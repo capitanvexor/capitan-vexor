@@ -565,6 +565,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <div class="card-title">📞 اطلاعات تماس</div>
       <div class="form-group"><label>📱 شماره تماس</label><input type="text" id="phone" placeholder="09388499513" dir="ltr"></div>
       <div class="form-group"><label>💬 آیدی روبیکا</label><input type="text" id="rubika" placeholder="oooo1219" dir="ltr"></div>
+      <div class="form-group"><label>✈️ آیدی تلگرام (اختیاری)</label><input type="text" id="telegram" placeholder="username" dir="ltr"></div>
       <button class="save-btn" onclick="saveSettings()">💾 ذخیره</button>
     </div>
   </div>
@@ -1034,20 +1035,24 @@ async function loadSettings() {
   if (data && data.length > 0) {
     document.getElementById('phone').value = data[0].phone || '';
     document.getElementById('rubika').value = data[0].rubika_id || '';
+    const tg = document.getElementById('telegram');
+    if (tg) tg.value = data[0].telegram_id || '';
   }
 }
 
 async function saveSettings() {
   const phone = document.getElementById('phone').value.trim();
   const rubika = document.getElementById('rubika').value.trim();
-  if (!phone || !rubika) { showStatus('❌ کامل کن!', 'error'); return; }
+  const telegram = document.getElementById('telegram')?.value.trim() || '';
+  if (!phone || !rubika) { showStatus('❌ شماره و روبیکا اجباری!', 'error'); return; }
   showStatus('⏳ ذخیره...', 'loading');
   const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, {
     method: 'PATCH',
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ phone, rubika_id: rubika, updated_at: new Date().toISOString() })
+    body: JSON.stringify({ phone, rubika_id: rubika, telegram_id: telegram, updated_at: new Date().toISOString() })
   });
   if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
+  else showStatus('❌ خطا', 'error');
 }
 
 function changeCredentials() {
