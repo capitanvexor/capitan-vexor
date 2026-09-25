@@ -221,7 +221,8 @@ footer {
 .footer-links a:hover { color: var(--cyan); }
 .copyright { color: #888; font-size: 0.75rem; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.05); }
 
-.float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
+/* ==== Floating Buttons - راست ==== */
+.float-buttons { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -240,11 +241,11 @@ footer {
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* ==== Chat Window (اصلاح‌شده) ==== */
+/* ==== Chat Window - راست ==== */
 .chat-window {
   position: fixed; 
   bottom: 15px; 
-  left: 25px;
+  right: 25px;
   width: 500px; 
   max-width: calc(100vw - 40px);
   height: calc(100vh - 90px);
@@ -320,7 +321,6 @@ footer {
 .chat-time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 .chat-empty { text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 40px 20px; }
 
-/* ==== کادر ارسال پیام (دکمه ارسال بزرگ و واضح) ==== */
 .chat-input-area { 
   padding: 10px 12px; 
   border-top: 1px solid var(--border); 
@@ -430,7 +430,7 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
   .stat-box { padding: 16px 20px; min-width: 100px; }
   .stat-box .num { font-size: 1.5rem; }
   .category-image { height: 170px; }
-  .float-buttons { bottom: 15px; left: 15px; }
+  .float-buttons { bottom: 15px; right: 15px; }
   .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
   section { padding: 55px 15px; }
   .category-grid { grid-template-columns: 1fr; }
