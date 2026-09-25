@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>جزئیات محصول | 𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
 :root {
@@ -30,7 +31,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-h
 .bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -7s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(60px,60px) scale(1.15);} }
 
-/* Navbar */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 15px 20px; background: rgba(10,10,15,0.85);
@@ -41,7 +41,7 @@ nav {
   font-weight: 900; font-size: 1.3rem;
   background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  text-decoration: none; letter-spacing: 1px;
+  text-decoration: none;
 }
 .back-btn {
   color: var(--text-dim); text-decoration: none; font-size: 0.9rem;
@@ -49,11 +49,8 @@ nav {
 }
 .back-btn:hover { color: var(--cyan); }
 
-/* Container */
 .container { max-width: 1100px; margin: 0 auto; padding: 100px 20px 60px; }
-.loading {
-  text-align: center; padding: 100px 20px; color: var(--text-dim);
-}
+.loading { text-align: center; padding: 100px 20px; color: var(--text-dim); }
 .spinner {
   width: 50px; height: 50px; border: 3px solid var(--border);
   border-top-color: var(--cyan); border-radius: 50%;
@@ -61,23 +58,18 @@ nav {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Product Layout */
 .product-wrap {
   display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
   background: var(--glass); border: 1px solid var(--border);
   border-radius: 25px; padding: 30px; backdrop-filter: blur(20px);
 }
-@media (max-width: 768px) {
-  .product-wrap { grid-template-columns: 1fr; gap: 25px; padding: 20px; }
-}
+@media (max-width: 768px) { .product-wrap { grid-template-columns: 1fr; gap: 25px; padding: 20px; } }
 
-/* Gallery */
 .gallery { display: flex; flex-direction: column; gap: 15px; }
 .main-image {
   width: 100%; aspect-ratio: 1/1; background: rgba(0,0,0,0.3);
   border: 1px solid var(--border); border-radius: 18px;
   overflow: hidden; display: flex; align-items: center; justify-content: center;
-  position: relative;
 }
 .main-image img { width: 100%; height: 100%; object-fit: contain; }
 .main-image .no-image { font-size: 6rem; opacity: 0.3; }
@@ -90,12 +82,8 @@ nav {
 .thumb:hover, .thumb.active { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.5); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Info */
 .info { display: flex; flex-direction: column; gap: 20px; }
-.title {
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
-  font-weight: 900; line-height: 1.4;
-}
+.title { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 900; line-height: 1.4; }
 .slogan {
   display: inline-block; padding: 8px 18px;
   background: linear-gradient(90deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
@@ -124,11 +112,11 @@ nav {
   line-height: 1.2;
 }
 .price-value .currency { font-size: 1rem; color: var(--text-dim); -webkit-text-fill-color: var(--text-dim); }
-
-/* Specs */
-.specs-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+.price-usd {
+  font-size: 1rem; color: var(--purple); font-weight: 700; margin-top: 5px;
 }
+
+.specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .spec-item {
   background: rgba(0,0,0,0.3); border: 1px solid var(--border);
   border-radius: 12px; padding: 14px; text-align: center;
@@ -137,7 +125,6 @@ nav {
 .spec-item .label { font-size: 0.75rem; color: var(--text-dim); }
 .spec-item .value { font-size: 1.1rem; font-weight: 700; color: var(--cyan); }
 
-/* Description */
 .desc-box {
   background: rgba(0,0,0,0.3); border: 1px solid var(--border);
   border-radius: 15px; padding: 20px;
@@ -145,7 +132,7 @@ nav {
 .desc-box h3 { color: var(--cyan); font-size: 1rem; margin-bottom: 10px; }
 .desc-box p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.8; white-space: pre-wrap; }
 
-/* Action Buttons */
+/* ==== Actions ==== */
 .actions { display: flex; gap: 12px; flex-wrap: wrap; }
 .btn-action {
   flex: 1; min-width: 150px; padding: 16px 20px;
@@ -159,21 +146,93 @@ nav {
   color: white; box-shadow: 0 0 25px rgba(255,46,196,0.4);
 }
 .btn-rubika:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(255,46,196,0.8); }
-.btn-phone {
+
+.btn-telegram {
+  background: linear-gradient(90deg, #0088cc, #00b4ff);
+  color: white; box-shadow: 0 0 25px rgba(0,136,204,0.4);
+}
+.btn-telegram:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0,136,204,0.8); }
+
+.btn-support {
   background: linear-gradient(90deg, var(--cyan), var(--purple));
   color: #0a0a0f; box-shadow: 0 0 25px rgba(0,255,231,0.4);
+  width: 100%;
 }
-.btn-phone:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0,255,231,0.8); }
+.btn-support:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0,255,231,0.8); }
 
-/* Notice */
 .notice {
   background: rgba(0,255,231,0.05); border: 1px dashed var(--border);
   border-radius: 12px; padding: 15px; text-align: center;
   font-size: 0.85rem; color: var(--text-dim);
 }
 
-/* Floating Buttons */
-.float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+/* ==== Chat Window ==== */
+.chat-window {
+  position: fixed; bottom: 95px; left: 25px;
+  width: 360px; max-width: calc(100vw - 40px);
+  height: 540px; max-height: calc(100vh - 140px);
+  background: rgba(15,15,25,0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,255,231,0.3);
+  z-index: 9998; display: flex; flex-direction: column; overflow: hidden;
+  opacity: 0; visibility: hidden; transform: translateY(20px) scale(0.95);
+  transition: all 0.35s ease;
+}
+.chat-window.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.chat-header {
+  background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15));
+  padding: 15px 18px; display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.chat-header-info { display: flex; align-items: center; gap: 12px; }
+.chat-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; box-shadow: 0 0 15px rgba(0,255,231,0.5);
+}
+.chat-header-name { font-weight: 800; font-size: 0.95rem; }
+.chat-header-status { font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+.online-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; animation: blink 1.5s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.chat-close { background: transparent; border: none; color: var(--text-dim); font-size: 1.3rem; cursor: pointer; padding: 5px; transition: 0.3s; border-radius: 8px; }
+.chat-close:hover { color: var(--danger); background: rgba(255,56,96,0.1); }
+
+.chat-name-form { padding: 25px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.chat-welcome { text-align: center; margin-bottom: 15px; }
+.chat-welcome-icon { font-size: 3rem; margin-bottom: 10px; }
+.chat-welcome h3 { color: var(--cyan); font-size: 1.2rem; margin-bottom: 5px; }
+.chat-welcome p { color: var(--text-dim); font-size: 0.85rem; }
+.chat-input-field {
+  width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border); border-radius: 12px;
+  color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none; transition: 0.3s;
+}
+.chat-input-field:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.3); }
+.chat-start-btn {
+  padding: 14px; background: linear-gradient(90deg, var(--cyan), var(--purple));
+  color: #0a0a0f; border: none; border-radius: 12px;
+  font-weight: 700; font-size: 0.95rem; cursor: pointer; font-family: inherit;
+  transition: 0.3s; margin-top: 10px;
+}
+.chat-start-btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0,255,231,0.6); }
+
+.chat-messages { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 12px; background: rgba(0,0,0,0.2); }
+.chat-bubble { max-width: 80%; padding: 10px 14px; border-radius: 16px; animation: bubbleIn 0.3s ease-out; word-wrap: break-word; }
+@keyframes bubbleIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.chat-bubble.theirs { align-self: flex-start; background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15)); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
+.chat-bubble.mine { align-self: flex-end; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; border-bottom-left-radius: 4px; font-weight: 600; }
+.chat-text { font-size: 0.9rem; line-height: 1.5; }
+.chat-time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
+.chat-empty { text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 40px 20px; }
+
+.chat-input-area { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; background: rgba(0,0,0,0.3); }
+.chat-input-area .chat-input-field { flex: 1; border-radius: 50px; }
+.chat-send-btn { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
+.chat-send-btn:hover { transform: scale(1.08); }
+
+.float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -181,8 +240,7 @@ nav {
   position: relative; cursor: pointer; border: none; color: white;
 }
 .float-btn.chat { background: linear-gradient(135deg, var(--cyan), var(--purple)); box-shadow: 0 0 25px rgba(0,255,231,0.6); }
-.float-btn.phone { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 0 25px rgba(16,185,129,0.6); }
-.float-btn:hover { transform: scale(1.15) rotate(10deg); }
+.float-btn:hover { transform: scale(1.1); }
 
 @media (max-width: 600px) {
   .container { padding: 90px 15px 40px; }
@@ -209,23 +267,57 @@ nav {
   </div>
 </div>
 
-<div class="float-buttons">
-  <button class="float-btn chat" onclick="openChat()">💬</button>
-  <a href="#" id="floatPhone" class="float-btn phone">📞</a>
+<!-- Chat Window -->
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar">⚓</div>
+      <div>
+        <div class="chat-header-name">کاپیتان وکثور</div>
+        <div class="chat-header-status">
+          <span class="online-dot"></span> آنلاین
+        </div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChatWindow()">✕</button>
+  </div>
+
+  <div class="chat-name-form" id="chatNameForm">
+    <div class="chat-welcome">
+      <div class="chat-welcome-icon">💬</div>
+      <h3>خوش اومدی!</h3>
+      <p>برای شروع چت، اسمت رو بنویس</p>
+    </div>
+    <input type="text" id="visitorNameInput" placeholder="اسمت چیه؟" class="chat-input-field">
+    <input type="text" id="visitorPhoneInput" placeholder="شماره تماس (اختیاری)" class="chat-input-field" dir="ltr">
+    <button class="chat-start-btn" onclick="startChat()">🚀 شروع چت</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages" style="display:none;"></div>
+
+  <div class="chat-input-area" id="chatInputArea" style="display:none;">
+    <input type="text" id="chatInput" placeholder="پیامت رو بنویس..." class="chat-input-field">
+    <button class="chat-send-btn" onclick="sendFromInput()">📤</button>
+  </div>
 </div>
+
+<div class="float-buttons">
+  <button class="float-btn chat" onclick="toggleChatWindow()">💬</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="chat.js" defer></script>
 
 <script>
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 
 let currentProduct = null;
-let contactInfo = { phone: '09388499513', rubika: 'oooo1219' };
+let contactInfo = { rubika: 'oooo1219', telegram: '' };
 
-// Get ID from URL
 const params = new URLSearchParams(window.location.search);
 const productId = params.get('id');
 
-// Load contact info
 async function loadContact() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
@@ -233,36 +325,23 @@ async function loadContact() {
     });
     const data = await res.json();
     if (data && data.length > 0) {
-      contactInfo.phone = data[0].phone;
-      contactInfo.rubika = data[0].rubika_id;
-      document.getElementById('floatPhone').href = `tel:${contactInfo.phone}`;
+      contactInfo.rubika = data[0].rubika_id || 'oooo1219';
+      contactInfo.telegram = data[0].telegram_id || '';
     }
   } catch (err) { console.error(err); }
 }
 
-// Load product
 async function loadProduct() {
-  if (!productId) {
-    showError('❌ محصولی انتخاب نشده');
-    return;
-  }
-
+  if (!productId) { showError('❌ محصولی انتخاب نشده'); return; }
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${productId}&select=*`, {
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
     });
     const data = await res.json();
-
-    if (!data || data.length === 0) {
-      showError('❌ محصول پیدا نشد');
-      return;
-    }
-
+    if (!data || data.length === 0) { showError('❌ محصول پیدا نشد'); return; }
     currentProduct = data[0];
     renderProduct(currentProduct);
-  } catch (err) {
-    showError('❌ خطا در بارگذاری: ' + err.message);
-  }
+  } catch (err) { showError('❌ خطا در بارگذاری: ' + err.message); }
 }
 
 function showError(msg) {
@@ -281,17 +360,24 @@ function renderProduct(p) {
   const statusClass = p.status === 'موجود' ? 'status-available' : (p.status === 'فروش رفته' ? 'status-sold' : 'status-unavailable');
   const priceFmt = p.price ? Number(p.price).toLocaleString('fa-IR') : 'تماس بگیرید';
 
+  // دکمه تلگرام فقط اگه آیدی داشت
+  const telegramBtn = contactInfo.telegram ? `
+    <a href="https://t.me/${contactInfo.telegram}" target="_blank" class="btn-action btn-telegram">
+      ✈️ خرید در تلگرام
+    </a>
+  ` : '';
+
   document.getElementById('container').innerHTML = `
     <div class="product-wrap">
       <div class="gallery">
         <div class="main-image" id="mainImage">
-          ${mainImg ? `<img src="${mainImg}" alt="${p.title}" id="mainImg">` : `<div class="no-image">🎯</div>`}
+          ${mainImg ? `<img src="${mainImg}" alt="${p.title}" id="mainImg" loading="lazy">` : `<div class="no-image">🎯</div>`}
         </div>
         ${images.length > 1 ? `
-          <div class="thumbnails" id="thumbnails">
+          <div class="thumbnails">
             ${images.map((img, i) => `
               <div class="thumb ${i === 0 ? 'active' : ''}" onclick="changeImage('${img}', this)">
-                <img src="${img}">
+                <img src="${img}" loading="lazy">
               </div>
             `).join('')}
           </div>
@@ -316,37 +402,18 @@ function renderProduct(p) {
             ${priceFmt}
             ${p.price ? '<span class="currency">تومان</span>' : ''}
           </div>
+          ${p.price_usd ? `<div class="price-usd">💵 ${p.price_usd}</div>` : ''}
         </div>
 
         <div class="specs-grid">
-          ${p.town_hall ? `
-            <div class="spec-item">
-              <div class="icon">🏰</div>
-              <div class="label">تاون هال</div>
-              <div class="value">${p.town_hall}</div>
-            </div>
-          ` : ''}
-          ${p.builder_level ? `
-            <div class="spec-item">
-              <div class="icon">🏗️</div>
-              <div class="label">لول بیلدر</div>
-              <div class="value">${p.builder_level}</div>
-            </div>
-          ` : ''}
-          ${p.name_changes !== null && p.name_changes !== undefined ? `
-            <div class="spec-item">
-              <div class="icon">✏️</div>
-              <div class="label">تغییر نام</div>
-              <div class="value">${p.name_changes}</div>
-            </div>
-          ` : ''}
-          ${p.category ? `
-            <div class="spec-item">
-              <div class="icon">📂</div>
-              <div class="label">دسته‌بندی</div>
-              <div class="value" style="font-size:0.9rem;">${p.category}</div>
-            </div>
-          ` : ''}
+          ${p.town_hall ? `<div class="spec-item"><div class="icon">🏰</div><div class="label">تاون هال</div><div class="value">${p.town_hall}</div></div>` : ''}
+          ${p.builder_level ? `<div class="spec-item"><div class="icon">🏗️</div><div class="label">لول بیلدر</div><div class="value">${p.builder_level}</div></div>` : ''}
+          ${p.name_changes ? `<div class="spec-item"><div class="icon">✏️</div><div class="label">تغییر نام</div><div class="value">${p.name_changes}</div></div>` : ''}
+          ${p.rank ? `<div class="spec-item"><div class="icon">🎖️</div><div class="label">رنک</div><div class="value" style="font-size:0.9rem;">${p.rank}</div></div>` : ''}
+          ${p.player_level ? `<div class="spec-item"><div class="icon">📊</div><div class="label">لول پلیر</div><div class="value">${p.player_level}</div></div>` : ''}
+          ${p.skins_count ? `<div class="spec-item"><div class="icon">🎨</div><div class="label">اسکین</div><div class="value">${p.skins_count}</div></div>` : ''}
+          ${p.item_type ? `<div class="spec-item"><div class="icon">🏷️</div><div class="label">نوع آیتم</div><div class="value" style="font-size:0.85rem;">${p.item_type}</div></div>` : ''}
+          ${p.item_amount ? `<div class="spec-item"><div class="icon">📦</div><div class="label">مقدار</div><div class="value" style="font-size:0.85rem;">${p.item_amount}</div></div>` : ''}
         </div>
 
         ${p.description ? `
@@ -364,10 +431,12 @@ function renderProduct(p) {
           <a href="https://rubika.ir/${contactInfo.rubika}" target="_blank" class="btn-action btn-rubika">
             💬 خرید در روبیکا
           </a>
-          <a href="tel:${contactInfo.phone}" class="btn-action btn-phone">
-            📞 تماس با مدیریت
-          </a>
+          ${telegramBtn}
         </div>
+
+        <button onclick="toggleChatWindow()" class="btn-action btn-support">
+          🛒 ارتباط با پشتیبانی (چت زنده)
+        </button>
       </div>
     </div>
   `;
@@ -379,29 +448,9 @@ function changeImage(src, thumbEl) {
   thumbEl.classList.add('active');
 }
 
-function openChat() {
-  if (typeof Tawk_API !== 'undefined' && Tawk_API.toggle) Tawk_API.toggle();
-  else alert('چت به‌زودی فعال می‌شود!');
-}
-
 // Init
-loadContact();
-loadProduct();
+loadContact().then(() => loadProduct());
 </script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6ab5ae6b2c323b344704c7cd/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>
