@@ -702,9 +702,6 @@ footer {
   <a href="tel:09388499513" class="float-btn phone" title="تماس">📞</a>
 </div>
 
-<!-- ===== Tawk.to Chat (Placeholder) ===== -->
-<!-- اینجا بعداً کد Tawk.to قرار میگیره -->
-
 <script>
 // ===== Reveal on Scroll =====
 const observer = new IntersectionObserver((entries) => {
@@ -719,7 +716,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ===== Chat Button =====
 function openChat() {
-  // اگه Tawk.to نصب شده باشه، از این تابع استفاده میکنیم
   if (typeof Tawk_API !== 'undefined' && Tawk_API.toggle) {
     Tawk_API.toggle();
   } else {
@@ -739,6 +735,20 @@ window.addEventListener('scroll', () => {
   }
 });
 </script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6ab5ae6b2c323b344704c7cd/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 
 </body>
 </html>
