@@ -31,7 +31,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-h
 .bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -7s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(60px,60px) scale(1.15);} }
 
-/* Navbar */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 15px 20px; background: rgba(10,10,15,0.9);
@@ -48,10 +47,7 @@ nav {
 .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
 
-/* Container */
 .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px 60px; }
-
-/* Header */
 .cat-header { text-align: center; margin-bottom: 35px; }
 .cat-header .cat-icon { font-size: 4rem; margin-bottom: 10px; display: inline-block; }
 .cat-header h1 {
@@ -61,7 +57,6 @@ nav {
 }
 .cat-header p { color: var(--text-dim); font-size: 0.95rem; }
 
-/* Back btn */
 .back-btn {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--text-dim); text-decoration: none; font-size: 0.9rem;
@@ -69,7 +64,6 @@ nav {
 }
 .back-btn:hover { color: var(--cyan); }
 
-/* Filter Box */
 .filter-box {
   background: var(--glass); border: 1px solid var(--border); border-radius: 20px;
   padding: 22px; margin-bottom: 25px; backdrop-filter: blur(20px);
@@ -95,7 +89,6 @@ nav {
 }
 .filter-group input:focus, .filter-group select:focus { border-color: var(--cyan); }
 
-/* Products Grid */
 .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
 .product-card {
   background: var(--glass); border: 1px solid var(--border); border-radius: 20px;
@@ -129,17 +122,19 @@ nav {
   background: rgba(0,255,231,0.08); border: 1px solid var(--border);
   padding: 5px 10px; border-radius: 8px; font-size: 0.72rem; color: var(--cyan);
 }
+.product-price-box { margin-top: auto; }
 .product-price {
-  font-size: 1.3rem; font-weight: 900; color: var(--cyan); margin-top: auto;
+  font-size: 1.3rem; font-weight: 900; color: var(--cyan);
   text-shadow: 0 0 20px rgba(0,255,231,0.4);
 }
 .product-price .currency { font-size: 0.8rem; color: var(--text-dim); font-weight: 500; }
+.product-price-usd {
+  font-size: 0.85rem; color: var(--purple); font-weight: 700; margin-top: 4px;
+}
 
-/* Empty */
 .empty-state { text-align: center; padding: 80px 20px; color: var(--text-dim); grid-column: 1/-1; }
 .empty-state .icon { font-size: 5rem; margin-bottom: 15px; opacity: 0.4; }
 
-/* Spinner */
 .spinner {
   width: 50px; height: 50px; border: 3px solid var(--border);
   border-top-color: var(--cyan); border-radius: 50%;
@@ -147,7 +142,6 @@ nav {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Floating */
 .float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
@@ -207,32 +201,8 @@ nav {
       <h3>🔍 فیلتر و جستجو</h3>
       <div class="filter-count" id="resultCount">...</div>
     </div>
-    <div class="filter-grid">
-      <div class="filter-group">
-        <label>🔍 جستجو</label>
-        <input type="text" id="searchInput" placeholder="عنوان یا کد اکانت..." oninput="applyFilters()">
-      </div>
-      <div class="filter-group" id="thFilterGroup">
-        <label>🏰 تاون هال</label>
-        <select id="filterTH" onchange="applyFilters()">
-          <option value="">همه تان‌ها</option>
-          <option value="10">تاون هال ۱۰</option>
-          <option value="11">تاون هال ۱۱</option>
-          <option value="12">تاون هال ۱۲</option>
-          <option value="13">تاون هال ۱۳</option>
-          <option value="14">تاون هال ۱۴</option>
-          <option value="15">تاون هال ۱۵</option>
-          <option value="16">تاون هال ۱۶</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label>💰 از قیمت (تومان)</label>
-        <input type="number" id="minPrice" placeholder="مثلاً 1000000" oninput="applyFilters()">
-      </div>
-      <div class="filter-group">
-        <label>💰 تا قیمت (تومان)</label>
-        <input type="number" id="maxPrice" placeholder="مثلاً 5000000" oninput="applyFilters()">
-      </div>
+    <div class="filter-grid" id="filterGrid">
+      <!-- فیلترها با JS ساخته میشن -->
     </div>
   </div>
 
@@ -269,18 +239,84 @@ let allProducts = [];
 const info = categoryInfo[category] || { icon: '🎮', desc: 'محصولات این دسته' };
 document.getElementById('catIcon').textContent = info.icon;
 document.getElementById('catTitle').textContent = category;
-document.getElementById('catDesc')?.remove();
 document.getElementById('catSub').textContent = info.desc;
 
-// Highlight active nav link
 document.querySelectorAll('.nav-links a[data-cat]').forEach(a => {
   if (a.dataset.cat === category) a.classList.add('active');
 });
 
-// Hide TH filter for items categories
-if (category === 'آیتم کلش' || category === 'آیتم کالاف') {
-  document.getElementById('thFilterGroup').style.display = 'none';
+// ساخت فیلترها بر اساس دسته
+function buildFilters() {
+  const grid = document.getElementById('filterGrid');
+  let html = `
+    <div class="filter-group">
+      <label>🔍 جستجو</label>
+      <input type="text" id="searchInput" placeholder="عنوان یا کد..." oninput="applyFilters()">
+    </div>
+  `;
+
+  // فیلترهای کلش
+  if (category === 'کلش') {
+    html += `
+      <div class="filter-group">
+        <label>🏰 تاون هال</label>
+        <select id="filterTH" onchange="applyFilters()">
+          <option value="">همه تان‌ها</option>
+          <option value="10">تاون هال ۱۰</option>
+          <option value="11">تاون هال ۱۱</option>
+          <option value="12">تاون هال ۱۲</option>
+          <option value="13">تاون هال ۱۳</option>
+          <option value="14">تاون هال ۱۴</option>
+          <option value="15">تاون هال ۱۵</option>
+          <option value="16">تاون هال ۱۶</option>
+        </select>
+      </div>
+    `;
+  }
+
+  // فیلترهای کالاف
+  if (category === 'کالاف') {
+    html += `
+      <div class="filter-group">
+        <label>🎖️ رنک</label>
+        <select id="filterRank" onchange="applyFilters()">
+          <option value="">همه رنک‌ها</option>
+          <option value="Legendary">Legendary</option>
+          <option value="Master">Master</option>
+          <option value="Grandmaster">Grandmaster</option>
+          <option value="Pro">Pro</option>
+          <option value="Elite">Elite</option>
+        </select>
+      </div>
+    `;
+  }
+
+  // فیلترهای آیتم
+  if (category.includes('آیتم')) {
+    html += `
+      <div class="filter-group">
+        <label>🏷️ نوع آیتم</label>
+        <input type="text" id="filterItemType" placeholder="مثلاً: بلیط" oninput="applyFilters()">
+      </div>
+    `;
+  }
+
+  // فیلتر قیمت (برای همه)
+  html += `
+    <div class="filter-group">
+      <label>💰 از قیمت (تومان)</label>
+      <input type="number" id="minPrice" placeholder="مثلاً 1000000" oninput="applyFilters()">
+    </div>
+    <div class="filter-group">
+      <label>💰 تا قیمت (تومان)</label>
+      <input type="number" id="maxPrice" placeholder="مثلاً 5000000" oninput="applyFilters()">
+    </div>
+  `;
+
+  grid.innerHTML = html;
 }
+
+buildFilters();
 
 async function loadProducts() {
   try {
@@ -295,7 +331,7 @@ async function loadProducts() {
     document.getElementById('productsGrid').innerHTML = `
       <div class="empty-state">
         <div class="icon">😕</div>
-        <p>خطا در بارگذاری محصولات</p>
+        <p>خطا در بارگذاری</p>
       </div>
     `;
   }
@@ -304,6 +340,8 @@ async function loadProducts() {
 function applyFilters() {
   const search = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
   const filterTH = document.getElementById('filterTH')?.value || '';
+  const filterRank = document.getElementById('filterRank')?.value || '';
+  const filterItemType = (document.getElementById('filterItemType')?.value || '').trim().toLowerCase();
   const minPrice = parseInt(document.getElementById('minPrice')?.value) || 0;
   const maxPrice = parseInt(document.getElementById('maxPrice')?.value) || Infinity;
 
@@ -314,6 +352,8 @@ function applyFilters() {
       if (!title.includes(search) && !code.includes(search)) return false;
     }
     if (filterTH && p.town_hall != filterTH) return false;
+    if (filterRank && (p.rank || '').toLowerCase() !== filterRank.toLowerCase()) return false;
+    if (filterItemType && !(p.item_type || '').toLowerCase().includes(filterItemType)) return false;
     if (p.price && p.price < minPrice) return false;
     if (p.price && p.price > maxPrice) return false;
     return true;
@@ -341,6 +381,21 @@ function renderProducts(products) {
     const statusClass = p.status === 'موجود' ? 'status-available' : (p.status === 'فروش رفته' ? 'status-sold' : 'status-unavailable');
     const priceFmt = p.price ? Number(p.price).toLocaleString('fa-IR') : 'تماس';
 
+    // ساخت spec tag ها بر اساس دسته
+    let specs = '';
+    if (p.category === 'کلش') {
+      if (p.town_hall) specs += `<span class="spec-tag">🏰 تان ${p.town_hall}</span>`;
+      if (p.builder_level) specs += `<span class="spec-tag">🏗️ بیلدر ${p.builder_level}</span>`;
+      if (p.name_changes) specs += `<span class="spec-tag">✏️ ${p.name_changes} تغییر نام</span>`;
+    } else if (p.category === 'کالاف') {
+      if (p.rank) specs += `<span class="spec-tag">🎖️ ${p.rank}</span>`;
+      if (p.player_level) specs += `<span class="spec-tag">📊 لول ${p.player_level}</span>`;
+      if (p.skins_count) specs += `<span class="spec-tag">🎨 ${p.skins_count} اسکین</span>`;
+    } else if (p.category && p.category.includes('آیتم')) {
+      if (p.item_type) specs += `<span class="spec-tag">🏷️ ${p.item_type}</span>`;
+      if (p.item_amount) specs += `<span class="spec-tag">📦 ${p.item_amount}</span>`;
+    }
+
     return `
       <a href="product.html?id=${p.id}" class="product-card">
         <div class="product-image-wrap">
@@ -350,14 +405,13 @@ function renderProducts(products) {
         </div>
         <div class="product-body">
           <h3 class="product-title">${p.title || 'بدون عنوان'}</h3>
-          <div class="product-specs">
-            ${p.town_hall ? `<span class="spec-tag">🏰 تان ${p.town_hall}</span>` : ''}
-            ${p.builder_level ? `<span class="spec-tag">🏗️ بیلدر ${p.builder_level}</span>` : ''}
-            ${p.name_changes ? `<span class="spec-tag">✏️ ${p.name_changes} تغییر نام</span>` : ''}
-          </div>
-          <div class="product-price">
-            ${priceFmt}
-            ${p.price ? '<span class="currency">تومان</span>' : ''}
+          <div class="product-specs">${specs}</div>
+          <div class="product-price-box">
+            <div class="product-price">
+              ${priceFmt}
+              ${p.price ? '<span class="currency">تومان</span>' : ''}
+            </div>
+            ${p.price_usd ? `<div class="product-price-usd">💵 ${p.price_usd}</div>` : ''}
           </div>
         </div>
       </a>
@@ -378,27 +432,18 @@ async function loadContact() {
 }
 
 function openChat() {
-  if (typeof Tawk_API !== 'undefined' && Tawk_API.toggle) Tawk_API.toggle();
-  else alert('چت به‌زودی فعال می‌شود!');
+  // اگه توی صفحه اصلی هستیم، پنجره چت رو باز کن
+  if (window.parent && window.parent.toggleChatWindow) {
+    window.parent.toggleChatWindow();
+  } else {
+    // اگه نه، برو به صفحه اصلی
+    window.location.href = 'index.html#chat';
+  }
 }
 
 loadProducts();
 loadContact();
 </script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6ab5ae6b2c323b344704c7cd/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>
