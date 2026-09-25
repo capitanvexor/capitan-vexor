@@ -264,6 +264,10 @@ footer {
   background: linear-gradient(135deg, var(--cyan), var(--purple));
   display: flex; align-items: center; justify-content: center;
   font-size: 1.3rem; box-shadow: 0 0 15px rgba(0,255,231,0.5);
+  overflow: hidden; flex-shrink: 0;
+}
+.chat-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
 }
 .chat-header-name { font-weight: 800; font-size: 0.95rem; }
 .chat-header-status { font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
@@ -543,7 +547,7 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
 <div class="chat-window" id="chatWindow">
   <div class="chat-header">
     <div class="chat-header-info">
-      <div class="chat-avatar">⚓</div>
+      <div class="chat-avatar"><img src="support-avatar.png" alt="پشتیبانی"></div>
       <div>
         <div class="chat-header-name">پشتیبانی کاپیتان وکثور</div>
         <div class="chat-header-status">
@@ -782,11 +786,9 @@ async function loadContact() {
       const rubika = data[0].rubika_id;
       const telegram = data[0].telegram_id;
       
-      // لینک روبیکا
       const rubikaLink = document.getElementById('rubikaLink');
       if (rubikaLink) rubikaLink.href = `https://rubika.ir/${rubika}`;
       
-      // لینک تلگرام
       const telegramLink = document.getElementById('telegramLink');
       if (telegramLink) {
         if (telegram) {
@@ -797,7 +799,6 @@ async function loadContact() {
         }
       }
       
-      // دکمه شناور تماس
       const floatPhone = document.getElementById('floatPhone');
       if (floatPhone) floatPhone.href = `tel:${data[0].phone}`;
     }
