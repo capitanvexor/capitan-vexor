@@ -35,7 +35,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 15px 20px; background: rgba(10,10,15,0.9);
   backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
 }
 .logo {
   font-weight: 900; font-size: 1.3rem; text-decoration: none;
@@ -43,7 +43,7 @@ nav {
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
 }
-.nav-links { display: flex; gap: 20px; list-style: none; }
+.nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
 .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
 .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 15px var(--cyan); }
 
@@ -107,12 +107,6 @@ section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
   position: relative; text-decoration: none; color: inherit;
   display: flex; flex-direction: column; cursor: pointer;
 }
-.category-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(0,255,231,0.05), rgba(168,85,247,0.05));
-  opacity: 0; transition: 0.4s;
-}
-.category-card:hover::before { opacity: 1; }
 .category-card:hover {
   transform: translateY(-12px); border-color: var(--cyan);
   box-shadow: 0 25px 60px rgba(0,255,231,0.4);
@@ -246,15 +240,15 @@ footer {
 
   <div class="stats">
     <div class="stat-box">
-      <div class="num" data-target="500" data-suffix="+">۰</div>
+      <div class="num">۵۰۰+</div>
       <div class="label">🛒 فروش موفق</div>
     </div>
     <div class="stat-box">
-      <div class="num" data-target="6" data-suffix=" سال">۰</div>
+      <div class="num">۶ سال</div>
       <div class="label">⭐ تجربه</div>
     </div>
     <div class="stat-box">
-      <div class="num" data-target="100" data-suffix="٪">۰</div>
+      <div class="num">۱۰۰٪</div>
       <div class="label">💎 رضایت مشتری</div>
     </div>
   </div>
@@ -374,37 +368,13 @@ footer {
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 
-// Reveal
+// Reveal Animation
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('active'), i * 100);
   });
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Counters
-function animateCounter(el) {
-  const target = +el.dataset.target;
-  const suffix = el.dataset.suffix || '';
-  let count = 0;
-  const step = target / 60;
-  const timer = setInterval(() => {
-    count += step;
-    if (count >= target) { count = target; clearInterval(timer); }
-    const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
-    let num = Math.floor(count).toString().replace(/\d/g, d => persianDigits[d]);
-    el.textContent = num + suffix;
-  }, 25);
-}
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.dataset.done) {
-      entry.dataset.done = 'true';
-      animateCounter(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.num[data-target]').forEach(el => counterObserver.observe(el));
 
 // Load Contact
 async function loadContact() {
