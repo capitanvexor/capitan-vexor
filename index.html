@@ -24,7 +24,6 @@
 html { scroll-behavior: smooth; }
 body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-height: 1.7; overflow-x: hidden; transition: background 0.4s, color 0.4s; }
 
-/* ===== Loader ===== */
 .loader {
   position: fixed; inset: 0; background: var(--bg-dark);
   display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 25px;
@@ -53,7 +52,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-h
   100% { left: 100%; width: 30%; }
 }
 
-/* ===== Particles ===== */
 #particles-canvas {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   z-index: -1; pointer-events: none;
@@ -67,36 +65,17 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-h
 .bg-glow::after { width: 500px; height: 500px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -7s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.15);} }
 
-/* ===== Theme Button ===== */
 .theme-btn {
-  position: fixed;
-  top: 15px;
-  left: 20px;
-  z-index: 1001;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 1.3rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  backdrop-filter: blur(10px);
+  position: fixed; top: 15px; left: 20px; z-index: 1001;
+  width: 45px; height: 45px; border-radius: 50%;
+  background: var(--glass); border: 1px solid var(--border);
+  color: var(--text); font-size: 1.3rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s; backdrop-filter: blur(10px);
 }
-.theme-btn:hover {
-  transform: scale(1.1) rotate(15deg);
-  border-color: var(--cyan);
-  box-shadow: 0 0 20px var(--cyan);
-}
-.theme-btn:active {
-  transform: scale(0.95);
-}
+.theme-btn:hover { transform: scale(1.1) rotate(15deg); border-color: var(--cyan); box-shadow: 0 0 20px var(--cyan); }
+.theme-btn:active { transform: scale(0.95); }
 
-/* ===== Navbar ===== */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 12px 20px; background: rgba(10,10,15,0.9);
@@ -116,7 +95,6 @@ nav {
 .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
 .nav-links a:hover { color: var(--cyan); }
 
-/* ===== Hero ===== */
 .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 60px; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px;
@@ -150,7 +128,6 @@ nav {
 }
 .hero p { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-dim); max-width: 700px; margin-bottom: 30px; }
 
-/* ===== Stats ===== */
 .stats { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 40px 0 60px; }
 .stat-box {
   background: var(--glass); border: 1px solid var(--border); border-radius: 18px;
@@ -164,7 +141,6 @@ nav {
 }
 .stat-box .label { color: var(--text-dim); font-size: 0.85rem; margin-top: 5px; }
 
-/* ===== Section ===== */
 section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .section-title {
   text-align: center; font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 900; margin-bottom: 15px;
@@ -173,7 +149,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 }
 .section-sub { text-align: center; color: var(--text-dim); margin-bottom: 45px; font-size: 0.95rem; }
 
-/* ===== Category Cards ===== */
 .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
 .category-card {
   background: var(--glass); border: 1px solid var(--border); border-radius: 22px;
@@ -205,7 +180,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
   font-size: 0.9rem;
 }
 
-/* ===== Features ===== */
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .feature {
   background: var(--glass); border: 1px solid var(--border); border-radius: 16px;
@@ -217,7 +191,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .feature h4 { color: var(--cyan); margin-bottom: 8px; font-size: 1rem; }
 .feature p { color: var(--text-dim); font-size: 0.85rem; }
 
-/* ===== Guarantee ===== */
 .guarantee {
   max-width: 900px; margin: 40px auto;
   background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
@@ -232,7 +205,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 }
 .guarantee p { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 0.9rem; }
 
-/* ===== Footer ===== */
 footer {
   background: rgba(10,10,15,0.9); border-top: 1px solid var(--border);
   padding: 40px 20px 25px; text-align: center; margin-top: 50px;
@@ -249,7 +221,6 @@ footer {
 .footer-links a:hover { color: var(--cyan); }
 .copyright { color: #888; font-size: 0.75rem; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.05); }
 
-/* ===== Floating ===== */
 .float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
@@ -266,11 +237,9 @@ footer {
 .float-btn.phone { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 0 25px rgba(16,185,129,0.6); }
 .float-btn:hover { transform: scale(1.1); }
 
-/* ===== Reveal ===== */
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* ===== Chat Window - چپ ===== */
 .chat-window {
   position: fixed; bottom: 95px; left: 25px;
   width: 360px; max-width: calc(100vw - 40px);
@@ -337,7 +306,6 @@ footer {
 .chat-send-btn { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
 .chat-send-btn:hover { transform: scale(1.08); }
 
-/* ===== THEME: LIGHT (روز) ===== */
 body.theme-light {
   --bg-dark: #f5f0e8;
   --text: #1a1a2e;
@@ -361,7 +329,6 @@ body.theme-light .chat-input-field { background: rgba(255,255,255,0.9); color: #
 body.theme-light .chat-time { color: #666; opacity: 0.8; }
 body.theme-light .copyright { color: #888; }
 
-/* ===== THEME: COLORFUL (رنگارنگ) ===== */
 body.theme-colorful {
   --bg-dark: #1a0533;
   --text: #ffffff;
@@ -402,7 +369,6 @@ body.theme-colorful .chat-start-btn,
 body.theme-colorful .chat-send-btn { background: linear-gradient(135deg, #ff2ec4, #ffdd00); color: #1a0533; }
 body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec4, #ffdd00); }
 
-/* ===== Mobile ===== */
 @media (max-width: 768px) {
   .nav-links { gap: 10px; }
   .nav-links a { font-size: 0.78rem; }
@@ -455,11 +421,11 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
 
   <div class="stats">
     <div class="stat-box">
-      <div class="num" data-target="500" data-suffix="+">۵۰۰+</div>
+      <div class="num" data-target="1" data-suffix="K+">۱K+</div>
       <div class="label">🛒 فروش موفق</div>
     </div>
     <div class="stat-box">
-      <div class="num" data-target="6" data-suffix=" سال">۶ سال</div>
+      <div class="num" data-target="5" data-suffix=" سال">۵ سال</div>
       <div class="label">⭐ تجربه</div>
     </div>
     <div class="stat-box">
@@ -619,7 +585,6 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 
-// ==== Theme Toggle ====
 const themes = ['dark', 'light', 'colorful'];
 const themeIcons = { dark: '🌙', light: '☀️', colorful: '🎨' };
 let currentTheme = localStorage.getItem('cv_theme') || 'dark';
@@ -642,7 +607,6 @@ function changeTheme() {
 
 applyTheme(currentTheme);
 
-// ==== Loader + Counters ====
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('loader').classList.add('hide');
@@ -654,7 +618,6 @@ window.addEventListener('load', () => {
   }, 700);
 });
 
-// ==== Particles ====
 const canvas = document.getElementById('particles-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -741,7 +704,6 @@ requestAnimationFrame(animateParticles);
 window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
 window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
 
-// ==== Typing Title ====
 function typeTitle() {
   const el = document.getElementById('typingTitle');
   if (!el) return;
@@ -759,7 +721,6 @@ function typeTitle() {
 }
 setTimeout(typeTitle, 900);
 
-// ==== Reveal ====
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('active');
@@ -767,7 +728,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ==== Counters ====
 function animateCounter(el) {
   const target = +el.dataset.target;
   const suffix = el.dataset.suffix || '';
@@ -782,7 +742,6 @@ function animateCounter(el) {
   }, 30);
 }
 
-// ==== Load Contact ====
 async function loadContact() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
