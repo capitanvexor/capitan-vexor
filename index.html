@@ -11,7 +11,6 @@
 <meta property="og:description" content="مطمئن‌ترین فروشگاه اکانت و آیتم بازی با ضمانت ۱۰۰٪">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
 * {
@@ -22,7 +21,6 @@
 }
 :root {
   --bg-dark: #0a0a0f;
-  --bg-dark2: #12121a;
   --cyan: #00ffe7;
   --purple: #a855f7;
   --pink: #ff2ec4;
@@ -39,12 +37,73 @@ body {
   min-height: 100vh;
   line-height: 1.7;
 }
-/* ===== Animated Background ===== */
-.bg-glow {
+
+/* ===== Loader ===== */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 25px;
+  z-index: 99999;
+  transition: opacity 0.8s, visibility 0.8s;
+}
+.loader.hide { opacity: 0; visibility: hidden; }
+.loader-ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--cyan);
+  border-right-color: var(--purple);
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+.loader-ring::before {
+  content: '⚓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  animation: pulseIcon 1.5s ease-in-out infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px var(--cyan)); }
+  50% { transform: scale(1.15); filter: drop-shadow(0 0 25px var(--cyan)); }
+}
+.loader-text {
+  font-weight: 700;
+  letter-spacing: 4px;
+  font-size: 0.9rem;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.5); }
+}
+
+/* ===== Particles Background ===== */
+#particles-canvas {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: -1;
+  pointer-events: none;
+}
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
   overflow: hidden;
   pointer-events: none;
 }
@@ -53,25 +112,26 @@ body {
   content: '';
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.5;
-  animation: float 12s ease-in-out infinite;
+  filter: blur(130px);
+  opacity: 0.45;
+  animation: float 14s ease-in-out infinite;
 }
 .bg-glow::before {
-  width: 500px; height: 500px;
+  width: 550px; height: 550px;
   background: var(--cyan);
   top: -100px; right: -100px;
 }
 .bg-glow::after {
-  width: 600px; height: 600px;
+  width: 650px; height: 650px;
   background: var(--purple);
   bottom: -150px; left: -150px;
-  animation-delay: -6s;
+  animation-delay: -7s;
 }
 @keyframes float {
   0%, 100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(50px, 50px) scale(1.1); }
+  50% { transform: translate(60px, 60px) scale(1.15); }
 }
+
 /* ===== Navbar ===== */
 nav {
   position: fixed;
@@ -88,7 +148,6 @@ nav {
   transition: 0.3s;
 }
 .logo {
-  font-family: 'Vazirmatn', sans-serif;
   font-weight: 900;
   font-size: 1.3rem;
   background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
@@ -96,12 +155,11 @@ nav {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
-  text-shadow: 0 0 30px rgba(0,255,231,0.5);
-  animation: shimmer 3s ease-in-out infinite;
+  animation: logoGlow 3s ease-in-out infinite;
 }
-@keyframes shimmer {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.3); }
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(0,255,231,0.5)); }
+  50% { filter: drop-shadow(0 0 25px rgba(168,85,247,0.8)); }
 }
 .nav-links {
   display: flex;
@@ -130,6 +188,7 @@ nav {
   box-shadow: 0 0 10px var(--cyan);
 }
 .nav-links a:hover::after { width: 100%; }
+
 /* ===== Hero ===== */
 .hero {
   min-height: 100vh;
@@ -174,23 +233,17 @@ nav {
   font-size: clamp(2rem, 7vw, 4.5rem);
   font-weight: 900;
   background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--pink) 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.3;
   margin-bottom: 20px;
-  text-shadow: 0 0 60px rgba(0,255,231,0.3);
-  animation: glow 3s ease-in-out infinite alternate;
+  animation: gradientMove 4s ease infinite;
 }
-@keyframes glow {
-  from { filter: drop-shadow(0 0 20px rgba(0,255,231,0.4)); }
-  to { filter: drop-shadow(0 0 40px rgba(168,85,247,0.6)); }
-}
-.hero p {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: var(--text-dim);
-  max-width: 700px;
-  margin-bottom: 30px;
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 .hero-tagline {
   display: inline-block;
@@ -202,7 +255,19 @@ nav {
   color: var(--cyan);
   margin-bottom: 30px;
   font-size: 1rem;
+  animation: taglinePulse 3s ease-in-out infinite;
 }
+@keyframes taglinePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0,255,231,0.1); }
+  50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(0,255,231,0.3); }
+}
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--text-dim);
+  max-width: 700px;
+  margin-bottom: 30px;
+}
+
 /* ===== Stats ===== */
 .stats {
   display: flex;
@@ -221,9 +286,9 @@ nav {
   min-width: 140px;
 }
 .stat-box:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.05);
   border-color: var(--cyan);
-  box-shadow: 0 20px 40px rgba(0,255,231,0.2);
+  box-shadow: 0 20px 50px rgba(0,255,231,0.3);
 }
 .stat-box .num {
   font-size: 2.2rem;
@@ -238,6 +303,7 @@ nav {
   font-size: 0.9rem;
   margin-top: 5px;
 }
+
 /* ===== Section ===== */
 section {
   padding: 80px 20px;
@@ -260,54 +326,64 @@ section {
   margin-bottom: 50px;
   font-size: 1rem;
 }
+
 /* ===== Products ===== */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
 }
 .product-card {
   background: var(--glass);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 30px 25px;
+  overflow: hidden;
   text-align: center;
   transition: 0.4s;
   position: relative;
-  overflow: hidden;
   backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
 }
-.product-card::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: conic-gradient(from 0deg, transparent, var(--cyan), transparent 30%);
-  animation: rotate 4s linear infinite;
-  opacity: 0;
-  transition: 0.4s;
-}
-.product-card:hover::before { opacity: 0.3; }
 .product-card:hover {
   transform: translateY(-10px);
   border-color: var(--cyan);
-  box-shadow: 0 20px 50px rgba(0,255,231,0.25);
+  box-shadow: 0 25px 60px rgba(0,255,231,0.3);
 }
-.product-card > * { position: relative; z-index: 1; }
-.product-icon {
-  font-size: 3.5rem;
-  margin-bottom: 15px;
-  filter: drop-shadow(0 0 20px rgba(0,255,231,0.5));
+.product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: 0.5s;
+  display: block;
+}
+.product-card:hover .product-image {
+  transform: scale(1.1) rotate(2deg);
+}
+.product-image-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.product-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,10,15,0.9));
+  pointer-events: none;
+}
+.product-body {
+  padding: 20px 20px 25px;
+  position: relative;
 }
 .product-card h3 {
   font-size: 1.3rem;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: var(--cyan);
+  text-shadow: 0 0 20px rgba(0,255,231,0.5);
 }
 .product-card p {
   color: var(--text-dim);
   font-size: 0.9rem;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 .btn-buy {
   display: inline-block;
@@ -320,14 +396,23 @@ section {
   font-size: 0.9rem;
   transition: 0.3s;
   box-shadow: 0 0 20px rgba(0,255,231,0.4);
+  position: relative;
+  overflow: hidden;
 }
+.btn-buy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+  transition: 0.6s;
+}
+.btn-buy:hover::before { transform: translateX(100%); }
 .btn-buy:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(0,255,231,0.8);
+  box-shadow: 0 0 40px rgba(0,255,231,0.9);
 }
-@keyframes rotate {
-  to { transform: rotate(360deg); }
-}
+
 /* ===== Features ===== */
 .features-grid {
   display: grid;
@@ -344,12 +429,18 @@ section {
 }
 .feature:hover {
   border-color: var(--purple);
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(168,85,247,0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(168,85,247,0.3);
 }
 .feature-icon {
   font-size: 2.5rem;
   margin-bottom: 12px;
+  display: inline-block;
+  transition: 0.3s;
+}
+.feature:hover .feature-icon {
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 0 20px var(--cyan));
 }
 .feature h4 {
   color: var(--cyan);
@@ -360,25 +451,26 @@ section {
   color: var(--text-dim);
   font-size: 0.85rem;
 }
+
 /* ===== Steps ===== */
 .steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  position: relative;
 }
 .step {
   background: var(--glass);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 30px 20px;
+  padding: 35px 20px 25px;
   text-align: center;
   position: relative;
   transition: 0.3s;
 }
 .step:hover {
   border-color: var(--cyan);
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0,255,231,0.25);
 }
 .step-num {
   position: absolute;
@@ -395,9 +487,10 @@ section {
   font-size: 1.1rem;
   box-shadow: 0 0 20px rgba(0,255,231,0.6);
 }
-.step-icon { font-size: 2.2rem; margin: 15px 0 10px; }
+.step-icon { font-size: 2.2rem; margin: 10px 0; }
 .step h4 { color: var(--cyan); font-size: 1rem; margin-bottom: 5px; }
 .step p { color: var(--text-dim); font-size: 0.85rem; }
+
 /* ===== Guarantee ===== */
 .guarantee {
   max-width: 900px;
@@ -408,12 +501,27 @@ section {
   padding: 40px 30px;
   text-align: center;
   backdrop-filter: blur(10px);
-  box-shadow: 0 20px 60px rgba(0,255,231,0.1);
+  box-shadow: 0 20px 60px rgba(0,255,231,0.15);
+  position: relative;
+  overflow: hidden;
 }
+.guarantee::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0,255,231,0.1), transparent 30%);
+  animation: rotate 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes rotate { to { transform: rotate(360deg); } }
+.guarantee > * { position: relative; z-index: 1; }
 .guarantee-icon {
   font-size: 4rem;
   margin-bottom: 15px;
   filter: drop-shadow(0 0 25px var(--cyan));
+  display: inline-block;
+  animation: pulseIcon 2s ease-in-out infinite;
 }
 .guarantee h3 {
   font-size: 1.6rem;
@@ -429,6 +537,7 @@ section {
   margin: 0 auto;
   font-size: 0.95rem;
 }
+
 /* ===== Footer ===== */
 footer {
   background: rgba(10,10,15,0.9);
@@ -459,13 +568,14 @@ footer {
   font-size: 0.9rem;
   transition: 0.3s;
 }
-.footer-links a:hover { color: var(--cyan); }
+.footer-links a:hover { color: var(--cyan); text-shadow: 0 0 15px var(--cyan); }
 .copyright {
   color: #555;
   font-size: 0.8rem;
   padding-top: 20px;
   border-top: 1px solid rgba(255,255,255,0.05);
 }
+
 /* ===== Floating Buttons ===== */
 .float-buttons {
   position: fixed;
@@ -500,7 +610,7 @@ footer {
 }
 @keyframes ripple {
   0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
 }
 .float-btn.chat {
   background: linear-gradient(135deg, var(--cyan), var(--purple));
@@ -511,19 +621,21 @@ footer {
   box-shadow: 0 0 25px rgba(16,185,129,0.6);
 }
 .float-btn:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 40px rgba(0,255,231,0.9);
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 0 45px rgba(0,255,231,0.95);
 }
+
 /* ===== Reveal Animation ===== */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(50px);
+  transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
 }
+
 /* ===== Mobile ===== */
 @media (max-width: 768px) {
   .nav-links { display: none; }
@@ -533,12 +645,20 @@ footer {
   .float-buttons { bottom: 20px; left: 15px; }
   .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
   section { padding: 60px 15px; }
+  .product-image { height: 160px; }
 }
 </style>
 </head>
 <body>
 
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</div>
+</div>
+
 <div class="bg-glow"></div>
+<canvas id="particles-canvas"></canvas>
 
 <!-- Navbar -->
 <nav>
@@ -564,15 +684,15 @@ footer {
 
   <div class="stats">
     <div class="stat-box">
-      <div class="num">۵۰۰+</div>
+      <div class="num" data-target="500" data-suffix="+">۰</div>
       <div class="label">🛒 فروش موفق</div>
     </div>
     <div class="stat-box">
-      <div class="num">۶ سال</div>
+      <div class="num" data-target="6" data-suffix=" سال">۰</div>
       <div class="label">⭐ تجربه</div>
     </div>
     <div class="stat-box">
-      <div class="num">۱۰۰٪</div>
+      <div class="num" data-target="100" data-suffix="٪">۰</div>
       <div class="label">💎 رضایت مشتری</div>
     </div>
   </div>
@@ -584,28 +704,44 @@ footer {
   <p class="section-sub reveal">بهترین قیمت‌ها با بالاترین کیفیت</p>
   <div class="products-grid">
     <div class="product-card reveal">
-      <div class="product-icon">🎯</div>
-      <h3>کالاف</h3>
-      <p>اکانت کالاف دیوتی موبایل با رنک‌های مختلف</p>
-      <a href="tel:09388499513" class="btn-buy">خرید</a>
+      <div class="product-image-wrap">
+        <img src="call-of-duty.jpg" alt="کالاف دیوتی موبایل" class="product-image" onerror="this.style.display='none'">
+      </div>
+      <div class="product-body">
+        <h3>کالاف</h3>
+        <p>اکانت کالاف دیوتی موبایل با رنک‌های مختلف</p>
+        <a href="tel:09388499513" class="btn-buy">خرید</a>
+      </div>
     </div>
     <div class="product-card reveal">
-      <div class="product-icon">🏰</div>
-      <h3>کلش</h3>
-      <p>اکانت کلش آف کلنز از تاون هال ۱ تا ۱۸</p>
-      <a href="tel:09388499513" class="btn-buy">خرید</a>
+      <div class="product-image-wrap">
+        <img src="clash-of-clans.jpg" alt="کلش آف کلنز" class="product-image" onerror="this.style.display='none'">
+      </div>
+      <div class="product-body">
+        <h3>کلش</h3>
+        <p>اکانت کلش آف کلنز از تاون هال ۱ تا ۱۸</p>
+        <a href="tel:09388499513" class="btn-buy">خرید</a>
+      </div>
     </div>
     <div class="product-card reveal">
-      <div class="product-icon">💎</div>
-      <h3>آیتم کلش</h3>
-      <p>بلیط طلایی، منظره و آیتم‌های ویژه کلش</p>
-      <a href="tel:09388499513" class="btn-buy">خرید</a>
+      <div class="product-image-wrap">
+        <img src="clash-items.jpg" alt="آیتم کلش" class="product-image" onerror="this.style.display='none'">
+      </div>
+      <div class="product-body">
+        <h3>آیتم کلش</h3>
+        <p>بلیط طلایی، منظره و آیتم‌های ویژه کلش</p>
+        <a href="tel:09388499513" class="btn-buy">خرید</a>
+      </div>
     </div>
     <div class="product-card reveal">
-      <div class="product-icon">🔫</div>
-      <h3>آیتم کالاف</h3>
-      <p>آیتم‌ها و اسکین‌های ویژه کالاف دیوتی موبایل</p>
-      <a href="tel:09388499513" class="btn-buy">خرید</a>
+      <div class="product-image-wrap">
+        <img src="cod-items.jpg" alt="آیتم کالاف" class="product-image" onerror="this.style.display='none'">
+      </div>
+      <div class="product-body">
+        <h3>آیتم کالاف</h3>
+        <p>آیتم‌ها و اسکین‌های ویژه کالاف دیوتی موبایل</p>
+        <a href="tel:09388499513" class="btn-buy">خرید</a>
+      </div>
     </div>
   </div>
 </section>
@@ -703,16 +839,140 @@ footer {
 </div>
 
 <script>
+// ===== Loader =====
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 1200);
+});
+
+// ===== Particles Canvas =====
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.5;
+    this.speedY = (Math.random() - 0.5) * 0.5;
+    this.color = Math.random() > 0.5 ? '0,255,231' : '168,85,247';
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+    if (mouse.x && mouse.y) {
+      const dx = mouse.x - this.x;
+      const dy = mouse.y - this.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 120) {
+        this.x -= dx / 40;
+        this.y -= dy / 40;
+      }
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color}, 0.7)`;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = `rgba(${this.color}, 0.9)`;
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particles = [];
+  const count = Math.min(80, Math.floor(window.innerWidth / 15));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+initParticles();
+
+function connectParticles() {
+  for (let a = 0; a < particles.length; a++) {
+    for (let b = a + 1; b < particles.length; b++) {
+      const dx = particles[a].x - particles[b].x;
+      const dy = particles[a].y - particles[b].y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 130) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(0,255,231,${0.15 * (1 - dist / 130)})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(particles[b].x, particles[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  connectParticles();
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = e.x;
+  mouse.y = e.y;
+});
+window.addEventListener('mouseleave', () => {
+  mouse.x = null;
+  mouse.y = null;
+});
+
 // ===== Reveal on Scroll =====
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+  entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('active');
+      setTimeout(() => entry.target.classList.add('active'), i * 80);
     }
   });
 }, { threshold: 0.15 });
-
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== Animated Counters =====
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  const suffix = el.dataset.suffix || '';
+  let count = 0;
+  const step = target / 60;
+  const timer = setInterval(() => {
+    count += step;
+    if (count >= target) {
+      count = target;
+      clearInterval(timer);
+    }
+    const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+    let num = Math.floor(count).toString().replace(/\d/g, d => persianDigits[d]);
+    el.textContent = num + suffix;
+  }, 25);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.done) {
+      entry.target.dataset.done = 'true';
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.num[data-target]').forEach(el => counterObserver.observe(el));
 
 // ===== Chat Button =====
 function openChat() {
@@ -723,7 +983,7 @@ function openChat() {
   }
 }
 
-// ===== Navbar Scroll Effect =====
+// ===== Navbar Scroll =====
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
   if (window.scrollY > 50) {
@@ -733,6 +993,23 @@ window.addEventListener('scroll', () => {
     nav.style.padding = '15px 20px';
     nav.style.background = 'rgba(10,10,15,0.7)';
   }
+});
+
+// ===== Card 3D Tilt =====
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
 });
 </script>
 
