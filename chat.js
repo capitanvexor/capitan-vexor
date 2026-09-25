@@ -94,7 +94,7 @@ async function startChat() {
     document.getElementById('chatInputArea').style.display = 'flex';
 
     // پیام خوش‌آمد
-    await sendMessage('سلام! خوش اومدی به پشتیبانی کاپیتان وکتور 💎 چطور می‌تونم کمکت کنم؟', 'admin');
+    await sendMessage('سلام! خوش اومدی به پشتیبانی کاپیتان وکثور 💎 چطور می‌تونم کمکت کنم؟', 'admin');
 
     loadMessages();
     subscribeToMessages();
