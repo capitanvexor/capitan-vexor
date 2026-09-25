@@ -165,11 +165,11 @@ nav {
   font-size: 0.85rem; color: var(--text-dim);
 }
 
-/* ==== Chat Window (اصلاح‌شده) ==== */
+/* ==== Chat Window - راست ==== */
 .chat-window {
   position: fixed; 
   bottom: 15px; 
-  left: 25px;
+  right: 25px;
   width: 500px; 
   max-width: calc(100vw - 40px);
   height: calc(100vh - 90px);
@@ -244,7 +244,6 @@ nav {
 .chat-time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 .chat-empty { text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 40px 20px; }
 
-/* ==== کادر ارسال پیام (دکمه بزرگ و واضح) ==== */
 .chat-input-area { 
   padding: 10px 12px; 
   border-top: 1px solid var(--border); 
@@ -284,7 +283,8 @@ nav {
   transform: scale(0.95);
 }
 
-.float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
+/* ==== Floating Buttons - راست ==== */
+.float-buttons { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -298,7 +298,7 @@ nav {
   .container { padding: 90px 15px 40px; }
   .specs-grid { grid-template-columns: repeat(2, 1fr); }
   .actions { flex-direction: column; }
-  .float-buttons { bottom: 15px; left: 15px; }
+  .float-buttons { bottom: 15px; right: 15px; }
   .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
   
   .chat-window {
