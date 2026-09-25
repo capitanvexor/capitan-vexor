@@ -320,17 +320,45 @@ footer {
 .chat-time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 .chat-empty { text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 40px 20px; }
 
+/* ==== کادر ارسال پیام (دکمه ارسال بزرگ و واضح) ==== */
 .chat-input-area { 
   padding: 10px 12px; 
   border-top: 1px solid var(--border); 
   display: flex; 
-  gap: 8px; 
+  gap: 10px; 
   background: rgba(0,0,0,0.3);
   flex-shrink: 0;
+  align-items: center;
 }
-.chat-input-area .chat-input-field { flex: 1; border-radius: 50px; }
-.chat-send-btn { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.1rem; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
-.chat-send-btn:hover { transform: scale(1.08); }
+.chat-input-area .chat-input-field { 
+  flex: 1; 
+  border-radius: 50px; 
+  padding: 12px 18px;
+  font-size: 0.95rem;
+}
+.chat-send-btn { 
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+  background: linear-gradient(135deg, var(--cyan), var(--purple)); 
+  border: none; 
+  color: #0a0a0f; 
+  font-size: 1.4rem; 
+  cursor: pointer; 
+  transition: 0.3s; 
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0,255,231,0.5);
+}
+.chat-send-btn:hover { 
+  transform: scale(1.1); 
+  box-shadow: 0 0 30px rgba(0,255,231,0.9);
+}
+.chat-send-btn:active {
+  transform: scale(0.95);
+}
 
 body.theme-light {
   --bg-dark: #f5f0e8;
@@ -409,7 +437,6 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
   .bg-glow::before, .bg-glow::after { filter: blur(70px); opacity: 0.25; }
   .theme-btn { top: 12px; left: 12px; width: 40px; height: 40px; font-size: 1.1rem; }
   
-  /* موبایل: پنجره چت تمام صفحه */
   .chat-window {
     left: 8px;
     right: 8px;
