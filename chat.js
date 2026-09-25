@@ -1,5 +1,5 @@
 // ==========================================
-// Capitan Vexor - Chat System (v2)
+// Capitan Vexor - Chat System (v3)
 // ==========================================
 
 const CHAT_SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
@@ -8,17 +8,44 @@ const CHAT_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 let chatRealtimeChannel = null;
 
 // ==== Init ====
-function initChat() {
+async function initChat() {
   const chatId = localStorage.getItem('cv_chat_id');
   const visitorName = localStorage.getItem('cv_chat_name');
 
   if (chatId && visitorName) {
-    document.getElementById('chatNameForm').style.display = 'none';
-    document.getElementById('chatMessages').style.display = 'flex';
-    document.getElementById('chatInputArea').style.display = 'flex';
-    loadMessages();
-    subscribeToMessages();
+    // چک کن چت هنوز توی دیتابیس هست یا نه
+    try {
+      const check = await fetch(`${CHAT_SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=id`, {
+        headers: {
+          'apikey': CHAT_SUPABASE_KEY,
+          'Authorization': `Bearer ${CHAT_SUPABASE_KEY}`
+        }
+      });
+      const data = await check.json();
+
+      if (data && data.length > 0) {
+        // چت وجود داره
+        document.getElementById('chatNameForm').style.display = 'none';
+        document.getElementById('chatMessages').style.display = 'flex';
+        document.getElementById('chatInputArea').style.display = 'flex';
+        loadMessages();
+        subscribeToMessages();
+        return;
+      } else {
+        // چت حذف شده — localStorage رو پاک کن
+        localStorage.removeItem('cv_chat_id');
+        localStorage.removeItem('cv_chat_name');
+        localStorage.removeItem('cv_chat_session');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
+
+  // فرم ثبت نام نمایش داده بشه
+  document.getElementById('chatNameForm').style.display = 'flex';
+  document.getElementById('chatMessages').style.display = 'none';
+  document.getElementById('chatInputArea').style.display = 'none';
 }
 
 // ==== Start Chat ====
@@ -33,32 +60,6 @@ async function startChat() {
     return;
   }
 
-  // چک کن قبلاً چتی داشته یا نه
-  const existingChatId = localStorage.getItem('cv_chat_id');
-  if (existingChatId) {
-    // آپدیت اسم اگه عوض شده
-    try {
-      await fetch(`${CHAT_SUPABASE_URL}/rest/v1/chats?id=eq.${existingChatId}`, {
-        method: 'PATCH',
-        headers: {
-          'apikey': CHAT_SUPABASE_KEY,
-          'Authorization': `Bearer ${CHAT_SUPABASE_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ visitor_name: name, visitor_phone: phone })
-      });
-      localStorage.setItem('cv_chat_name', name);
-    } catch (err) { console.error(err); }
-
-    document.getElementById('chatNameForm').style.display = 'none';
-    document.getElementById('chatMessages').style.display = 'flex';
-    document.getElementById('chatInputArea').style.display = 'flex';
-    loadMessages();
-    subscribeToMessages();
-    return;
-  }
-
-  // چت جدید
   const sessionId = 'cv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
   try {
@@ -92,6 +93,7 @@ async function startChat() {
     document.getElementById('chatMessages').style.display = 'flex';
     document.getElementById('chatInputArea').style.display = 'flex';
 
+    // پیام خوش‌آمد
     await sendMessage('سلام! خوش اومدی به کاپیتان وکتور 💎 چطور می‌تونم کمکت کنم؟', 'admin');
 
     loadMessages();
@@ -102,14 +104,14 @@ async function startChat() {
   }
 }
 
-// ==== Send ====
+// ==== Send Message ====
 async function sendMessage(text, sender = 'visitor') {
-  if (!text || !text.trim()) return;
+  if (!text || !text.trim()) return false;
   const chatId = localStorage.getItem('cv_chat_id');
-  if (!chatId) return;
+  if (!chatId) return false;
 
   try {
-    await fetch(`${CHAT_SUPABASE_URL}/rest/v1/messages`, {
+    const res = await fetch(`${CHAT_SUPABASE_URL}/rest/v1/messages`, {
       method: 'POST',
       headers: {
         'apikey': CHAT_SUPABASE_KEY,
@@ -123,6 +125,11 @@ async function sendMessage(text, sender = 'visitor') {
       })
     });
 
+    if (!res.ok) {
+      console.error('خطا در ذخیره پیام:', await res.text());
+      return false;
+    }
+
     await fetch(`${CHAT_SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, {
       method: 'PATCH',
       headers: {
@@ -133,7 +140,11 @@ async function sendMessage(text, sender = 'visitor') {
       body: JSON.stringify({ last_message_at: new Date().toISOString() })
     });
 
-  } catch (err) { console.error('خطا در ارسال:', err); }
+    return true;
+  } catch (err) {
+    console.error('خطا در ارسال:', err);
+    return false;
+  }
 }
 
 async function sendFromInput() {
@@ -145,7 +156,7 @@ async function sendFromInput() {
   loadMessages();
 }
 
-// ==== Load ====
+// ==== Load Messages ====
 async function loadMessages() {
   const chatId = localStorage.getItem('cv_chat_id');
   if (!chatId) return;
