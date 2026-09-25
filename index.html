@@ -523,8 +523,8 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
     <h3>گارانتی ۱۰۰٪ تضمینی</h3>
     <p>اگه بعد از خرید مشکلی پیش بیاد، ما مسئولیم و محصول رو تعویض می‌کنیم. رضایت شما اولویت ماست.</p>
     <div style="margin-top: 25px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-      <a href="tel:09388499513" id="phoneLink" style="display:inline-block; padding: 12px 25px; background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; border-radius: 50px; text-decoration: none; font-weight: 700;">📞 تماس</a>
       <a href="https://rubika.ir/oooo1219" id="rubikaLink" target="_blank" style="display:inline-block; padding: 12px 25px; background: linear-gradient(90deg, var(--pink), var(--purple)); color: white; border-radius: 50px; text-decoration: none; font-weight: 700;">💬 روبیکا</a>
+      <a href="#" id="telegramLink" target="_blank" style="display:inline-block; padding: 12px 25px; background: linear-gradient(90deg, #0088cc, #00b4ff); color: white; border-radius: 50px; text-decoration: none; font-weight: 700;">✈️ تلگرام</a>
     </div>
   </div>
 </section>
@@ -587,7 +587,6 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 // ===== Click Sound (Web Audio API) =====
 let audioContext = null;
-
 function playClick() {
   try {
     if (!audioContext) {
@@ -608,11 +607,8 @@ function playClick() {
     gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
     oscillator.start(now);
     oscillator.stop(now + 0.1);
-  } catch (e) {
-    console.log('خطا در پخش صدا:', e);
-  }
+  } catch (e) {}
 }
-
 document.addEventListener('click', (e) => {
   const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .tab, .btn-icon, .status-badge, .save-btn, .contact-btn, .btn-action, .thumb, .stat-box');
   if (target) playClick();
@@ -783,12 +779,27 @@ async function loadContact() {
     });
     const data = await res.json();
     if (data && data.length > 0) {
-      const phone = data[0].phone;
       const rubika = data[0].rubika_id;
-      document.getElementById('phoneLink').href = `tel:${phone}`;
-      document.getElementById('phoneLink').textContent = `📞 ${phone}`;
-      document.getElementById('rubikaLink').href = `https://rubika.ir/${rubika}`;
-      document.getElementById('floatPhone').href = `tel:${phone}`;
+      const telegram = data[0].telegram_id;
+      
+      // لینک روبیکا
+      const rubikaLink = document.getElementById('rubikaLink');
+      if (rubikaLink) rubikaLink.href = `https://rubika.ir/${rubika}`;
+      
+      // لینک تلگرام
+      const telegramLink = document.getElementById('telegramLink');
+      if (telegramLink) {
+        if (telegram) {
+          telegramLink.href = `https://t.me/${telegram}`;
+          telegramLink.style.display = 'inline-block';
+        } else {
+          telegramLink.style.display = 'none';
+        }
+      }
+      
+      // دکمه شناور تماس
+      const floatPhone = document.getElementById('floatPhone');
+      if (floatPhone) floatPhone.href = `tel:${data[0].phone}`;
     }
   } catch (err) { console.error(err); }
 }
