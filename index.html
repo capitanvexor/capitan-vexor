@@ -13,7 +13,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
 :root {
   --bg-dark: #0a0a0f;
-  --bg-secondary: #12121a;
   --cyan: #00ffe7;
   --purple: #a855f7;
   --pink: #ff2ec4;
@@ -271,7 +270,7 @@ footer {
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* ===== Chat Window ===== */
+/* ===== Chat Window - چپ ===== */
 .chat-window {
   position: fixed; bottom: 95px; left: 25px;
   width: 360px; max-width: calc(100vw - 40px);
@@ -338,9 +337,7 @@ footer {
 .chat-send-btn { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
 .chat-send-btn:hover { transform: scale(1.08); }
 
-/* ============================================
-   THEME: LIGHT (روز)
-============================================ */
+/* ===== THEME: LIGHT (روز) ===== */
 body.theme-light {
   --bg-dark: #f5f0e8;
   --text: #1a1a2e;
@@ -355,23 +352,16 @@ body.theme-light nav { background: rgba(245,240,232,0.95); }
 body.theme-light footer { background: rgba(245,240,232,0.95); }
 body.theme-light .bg-glow::before { background: #6ec1e4; opacity: 0.5; }
 body.theme-light .bg-glow::after { background: #ff9a76; opacity: 0.5; }
-body.theme-light .category-image-wrap::after {
-  background: linear-gradient(180deg, transparent 40%, rgba(245,240,232,0.95));
-}
+body.theme-light .category-image-wrap::after { background: linear-gradient(180deg, transparent 40%, rgba(245,240,232,0.95)); }
 body.theme-light .chat-window { background: rgba(255,255,255,0.98); }
 body.theme-light .chat-messages { background: rgba(0,0,0,0.03); }
-body.theme-light .chat-bubble.theirs {
-  background: rgba(0,136,204,0.1); color: #1a1a2e;
-}
-body.theme-light .chat-bubble.mine { color: white; }
+body.theme-light .chat-bubble.theirs { background: rgba(0,136,204,0.1); color: #1a1a2e; }
 body.theme-light .chat-input-area { background: rgba(0,0,0,0.03); }
 body.theme-light .chat-input-field { background: rgba(255,255,255,0.9); color: #1a1a2e; }
-body.theme-light .copyright { color: #888; }
 body.theme-light .chat-time { color: #666; opacity: 0.8; }
+body.theme-light .copyright { color: #888; }
 
-/* ============================================
-   THEME: COLORFUL (رنگارنگ)
-============================================ */
+/* ===== THEME: COLORFUL (رنگارنگ) ===== */
 body.theme-colorful {
   --bg-dark: #1a0533;
   --text: #ffffff;
@@ -386,15 +376,11 @@ body.theme-colorful .bg-glow::before { background: #ff2ec4; opacity: 0.6; }
 body.theme-colorful .bg-glow::after { background: #00d4ff; opacity: 0.6; }
 body.theme-colorful nav { background: rgba(26,5,51,0.95); }
 body.theme-colorful footer { background: rgba(26,5,51,0.95); }
-body.theme-colorful .stat-box .num {
-  background: linear-gradient(135deg, #ff2ec4, #ffdd00, #00d4ff);
-  -webkit-background-clip: text; background-clip: text;
-}
+body.theme-colorful .stat-box .num { background: linear-gradient(135deg, #ff2ec4, #ffdd00, #00d4ff); -webkit-background-clip: text; background-clip: text; }
 body.theme-colorful .section-title {
   background: linear-gradient(90deg, #ff2ec4, #ffdd00, #00d4ff, #ff2ec4);
   background-size: 300% 300%;
   -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
   animation: gradientMove 3s ease infinite;
 }
 body.theme-colorful .hero h1 {
@@ -407,31 +393,14 @@ body.theme-colorful .logo {
   background-size: 200% 200%;
   -webkit-background-clip: text; background-clip: text;
 }
-body.theme-colorful .category-title {
-  background: linear-gradient(90deg, #ffdd00, #ff2ec4);
-  -webkit-background-clip: text; background-clip: text;
-}
-body.theme-colorful .category-btn {
-  background: linear-gradient(90deg, #ff2ec4, #ffdd00);
-  color: #1a0533;
-}
+body.theme-colorful .category-title { background: linear-gradient(90deg, #ffdd00, #ff2ec4); -webkit-background-clip: text; background-clip: text; }
+body.theme-colorful .category-btn { background: linear-gradient(90deg, #ff2ec4, #ffdd00); color: #1a0533; }
 body.theme-colorful .feature h4 { color: #ffdd00; }
-body.theme-colorful .section-title { color: #ff2ec4; }
-body.theme-colorful .chat-avatar {
-  background: linear-gradient(135deg, #ff2ec4, #ffdd00);
-}
-body.theme-colorful .chat-bubble.mine {
-  background: linear-gradient(135deg, #ff2ec4, #ffdd00);
-  color: #1a0533;
-}
+body.theme-colorful .chat-avatar { background: linear-gradient(135deg, #ff2ec4, #ffdd00); }
+body.theme-colorful .chat-bubble.mine { background: linear-gradient(135deg, #ff2ec4, #ffdd00); color: #1a0533; }
 body.theme-colorful .chat-start-btn,
-body.theme-colorful .chat-send-btn {
-  background: linear-gradient(135deg, #ff2ec4, #ffdd00);
-  color: #1a0533;
-}
-body.theme-colorful .float-btn.chat {
-  background: linear-gradient(135deg, #ff2ec4, #ffdd00);
-}
+body.theme-colorful .chat-send-btn { background: linear-gradient(135deg, #ff2ec4, #ffdd00); color: #1a0533; }
+body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec4, #ffdd00); }
 
 /* ===== Mobile ===== */
 @media (max-width: 768px) {
@@ -672,7 +641,6 @@ function changeTheme() {
   applyTheme(currentTheme);
 }
 
-// اعمال تم ذخیره‌شده (قبل از لود کامل)
 applyTheme(currentTheme);
 
 // ==== Loader + Counters ====
