@@ -31,7 +31,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -6s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
 
-/* Login */
 .login-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
 .login-box {
   background: var(--glass); border: 1px solid var(--border); border-radius: 25px;
@@ -65,7 +64,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .back-link { display: inline-block; margin-top: 20px; color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
 .back-link:hover { color: var(--cyan); }
 
-/* Dashboard */
 .dashboard { display: none; padding: 20px; max-width: 1000px; margin: 0 auto; }
 .dashboard.active { display: block; }
 .dash-header {
@@ -85,7 +83,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 }
 .logout-btn:hover { background: var(--danger); color: white; }
 
-/* Tabs */
 .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .tab {
   padding: 12px 22px; background: var(--glass); border: 1px solid var(--border);
@@ -100,7 +97,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* Card */
 .card {
   background: var(--glass); border: 1px solid var(--border); border-radius: 20px;
   padding: 25px; backdrop-filter: blur(20px); margin-bottom: 20px;
@@ -122,7 +118,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
   border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.2);
 }
-.form-group .hint { font-size: 0.75rem; color: #666; margin-top: 5px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 .form-row.three { grid-template-columns: 1fr 1fr 1fr; }
 
@@ -134,11 +129,9 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .save-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,255,231,0.7); }
 .save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-/* Image Upload */
 .upload-area {
   border: 2px dashed var(--border); border-radius: 12px; padding: 30px 20px;
-  text-align: center; cursor: pointer; transition: 0.3s;
-  background: rgba(0,0,0,0.2);
+  text-align: center; cursor: pointer; transition: 0.3s; background: rgba(0,0,0,0.2);
 }
 .upload-area:hover { border-color: var(--cyan); background: rgba(0,255,231,0.05); }
 .upload-area .icon { font-size: 3rem; margin-bottom: 10px; }
@@ -156,7 +149,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center;
 }
 
-/* Status */
 .status {
   padding: 15px 20px; border-radius: 12px; margin-bottom: 20px;
   font-weight: 600; display: none; align-items: center; gap: 10px;
@@ -166,7 +158,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .status.error { background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); }
 .status.loading { background: rgba(0,255,231,0.1); border: 1px solid var(--cyan); color: var(--cyan); }
 
-/* Products List */
 .products-list { display: grid; gap: 12px; }
 .product-item {
   background: rgba(0,0,0,0.3); border: 1px solid var(--border);
@@ -192,75 +183,98 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
 .empty-state .icon { font-size: 3rem; margin-bottom: 10px; opacity: 0.5; }
 
-/* Chat Tab */
+/* Chat Card */
 .chat-card {
   background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
   border: 1px solid var(--border); border-radius: 20px;
   padding: 30px; text-align: center;
 }
-.chat-icon {
-  font-size: 5rem; margin-bottom: 15px;
-  filter: drop-shadow(0 0 30px var(--cyan));
-  animation: pulse 2s ease-in-out infinite;
-}
+.chat-icon { font-size: 5rem; margin-bottom: 15px; filter: drop-shadow(0 0 30px var(--cyan)); animation: pulse 2s ease-in-out infinite; }
 .chat-title {
   font-size: 1.5rem; font-weight: 900; margin-bottom: 10px;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .chat-desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto; }
-
 .chat-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   padding: 16px 40px; border-radius: 14px; font-weight: 700; font-size: 1.1rem;
   text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-family: inherit;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
-  color: #0a0a0f; box-shadow: 0 0 30px rgba(0,255,231,0.5);
-  margin: 10px;
+  color: #0a0a0f; box-shadow: 0 0 30px rgba(0,255,231,0.5); margin: 10px;
 }
 .chat-btn:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,255,231,0.9); }
 
-.chat-btn.secondary {
-  background: linear-gradient(90deg, var(--pink), var(--purple));
-  color: white; box-shadow: 0 0 30px rgba(255,46,196,0.5);
+/* Admin Chat Panel */
+.admin-chat-wrap { display: grid; grid-template-columns: 300px 1fr; gap: 15px; height: 600px; }
+.admin-chat-list {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px;
+  overflow-y: auto; padding: 10px;
 }
-.chat-btn.secondary:hover { box-shadow: 0 0 50px rgba(255,46,196,0.9); }
-
-/* Info Boxes */
-.info-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px; margin-top: 30px;
+.chat-list-item {
+  padding: 12px 15px; border-radius: 12px; cursor: pointer; transition: 0.3s;
+  border: 1px solid transparent; margin-bottom: 8px;
 }
-.info-box {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
-  border-radius: 15px; padding: 20px; text-align: center;
+.chat-list-item:hover { background: rgba(0,255,231,0.05); border-color: var(--border); }
+.chat-list-item.active {
+  background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
+  border-color: var(--cyan);
 }
-.info-box .icon { font-size: 2rem; margin-bottom: 10px; }
-.info-box h4 { color: var(--cyan); font-size: 0.95rem; margin-bottom: 8px; }
-.info-box p { color: var(--text-dim); font-size: 0.8rem; line-height: 1.6; }
-
-/* Steps */
-.steps-box {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
-  border-radius: 15px; padding: 20px; margin-top: 20px; text-align: right;
-}
-.steps-box h4 { color: var(--cyan); margin-bottom: 15px; font-size: 1rem; }
-.steps-box ol { padding-right: 20px; }
-.steps-box li { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 10px; line-height: 1.8; }
-.steps-box strong { color: var(--text); }
-
-.security-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(16,185,129,0.15); border: 1px solid var(--success);
-  color: var(--success); padding: 8px 16px; border-radius: 50px;
-  font-size: 0.85rem; font-weight: 600; margin-top: 15px;
+.chat-list-item .name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+.chat-list-item .preview { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-list-item .time { font-size: 0.7rem; color: #666; margin-top: 4px; }
+.chat-list-item .unread {
+  display: inline-block; background: var(--danger); color: white;
+  font-size: 0.7rem; padding: 2px 8px; border-radius: 50px; margin-right: 5px;
 }
 
+.admin-chat-main {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.admin-chat-header {
+  padding: 15px 20px; border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
+  display: flex; justify-content: space-between; align-items: center;
+}
+.admin-chat-header h3 { font-size: 1rem; color: var(--cyan); }
+.admin-chat-header .visitor-info { font-size: 0.8rem; color: var(--text-dim); }
+.admin-chat-messages {
+  flex: 1; overflow-y: auto; padding: 18px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.admin-chat-input {
+  padding: 12px; border-top: 1px solid var(--border);
+  display: flex; gap: 8px; background: rgba(0,0,0,0.3);
+}
+.admin-chat-input input {
+  flex: 1; padding: 12px 16px; background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border); border-radius: 50px;
+  color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none;
+}
+.admin-chat-input input:focus { border-color: var(--cyan); }
+.admin-chat-input button {
+  width: 45px; height: 45px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+}
+.admin-chat-input button:hover { transform: scale(1.1); }
+
+.admin-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; color: var(--text-dim); text-align: center; padding: 40px;
+}
+.admin-empty .icon { font-size: 4rem; margin-bottom: 15px; opacity: 0.4; }
+
+@media (max-width: 700px) {
+  .admin-chat-wrap { grid-template-columns: 1fr; height: auto; }
+  .admin-chat-list { max-height: 200px; }
+  .admin-chat-main { height: 500px; }
+}
 @media (max-width: 600px) {
   .login-box { padding: 35px 25px; }
   .card { padding: 18px; }
   .form-row, .form-row.three { grid-template-columns: 1fr; }
-  .chat-btn { width: 100%; padding: 14px 20px; font-size: 0.95rem; }
 }
 </style>
 </head>
@@ -298,19 +312,19 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div id="statusBox" class="status"></div>
 
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('add', this)">➕ افزودن اکانت</button>
-    <button class="tab" onclick="switchTab('list', this)">📦 لیست اکانت‌ها</button>
-    <button class="tab" onclick="switchTab('chat', this)">💬 چت زنده</button>
-    <button class="tab" onclick="switchTab('contact', this)">📞 اطلاعات تماس</button>
+    <button class="tab active" onclick="switchTab('add', this)">➕ افزودن</button>
+    <button class="tab" onclick="switchTab('list', this)">📦 لیست</button>
+    <button class="tab" onclick="switchTab('chat', this)">💬 چت زنده <span id="chatBadge"></span></button>
+    <button class="tab" onclick="switchTab('contact', this)">📞 تماس</button>
   </div>
 
   <!-- Tab: Add Product -->
   <div class="tab-content active" id="tab-add">
     <div class="card">
-      <div class="card-title">➕ افزودن اکانت جدید</div>
+      <div class="card-title">➕ افزودن محصول جدید</div>
 
       <div class="form-group">
-        <label>🎮 عنوان اکانت *</label>
+        <label>🎮 عنوان *</label>
         <input type="text" id="pTitle" placeholder="مثلاً: اکانت کلش آف کلنز TH14 پر مانع">
       </div>
 
@@ -319,38 +333,76 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <input type="text" id="pSlogan" placeholder="مثلاً: 🔥 نقد و اقساط تضمینی 🔥">
       </div>
 
-      <div class="form-row three">
+      <div class="form-group">
+        <label>📂 دسته‌بندی *</label>
+        <select id="pCategory" onchange="updateCategoryFields()">
+          <option value="کلش">🏰 کلش</option>
+          <option value="کالاف">🎯 کالاف</option>
+          <option value="آیتم کلش">💎 آیتم کلش</option>
+          <option value="آیتم کالاف">🔫 آیتم کالاف</option>
+        </select>
+      </div>
+
+      <!-- فیلدهای کلش -->
+      <div id="fields-clash" class="form-row three">
         <div class="form-group">
           <label>🏰 تاون هال</label>
-          <input type="number" id="pTownHall" placeholder="12">
+          <input type="number" id="pTownHall" placeholder="14">
         </div>
         <div class="form-group">
           <label>🏗️ لول بیلدر</label>
           <input type="number" id="pBuilder" placeholder="10">
         </div>
         <div class="form-group">
-          <label>✏️ تعداد تغییر نام</label>
+          <label>✏️ تغییر نام</label>
           <input type="number" id="pNameChanges" placeholder="1">
         </div>
       </div>
 
+      <!-- فیلدهای کالاف -->
+      <div id="fields-cod" class="form-row three" style="display:none;">
+        <div class="form-group">
+          <label>🎖️ رنک</label>
+          <input type="text" id="pRank" placeholder="مثلاً: Legendary">
+        </div>
+        <div class="form-group">
+          <label>📊 لول پلیر</label>
+          <input type="number" id="pPlayerLevel" placeholder="150">
+        </div>
+        <div class="form-group">
+          <label>🎨 تعداد اسکین</label>
+          <input type="number" id="pSkins" placeholder="50">
+        </div>
+      </div>
+
+      <!-- فیلدهای آیتم -->
+      <div id="fields-item" class="form-row" style="display:none;">
+        <div class="form-group">
+          <label>🏷️ نوع آیتم</label>
+          <input type="text" id="pItemType" placeholder="مثلاً: بلیط طلایی">
+        </div>
+        <div class="form-group">
+          <label>📦 مقدار</label>
+          <input type="text" id="pItemAmount" placeholder="مثلاً: ۱ عدد">
+        </div>
+      </div>
+
       <div class="form-row">
         <div class="form-group">
-          <label>🆔 کد اکانت</label>
-          <input type="text" id="pCode" placeholder="مثلاً: 232" dir="ltr">
+          <label>🆔 کد محصول</label>
+          <input type="text" id="pCode" placeholder="232" dir="ltr">
         </div>
         <div class="form-group">
           <label>💰 قیمت (تومان) *</label>
-          <input type="number" id="pPrice" placeholder="مثلاً: 5800000">
+          <input type="number" id="pPrice" placeholder="5800000">
         </div>
       </div>
 
-      <div class="form-group">
-        <label>📝 توضیحات</label>
-        <textarea id="pDesc" rows="3" placeholder="توضیحات کامل درباره اکانت..."></textarea>
-      </div>
-
       <div class="form-row">
+        <div class="form-group">
+          <label>💵 قیمت دلاری (اختیاری)</label>
+          <input type="text" id="pPriceUsd" placeholder="مثلاً: 95$" dir="ltr">
+        </div>
         <div class="form-group">
           <label>✅ وضعیت</label>
           <select id="pStatus">
@@ -359,89 +411,49 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
             <option value="فروش رفته">🔴 فروش رفته</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>📂 دسته‌بندی *</label>
-          <select id="pCategory">
-            <option value="کالاف">🎯 کالاف</option>
-            <option value="کلش">🏰 کلش</option>
-            <option value="آیتم کلش">💎 آیتم کلش</option>
-            <option value="آیتم کالاف">🔫 آیتم کالاف</option>
-          </select>
-        </div>
       </div>
 
       <div class="form-group">
-        <label>📸 عکس‌های اکانت (چندتایی)</label>
+        <label>📝 توضیحات</label>
+        <textarea id="pDesc" rows="3" placeholder="توضیحات کامل..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>📸 عکس‌ها (چندتایی)</label>
         <div class="upload-area" onclick="document.getElementById('pImages').click()">
           <div class="icon">🖼️</div>
           <p>برای انتخاب عکس‌ها کلیک کن</p>
-          <p style="font-size: 0.75rem; color: #666; margin-top: 5px;">می‌تونی چند تا عکس انتخاب کنی</p>
           <input type="file" id="pImages" accept="image/*" multiple onchange="handleImages(event)">
         </div>
         <div class="images-preview" id="imagesPreview"></div>
       </div>
 
-      <button class="save-btn" id="addBtn" onclick="addProduct()">🚀 ثبت اکانت</button>
+      <button class="save-btn" id="addBtn" onclick="addProduct()">🚀 ثبت محصول</button>
     </div>
   </div>
 
-  <!-- Tab: List Products -->
+  <!-- Tab: List -->
   <div class="tab-content" id="tab-list">
     <div class="card">
-      <div class="card-title">📦 لیست اکانت‌ها</div>
+      <div class="card-title">📦 لیست محصولات</div>
       <div class="products-list" id="productsList"></div>
     </div>
   </div>
 
   <!-- Tab: Chat -->
   <div class="tab-content" id="tab-chat">
-    <div class="chat-card">
-      <div class="chat-icon">💬</div>
-      <h2 class="chat-title">چت زنده با مشتریان</h2>
-      <p class="chat-desc">
-        تمام پیام‌های مشتری‌ها اینجا بهت می‌رسه.<br>
-        می‌تونی از لینک زیر، پنل چت رو باز کنی و فوری جواب بدی.
-      </p>
-
-      <a href="https://dashboard.tawk.to" target="_blank" class="chat-btn">
-        🚀 باز کردن پنل چت Tawk.to
-      </a>
-
-      <div class="security-badge">
-        🔒 پیام‌ها کاملاً خصوصی و امن هستن
+    <div class="admin-chat-wrap">
+      <div class="admin-chat-list" id="chatList">
+        <div class="admin-empty">
+          <div class="icon">⏳</div>
+          <p>در حال بارگذاری...</p>
+        </div>
       </div>
-
-      <div class="steps-box">
-        <h4>📋 چطور جواب بدم؟</h4>
-        <ol>
-          <li>روی دکمه <strong>«باز کردن پنل چت Tawk.to»</strong> بزن</li>
-          <li>با ایمیل و رمزی که موقع ثبت‌نام Tawk.to ساختی وارد شو</li>
-          <li>پیام‌های مشتری‌ها توی <strong>Inbox</strong> میان</li>
-          <li>روی هر پیام کلیک کن و جواب بده</li>
-          <li>می‌تونی از <strong>پاسخ‌های آماده</strong> هم استفاده کنی</li>
-        </ol>
-      </div>
-
-      <div class="info-grid">
-        <div class="info-box">
-          <div class="icon">📱</div>
-          <h4>اپلیکیشن موبایل</h4>
-          <p>Tawk.to رو نصب کن تا هر جا پیام بیاد، نوتیفیکیشن بگیری</p>
-        </div>
-        <div class="info-box">
-          <div class="icon">🔔</div>
-          <h4>نوتیفیکیشن</h4>
-          <p>تنظیمات اعلان رو فعال کن تا هیچ پیامی رو از دست ندی</p>
-        </div>
-        <div class="info-box">
-          <div class="icon">⚡</div>
-          <h4>پاسخ سریع</h4>
-          <p>پاسخ‌های آماده بساز تا با یه کلیک جواب بدی</p>
-        </div>
-        <div class="info-box">
-          <div class="icon">🛡️</div>
-          <h4>امنیت بالا</h4>
-          <p>همه پیام‌ها رمزنگاری شده و فقط تو می‌بینی</p>
+      <div class="admin-chat-main" id="adminChatMain">
+        <div class="admin-empty">
+          <div class="icon">💬</div>
+          <h3>یه گفتگو انتخاب کن</h3>
+          <p>از لیست سمت راست، یه مشتری رو انتخاب کن تا پیام‌ها رو ببینی</p>
         </div>
       </div>
     </div>
@@ -459,20 +471,26 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <label>💬 آیدی روبیکا (بدون @)</label>
         <input type="text" id="rubika" placeholder="oooo1219" dir="ltr">
       </div>
-      <button class="save-btn" onclick="saveSettings()">💾 ذخیره اطلاعات تماس</button>
+      <button class="save-btn" onclick="saveSettings()">💾 ذخیره</button>
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const DEFAULT_USERNAME = 'admin';
 const DEFAULT_PASSWORD = 'vexor2024';
 
 let selectedImages = [];
+let currentChatId = null;
+let currentChatName = null;
 
+// ==== Login ====
 function login() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
@@ -493,6 +511,8 @@ function showDashboard() {
   document.getElementById('dashboard').classList.add('active');
   loadProducts();
   loadSettings();
+  loadChats();
+  subscribeToChats();
 }
 function logout() {
   sessionStorage.removeItem('cv_logged_in');
@@ -508,6 +528,7 @@ function switchTab(name, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'chat') loadChats();
 }
 
 function showStatus(msg, type = 'loading') {
@@ -517,13 +538,20 @@ function showStatus(msg, type = 'loading') {
   if (type !== 'loading') setTimeout(() => box.classList.remove('show'), 4000);
 }
 
-// === Image Upload ===
+// ==== Category Fields ====
+function updateCategoryFields() {
+  const cat = document.getElementById('pCategory').value;
+  document.getElementById('fields-clash').style.display = (cat === 'کلش') ? 'grid' : 'none';
+  document.getElementById('fields-cod').style.display = (cat === 'کالاف') ? 'grid' : 'none';
+  document.getElementById('fields-item').style.display = (cat.includes('آیتم')) ? 'grid' : 'none';
+}
+
+// ==== Image Upload ====
 function handleImages(event) {
   const files = Array.from(event.target.files);
   selectedImages = [...selectedImages, ...files];
   renderImagePreviews();
 }
-
 function renderImagePreviews() {
   const preview = document.getElementById('imagesPreview');
   preview.innerHTML = '';
@@ -531,19 +559,14 @@ function renderImagePreviews() {
     const url = URL.createObjectURL(file);
     const item = document.createElement('div');
     item.className = 'img-preview-item';
-    item.innerHTML = `
-      <img src="${url}">
-      <button class="remove" onclick="removeImage(${i})">×</button>
-    `;
+    item.innerHTML = `<img src="${url}"><button class="remove" onclick="removeImage(${i})">×</button>`;
     preview.appendChild(item);
   });
 }
-
 function removeImage(i) {
   selectedImages.splice(i, 1);
   renderImagePreviews();
 }
-
 async function uploadImage(file) {
   const ext = file.name.split('.').pop();
   const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${ext}`;
@@ -560,9 +583,11 @@ async function uploadImage(file) {
   return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 }
 
+// ==== Add Product ====
 async function addProduct() {
   const title = document.getElementById('pTitle').value.trim();
   const price = document.getElementById('pPrice').value.trim();
+  const cat = document.getElementById('pCategory').value;
 
   if (!title || !price) {
     showStatus('❌ عنوان و قیمت اجباری هستن!', 'error');
@@ -580,21 +605,33 @@ async function addProduct() {
       imageUrls = await Promise.all(selectedImages.map(uploadImage));
     }
 
-    showStatus('⏳ در حال ذخیره اکانت...', 'loading');
+    showStatus('⏳ در حال ذخیره...', 'loading');
 
     const product = {
       title: title,
       slogan: document.getElementById('pSlogan').value.trim(),
-      town_hall: parseInt(document.getElementById('pTownHall').value) || null,
-      builder_level: parseInt(document.getElementById('pBuilder').value) || null,
-      name_changes: parseInt(document.getElementById('pNameChanges').value) || null,
+      category: cat,
       account_code: document.getElementById('pCode').value.trim(),
       price: parseInt(price),
+      price_usd: document.getElementById('pPriceUsd').value.trim(),
       description: document.getElementById('pDesc').value.trim(),
       status: document.getElementById('pStatus').value,
-      category: document.getElementById('pCategory').value,
       images: imageUrls
     };
+
+    // فیلدهای مخصوص هر دسته
+    if (cat === 'کلش') {
+      product.town_hall = parseInt(document.getElementById('pTownHall').value) || null;
+      product.builder_level = parseInt(document.getElementById('pBuilder').value) || null;
+      product.name_changes = parseInt(document.getElementById('pNameChanges').value) || null;
+    } else if (cat === 'کالاف') {
+      product.rank = document.getElementById('pRank').value.trim();
+      product.player_level = parseInt(document.getElementById('pPlayerLevel').value) || null;
+      product.skins_count = parseInt(document.getElementById('pSkins').value) || null;
+    } else if (cat.includes('آیتم')) {
+      product.item_type = document.getElementById('pItemType').value.trim();
+      product.item_amount = document.getElementById('pItemAmount').value.trim();
+    }
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
       method: 'POST',
@@ -608,15 +645,11 @@ async function addProduct() {
     });
 
     if (res.ok) {
-      showStatus('🎉 اکانت با موفقیت ثبت شد!', 'success');
-      document.getElementById('pTitle').value = '';
-      document.getElementById('pSlogan').value = '';
-      document.getElementById('pTownHall').value = '';
-      document.getElementById('pBuilder').value = '';
-      document.getElementById('pNameChanges').value = '';
-      document.getElementById('pCode').value = '';
-      document.getElementById('pPrice').value = '';
-      document.getElementById('pDesc').value = '';
+      showStatus('🎉 محصول ثبت شد!', 'success');
+      ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pRank','pPlayerLevel','pSkins','pItemType','pItemAmount','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
       selectedImages = [];
       renderImagePreviews();
       loadProducts();
@@ -628,10 +661,11 @@ async function addProduct() {
     showStatus('❌ خطا: ' + err.message, 'error');
   } finally {
     btn.disabled = false;
-    btn.textContent = '🚀 ثبت اکانت';
+    btn.textContent = '🚀 ثبت محصول';
   }
 }
 
+// ==== Load Products ====
 async function loadProducts() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, {
@@ -645,7 +679,7 @@ async function loadProducts() {
 function renderProducts(products) {
   const list = document.getElementById('productsList');
   if (!products || products.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>هنوز اکانتی اضافه نکردی!</p></div>`;
+    list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>هنوز محصولی نداری!</p></div>`;
     return;
   }
   list.innerHTML = products.map(p => {
@@ -657,7 +691,10 @@ function renderProducts(products) {
           <h4>${p.title}</h4>
           <p>${p.category} | کد: ${p.account_code || '-'} | ${p.status}</p>
         </div>
-        <div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت</div>
+        <div class="product-price">
+          ${Number(p.price).toLocaleString('fa-IR')} ت
+          ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}
+        </div>
         <button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button>
       </div>
     `;
@@ -671,13 +708,11 @@ async function deleteProduct(id) {
       method: 'DELETE',
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
     });
-    if (res.ok) {
-      showStatus('🗑️ حذف شد', 'success');
-      loadProducts();
-    }
+    if (res.ok) { showStatus('🗑️ حذف شد', 'success'); loadProducts(); }
   } catch (err) { showStatus('❌ خطا', 'error'); }
 }
 
+// ==== Settings ====
 async function loadSettings() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
@@ -699,17 +734,167 @@ async function saveSettings() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, {
       method: 'PATCH',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, rubika_id: rubika, updated_at: new Date().toISOString() })
+    });
+    if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
+  } catch (err) { showStatus('❌ خطا', 'error'); }
+}
+
+// ==== Chat Admin ====
+async function loadChats() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const chats = await res.json();
+    renderChatList(chats);
+  } catch (err) { console.error(err); }
+}
+
+function renderChatList(chats) {
+  const list = document.getElementById('chatList');
+  if (!chats || chats.length === 0) {
+    list.innerHTML = `<div class="admin-empty"><div class="icon">📭</div><p>هنوز چتی نداری</p></div>`;
+    return;
+  }
+  list.innerHTML = chats.map(c => {
+    const time = c.last_message_at ? new Date(c.last_message_at).toLocaleString('fa-IR', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
+    const active = currentChatId === c.id ? 'active' : '';
+    return `
+      <div class="chat-list-item ${active}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')">
+        <div class="name">👤 ${escapeHtml(c.visitor_name)}</div>
+        ${c.visitor_phone ? `<div class="preview">📞 ${escapeHtml(c.visitor_phone)}</div>` : ''}
+        <div class="time">${time}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function openChat(id, name) {
+  currentChatId = id;
+  currentChatName = name;
+  document.querySelectorAll('.chat-list-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.chat-list-item').forEach(el => {
+    if (el.getAttribute('onclick').includes(`(${id},`)) el.classList.add('active');
+  });
+
+  const main = document.getElementById('adminChatMain');
+  main.innerHTML = `
+    <div class="admin-chat-header">
+      <h3>👤 ${escapeHtml(name)}</h3>
+    </div>
+    <div class="admin-chat-messages" id="adminChatMessages">
+      <div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div>
+    </div>
+    <div class="admin-chat-input">
+      <input type="text" id="adminChatInput" placeholder="پاسخ بنویس..." onkeypress="if(event.key==='Enter') sendAdminMessage()">
+      <button onclick="sendAdminMessage()">📤</button>
+    </div>
+  `;
+  loadChatMessages(id);
+  subscribeToChatMessages(id);
+}
+
+async function loadChatMessages(chatId) {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const messages = await res.json();
+    renderChatMessages(messages);
+  } catch (err) { console.error(err); }
+}
+
+function renderChatMessages(messages) {
+  const container = document.getElementById('adminChatMessages');
+  if (!container) return;
+  if (!messages || messages.length === 0) {
+    container.innerHTML = '<div style="text-align:center;color:#666;padding:20px;">هنوز پیامی نیست</div>';
+    return;
+  }
+  container.innerHTML = messages.map(m => {
+    const isAdmin = m.sender === 'admin';
+    return `
+      <div class="chat-bubble ${isAdmin ? 'mine' : 'theirs'}">
+        <div class="chat-text">${escapeHtml(m.message)}</div>
+        <div class="chat-time">${formatTime(m.created_at)}</div>
+      </div>
+    `;
+  }).join('');
+  container.scrollTop = container.scrollHeight;
+}
+
+async function sendAdminMessage() {
+  const input = document.getElementById('adminChatInput');
+  const text = input.value.trim();
+  if (!text || !currentChatId) return;
+  input.value = '';
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
+      method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
         'Authorization': `Bearer ${SUPABASE_KEY}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ phone, rubika_id: rubika, updated_at: new Date().toISOString() })
+      body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text })
     });
-    if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
-    else showStatus('❌ خطا', 'error');
-  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
+    await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ last_message_at: new Date().toISOString() })
+    });
+    loadChatMessages(currentChatId);
+  } catch (err) { alert('خطا: ' + err.message); }
 }
+
+// ==== Realtime ====
+let chatsChannel = null;
+function subscribeToChats() {
+  if (chatsChannel) return;
+  chatsChannel = supabaseClient
+    .channel('admin-chats')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, () => {
+      if (currentChatId) loadChatMessages(currentChatId);
+      loadChats();
+    })
+    .subscribe();
+}
+
+let messagesChannel = null;
+function subscribeToChatMessages(chatId) {
+  if (messagesChannel) supabaseClient.removeChannel(messagesChannel);
+  messagesChannel = supabaseClient
+    .channel('admin-chat-' + chatId)
+    .on('postgres_changes', {
+      event: 'INSERT',
+      schema: 'public',
+      table: 'messages',
+      filter: `chat_id=eq.${chatId}`
+    }, () => loadChatMessages(chatId))
+    .subscribe();
+}
+
+// ==== Helpers ====
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+function formatTime(iso) {
+  const d = new Date(iso);
+  return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+}
+
+// Init category fields
+updateCategoryFields();
 </script>
 
 </body>
