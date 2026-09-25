@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>دسته‌بندی | 𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
 :root {
@@ -202,7 +203,6 @@ nav {
       <div class="filter-count" id="resultCount">...</div>
     </div>
     <div class="filter-grid" id="filterGrid">
-      <!-- فیلترها با JS ساخته میشن -->
     </div>
   </div>
 
@@ -218,6 +218,8 @@ nav {
   <button class="float-btn chat" onclick="openChat()">💬</button>
   <a href="tel:09388499513" id="floatPhone" class="float-btn phone">📞</a>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
 <script>
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
@@ -235,7 +237,6 @@ const categoryInfo = {
 
 let allProducts = [];
 
-// Init
 const info = categoryInfo[category] || { icon: '🎮', desc: 'محصولات این دسته' };
 document.getElementById('catIcon').textContent = info.icon;
 document.getElementById('catTitle').textContent = category;
@@ -245,7 +246,6 @@ document.querySelectorAll('.nav-links a[data-cat]').forEach(a => {
   if (a.dataset.cat === category) a.classList.add('active');
 });
 
-// ساخت فیلترها بر اساس دسته
 function buildFilters() {
   const grid = document.getElementById('filterGrid');
   let html = `
@@ -255,7 +255,6 @@ function buildFilters() {
     </div>
   `;
 
-  // فیلترهای کلش
   if (category === 'کلش') {
     html += `
       <div class="filter-group">
@@ -274,7 +273,6 @@ function buildFilters() {
     `;
   }
 
-  // فیلترهای کالاف
   if (category === 'کالاف') {
     html += `
       <div class="filter-group">
@@ -291,7 +289,6 @@ function buildFilters() {
     `;
   }
 
-  // فیلترهای آیتم
   if (category.includes('آیتم')) {
     html += `
       <div class="filter-group">
@@ -301,7 +298,6 @@ function buildFilters() {
     `;
   }
 
-  // فیلتر قیمت (برای همه)
   html += `
     <div class="filter-group">
       <label>💰 از قیمت (تومان)</label>
@@ -381,7 +377,6 @@ function renderProducts(products) {
     const statusClass = p.status === 'موجود' ? 'status-available' : (p.status === 'فروش رفته' ? 'status-sold' : 'status-unavailable');
     const priceFmt = p.price ? Number(p.price).toLocaleString('fa-IR') : 'تماس';
 
-    // ساخت spec tag ها بر اساس دسته
     let specs = '';
     if (p.category === 'کلش') {
       if (p.town_hall) specs += `<span class="spec-tag">🏰 تان ${p.town_hall}</span>`;
@@ -399,7 +394,7 @@ function renderProducts(products) {
     return `
       <a href="product.html?id=${p.id}" class="product-card">
         <div class="product-image-wrap">
-          ${img ? `<img src="${img}" class="product-image" alt="${p.title}" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\\'no-image\\'>🎯</div>'">` : '<div class="no-image">🎯</div>'}
+          ${img ? `<img src="${img}" class="product-image" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\\'no-image\\'>🎯</div>'">` : '<div class="no-image">🎯</div>'}
           <div class="product-status ${statusClass}">${p.status || 'موجود'}</div>
           ${p.account_code ? `<div class="product-code">کد: ${p.account_code}</div>` : ''}
         </div>
@@ -432,39 +427,43 @@ async function loadContact() {
 }
 
 function openChat() {
-  // اگه توی صفحه اصلی هستیم، پنجره چت رو باز کن
-  if (window.parent && window.parent.toggleChatWindow) {
-    window.parent.toggleChatWindow();
-  } else {
-    // اگه نه، برو به صفحه اصلی
-    window.location.href = 'index.html#chat';
-  }
+  window.location.href = 'index.html#chat';
 }
 
 loadProducts();
 loadContact();
 </script>
+
 <script>
-// ===== Click Sound =====
-const CLICK_SOUND = 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT';
-let clickAudio = null;
+// ===== Click Sound (Web Audio API) =====
+let audioContext = null;
 function playClick() {
   try {
-    if (!clickAudio) {
-      clickAudio = new Audio(CLICK_SOUND);
-      clickAudio.volume = 0.3;
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
-    clickAudio.currentTime = 0;
-    clickAudio.play().catch(() => {});
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+    const now = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(900, now);
+    oscillator.frequency.exponentialRampToValueAtTime(400, now + 0.08);
+    gainNode.gain.setValueAtTime(0.2, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    oscillator.start(now);
+    oscillator.stop(now + 0.1);
   } catch (e) {}
 }
 document.addEventListener('click', (e) => {
-  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .tab, .btn-icon, .status-badge, .save-btn, .contact-btn, .btn-action');
+  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .tab, .btn-icon, .status-badge, .save-btn, .contact-btn, .btn-action, .thumb, .stat-box, .product-card');
   if (target) playClick();
 }, true);
-document.querySelectorAll('.float-btn').forEach(btn => {
-  btn.addEventListener('click', playClick);
-});
 </script>
+
 </body>
 </html>
