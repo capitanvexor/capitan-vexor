@@ -7,6 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
 :root {
@@ -20,6 +21,7 @@
   --border: rgba(0,255,231,0.2);
   --danger: #ff3860;
   --success: #10b981;
+  --warning: #f59e0b;
 }
 body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 .bg-glow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
@@ -163,8 +165,9 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   background: rgba(0,0,0,0.3); border: 1px solid var(--border);
   border-radius: 12px; padding: 15px;
   display: flex; justify-content: space-between; align-items: center;
-  gap: 15px; flex-wrap: wrap;
+  gap: 15px; flex-wrap: wrap; transition: 0.3s;
 }
+.product-item:hover { border-color: var(--cyan); }
 .product-thumb {
   width: 60px; height: 60px; border-radius: 10px; object-fit: cover;
   border: 1px solid var(--border);
@@ -172,6 +175,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .product-details h4 { font-size: 1rem; margin-bottom: 3px; }
 .product-details p { font-size: 0.8rem; color: var(--text-dim); }
 .product-price { color: var(--cyan); font-weight: 700; font-size: 0.9rem; }
+.product-actions { display: flex; gap: 8px; }
 .btn-icon {
   width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border);
   background: transparent; color: var(--text); cursor: pointer; transition: 0.3s;
@@ -180,101 +184,88 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .btn-icon:hover { background: rgba(0,255,231,0.1); border-color: var(--cyan); }
 .btn-icon.danger:hover { background: rgba(255,56,96,0.15); border-color: var(--danger); color: var(--danger); }
 
+/* Status Badge */
+.status-badge {
+  padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+  cursor: pointer; transition: 0.3s; border: 1px solid;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.status-badge.available { background: rgba(16,185,129,0.15); color: var(--success); border-color: var(--success); }
+.status-badge.sold { background: rgba(255,56,96,0.15); color: var(--danger); border-color: var(--danger); }
+.status-badge.unavailable { background: rgba(100,100,100,0.15); color: #999; border-color: #666; }
+.status-badge:hover { transform: scale(1.05); }
+
 .empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
 .empty-state .icon { font-size: 3rem; margin-bottom: 10px; opacity: 0.5; }
 
-/* Chat Card */
-.chat-card {
-  background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
-  border: 1px solid var(--border); border-radius: 20px;
-  padding: 30px; text-align: center;
+/* Modal */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px); z-index: 99999;
+  display: none; justify-content: center; align-items: center; padding: 20px;
 }
-.chat-icon { font-size: 5rem; margin-bottom: 15px; filter: drop-shadow(0 0 30px var(--cyan)); animation: pulse 2s ease-in-out infinite; }
-.chat-title {
-  font-size: 1.5rem; font-weight: 900; margin-bottom: 10px;
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+.modal-overlay.show { display: flex; }
+.modal {
+  background: var(--bg-dark); border: 1px solid var(--border);
+  border-radius: 25px; padding: 30px; width: 100%; max-width: 600px;
+  max-height: 90vh; overflow-y: auto; animation: modalIn 0.3s ease-out;
+  box-shadow: 0 25px 60px rgba(0,255,231,0.2);
 }
-.chat-desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto; }
-.chat-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 16px 40px; border-radius: 14px; font-weight: 700; font-size: 1.1rem;
-  text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-family: inherit;
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  color: #0a0a0f; box-shadow: 0 0 30px rgba(0,255,231,0.5); margin: 10px;
-}
-.chat-btn:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,255,231,0.9); }
-
-/* Admin Chat Panel */
-.admin-chat-wrap { display: grid; grid-template-columns: 300px 1fr; gap: 15px; height: 600px; }
-.admin-chat-list {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px;
-  overflow-y: auto; padding: 10px;
-}
-.chat-list-item {
-  padding: 12px 15px; border-radius: 12px; cursor: pointer; transition: 0.3s;
-  border: 1px solid transparent; margin-bottom: 8px;
-}
-.chat-list-item:hover { background: rgba(0,255,231,0.05); border-color: var(--border); }
-.chat-list-item.active {
-  background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
-  border-color: var(--cyan);
-}
-.chat-list-item .name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
-.chat-list-item .preview { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.chat-list-item .time { font-size: 0.7rem; color: #666; margin-top: 4px; }
-.chat-list-item .unread {
-  display: inline-block; background: var(--danger); color: white;
-  font-size: 0.7rem; padding: 2px 8px; border-radius: 50px; margin-right: 5px;
-}
-
-.admin-chat-main {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px;
-  display: flex; flex-direction: column; overflow: hidden;
-}
-.admin-chat-header {
-  padding: 15px 20px; border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
+@keyframes modalIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+.modal-header {
   display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border);
 }
-.admin-chat-header h3 { font-size: 1rem; color: var(--cyan); }
-.admin-chat-header .visitor-info { font-size: 0.8rem; color: var(--text-dim); }
-.admin-chat-messages {
-  flex: 1; overflow-y: auto; padding: 18px;
-  display: flex; flex-direction: column; gap: 12px;
+.modal-header h2 {
+  font-size: 1.3rem; background: linear-gradient(90deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  font-weight: 900;
 }
-.admin-chat-input {
-  padding: 12px; border-top: 1px solid var(--border);
-  display: flex; gap: 8px; background: rgba(0,0,0,0.3);
+.modal-close {
+  background: transparent; border: none; color: var(--text-dim);
+  font-size: 1.5rem; cursor: pointer; width: 35px; height: 35px;
+  border-radius: 10px; transition: 0.3s;
 }
-.admin-chat-input input {
-  flex: 1; padding: 12px 16px; background: rgba(0,0,0,0.4);
-  border: 1px solid var(--border); border-radius: 50px;
-  color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none;
+.modal-close:hover { background: rgba(255,56,96,0.15); color: var(--danger); }
+.modal-actions {
+  display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;
 }
-.admin-chat-input input:focus { border-color: var(--cyan); }
-.admin-chat-input button {
-  width: 45px; height: 45px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+.modal-btn {
+  flex: 1; padding: 13px; border-radius: 12px; border: none;
+  font-family: inherit; font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; transition: 0.3s; min-width: 120px;
 }
-.admin-chat-input button:hover { transform: scale(1.1); }
+.modal-btn.primary {
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  color: #0a0a0f; box-shadow: 0 0 20px rgba(0,255,231,0.4);
+}
+.modal-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,255,231,0.7); }
+.modal-btn.secondary {
+  background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border);
+}
+.modal-btn.secondary:hover { border-color: var(--cyan); color: var(--cyan); }
 
-.admin-empty {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  height: 100%; color: var(--text-dim); text-align: center; padding: 40px;
+/* Image grid in modal */
+.existing-images {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;
 }
-.admin-empty .icon { font-size: 4rem; margin-bottom: 15px; opacity: 0.4; }
+.existing-img-item {
+  position: relative; width: 80px; height: 80px; border-radius: 10px;
+  overflow: hidden; border: 2px solid var(--border);
+}
+.existing-img-item img { width: 100%; height: 100%; object-fit: cover; }
+.existing-img-item .delete-img {
+  position: absolute; top: 3px; right: 3px;
+  background: rgba(255,56,96,0.9); color: white; border: none;
+  border-radius: 50%; width: 22px; height: 22px; cursor: pointer;
+  font-size: 0.8rem; display: flex; align-items: center; justify-content: center;
+}
 
-@media (max-width: 700px) {
-  .admin-chat-wrap { grid-template-columns: 1fr; height: auto; }
-  .admin-chat-list { max-height: 200px; }
-  .admin-chat-main { height: 500px; }
-}
 @media (max-width: 600px) {
   .login-box { padding: 35px 25px; }
   .card { padding: 18px; }
   .form-row, .form-row.three { grid-template-columns: 1fr; }
+  .modal { padding: 20px; }
 }
 </style>
 </head>
@@ -313,24 +304,23 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 
   <div class="tabs">
     <button class="tab active" onclick="switchTab('add', this)">➕ افزودن</button>
-    <button class="tab" onclick="switchTab('list', this)">📦 لیست</button>
-    <button class="tab" onclick="switchTab('chat', this)">💬 چت زنده <span id="chatBadge"></span></button>
+    <button class="tab" onclick="switchTab('list', this)">📦 لیست محصولات</button>
     <button class="tab" onclick="switchTab('contact', this)">📞 تماس</button>
   </div>
 
-  <!-- Tab: Add Product -->
+  <!-- Tab: Add -->
   <div class="tab-content active" id="tab-add">
     <div class="card">
       <div class="card-title">➕ افزودن محصول جدید</div>
 
       <div class="form-group">
         <label>🎮 عنوان *</label>
-        <input type="text" id="pTitle" placeholder="مثلاً: اکانت کلش آف کلنز TH14 پر مانع">
+        <input type="text" id="pTitle" placeholder="مثلاً: اکانت کلش TH14 پر مانع">
       </div>
 
       <div class="form-group">
         <label>💬 شعار (اختیاری)</label>
-        <input type="text" id="pSlogan" placeholder="مثلاً: 🔥 نقد و اقساط تضمینی 🔥">
+        <input type="text" id="pSlogan" placeholder="🔥 نقد و اقساط تضمینی">
       </div>
 
       <div class="form-group">
@@ -343,7 +333,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </select>
       </div>
 
-      <!-- فیلدهای کلش -->
       <div id="fields-clash" class="form-row three">
         <div class="form-group">
           <label>🏰 تاون هال</label>
@@ -359,11 +348,10 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </div>
       </div>
 
-      <!-- فیلدهای کالاف -->
       <div id="fields-cod" class="form-row three" style="display:none;">
         <div class="form-group">
           <label>🎖️ رنک</label>
-          <input type="text" id="pRank" placeholder="مثلاً: Legendary">
+          <input type="text" id="pRank" placeholder="Legendary">
         </div>
         <div class="form-group">
           <label>📊 لول پلیر</label>
@@ -375,15 +363,14 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </div>
       </div>
 
-      <!-- فیلدهای آیتم -->
       <div id="fields-item" class="form-row" style="display:none;">
         <div class="form-group">
           <label>🏷️ نوع آیتم</label>
-          <input type="text" id="pItemType" placeholder="مثلاً: بلیط طلایی">
+          <input type="text" id="pItemType" placeholder="بلیط طلایی">
         </div>
         <div class="form-group">
           <label>📦 مقدار</label>
-          <input type="text" id="pItemAmount" placeholder="مثلاً: ۱ عدد">
+          <input type="text" id="pItemAmount" placeholder="۱ عدد">
         </div>
       </div>
 
@@ -400,8 +387,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 
       <div class="form-row">
         <div class="form-group">
-          <label>💵 قیمت دلاری (اختیاری)</label>
-          <input type="text" id="pPriceUsd" placeholder="مثلاً: 95$" dir="ltr">
+          <label>💵 قیمت دلاری</label>
+          <input type="text" id="pPriceUsd" placeholder="95$" dir="ltr">
         </div>
         <div class="form-group">
           <label>✅ وضعیت</label>
@@ -419,10 +406,11 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       </div>
 
       <div class="form-group">
-        <label>📸 عکس‌ها (چندتایی)</label>
+        <label>📸 عکس‌ها (چندتایی — خودکار فشرده میشن)</label>
         <div class="upload-area" onclick="document.getElementById('pImages').click()">
           <div class="icon">🖼️</div>
           <p>برای انتخاب عکس‌ها کلیک کن</p>
+          <p style="font-size:0.75rem;color:#666;margin-top:5px;">⚡ عکس‌ها خودکار فشرده میشن</p>
           <input type="file" id="pImages" accept="image/*" multiple onchange="handleImages(event)">
         </div>
         <div class="images-preview" id="imagesPreview"></div>
@@ -436,26 +424,13 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div class="tab-content" id="tab-list">
     <div class="card">
       <div class="card-title">📦 لیست محصولات</div>
+      <div style="margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="status-badge available" onclick="filterList('all')">همه</button>
+        <button class="status-badge available" onclick="filterList('موجود')">✅ موجود</button>
+        <button class="status-badge unavailable" onclick="filterList('ناموجود')">❌ ناموجود</button>
+        <button class="status-badge sold" onclick="filterList('فروش رفته')">🔴 فروش رفته</button>
+      </div>
       <div class="products-list" id="productsList"></div>
-    </div>
-  </div>
-
-  <!-- Tab: Chat -->
-  <div class="tab-content" id="tab-chat">
-    <div class="admin-chat-wrap">
-      <div class="admin-chat-list" id="chatList">
-        <div class="admin-empty">
-          <div class="icon">⏳</div>
-          <p>در حال بارگذاری...</p>
-        </div>
-      </div>
-      <div class="admin-chat-main" id="adminChatMain">
-        <div class="admin-empty">
-          <div class="icon">💬</div>
-          <h3>یه گفتگو انتخاب کن</h3>
-          <p>از لیست سمت راست، یه مشتری رو انتخاب کن تا پیام‌ها رو ببینی</p>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -468,7 +443,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <input type="text" id="phone" placeholder="09388499513" dir="ltr">
       </div>
       <div class="form-group">
-        <label>💬 آیدی روبیکا (بدون @)</label>
+        <label>💬 آیدی روبیکا</label>
         <input type="text" id="rubika" placeholder="oooo1219" dir="ltr">
       </div>
       <button class="save-btn" onclick="saveSettings()">💾 ذخیره</button>
@@ -476,19 +451,142 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Edit Modal -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>✏️ ویرایش محصول</h2>
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
+
+    <input type="hidden" id="editId">
+    <input type="hidden" id="editImages" value="[]">
+
+    <div class="form-group">
+      <label>🎮 عنوان *</label>
+      <input type="text" id="editTitle">
+    </div>
+
+    <div class="form-group">
+      <label>💬 شعار</label>
+      <input type="text" id="editSlogan">
+    </div>
+
+    <div class="form-group">
+      <label>📂 دسته‌بندی</label>
+      <select id="editCategory">
+        <option value="کلش">🏰 کلش</option>
+        <option value="کالاف">🎯 کالاف</option>
+        <option value="آیتم کلش">💎 آیتم کلش</option>
+        <option value="آیتم کالاف">🔫 آیتم کالاف</option>
+      </select>
+    </div>
+
+    <div class="form-row three">
+      <div class="form-group">
+        <label>🏰 تاون هال</label>
+        <input type="number" id="editTownHall">
+      </div>
+      <div class="form-group">
+        <label>🏗️ لول بیلدر</label>
+        <input type="number" id="editBuilder">
+      </div>
+      <div class="form-group">
+        <label>✏️ تغییر نام</label>
+        <input type="number" id="editNameChanges">
+      </div>
+    </div>
+
+    <div class="form-row three">
+      <div class="form-group">
+        <label>🎖️ رنک</label>
+        <input type="text" id="editRank">
+      </div>
+      <div class="form-group">
+        <label>📊 لول پلیر</label>
+        <input type="number" id="editPlayerLevel">
+      </div>
+      <div class="form-group">
+        <label>🎨 تعداد اسکین</label>
+        <input type="number" id="editSkins">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>🏷️ نوع آیتم</label>
+        <input type="text" id="editItemType">
+      </div>
+      <div class="form-group">
+        <label>📦 مقدار</label>
+        <input type="text" id="editItemAmount">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>🆔 کد</label>
+        <input type="text" id="editCode" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label>💰 قیمت (تومان) *</label>
+        <input type="number" id="editPrice">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>💵 قیمت دلاری</label>
+        <input type="text" id="editPriceUsd" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label>✅ وضعیت</label>
+        <select id="editStatus">
+          <option value="موجود">✅ موجود</option>
+          <option value="ناموجود">❌ ناموجود</option>
+          <option value="فروش رفته">🔴 فروش رفته</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>📝 توضیحات</label>
+      <textarea id="editDesc" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>📸 عکس‌های فعلی</label>
+      <div class="existing-images" id="existingImages"></div>
+    </div>
+
+    <div class="form-group">
+      <label>➕ عکس‌های جدید (خودکار فشرده میشن)</label>
+      <div class="upload-area" onclick="document.getElementById('editImagesInput').click()">
+        <div class="icon">🖼️</div>
+        <p>اضافه کردن عکس جدید</p>
+        <input type="file" id="editImagesInput" accept="image/*" multiple onchange="handleEditImages(event)">
+      </div>
+      <div class="images-preview" id="editImagesPreview"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn secondary" onclick="closeEditModal()">انصراف</button>
+      <button class="modal-btn primary" id="saveEditBtn" onclick="saveEdit()">💾 ذخیره تغییرات</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
-
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const DEFAULT_USERNAME = 'admin';
 const DEFAULT_PASSWORD = 'vexor2024';
 
 let selectedImages = [];
-let currentChatId = null;
-let currentChatName = null;
+let editNewImages = [];
+let allProductsData = [];
+let currentListFilter = 'all';
 
 // ==== Login ====
 function login() {
@@ -511,8 +609,6 @@ function showDashboard() {
   document.getElementById('dashboard').classList.add('active');
   loadProducts();
   loadSettings();
-  loadChats();
-  subscribeToChats();
 }
 function logout() {
   sessionStorage.removeItem('cv_logged_in');
@@ -528,7 +624,6 @@ function switchTab(name, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('tab-' + name).classList.add('active');
-  if (name === 'chat') loadChats();
 }
 
 function showStatus(msg, type = 'loading') {
@@ -546,7 +641,42 @@ function updateCategoryFields() {
   document.getElementById('fields-item').style.display = (cat.includes('آیتم')) ? 'grid' : 'none';
 }
 
-// ==== Image Upload ====
+// ==== Image Compression + Upload ====
+async function compressAndUpload(file) {
+  try {
+    // فشرده‌سازی
+    const options = {
+      maxSizeMB: 0.3,
+      maxWidthOrHeight: 1200,
+      useWebWorker: true,
+      fileType: 'image/jpeg',
+      initialQuality: 0.8
+    };
+    const compressedFile = await imageCompression(file, options);
+
+    // ساخت اسم
+    const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.jpg`;
+
+    // آپلود
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'image/jpeg'
+      },
+      body: compressedFile
+    });
+
+    if (!res.ok) throw new Error('خطا در آپلود');
+    return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
+  } catch (err) {
+    console.error('خطا:', err);
+    throw err;
+  }
+}
+
+// ==== Add Product Images ====
 function handleImages(event) {
   const files = Array.from(event.target.files);
   selectedImages = [...selectedImages, ...files];
@@ -567,21 +697,6 @@ function removeImage(i) {
   selectedImages.splice(i, 1);
   renderImagePreviews();
 }
-async function uploadImage(file) {
-  const ext = file.name.split('.').pop();
-  const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${ext}`;
-  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, {
-    method: 'POST',
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
-      'Content-Type': file.type
-    },
-    body: file
-  });
-  if (!res.ok) throw new Error('خطا در آپلود عکس');
-  return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
-}
 
 // ==== Add Product ====
 async function addProduct() {
@@ -590,7 +705,7 @@ async function addProduct() {
   const cat = document.getElementById('pCategory').value;
 
   if (!title || !price) {
-    showStatus('❌ عنوان و قیمت اجباری هستن!', 'error');
+    showStatus('❌ عنوان و قیمت اجباری!', 'error');
     return;
   }
 
@@ -601,8 +716,8 @@ async function addProduct() {
   try {
     let imageUrls = [];
     if (selectedImages.length > 0) {
-      showStatus('⏳ در حال آپلود عکس‌ها...', 'loading');
-      imageUrls = await Promise.all(selectedImages.map(uploadImage));
+      showStatus('⏳ فشرده‌سازی و آپلود عکس‌ها...', 'loading');
+      imageUrls = await Promise.all(selectedImages.map(compressAndUpload));
     }
 
     showStatus('⏳ در حال ذخیره...', 'loading');
@@ -619,7 +734,6 @@ async function addProduct() {
       images: imageUrls
     };
 
-    // فیلدهای مخصوص هر دسته
     if (cat === 'کلش') {
       product.town_hall = parseInt(document.getElementById('pTownHall').value) || null;
       product.builder_level = parseInt(document.getElementById('pBuilder').value) || null;
@@ -671,36 +785,229 @@ async function loadProducts() {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, {
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
     });
-    const products = await res.json();
-    renderProducts(products);
+    allProductsData = await res.json();
+    filterList(currentListFilter);
   } catch (err) { console.error(err); }
+}
+
+function filterList(status) {
+  currentListFilter = status;
+  let filtered = allProductsData;
+  if (status !== 'all') {
+    filtered = allProductsData.filter(p => p.status === status);
+  }
+  renderProducts(filtered);
 }
 
 function renderProducts(products) {
   const list = document.getElementById('productsList');
   if (!products || products.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>هنوز محصولی نداری!</p></div>`;
+    list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>محصولی نیست</p></div>`;
     return;
   }
   list.innerHTML = products.map(p => {
     const img = p.images && p.images[0] ? `<img src="${p.images[0]}" class="product-thumb">` : '<div style="font-size:2rem;">🎯</div>';
+    const statusClass = p.status === 'موجود' ? 'available' : (p.status === 'فروش رفته' ? 'sold' : 'unavailable');
+    const statusIcon = p.status === 'موجود' ? '✅' : (p.status === 'فروش رفته' ? '🔴' : '❌');
     return `
       <div class="product-item">
         ${img}
         <div class="product-details">
           <h4>${p.title}</h4>
-          <p>${p.category} | کد: ${p.account_code || '-'} | ${p.status}</p>
+          <p>${p.category} | کد: ${p.account_code || '-'}</p>
         </div>
         <div class="product-price">
           ${Number(p.price).toLocaleString('fa-IR')} ت
           ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}
         </div>
-        <button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button>
+        <span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">
+          ${statusIcon} ${p.status}
+        </span>
+        <div class="product-actions">
+          <button class="btn-icon" onclick="openEditModal(${p.id})" title="ویرایش">✏️</button>
+          <button class="btn-icon danger" onclick="deleteProduct(${p.id})" title="حذف">🗑️</button>
+        </div>
       </div>
     `;
   }).join('');
 }
 
+// ==== Toggle Status ====
+async function toggleStatus(id, currentStatus) {
+  let newStatus;
+  if (currentStatus === 'موجود') newStatus = 'فروش رفته';
+  else if (currentStatus === 'فروش رفته') newStatus = 'ناموجود';
+  else newStatus = 'موجود';
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: newStatus })
+    });
+    if (res.ok) {
+      showStatus(`✅ وضعیت به "${newStatus}" تغییر کرد`, 'success');
+      loadProducts();
+    }
+  } catch (err) { showStatus('❌ خطا', 'error'); }
+}
+
+// ==== Edit Modal ====
+function openEditModal(id) {
+  const p = allProductsData.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('editId').value = p.id;
+  document.getElementById('editTitle').value = p.title || '';
+  document.getElementById('editSlogan').value = p.slogan || '';
+  document.getElementById('editCategory').value = p.category || 'کلش';
+  document.getElementById('editTownHall').value = p.town_hall || '';
+  document.getElementById('editBuilder').value = p.builder_level || '';
+  document.getElementById('editNameChanges').value = p.name_changes || '';
+  document.getElementById('editRank').value = p.rank || '';
+  document.getElementById('editPlayerLevel').value = p.player_level || '';
+  document.getElementById('editSkins').value = p.skins_count || '';
+  document.getElementById('editItemType').value = p.item_type || '';
+  document.getElementById('editItemAmount').value = p.item_amount || '';
+  document.getElementById('editCode').value = p.account_code || '';
+  document.getElementById('editPrice').value = p.price || '';
+  document.getElementById('editPriceUsd').value = p.price_usd || '';
+  document.getElementById('editStatus').value = p.status || 'موجود';
+  document.getElementById('editDesc').value = p.description || '';
+
+  // عکس‌های موجود
+  const images = p.images || [];
+  document.getElementById('editImages').value = JSON.stringify(images);
+  renderExistingImages(images);
+
+  editNewImages = [];
+  renderEditImagesPreview();
+
+  document.getElementById('editModal').classList.add('show');
+}
+
+function renderExistingImages(images) {
+  const container = document.getElementById('existingImages');
+  if (!images || images.length === 0) {
+    container.innerHTML = '<p style="color:#666;font-size:0.85rem;">عکسی نداره</p>';
+    return;
+  }
+  container.innerHTML = images.map((img, i) => `
+    <div class="existing-img-item">
+      <img src="${img}">
+      <button class="delete-img" onclick="removeExistingImage(${i})">×</button>
+    </div>
+  `).join('');
+}
+
+function removeExistingImage(index) {
+  const images = JSON.parse(document.getElementById('editImages').value);
+  images.splice(index, 1);
+  document.getElementById('editImages').value = JSON.stringify(images);
+  renderExistingImages(images);
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.remove('show');
+}
+
+// ==== Edit Images ====
+function handleEditImages(event) {
+  const files = Array.from(event.target.files);
+  editNewImages = [...editNewImages, ...files];
+  renderEditImagesPreview();
+}
+function renderEditImagesPreview() {
+  const preview = document.getElementById('editImagesPreview');
+  preview.innerHTML = '';
+  editNewImages.forEach((file, i) => {
+    const url = URL.createObjectURL(file);
+    const item = document.createElement('div');
+    item.className = 'img-preview-item';
+    item.innerHTML = `<img src="${url}"><button class="remove" onclick="removeEditImage(${i})">×</button>`;
+    preview.appendChild(item);
+  });
+}
+function removeEditImage(i) {
+  editNewImages.splice(i, 1);
+  renderEditImagesPreview();
+}
+
+// ==== Save Edit ====
+async function saveEdit() {
+  const id = document.getElementById('editId').value;
+  const title = document.getElementById('editTitle').value.trim();
+  const price = document.getElementById('editPrice').value.trim();
+
+  if (!title || !price) {
+    alert('عنوان و قیمت اجباری هستن!');
+    return;
+  }
+
+  const btn = document.getElementById('saveEditBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ ذخیره...';
+
+  try {
+    let existingImages = JSON.parse(document.getElementById('editImages').value);
+
+    // آپلود عکس‌های جدید
+    if (editNewImages.length > 0) {
+      btn.textContent = '⏳ آپلود عکس...';
+      const newUrls = await Promise.all(editNewImages.map(compressAndUpload));
+      existingImages = [...existingImages, ...newUrls];
+    }
+
+    const updateData = {
+      title: title,
+      slogan: document.getElementById('editSlogan').value.trim(),
+      category: document.getElementById('editCategory').value,
+      town_hall: parseInt(document.getElementById('editTownHall').value) || null,
+      builder_level: parseInt(document.getElementById('editBuilder').value) || null,
+      name_changes: parseInt(document.getElementById('editNameChanges').value) || null,
+      rank: document.getElementById('editRank').value.trim(),
+      player_level: parseInt(document.getElementById('editPlayerLevel').value) || null,
+      skins_count: parseInt(document.getElementById('editSkins').value) || null,
+      item_type: document.getElementById('editItemType').value.trim(),
+      item_amount: document.getElementById('editItemAmount').value.trim(),
+      account_code: document.getElementById('editCode').value.trim(),
+      price: parseInt(price),
+      price_usd: document.getElementById('editPriceUsd').value.trim(),
+      status: document.getElementById('editStatus').value,
+      description: document.getElementById('editDesc').value.trim(),
+      images: existingImages
+    };
+
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updateData)
+    });
+
+    if (res.ok) {
+      showStatus('🎉 تغییرات ذخیره شد!', 'success');
+      closeEditModal();
+      loadProducts();
+    } else {
+      alert('خطا در ذخیره');
+    }
+  } catch (err) {
+    alert('خطا: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '💾 ذخیره تغییرات';
+  }
+}
+
+// ==== Delete ====
 async function deleteProduct(id) {
   if (!confirm('مطمئنی؟')) return;
   try {
@@ -741,159 +1048,6 @@ async function saveSettings() {
   } catch (err) { showStatus('❌ خطا', 'error'); }
 }
 
-// ==== Chat Admin ====
-async function loadChats() {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    const chats = await res.json();
-    renderChatList(chats);
-  } catch (err) { console.error(err); }
-}
-
-function renderChatList(chats) {
-  const list = document.getElementById('chatList');
-  if (!chats || chats.length === 0) {
-    list.innerHTML = `<div class="admin-empty"><div class="icon">📭</div><p>هنوز چتی نداری</p></div>`;
-    return;
-  }
-  list.innerHTML = chats.map(c => {
-    const time = c.last_message_at ? new Date(c.last_message_at).toLocaleString('fa-IR', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
-    const active = currentChatId === c.id ? 'active' : '';
-    return `
-      <div class="chat-list-item ${active}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')">
-        <div class="name">👤 ${escapeHtml(c.visitor_name)}</div>
-        ${c.visitor_phone ? `<div class="preview">📞 ${escapeHtml(c.visitor_phone)}</div>` : ''}
-        <div class="time">${time}</div>
-      </div>
-    `;
-  }).join('');
-}
-
-async function openChat(id, name) {
-  currentChatId = id;
-  currentChatName = name;
-  document.querySelectorAll('.chat-list-item').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.chat-list-item').forEach(el => {
-    if (el.getAttribute('onclick').includes(`(${id},`)) el.classList.add('active');
-  });
-
-  const main = document.getElementById('adminChatMain');
-  main.innerHTML = `
-    <div class="admin-chat-header">
-      <h3>👤 ${escapeHtml(name)}</h3>
-    </div>
-    <div class="admin-chat-messages" id="adminChatMessages">
-      <div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div>
-    </div>
-    <div class="admin-chat-input">
-      <input type="text" id="adminChatInput" placeholder="پاسخ بنویس..." onkeypress="if(event.key==='Enter') sendAdminMessage()">
-      <button onclick="sendAdminMessage()">📤</button>
-    </div>
-  `;
-  loadChatMessages(id);
-  subscribeToChatMessages(id);
-}
-
-async function loadChatMessages(chatId) {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    const messages = await res.json();
-    renderChatMessages(messages);
-  } catch (err) { console.error(err); }
-}
-
-function renderChatMessages(messages) {
-  const container = document.getElementById('adminChatMessages');
-  if (!container) return;
-  if (!messages || messages.length === 0) {
-    container.innerHTML = '<div style="text-align:center;color:#666;padding:20px;">هنوز پیامی نیست</div>';
-    return;
-  }
-  container.innerHTML = messages.map(m => {
-    const isAdmin = m.sender === 'admin';
-    return `
-      <div class="chat-bubble ${isAdmin ? 'mine' : 'theirs'}">
-        <div class="chat-text">${escapeHtml(m.message)}</div>
-        <div class="chat-time">${formatTime(m.created_at)}</div>
-      </div>
-    `;
-  }).join('');
-  container.scrollTop = container.scrollHeight;
-}
-
-async function sendAdminMessage() {
-  const input = document.getElementById('adminChatInput');
-  const text = input.value.trim();
-  if (!text || !currentChatId) return;
-  input.value = '';
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text })
-    });
-    await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
-      method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ last_message_at: new Date().toISOString() })
-    });
-    loadChatMessages(currentChatId);
-  } catch (err) { alert('خطا: ' + err.message); }
-}
-
-// ==== Realtime ====
-let chatsChannel = null;
-function subscribeToChats() {
-  if (chatsChannel) return;
-  chatsChannel = supabaseClient
-    .channel('admin-chats')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, () => {
-      if (currentChatId) loadChatMessages(currentChatId);
-      loadChats();
-    })
-    .subscribe();
-}
-
-let messagesChannel = null;
-function subscribeToChatMessages(chatId) {
-  if (messagesChannel) supabaseClient.removeChannel(messagesChannel);
-  messagesChannel = supabaseClient
-    .channel('admin-chat-' + chatId)
-    .on('postgres_changes', {
-      event: 'INSERT',
-      schema: 'public',
-      table: 'messages',
-      filter: `chat_id=eq.${chatId}`
-    }, () => loadChatMessages(chatId))
-    .subscribe();
-}
-
-// ==== Helpers ====
-function escapeHtml(text) {
-  if (!text) return '';
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-function formatTime(iso) {
-  const d = new Date(iso);
-  return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
-}
-
-// Init category fields
 updateCategoryFields();
 </script>
 
