@@ -144,9 +144,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .upload-area .icon { font-size: 3rem; margin-bottom: 10px; }
 .upload-area p { color: var(--text-dim); font-size: 0.9rem; }
 .upload-area input { display: none; }
-.images-preview {
-  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;
-}
+.images-preview { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
 .img-preview-item {
   position: relative; width: 80px; height: 80px; border-radius: 10px;
   overflow: hidden; border: 2px solid var(--border);
@@ -194,10 +192,75 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
 .empty-state .icon { font-size: 3rem; margin-bottom: 10px; opacity: 0.5; }
 
+/* Chat Tab */
+.chat-card {
+  background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 30px; text-align: center;
+}
+.chat-icon {
+  font-size: 5rem; margin-bottom: 15px;
+  filter: drop-shadow(0 0 30px var(--cyan));
+  animation: pulse 2s ease-in-out infinite;
+}
+.chat-title {
+  font-size: 1.5rem; font-weight: 900; margin-bottom: 10px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.chat-desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+.chat-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 40px; border-radius: 14px; font-weight: 700; font-size: 1.1rem;
+  text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-family: inherit;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  color: #0a0a0f; box-shadow: 0 0 30px rgba(0,255,231,0.5);
+  margin: 10px;
+}
+.chat-btn:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,255,231,0.9); }
+
+.chat-btn.secondary {
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+  color: white; box-shadow: 0 0 30px rgba(255,46,196,0.5);
+}
+.chat-btn.secondary:hover { box-shadow: 0 0 50px rgba(255,46,196,0.9); }
+
+/* Info Boxes */
+.info-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px; margin-top: 30px;
+}
+.info-box {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+  border-radius: 15px; padding: 20px; text-align: center;
+}
+.info-box .icon { font-size: 2rem; margin-bottom: 10px; }
+.info-box h4 { color: var(--cyan); font-size: 0.95rem; margin-bottom: 8px; }
+.info-box p { color: var(--text-dim); font-size: 0.8rem; line-height: 1.6; }
+
+/* Steps */
+.steps-box {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+  border-radius: 15px; padding: 20px; margin-top: 20px; text-align: right;
+}
+.steps-box h4 { color: var(--cyan); margin-bottom: 15px; font-size: 1rem; }
+.steps-box ol { padding-right: 20px; }
+.steps-box li { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 10px; line-height: 1.8; }
+.steps-box strong { color: var(--text); }
+
+.security-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(16,185,129,0.15); border: 1px solid var(--success);
+  color: var(--success); padding: 8px 16px; border-radius: 50px;
+  font-size: 0.85rem; font-weight: 600; margin-top: 15px;
+}
+
 @media (max-width: 600px) {
   .login-box { padding: 35px 25px; }
   .card { padding: 18px; }
   .form-row, .form-row.three { grid-template-columns: 1fr; }
+  .chat-btn { width: 100%; padding: 14px 20px; font-size: 0.95rem; }
 }
 </style>
 </head>
@@ -237,6 +300,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div class="tabs">
     <button class="tab active" onclick="switchTab('add', this)">➕ افزودن اکانت</button>
     <button class="tab" onclick="switchTab('list', this)">📦 لیست اکانت‌ها</button>
+    <button class="tab" onclick="switchTab('chat', this)">💬 چت زنده</button>
     <button class="tab" onclick="switchTab('contact', this)">📞 اطلاعات تماس</button>
   </div>
 
@@ -257,7 +321,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 
       <div class="form-row three">
         <div class="form-group">
-          <label>🏰 تاون هال *</label>
+          <label>🏰 تاون هال</label>
           <input type="number" id="pTownHall" placeholder="12">
         </div>
         <div class="form-group">
@@ -272,7 +336,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 
       <div class="form-row">
         <div class="form-group">
-          <label>🆔 کد اکانت *</label>
+          <label>🆔 کد اکانت</label>
           <input type="text" id="pCode" placeholder="مثلاً: 232" dir="ltr">
         </div>
         <div class="form-group">
@@ -296,12 +360,12 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
           </select>
         </div>
         <div class="form-group">
-          <label>📂 دسته‌بندی</label>
+          <label>📂 دسته‌بندی *</label>
           <select id="pCategory">
-            <option value="اکانت‌ها">🎮 اکانت‌ها</option>
-            <option value="آیتم‌ها">🏆 آیتم‌ها</option>
-            <option value="فری فایر">🔥 فری فایر</option>
             <option value="کالاف">🎯 کالاف</option>
+            <option value="کلش">🏰 کلش</option>
+            <option value="آیتم کلش">💎 آیتم کلش</option>
+            <option value="آیتم کالاف">🔫 آیتم کالاف</option>
           </select>
         </div>
       </div>
@@ -326,6 +390,60 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <div class="card">
       <div class="card-title">📦 لیست اکانت‌ها</div>
       <div class="products-list" id="productsList"></div>
+    </div>
+  </div>
+
+  <!-- Tab: Chat -->
+  <div class="tab-content" id="tab-chat">
+    <div class="chat-card">
+      <div class="chat-icon">💬</div>
+      <h2 class="chat-title">چت زنده با مشتریان</h2>
+      <p class="chat-desc">
+        تمام پیام‌های مشتری‌ها اینجا بهت می‌رسه.<br>
+        می‌تونی از لینک زیر، پنل چت رو باز کنی و فوری جواب بدی.
+      </p>
+
+      <a href="https://dashboard.tawk.to" target="_blank" class="chat-btn">
+        🚀 باز کردن پنل چت Tawk.to
+      </a>
+
+      <div class="security-badge">
+        🔒 پیام‌ها کاملاً خصوصی و امن هستن
+      </div>
+
+      <div class="steps-box">
+        <h4>📋 چطور جواب بدم؟</h4>
+        <ol>
+          <li>روی دکمه <strong>«باز کردن پنل چت Tawk.to»</strong> بزن</li>
+          <li>با ایمیل و رمزی که موقع ثبت‌نام Tawk.to ساختی وارد شو</li>
+          <li>پیام‌های مشتری‌ها توی <strong>Inbox</strong> میان</li>
+          <li>روی هر پیام کلیک کن و جواب بده</li>
+          <li>می‌تونی از <strong>پاسخ‌های آماده</strong> هم استفاده کنی</li>
+        </ol>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="icon">📱</div>
+          <h4>اپلیکیشن موبایل</h4>
+          <p>Tawk.to رو نصب کن تا هر جا پیام بیاد، نوتیفیکیشن بگیری</p>
+        </div>
+        <div class="info-box">
+          <div class="icon">🔔</div>
+          <h4>نوتیفیکیشن</h4>
+          <p>تنظیمات اعلان رو فعال کن تا هیچ پیامی رو از دست ندی</p>
+        </div>
+        <div class="info-box">
+          <div class="icon">⚡</div>
+          <h4>پاسخ سریع</h4>
+          <p>پاسخ‌های آماده بساز تا با یه کلیک جواب بدی</p>
+        </div>
+        <div class="info-box">
+          <div class="icon">🛡️</div>
+          <h4>امنیت بالا</h4>
+          <p>همه پیام‌ها رمزنگاری شده و فقط تو می‌بینی</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -355,7 +473,6 @@ const DEFAULT_PASSWORD = 'vexor2024';
 
 let selectedImages = [];
 
-// ===== Login =====
 function login() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
@@ -400,7 +517,7 @@ function showStatus(msg, type = 'loading') {
   if (type !== 'loading') setTimeout(() => box.classList.remove('show'), 4000);
 }
 
-// ===== Image Upload =====
+// === Image Upload ===
 function handleImages(event) {
   const files = Array.from(event.target.files);
   selectedImages = [...selectedImages, ...files];
@@ -427,7 +544,6 @@ function removeImage(i) {
   renderImagePreviews();
 }
 
-// ===== Upload to Supabase Storage =====
 async function uploadImage(file) {
   const ext = file.name.split('.').pop();
   const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.${ext}`;
@@ -444,15 +560,12 @@ async function uploadImage(file) {
   return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 }
 
-// ===== Add Product =====
 async function addProduct() {
   const title = document.getElementById('pTitle').value.trim();
-  const code = document.getElementById('pCode').value.trim();
   const price = document.getElementById('pPrice').value.trim();
-  const townHall = document.getElementById('pTownHall').value.trim();
 
-  if (!title || !code || !price || !townHall) {
-    showStatus('❌ عنوان، تاون هال، کد اکانت و قیمت اجباری هستن!', 'error');
+  if (!title || !price) {
+    showStatus('❌ عنوان و قیمت اجباری هستن!', 'error');
     return;
   }
 
@@ -461,7 +574,6 @@ async function addProduct() {
   btn.textContent = '⏳ در حال ذخیره...';
 
   try {
-    // آپلود عکس‌ها
     let imageUrls = [];
     if (selectedImages.length > 0) {
       showStatus('⏳ در حال آپلود عکس‌ها...', 'loading');
@@ -473,10 +585,10 @@ async function addProduct() {
     const product = {
       title: title,
       slogan: document.getElementById('pSlogan').value.trim(),
-      town_hall: parseInt(townHall),
+      town_hall: parseInt(document.getElementById('pTownHall').value) || null,
       builder_level: parseInt(document.getElementById('pBuilder').value) || null,
       name_changes: parseInt(document.getElementById('pNameChanges').value) || null,
-      account_code: code,
+      account_code: document.getElementById('pCode').value.trim(),
       price: parseInt(price),
       description: document.getElementById('pDesc').value.trim(),
       status: document.getElementById('pStatus').value,
@@ -497,7 +609,6 @@ async function addProduct() {
 
     if (res.ok) {
       showStatus('🎉 اکانت با موفقیت ثبت شد!', 'success');
-      // Reset form
       document.getElementById('pTitle').value = '';
       document.getElementById('pSlogan').value = '';
       document.getElementById('pTownHall').value = '';
@@ -521,7 +632,6 @@ async function addProduct() {
   }
 }
 
-// ===== Load Products =====
 async function loadProducts() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, {
@@ -529,9 +639,7 @@ async function loadProducts() {
     });
     const products = await res.json();
     renderProducts(products);
-  } catch (err) {
-    console.error(err);
-  }
+  } catch (err) { console.error(err); }
 }
 
 function renderProducts(products) {
@@ -541,13 +649,13 @@ function renderProducts(products) {
     return;
   }
   list.innerHTML = products.map(p => {
-    const img = p.images && p.images[0] ? `<img src="${p.images[0]}" class="product-thumb">` : '🎯';
+    const img = p.images && p.images[0] ? `<img src="${p.images[0]}" class="product-thumb">` : '<div style="font-size:2rem;">🎯</div>';
     return `
       <div class="product-item">
-        ${img.startsWith('<') ? img : `<div style="font-size:2rem;">🎯</div>`}
+        ${img}
         <div class="product-details">
           <h4>${p.title}</h4>
-          <p>کد: ${p.account_code} | تان: ${p.town_hall} | ${p.status}</p>
+          <p>${p.category} | کد: ${p.account_code || '-'} | ${p.status}</p>
         </div>
         <div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت</div>
         <button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button>
@@ -570,7 +678,6 @@ async function deleteProduct(id) {
   } catch (err) { showStatus('❌ خطا', 'error'); }
 }
 
-// ===== Settings =====
 async function loadSettings() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
