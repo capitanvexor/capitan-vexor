@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جزئیات محصول | 𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
+:root {
+  --bg-dark: #0a0a0f;
+  --cyan: #00ffe7;
+  --purple: #a855f7;
+  --pink: #ff2ec4;
+  --text: #ffffff;
+  --text-dim: #a0a0b0;
+  --glass: rgba(255,255,255,0.04);
+  --border: rgba(0,255,231,0.2);
+  --success: #10b981;
+  --danger: #ff3860;
+}
+body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-height: 1.7; overflow-x: hidden; }
+.bg-glow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bg-glow::before, .bg-glow::after {
+  content: ''; position: absolute; border-radius: 50%; filter: blur(130px); opacity: 0.4;
+  animation: float 14s ease-in-out infinite;
+}
+.bg-glow::before { width: 500px; height: 500px; background: var(--cyan); top: -100px; right: -100px; }
+.bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -7s; }
+@keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(60px,60px) scale(1.15);} }
+
+/* Navbar */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 15px 20px; background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo {
+  font-weight: 900; font-size: 1.3rem;
+  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  text-decoration: none; letter-spacing: 1px;
+}
+.back-btn {
+  color: var(--text-dim); text-decoration: none; font-size: 0.9rem;
+  display: flex; align-items: center; gap: 6px; transition: 0.3s;
+}
+.back-btn:hover { color: var(--cyan); }
+
+/* Container */
+.container { max-width: 1100px; margin: 0 auto; padding: 100px 20px 60px; }
+.loading {
+  text-align: center; padding: 100px 20px; color: var(--text-dim);
+}
+.spinner {
+  width: 50px; height: 50px; border: 3px solid var(--border);
+  border-top-color: var(--cyan); border-radius: 50%;
+  animation: spin 1s linear infinite; margin: 0 auto 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Product Layout */
+.product-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: 25px; padding: 30px; backdrop-filter: blur(20px);
+}
+@media (max-width: 768px) {
+  .product-wrap { grid-template-columns: 1fr; gap: 25px; padding: 20px; }
+}
+
+/* Gallery */
+.gallery { display: flex; flex-direction: column; gap: 15px; }
+.main-image {
+  width: 100%; aspect-ratio: 1/1; background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border); border-radius: 18px;
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.main-image img { width: 100%; height: 100%; object-fit: contain; }
+.main-image .no-image { font-size: 6rem; opacity: 0.3; }
+.thumbnails { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
+.thumb {
+  width: 70px; height: 70px; border-radius: 12px; overflow: hidden;
+  border: 2px solid var(--border); cursor: pointer; transition: 0.3s;
+  flex-shrink: 0; background: rgba(0,0,0,0.3);
+}
+.thumb:hover, .thumb.active { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.5); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Info */
+.info { display: flex; flex-direction: column; gap: 20px; }
+.title {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 900; line-height: 1.4;
+}
+.slogan {
+  display: inline-block; padding: 8px 18px;
+  background: linear-gradient(90deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
+  border: 1px solid var(--border); border-radius: 50px;
+  color: var(--cyan); font-size: 0.85rem; font-weight: 600;
+}
+.status-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 15px; border-radius: 50px;
+  font-size: 0.85rem; font-weight: 700;
+}
+.status-available { background: rgba(16,185,129,0.2); color: var(--success); border: 1px solid var(--success); }
+.status-sold { background: rgba(255,56,96,0.2); color: var(--danger); border: 1px solid var(--danger); }
+.status-unavailable { background: rgba(100,100,100,0.2); color: #999; border: 1px solid #666; }
+
+.price-box {
+  background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
+  border: 1px solid var(--border); border-radius: 18px;
+  padding: 20px 25px; text-align: center;
+}
+.price-label { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 5px; }
+.price-value {
+  font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+.price-value .currency { font-size: 1rem; color: var(--text-dim); -webkit-text-fill-color: var(--text-dim); }
+
+/* Specs */
+.specs-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+}
+.spec-item {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px; text-align: center;
+}
+.spec-item .icon { font-size: 1.5rem; margin-bottom: 5px; }
+.spec-item .label { font-size: 0.75rem; color: var(--text-dim); }
+.spec-item .value { font-size: 1.1rem; font-weight: 700; color: var(--cyan); }
+
+/* Description */
+.desc-box {
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+  border-radius: 15px; padding: 20px;
+}
+.desc-box h3 { color: var(--cyan); font-size: 1rem; margin-bottom: 10px; }
+.desc-box p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.8; white-space: pre-wrap; }
+
+/* Action Buttons */
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-action {
+  flex: 1; min-width: 150px; padding: 16px 20px;
+  border-radius: 14px; border: none; cursor: pointer;
+  font-family: inherit; font-size: 1rem; font-weight: 700;
+  text-decoration: none; text-align: center;
+  transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-rubika {
+  background: linear-gradient(90deg, var(--pink), var(--purple));
+  color: white; box-shadow: 0 0 25px rgba(255,46,196,0.4);
+}
+.btn-rubika:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(255,46,196,0.8); }
+.btn-phone {
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  color: #0a0a0f; box-shadow: 0 0 25px rgba(0,255,231,0.4);
+}
+.btn-phone:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0,255,231,0.8); }
+
+/* Notice */
+.notice {
+  background: rgba(0,255,231,0.05); border: 1px dashed var(--border);
+  border-radius: 12px; padding: 15px; text-align: center;
+  font-size: 0.85rem; color: var(--text-dim);
+}
+
+/* Floating Buttons */
+.float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+.float-btn {
+  width: 55px; height: 55px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 1.5rem; transition: 0.3s;
+  position: relative; cursor: pointer; border: none; color: white;
+}
+.float-btn.chat { background: linear-gradient(135deg, var(--cyan), var(--purple)); box-shadow: 0 0 25px rgba(0,255,231,0.6); }
+.float-btn.phone { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 0 25px rgba(16,185,129,0.6); }
+.float-btn:hover { transform: scale(1.15) rotate(10deg); }
+
+@media (max-width: 600px) {
+  .container { padding: 90px 15px 40px; }
+  .specs-grid { grid-template-columns: repeat(2, 1fr); }
+  .actions { flex-direction: column; }
+  .float-buttons { bottom: 15px; left: 15px; }
+  .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<nav>
+  <a href="index.html" class="logo">𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</a>
+  <a href="index.html" class="back-btn">→ بازگشت</a>
+</nav>
+
+<div class="container" id="container">
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>در حال بارگذاری...</p>
+  </div>
+</div>
+
+<div class="float-buttons">
+  <button class="float-btn chat" onclick="openChat()">💬</button>
+  <a href="#" id="floatPhone" class="float-btn phone">📞</a>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
+
+let currentProduct = null;
+let contactInfo = { phone: '09388499513', rubika: 'oooo1219' };
+
+// Get ID from URL
+const params = new URLSearchParams(window.location.search);
+const productId = params.get('id');
+
+// Load contact info
+async function loadContact() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+    if (data && data.length > 0) {
+      contactInfo.phone = data[0].phone;
+      contactInfo.rubika = data[0].rubika_id;
+      document.getElementById('floatPhone').href = `tel:${contactInfo.phone}`;
+    }
+  } catch (err) { console.error(err); }
+}
+
+// Load product
+async function loadProduct() {
+  if (!productId) {
+    showError('❌ محصولی انتخاب نشده');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${productId}&select=*`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+
+    if (!data || data.length === 0) {
+      showError('❌ محصول پیدا نشد');
+      return;
+    }
+
+    currentProduct = data[0];
+    renderProduct(currentProduct);
+  } catch (err) {
+    showError('❌ خطا در بارگذاری: ' + err.message);
+  }
+}
+
+function showError(msg) {
+  document.getElementById('container').innerHTML = `
+    <div style="text-align:center;padding:80px 20px;">
+      <div style="font-size:5rem;margin-bottom:20px;opacity:0.5;">😕</div>
+      <h2 style="color:var(--cyan);margin-bottom:15px;">${msg}</h2>
+      <a href="index.html" style="display:inline-block;margin-top:20px;padding:12px 25px;background:linear-gradient(90deg,var(--cyan),var(--purple));color:#0a0a0f;border-radius:50px;text-decoration:none;font-weight:700;">→ بازگشت به فروشگاه</a>
+    </div>
+  `;
+}
+
+function renderProduct(p) {
+  const images = p.images && p.images.length > 0 ? p.images : [];
+  const mainImg = images[0] || '';
+  const statusClass = p.status === 'موجود' ? 'status-available' : (p.status === 'فروش رفته' ? 'status-sold' : 'status-unavailable');
+  const priceFmt = p.price ? Number(p.price).toLocaleString('fa-IR') : 'تماس بگیرید';
+
+  document.getElementById('container').innerHTML = `
+    <div class="product-wrap">
+      <div class="gallery">
+        <div class="main-image" id="mainImage">
+          ${mainImg ? `<img src="${mainImg}" alt="${p.title}" id="mainImg">` : `<div class="no-image">🎯</div>`}
+        </div>
+        ${images.length > 1 ? `
+          <div class="thumbnails" id="thumbnails">
+            ${images.map((img, i) => `
+              <div class="thumb ${i === 0 ? 'active' : ''}" onclick="changeImage('${img}', this)">
+                <img src="${img}">
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+
+      <div class="info">
+        <div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;">
+            <span class="status-badge ${statusClass}">
+              ${p.status === 'موجود' ? '✅' : (p.status === 'فروش رفته' ? '🔴' : '⭕')} ${p.status}
+            </span>
+            ${p.account_code ? `<span class="status-badge" style="background:rgba(0,255,231,0.1);color:var(--cyan);border:1px solid var(--border);">🆔 کد: ${p.account_code}</span>` : ''}
+          </div>
+          <h1 class="title">${p.title}</h1>
+          ${p.slogan ? `<div class="slogan" style="margin-top:12px;">${p.slogan}</div>` : ''}
+        </div>
+
+        <div class="price-box">
+          <div class="price-label">💰 قیمت</div>
+          <div class="price-value">
+            ${priceFmt}
+            ${p.price ? '<span class="currency">تومان</span>' : ''}
+          </div>
+        </div>
+
+        <div class="specs-grid">
+          ${p.town_hall ? `
+            <div class="spec-item">
+              <div class="icon">🏰</div>
+              <div class="label">تاون هال</div>
+              <div class="value">${p.town_hall}</div>
+            </div>
+          ` : ''}
+          ${p.builder_level ? `
+            <div class="spec-item">
+              <div class="icon">🏗️</div>
+              <div class="label">لول بیلدر</div>
+              <div class="value">${p.builder_level}</div>
+            </div>
+          ` : ''}
+          ${p.name_changes !== null && p.name_changes !== undefined ? `
+            <div class="spec-item">
+              <div class="icon">✏️</div>
+              <div class="label">تغییر نام</div>
+              <div class="value">${p.name_changes}</div>
+            </div>
+          ` : ''}
+          ${p.category ? `
+            <div class="spec-item">
+              <div class="icon">📂</div>
+              <div class="label">دسته‌بندی</div>
+              <div class="value" style="font-size:0.9rem;">${p.category}</div>
+            </div>
+          ` : ''}
+        </div>
+
+        ${p.description ? `
+          <div class="desc-box">
+            <h3>📝 توضیحات</h3>
+            <p>${p.description}</p>
+          </div>
+        ` : ''}
+
+        <div class="notice">
+          🛒 برای خرید، روی یکی از دکمه‌های زیر بزن و با مدیریت تماس بگیر
+        </div>
+
+        <div class="actions">
+          <a href="https://rubika.ir/${contactInfo.rubika}" target="_blank" class="btn-action btn-rubika">
+            💬 خرید در روبیکا
+          </a>
+          <a href="tel:${contactInfo.phone}" class="btn-action btn-phone">
+            📞 تماس با مدیریت
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function changeImage(src, thumbEl) {
+  document.getElementById('mainImg').src = src;
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+  thumbEl.classList.add('active');
+}
+
+function openChat() {
+  if (typeof Tawk_API !== 'undefined' && Tawk_API.toggle) Tawk_API.toggle();
+  else alert('چت به‌زودی فعال می‌شود!');
+}
+
+// Init
+loadContact();
+loadProduct();
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6ab5ae6b2c323b344704c7cd/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+</body>
+</html>
