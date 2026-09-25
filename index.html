@@ -18,12 +18,51 @@
   --text-dim: #a0a0b0;
   --glass: rgba(255,255,255,0.04);
   --border: rgba(0,255,231,0.2);
-  --danger: #ff3860;
-  --success: #10b981;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-height: 1.7; overflow-x: hidden; }
-.bg-glow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+
+/* ===== Loader ===== */
+.loader {
+  position: fixed; inset: 0; background: var(--bg-dark);
+  display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 30px;
+  z-index: 99999; transition: opacity 0.8s, visibility 0.8s;
+}
+.loader.hide { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-size: clamp(1.5rem, 6vw, 3rem); font-weight: 900;
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--pink) 100%);
+  background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; letter-spacing: 2px;
+  animation: gradientMove 2s ease infinite, glowPulse 2s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% { filter: drop-shadow(0 0 20px rgba(0,255,231,0.5)); }
+  50% { filter: drop-shadow(0 0 60px rgba(168,85,247,0.9)); }
+}
+.loader-bar {
+  width: 200px; height: 4px; background: rgba(255,255,255,0.1);
+  border-radius: 10px; overflow: hidden; position: relative;
+}
+.loader-bar::after {
+  content: ''; position: absolute; left: 0; top: 0; height: 100%;
+  width: 30%; background: linear-gradient(90deg, var(--cyan), var(--purple));
+  border-radius: 10px;
+  animation: loadingBar 1.5s ease-in-out infinite;
+  box-shadow: 0 0 20px var(--cyan);
+}
+@keyframes loadingBar {
+  0% { left: 0; width: 30%; }
+  50% { width: 60%; }
+  100% { left: 100%; width: 30%; }
+}
+
+/* ===== Particles ===== */
+#particles-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none;
+}
+.bg-glow { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
 .bg-glow::before, .bg-glow::after {
   content: ''; position: absolute; border-radius: 50%; filter: blur(130px); opacity: 0.4;
   animation: float 14s ease-in-out infinite;
@@ -35,16 +74,18 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-h
 /* Navbar */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 15px 20px; background: rgba(10,10,15,0.9);
+  padding: 15px 20px; background: rgba(10,10,15,0.85);
   backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
 }
 .logo {
   font-weight: 900; font-size: 1.3rem; text-decoration: none;
   background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+  background-size: 200% 200%;
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
+  letter-spacing: 1px; animation: gradientMove 4s ease infinite;
 }
+@keyframes gradientMove { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 .nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
 .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
 .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 15px var(--cyan); }
@@ -60,19 +101,33 @@ nav {
 @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,255,231,0.4);} 50%{box-shadow:0 0 0 10px rgba(0,255,231,0);} }
 .hero-badge .dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 10px var(--cyan); animation: blink 1.5s infinite; }
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+/* Typing Title */
 .hero h1 {
   font-size: clamp(2rem, 7vw, 4.5rem); font-weight: 900;
   background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--pink) 100%);
-  background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; line-height: 1.3; margin-bottom: 20px;
+  background-size: 200% 200%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1.3; margin-bottom: 20px; min-height: 1.3em;
   animation: gradientMove 4s ease infinite;
 }
-@keyframes gradientMove { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+.hero h1 .cursor {
+  display: inline-block; width: 3px; height: 1em;
+  background: var(--cyan); animation: cursorBlink 0.8s infinite;
+  vertical-align: middle; margin-right: 5px;
+  box-shadow: 0 0 15px var(--cyan);
+}
+@keyframes cursorBlink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 .hero-tagline {
   display: inline-block; padding: 10px 25px;
   background: linear-gradient(90deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
   border: 1px solid var(--border); border-radius: 50px;
   font-weight: 700; color: var(--cyan); margin-bottom: 30px; font-size: 1rem;
+  animation: taglinePulse 3s ease-in-out infinite;
+}
+@keyframes taglinePulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 20px rgba(0,255,231,0.1); }
+  50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(0,255,231,0.3); }
 }
 .hero p { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-dim); max-width: 700px; margin-bottom: 30px; }
 
@@ -100,14 +155,15 @@ section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
 .section-sub { text-align: center; color: var(--text-dim); margin-bottom: 50px; font-size: 1rem; }
 
 /* Category Cards */
-.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; perspective: 1000px; }
 .category-card {
   background: var(--glass); border: 1px solid var(--border); border-radius: 25px;
   overflow: hidden; transition: 0.4s; backdrop-filter: blur(10px);
   position: relative; text-decoration: none; color: inherit;
   display: flex; flex-direction: column; cursor: pointer;
+  transform-style: preserve-3d; will-change: transform;
 }
-.category-card:hover { transform: translateY(-12px); border-color: var(--cyan); box-shadow: 0 25px 60px rgba(0,255,231,0.4); }
+.category-card:hover { border-color: var(--cyan); box-shadow: 0 25px 60px rgba(0,255,231,0.4); }
 .category-image { width: 100%; height: 220px; object-fit: cover; transition: 0.6s; display: block; }
 .category-card:hover .category-image { transform: scale(1.1); }
 .category-image-wrap { overflow: hidden; position: relative; }
@@ -116,7 +172,8 @@ section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
   background: linear-gradient(180deg, transparent 40%, rgba(10,10,15,0.95));
 }
 .category-body { padding: 25px; text-align: center; position: relative; z-index: 1; margin-top: -60px; }
-.category-icon { font-size: 3rem; margin-bottom: 12px; display: inline-block; }
+.category-icon { font-size: 3rem; margin-bottom: 12px; display: inline-block; transition: 0.3s; }
+.category-card:hover .category-icon { transform: scale(1.2) rotate(10deg); }
 .category-title {
   font-size: 1.4rem; font-weight: 900; margin-bottom: 10px;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
@@ -128,7 +185,9 @@ section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
   background: linear-gradient(90deg, var(--cyan), var(--purple));
   color: #0a0a0f; border-radius: 50px; font-weight: 700;
   font-size: 0.9rem; box-shadow: 0 0 20px rgba(0,255,231,0.4);
+  transition: 0.3s;
 }
+.category-card:hover .category-btn { box-shadow: 0 0 40px rgba(0,255,231,0.9); }
 
 /* Features */
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
@@ -137,7 +196,8 @@ section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
   padding: 25px; text-align: center; transition: 0.3s;
 }
 .feature:hover { border-color: var(--purple); transform: translateY(-8px); box-shadow: 0 20px 45px rgba(168,85,247,0.3); }
-.feature-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.feature-icon { font-size: 2.5rem; margin-bottom: 12px; display: inline-block; transition: 0.3s; }
+.feature:hover .feature-icon { transform: scale(1.2) rotate(10deg); }
 .feature h4 { color: var(--cyan); margin-bottom: 8px; font-size: 1.05rem; }
 .feature p { color: var(--text-dim); font-size: 0.85rem; }
 
@@ -147,8 +207,17 @@ section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
   background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
   border: 1px solid var(--border); border-radius: 25px;
   padding: 40px 30px; text-align: center; backdrop-filter: blur(10px);
+  position: relative; overflow: hidden;
 }
-.guarantee-icon { font-size: 4rem; margin-bottom: 15px; filter: drop-shadow(0 0 25px var(--cyan)); }
+.guarantee::before {
+  content: ''; position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0,255,231,0.1), transparent 30%);
+  animation: rotate 8s linear infinite; pointer-events: none;
+}
+@keyframes rotate { to { transform: rotate(360deg); } }
+.guarantee > * { position: relative; z-index: 1; }
+.guarantee-icon { font-size: 4rem; margin-bottom: 15px; filter: drop-shadow(0 0 25px var(--cyan)); display: inline-block; animation: pulse 2s ease-in-out infinite; }
 .guarantee h3 {
   font-size: 1.6rem; margin-bottom: 15px;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
@@ -193,40 +262,23 @@ footer {
 .reveal { opacity: 0; transform: translateY(50px); transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* ===== Chat Window ===== */
+/* Chat Window */
 .chat-window {
-  position: fixed;
-  bottom: 100px;
-  left: 25px;
-  width: 370px;
-  max-width: calc(100vw - 40px);
-  height: 550px;
-  max-height: calc(100vh - 140px);
+  position: fixed; bottom: 100px; left: 25px;
+  width: 370px; max-width: calc(100vw - 40px);
+  height: 550px; max-height: calc(100vh - 140px);
   background: rgba(15,15,25,0.98);
   backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  border: 1px solid var(--border); border-radius: 20px;
   box-shadow: 0 25px 60px rgba(0,255,231,0.3);
-  z-index: 9998;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px) scale(0.95);
+  z-index: 9998; display: flex; flex-direction: column; overflow: hidden;
+  opacity: 0; visibility: hidden; transform: translateY(20px) scale(0.95);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.chat-window.open {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-}
+.chat-window.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
 .chat-header {
   background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15));
-  padding: 15px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 15px 18px; display: flex; justify-content: space-between; align-items: center;
   border-bottom: 1px solid var(--border);
 }
 .chat-header-info { display: flex; align-items: center; gap: 12px; }
@@ -237,19 +289,10 @@ footer {
   font-size: 1.3rem; box-shadow: 0 0 15px rgba(0,255,231,0.5);
 }
 .chat-header-name { font-weight: 800; font-size: 0.95rem; }
-.chat-header-status {
-  font-size: 0.75rem; color: var(--text-dim);
-  display: flex; align-items: center; gap: 5px; margin-top: 2px;
-}
-.online-dot {
-  width: 7px; height: 7px; background: #10b981; border-radius: 50%;
-  box-shadow: 0 0 8px #10b981; animation: blink 1.5s infinite;
-}
-.chat-close {
-  background: transparent; border: none; color: var(--text-dim);
-  font-size: 1.3rem; cursor: pointer; padding: 5px; transition: 0.3s; border-radius: 8px;
-}
-.chat-close:hover { color: var(--danger); background: rgba(255,56,96,0.1); }
+.chat-header-status { font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+.online-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; animation: blink 1.5s infinite; }
+.chat-close { background: transparent; border: none; color: var(--text-dim); font-size: 1.3rem; cursor: pointer; padding: 5px; transition: 0.3s; border-radius: 8px; }
+.chat-close:hover { color: #ff3860; background: rgba(255,56,96,0.1); }
 
 .chat-name-form { padding: 25px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
 .chat-welcome { text-align: center; margin-bottom: 15px; }
@@ -257,10 +300,9 @@ footer {
 .chat-welcome h3 { color: var(--cyan); font-size: 1.2rem; margin-bottom: 5px; }
 .chat-welcome p { color: var(--text-dim); font-size: 0.85rem; }
 .chat-input-field {
-  width: 100%; padding: 12px 16px;
-  background: rgba(0,0,0,0.4); border: 1px solid var(--border);
-  border-radius: 12px; color: var(--text); font-family: inherit;
-  font-size: 0.9rem; outline: none; transition: 0.3s;
+  width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border); border-radius: 12px;
+  color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none; transition: 0.3s;
 }
 .chat-input-field:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.3); }
 .chat-start-btn {
@@ -271,42 +313,20 @@ footer {
 }
 .chat-start-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,255,231,0.7); }
 
-.chat-messages {
-  flex: 1; overflow-y: auto; padding: 18px;
-  display: flex; flex-direction: column; gap: 12px; background: rgba(0,0,0,0.2);
-}
+.chat-messages { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 12px; background: rgba(0,0,0,0.2); }
 .chat-messages::-webkit-scrollbar { width: 6px; }
 .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-.chat-bubble {
-  max-width: 80%; padding: 10px 14px; border-radius: 16px;
-  animation: bubbleIn 0.3s ease-out; word-wrap: break-word;
-}
+.chat-bubble { max-width: 80%; padding: 10px 14px; border-radius: 16px; animation: bubbleIn 0.3s ease-out; word-wrap: break-word; }
 @keyframes bubbleIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.chat-bubble.theirs {
-  align-self: flex-start;
-  background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15));
-  border: 1px solid var(--border); border-bottom-right-radius: 4px;
-}
-.chat-bubble.mine {
-  align-self: flex-end;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  color: #0a0a0f; border-bottom-left-radius: 4px; font-weight: 600;
-}
+.chat-bubble.theirs { align-self: flex-start; background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15)); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
+.chat-bubble.mine { align-self: flex-end; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; border-bottom-left-radius: 4px; font-weight: 600; }
 .chat-text { font-size: 0.9rem; line-height: 1.5; }
 .chat-time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 .chat-empty { text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 40px 20px; }
 
-.chat-input-area {
-  padding: 12px; border-top: 1px solid var(--border);
-  display: flex; gap: 8px; background: rgba(0,0,0,0.3);
-}
+.chat-input-area { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; background: rgba(0,0,0,0.3); }
 .chat-input-area .chat-input-field { flex: 1; border-radius: 50px; }
-.chat-send-btn {
-  width: 45px; height: 45px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer;
-  transition: 0.3s; box-shadow: 0 0 15px rgba(0,255,231,0.4); flex-shrink: 0;
-}
+.chat-send-btn { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px rgba(0,255,231,0.4); flex-shrink: 0; }
 .chat-send-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px rgba(0,255,231,0.8); }
 
 @media (max-width: 768px) {
@@ -321,16 +341,20 @@ footer {
   section { padding: 60px 15px; }
 }
 @media (max-width: 480px) {
-  .chat-window {
-    left: 10px; right: 10px; bottom: 80px;
-    width: auto; height: calc(100vh - 120px); max-height: 600px;
-  }
+  .chat-window { left: 10px; right: 10px; bottom: 80px; width: auto; height: calc(100vh - 120px); max-height: 600px; }
 }
 </style>
 </head>
 <body>
 
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-logo">𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</div>
+  <div class="loader-bar"></div>
+</div>
+
 <div class="bg-glow"></div>
+<canvas id="particles-canvas"></canvas>
 
 <nav>
   <a href="index.html" class="logo">𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</a>
@@ -347,21 +371,21 @@ footer {
     <span class="dot"></span>
     فروشگاه فعال و آنلاین
   </div>
-  <h1>𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</h1>
+  <h1 id="typingTitle"></h1>
   <div class="hero-tagline">🔥 نقد و اقساط کاملاً تضمینی 🔥</div>
   <p>مطمئن‌ترین فروشگاه اکانت و آیتم بازی در ایران با ضمانت ۱۰۰٪ و تحویل فوری</p>
 
   <div class="stats">
     <div class="stat-box">
-      <div class="num">۵۰۰+</div>
+      <div class="num" data-target="500" data-suffix="+">۰</div>
       <div class="label">🛒 فروش موفق</div>
     </div>
     <div class="stat-box">
-      <div class="num">۶ سال</div>
+      <div class="num" data-target="6" data-suffix=" سال">۰</div>
       <div class="label">⭐ تجربه</div>
     </div>
     <div class="stat-box">
-      <div class="num">۱۰۰٪</div>
+      <div class="num" data-target="100" data-suffix="٪">۰</div>
       <div class="label">💎 رضایت مشتری</div>
     </div>
   </div>
@@ -372,7 +396,7 @@ footer {
   <p class="section-sub">یکی از دسته‌های زیر رو انتخاب کن</p>
 
   <div class="category-grid">
-    <a href="category.html?cat=کالاف" class="category-card reveal">
+    <a href="category.html?cat=کالاف" class="category-card reveal" data-tilt>
       <div class="category-image-wrap">
         <img src="call-of-duty.jpg" alt="کالاف" class="category-image" onerror="this.style.display='none'">
       </div>
@@ -384,7 +408,7 @@ footer {
       </div>
     </a>
 
-    <a href="category.html?cat=کلش" class="category-card reveal">
+    <a href="category.html?cat=کلش" class="category-card reveal" data-tilt>
       <div class="category-image-wrap">
         <img src="clash-of-clans.jpg" alt="کلش" class="category-image" onerror="this.style.display='none'">
       </div>
@@ -396,7 +420,7 @@ footer {
       </div>
     </a>
 
-    <a href="category.html?cat=آیتم کلش" class="category-card reveal">
+    <a href="category.html?cat=آیتم کلش" class="category-card reveal" data-tilt>
       <div class="category-image-wrap">
         <img src="clash-items.jpg" alt="آیتم کلش" class="category-image" onerror="this.style.display='none'">
       </div>
@@ -408,7 +432,7 @@ footer {
       </div>
     </a>
 
-    <a href="category.html?cat=آیتم کالاف" class="category-card reveal">
+    <a href="category.html?cat=آیتم کالاف" class="category-card reveal" data-tilt>
       <div class="category-image-wrap">
         <img src="cod-items.jpg" alt="آیتم کالاف" class="category-image" onerror="this.style.display='none'">
       </div>
@@ -506,13 +530,11 @@ footer {
   </div>
 </div>
 
-<!-- Floating Buttons -->
 <div class="float-buttons">
   <button class="float-btn chat" onclick="toggleChatWindow()" title="چت">💬</button>
   <a href="tel:09388499513" id="floatPhone" class="float-btn phone" title="تماس">📞</a>
 </div>
 
-<!-- Supabase JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="chat.js"></script>
 
@@ -520,7 +542,107 @@ footer {
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 
-// Reveal
+// ==== Loader ====
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hide'), 1500);
+});
+
+// ==== Particles ====
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.5;
+    this.speedY = (Math.random() - 0.5) * 0.5;
+    this.color = Math.random() > 0.5 ? '0,255,231' : '168,85,247';
+  }
+  update() {
+    this.x += this.speedX; this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    if (mouse.x && mouse.y) {
+      const dx = mouse.x - this.x, dy = mouse.y - this.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 120) { this.x -= dx / 40; this.y -= dy / 40; }
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color}, 0.7)`;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = `rgba(${this.color}, 0.9)`;
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particles = [];
+  const count = Math.min(80, Math.floor(window.innerWidth / 15));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+initParticles();
+
+function connectParticles() {
+  for (let a = 0; a < particles.length; a++) {
+    for (let b = a + 1; b < particles.length; b++) {
+      const dx = particles[a].x - particles[b].x;
+      const dy = particles[a].y - particles[b].y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 130) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(0,255,231,${0.15 * (1 - dist / 130)})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(particles[b].x, particles[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  connectParticles();
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+// ==== Typing Title ====
+function typeTitle() {
+  const el = document.getElementById('typingTitle');
+  const text = '𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓';
+  let i = 0;
+  el.innerHTML = '<span class="cursor"></span>';
+  const timer = setInterval(() => {
+    if (i < text.length) {
+      el.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+      i++;
+    } else {
+      clearInterval(timer);
+      setTimeout(() => {
+        el.innerHTML = text + '<span class="cursor"></span>';
+      }, 500);
+    }
+  }, 100);
+}
+setTimeout(typeTitle, 1600);
+
+// ==== Reveal ====
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('active'), i * 100);
@@ -528,7 +650,48 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Load Contact
+// ==== Counters ====
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  const suffix = el.dataset.suffix || '';
+  let count = 0;
+  const step = target / 60;
+  const timer = setInterval(() => {
+    count += step;
+    if (count >= target) { count = target; clearInterval(timer); }
+    const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+    let num = Math.floor(count).toString().replace(/\d/g, d => persianDigits[d]);
+    el.textContent = num + suffix;
+  }, 25);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.dataset.done) {
+      entry.dataset.done = 'true';
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.num[data-target]').forEach(el => counterObserver.observe(el));
+
+// ==== 3D Tilt ====
+document.querySelectorAll('[data-tilt]').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 25;
+    const rotateY = (centerX - x) / 25;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ==== Load Contact ====
 async function loadContact() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
