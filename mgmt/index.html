@@ -8,12 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Vazirmatn', Tahoma, sans-serif;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
 :root {
   --bg-dark: #0a0a0f;
   --cyan: #00ffe7;
@@ -32,481 +27,155 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-/* Background */
 .bg-glow {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
+  position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
 }
-.bg-glow::before,
-.bg-glow::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.4;
+.bg-glow::before, .bg-glow::after {
+  content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.4;
   animation: float 12s ease-in-out infinite;
 }
-.bg-glow::before {
-  width: 500px; height: 500px;
-  background: var(--cyan);
-  top: -100px; right: -100px;
-}
-.bg-glow::after {
-  width: 600px; height: 600px;
-  background: var(--purple);
-  bottom: -150px; left: -150px;
-  animation-delay: -6s;
-}
-@keyframes float {
-  0%, 100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(50px, 50px) scale(1.1); }
-}
+.bg-glow::before { width: 500px; height: 500px; background: var(--cyan); top: -100px; right: -100px; }
+.bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -6s; }
+@keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
 
-/* ==== Login Screen ==== */
-.login-screen {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+/* Login */
+.login-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
 .login-box {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 25px;
-  padding: 45px 35px;
-  backdrop-filter: blur(20px);
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
-  box-shadow: 0 25px 60px rgba(0,255,231,0.1);
+  background: var(--glass); border: 1px solid var(--border); border-radius: 25px;
+  padding: 45px 35px; backdrop-filter: blur(20px); width: 100%; max-width: 420px;
+  text-align: center; box-shadow: 0 25px 60px rgba(0,255,231,0.1);
   animation: slideUp 0.6s ease-out;
 }
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.login-icon {
-  font-size: 4rem;
-  margin-bottom: 15px;
-  filter: drop-shadow(0 0 25px var(--cyan));
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
+@keyframes slideUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+.login-icon { font-size: 4rem; margin-bottom: 15px; filter: drop-shadow(0 0 25px var(--cyan)); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
 .login-box h1 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
+  font-size: 1.5rem; margin-bottom: 8px;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   font-weight: 900;
 }
-.login-box .subtitle {
-  color: var(--text-dim);
-  font-size: 0.9rem;
-  margin-bottom: 30px;
-}
-.input-group {
-  position: relative;
-  margin-bottom: 18px;
-}
+.login-box .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 30px; }
+.input-group { position: relative; margin-bottom: 18px; }
 .input-group input {
-  width: 100%;
-  padding: 15px 45px 15px 18px;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  color: var(--text);
-  font-size: 1rem;
-  outline: none;
-  transition: 0.3s;
-  font-family: inherit;
+  width: 100%; padding: 15px 45px 15px 18px;
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px;
+  color: var(--text); font-size: 1rem; outline: none; transition: 0.3s; font-family: inherit;
 }
-.input-group input:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 20px rgba(0,255,231,0.3);
-}
-.input-group .icon {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.2rem;
-  opacity: 0.6;
-}
+.input-group input:focus { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,255,231,0.3); }
+.input-group .icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; opacity: 0.6; }
 .login-btn {
-  width: 100%;
-  padding: 15px;
+  width: 100%; padding: 15px;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
-  color: #0a0a0f;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: inherit;
-  margin-top: 10px;
-  box-shadow: 0 0 25px rgba(0,255,231,0.4);
+  color: #0a0a0f; border: none; border-radius: 12px;
+  font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s;
+  font-family: inherit; margin-top: 10px; box-shadow: 0 0 25px rgba(0,255,231,0.4);
 }
-.login-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(0,255,231,0.7);
-}
-.login-btn:active {
-  transform: translateY(0);
-}
+.login-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,255,231,0.7); }
 .error-msg {
-  background: rgba(255,56,96,0.15);
-  border: 1px solid var(--danger);
-  color: var(--danger);
-  padding: 12px;
-  border-radius: 10px;
-  margin-top: 15px;
-  font-size: 0.9rem;
-  display: none;
-  animation: shake 0.4s;
+  background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger);
+  padding: 12px; border-radius: 10px; margin-top: 15px; font-size: 0.9rem;
+  display: none; animation: shake 0.4s;
 }
 .error-msg.show { display: block; }
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px); }
-  75% { transform: translateX(8px); }
-}
-.back-link {
-  display: inline-block;
-  margin-top: 20px;
-  color: var(--text-dim);
-  text-decoration: none;
-  font-size: 0.85rem;
-  transition: 0.3s;
-}
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-8px);} 75%{transform:translateX(8px);} }
+.back-link { display: inline-block; margin-top: 20px; color: var(--text-dim); text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
 .back-link:hover { color: var(--cyan); }
 
-/* ==== Dashboard ==== */
-.dashboard {
-  display: none;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  animation: fadeIn 0.5s ease-out;
-}
+/* Dashboard */
+.dashboard { display: none; padding: 20px; max-width: 900px; margin: 0 auto; animation: fadeIn 0.5s ease-out; }
 .dashboard.active { display: block; }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 .dash-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  margin-bottom: 25px;
-  backdrop-filter: blur(20px);
-  flex-wrap: wrap;
-  gap: 15px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px; background: var(--glass); border: 1px solid var(--border);
+  border-radius: 18px; margin-bottom: 25px; backdrop-filter: blur(20px);
+  flex-wrap: wrap; gap: 15px;
 }
 .dash-header h1 {
   font-size: 1.3rem;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   font-weight: 900;
-}
-.dash-header .user-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.9rem;
-  color: var(--text-dim);
 }
 .logout-btn {
-  padding: 10px 20px;
-  background: rgba(255,56,96,0.15);
-  border: 1px solid var(--danger);
-  color: var(--danger);
-  border-radius: 10px;
-  cursor: pointer;
-  font-family: inherit;
-  font-weight: 600;
-  transition: 0.3s;
-  font-size: 0.85rem;
+  padding: 10px 20px; background: rgba(255,56,96,0.15); border: 1px solid var(--danger);
+  color: var(--danger); border-radius: 10px; cursor: pointer; font-family: inherit;
+  font-weight: 600; transition: 0.3s; font-size: 0.85rem;
 }
-.logout-btn:hover {
-  background: var(--danger);
-  color: white;
+.logout-btn:hover { background: var(--danger); color: white; }
+
+/* Card */
+.card {
+  background: var(--glass); border: 1px solid var(--border); border-radius: 20px;
+  padding: 30px; backdrop-filter: blur(20px); margin-bottom: 20px;
+  box-shadow: 0 15px 40px rgba(0,255,231,0.08);
 }
-/* Tabs */
-.tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
+.card-title {
+  font-size: 1.1rem; font-weight: 700; color: var(--cyan);
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
 }
-.tab {
-  padding: 12px 22px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: inherit;
-  color: var(--text-dim);
-  font-weight: 600;
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block; font-size: 0.9rem; color: var(--text-dim);
+  margin-bottom: 8px; font-weight: 600;
+}
+.form-group input {
+  width: 100%; padding: 15px 18px;
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px;
+  color: var(--text); font-size: 1rem; outline: none; transition: 0.3s; font-family: inherit;
+}
+.form-group input:focus { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,255,231,0.3); }
+.form-group .hint { font-size: 0.78rem; color: #666; margin-top: 6px; }
+
+.save-btn {
+  width: 100%; padding: 16px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  color: #0a0a0f; border: none; border-radius: 12px;
+  font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s;
+  font-family: inherit; box-shadow: 0 0 25px rgba(0,255,231,0.4);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.save-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,255,231,0.7); }
+.save-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Status */
+.status {
+  padding: 15px 20px; border-radius: 12px; margin-bottom: 20px;
+  font-weight: 600; display: none; align-items: center; gap: 10px;
+  animation: slideUp 0.4s ease-out;
+}
+.status.show { display: flex; }
+.status.success { background: rgba(16,185,129,0.15); border: 1px solid var(--success); color: var(--success); }
+.status.error { background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); }
+.status.loading { background: rgba(0,255,231,0.1); border: 1px solid var(--cyan); color: var(--cyan); }
+
+/* Preview */
+.preview {
+  background: rgba(0,0,0,0.3); border: 1px dashed var(--border);
+  border-radius: 12px; padding: 20px; margin-top: 20px;
+}
+.preview h4 { color: var(--cyan); font-size: 0.9rem; margin-bottom: 15px; }
+.preview-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
   font-size: 0.9rem;
 }
-.tab:hover { color: var(--cyan); border-color: var(--cyan); }
-.tab.active {
-  background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15));
-  color: var(--cyan);
-  border-color: var(--cyan);
-  box-shadow: 0 0 20px rgba(0,255,231,0.2);
-}
-.tab-content { display: none; }
-.tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+.preview-item:last-child { border-bottom: none; }
+.preview-item .label { color: var(--text-dim); }
+.preview-item .value { color: var(--cyan); font-weight: 700; }
 
-/* Stats Cards */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 18px;
-  margin-bottom: 25px;
+/* Info Box */
+.info-box {
+  background: rgba(0,255,231,0.05); border: 1px solid rgba(0,255,231,0.2);
+  border-radius: 12px; padding: 15px 18px; margin-bottom: 20px;
+  font-size: 0.85rem; color: var(--text-dim); line-height: 1.8;
 }
-.stat-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 22px;
-  backdrop-filter: blur(20px);
-  transition: 0.3s;
-}
-.stat-card:hover {
-  border-color: var(--cyan);
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,255,231,0.15);
-}
-.stat-card .icon {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-.stat-card .value {
-  font-size: 1.8rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.stat-card .label {
-  color: var(--text-dim);
-  font-size: 0.85rem;
-  margin-top: 5px;
-}
+.info-box strong { color: var(--cyan); }
 
-/* Products Management */
-.section-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--cyan);
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.products-list {
-  display: grid;
-  gap: 15px;
-}
-.product-item {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 18px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(20px);
-  transition: 0.3s;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-.product-item:hover {
-  border-color: var(--cyan);
-  background: rgba(0,255,231,0.03);
-}
-.product-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex: 1;
-  min-width: 200px;
-}
-.product-emoji {
-  font-size: 2rem;
-  filter: drop-shadow(0 0 10px rgba(0,255,231,0.5));
-}
-.product-details h4 {
-  font-size: 1rem;
-  margin-bottom: 3px;
-}
-.product-details p {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-}
-.product-price {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--cyan);
-  margin: 0 10px;
-}
-.product-actions {
-  display: flex;
-  gap: 8px;
-}
-.btn-icon {
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.btn-icon:hover {
-  background: rgba(0,255,231,0.1);
-  border-color: var(--cyan);
-}
-.btn-icon.danger:hover {
-  background: rgba(255,56,96,0.15);
-  border-color: var(--danger);
-  color: var(--danger);
-}
-
-/* Add Product Form */
-.form-box {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 22px;
-  margin-bottom: 20px;
-  backdrop-filter: blur(20px);
-}
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-.form-row.full {
-  grid-template-columns: 1fr;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.form-group label {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  font-weight: 600;
-}
-.form-group input,
-.form-group textarea,
-.form-group select {
-  padding: 12px 15px;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text);
-  font-size: 0.95rem;
-  outline: none;
-  font-family: inherit;
-  transition: 0.3s;
-}
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 15px rgba(0,255,231,0.2);
-}
-.btn-primary {
-  padding: 13px 28px;
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  color: #0a0a0f;
-  border: none;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition: 0.3s;
-  box-shadow: 0 0 20px rgba(0,255,231,0.3);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(0,255,231,0.6);
-}
-
-/* Toast Notification */
-.toast {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  padding: 15px 25px;
-  background: var(--glass);
-  border: 1px solid var(--success);
-  color: var(--success);
-  border-radius: 12px;
-  backdrop-filter: blur(20px);
-  font-weight: 600;
-  z-index: 9999;
-  transform: translateY(100px);
-  opacity: 0;
-  transition: 0.4s;
-}
-.toast.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-.toast.error {
-  border-color: var(--danger);
-  color: var(--danger);
-}
-
-/* Empty State */
-.empty-state {
-  text-align: center;
-  padding: 50px 20px;
-  color: var(--text-dim);
-}
-.empty-state .icon {
-  font-size: 4rem;
-  margin-bottom: 15px;
-  opacity: 0.5;
-}
-
-/* Mobile */
 @media (max-width: 600px) {
   .login-box { padding: 35px 25px; }
-  .form-row { grid-template-columns: 1fr; }
-  .product-item { flex-direction: column; align-items: stretch; }
-  .product-actions { justify-content: flex-end; }
-  .toast { bottom: 15px; right: 15px; left: 15px; }
+  .card { padding: 22px 18px; }
 }
 </style>
 </head>
@@ -514,7 +183,7 @@ body {
 
 <div class="bg-glow"></div>
 
-<!-- ==== Login Screen ==== -->
+<!-- ==== Login ==== -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-icon">🔐</div>
@@ -543,159 +212,54 @@ body {
 <div class="dashboard" id="dashboard">
   <div class="dash-header">
     <h1>⚓ پنل مدیریت کاپیتان وکتور</h1>
-    <div class="user-info">
-      <span>👋 خوش آمدی، ادمین</span>
-      <button class="logout-btn" onclick="logout()">🚪 خروج</button>
-    </div>
+    <button class="logout-btn" onclick="logout()">🚪 خروج</button>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('overview', this)">📊 نمای کلی</button>
-    <button class="tab" onclick="switchTab('products', this)">📦 محصولات</button>
-    <button class="tab" onclick="switchTab('settings', this)">⚙️ تنظیمات</button>
-  </div>
+  <div id="statusBox" class="status"></div>
 
-  <!-- Tab: Overview -->
-  <div class="tab-content active" id="tab-overview">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="icon">📦</div>
-        <div class="value" id="statProducts">0</div>
-        <div class="label">محصولات فعال</div>
-      </div>
-      <div class="stat-card">
-        <div class="icon">👥</div>
-        <div class="value">--</div>
-        <div class="label">بازدیدکننده</div>
-      </div>
-      <div class="stat-card">
-        <div class="icon">💬</div>
-        <div class="value">--</div>
-        <div class="label">پیام‌های چت</div>
-      </div>
-      <div class="stat-card">
-        <div class="icon">⭐</div>
-        <div class="value">100%</div>
-        <div class="label">رضایت مشتری</div>
-      </div>
+  <div class="card">
+    <div class="card-title">📞 اطلاعات تماس (همه‌جا آپدیت میشه)</div>
+
+    <div class="info-box">
+      💡 این اطلاعات <strong>فوری</strong> روی صفحه اصلی سایت آپدیت میشن. مشتری‌ها همون لحظه می‌بینن!
     </div>
 
-    <div class="section-title">🚀 دسترسی سریع</div>
-    <div class="products-list">
-      <a href="https://dashboard.tawk.to" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="product-item">
-          <div class="product-info">
-            <div class="product-emoji">💬</div>
-            <div class="product-details">
-              <h4>پنل چت Tawk.to</h4>
-              <p>پاسخ به پیام‌های مشتریان</p>
-            </div>
-          </div>
-          <div class="product-actions"><span style="color: var(--cyan);">↗</span></div>
-        </div>
-      </a>
-      <a href="https://github.com/capitanvexor/capitan-vexor" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="product-item">
-          <div class="product-info">
-            <div class="product-emoji">🐙</div>
-            <div class="product-details">
-              <h4>مخزن GitHub</h4>
-              <p>ویرایش فایل‌های سایت</p>
-            </div>
-          </div>
-          <div class="product-actions"><span style="color: var(--cyan);">↗</span></div>
-        </div>
-      </a>
-      <a href="https://search.google.com/search-console" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="product-item">
-          <div class="product-info">
-            <div class="product-emoji">🔍</div>
-            <div class="product-details">
-              <h4>Google Search Console</h4>
-              <p>وضعیت سایت در گوگل</p>
-            </div>
-          </div>
-          <div class="product-actions"><span style="color: var(--cyan);">↗</span></div>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- Tab: Products -->
-  <div class="tab-content" id="tab-products">
-    <div class="section-title">➕ افزودن محصول جدید</div>
-    <div class="form-box">
-      <div class="form-row">
-        <div class="form-group">
-          <label>اسم محصول</label>
-          <input type="text" id="pName" placeholder="مثلاً: اکانت کلش TH15">
-        </div>
-        <div class="form-group">
-          <label>قیمت (تومان)</label>
-          <input type="text" id="pPrice" placeholder="مثلاً: 500000">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>دسته‌بندی</label>
-          <select id="pCategory">
-            <option value="کالاف">کالاف</option>
-            <option value="کلش">کلش</option>
-            <option value="آیتم کلش">آیتم کلش</option>
-            <option value="آیتم کالاف">آیتم کالاف</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>ایموجی</label>
-          <input type="text" id="pEmoji" placeholder="🎯" value="🎯">
-        </div>
-      </div>
-      <div class="form-row full">
-        <div class="form-group">
-          <label>توضیحات</label>
-          <textarea id="pDesc" rows="2" placeholder="توضیحات کوتاه..."></textarea>
-        </div>
-      </div>
-      <button class="btn-primary" onclick="addProduct()">➕ افزودن محصول</button>
+    <div class="form-group">
+      <label>📱 شماره تماس</label>
+      <input type="text" id="phone" placeholder="09388499513" dir="ltr">
+      <div class="hint">شماره‌ای که مشتری تماس می‌گیره</div>
     </div>
 
-    <div class="section-title">📦 لیست محصولات</div>
-    <div class="products-list" id="productsList"></div>
-  </div>
-
-  <!-- Tab: Settings -->
-  <div class="tab-content" id="tab-settings">
-    <div class="section-title">⚙️ تنظیمات پنل</div>
-    <div class="form-box">
-      <div class="form-row">
-        <div class="form-group">
-          <label>نام کاربری جدید</label>
-          <input type="text" id="newUsername" placeholder="نام کاربری">
-        </div>
-        <div class="form-group">
-          <label>رمز عبور جدید</label>
-          <input type="password" id="newPassword" placeholder="رمز جدید">
-        </div>
-      </div>
-      <button class="btn-primary" onclick="changeCredentials()">💾 ذخیره تغییرات</button>
+    <div class="form-group">
+      <label>💬 آیدی روبیکا</label>
+      <input type="text" id="rubika" placeholder="oooo1219" dir="ltr">
+      <div class="hint">بدون @ بنویس (مثلاً: oooo1219)</div>
     </div>
 
-    <div class="section-title">⚠️ منطقه خطر</div>
-    <div class="form-box" style="border-color: rgba(255,56,96,0.3);">
-      <p style="color: var(--text-dim); margin-bottom: 15px; font-size: 0.9rem;">
-        با زدن این دکمه، تمام محصولات حذف می‌شن.
-      </p>
-      <button class="logout-btn" onclick="resetProducts()">🗑️ حذف همه محصولات</button>
+    <button class="save-btn" id="saveBtn" onclick="saveSettings()">
+      💾 ذخیره و آپدیت سایت
+    </button>
+
+    <div class="preview">
+      <h4>👁️ پیش‌نمایش (چیزی که مشتری می‌بینه):</h4>
+      <div class="preview-item">
+        <span class="label">📞 شماره تماس:</span>
+        <span class="value" id="previewPhone">-</span>
+      </div>
+      <div class="preview-item">
+        <span class="label">💬 آیدی روبیکا:</span>
+        <span class="value" id="previewRubika">-</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
 <script>
-// ==== تنظیمات ====
-// ⚠️ اینا رو بعداً عوض کن!
+// ==== تنظیمات Supabase ====
+const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
+
+// ==== تنظیمات ورود ====
 const DEFAULT_USERNAME = 'admin';
 const DEFAULT_PASSWORD = 'vexor2024';
 
@@ -709,27 +273,22 @@ function login() {
   if (user === savedUser && pass === savedPass) {
     sessionStorage.setItem('cv_logged_in', 'true');
     showDashboard();
-    showToast('✅ خوش آمدی ادمین!');
   } else {
     document.getElementById('errorMsg').classList.add('show');
     setTimeout(() => document.getElementById('errorMsg').classList.remove('show'), 3000);
   }
 }
 
-// Enter key for login
 document.getElementById('password').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') login();
 });
 
-// ==== Show Dashboard ====
 function showDashboard() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('dashboard').classList.add('active');
-  loadProducts();
-  updateStats();
+  loadSettings();
 }
 
-// ==== Logout ====
 function logout() {
   sessionStorage.removeItem('cv_logged_in');
   document.getElementById('loginScreen').style.display = 'flex';
@@ -738,134 +297,103 @@ function logout() {
   document.getElementById('password').value = '';
 }
 
-// Auto login check
 window.addEventListener('load', () => {
   if (sessionStorage.getItem('cv_logged_in') === 'true') {
     showDashboard();
   }
 });
 
-// ==== Tabs ====
-function switchTab(tabName, btn) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tab-' + tabName).classList.add('active');
+// ==== Status ====
+function showStatus(msg, type = 'loading') {
+  const box = document.getElementById('statusBox');
+  box.className = 'status show ' + type;
+  box.textContent = msg;
+  if (type !== 'loading') {
+    setTimeout(() => box.classList.remove('show'), 4000);
+  }
 }
 
-// ==== Products ====
-function getProducts() {
-  return JSON.parse(localStorage.getItem('cv_products') || '[]');
+// ==== Load Settings from Supabase ====
+async function loadSettings() {
+  showStatus('⏳ در حال بارگذاری اطلاعات...', 'loading');
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      }
+    });
+    const data = await res.json();
+
+    if (data && data.length > 0) {
+      document.getElementById('phone').value = data[0].phone || '';
+      document.getElementById('rubika').value = data[0].rubika_id || '';
+      updatePreview();
+      showStatus('✅ اطلاعات بارگذاری شد', 'success');
+    } else {
+      showStatus('⚠️ اطلاعاتی پیدا نشد', 'error');
+    }
+  } catch (err) {
+    showStatus('❌ خطا در بارگذاری: ' + err.message, 'error');
+  }
 }
 
-function saveProducts(products) {
-  localStorage.setItem('cv_products', JSON.stringify(products));
-}
+// ==== Save Settings to Supabase ====
+async function saveSettings() {
+  const phone = document.getElementById('phone').value.trim();
+  const rubika = document.getElementById('rubika').value.trim();
 
-function loadProducts() {
-  const products = getProducts();
-  const list = document.getElementById('productsList');
-
-  if (products.length === 0) {
-    list.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">📦</div>
-        <p>هنوز محصولی اضافه نکردی!</p>
-      </div>
-    `;
+  if (!phone || !rubika) {
+    showStatus('❌ شماره و آیدی رو کامل وارد کن!', 'error');
     return;
   }
 
-  list.innerHTML = products.map((p, i) => `
-    <div class="product-item">
-      <div class="product-info">
-        <div class="product-emoji">${p.emoji}</div>
-        <div class="product-details">
-          <h4>${p.name}</h4>
-          <p>${p.category} — ${p.desc || 'بدون توضیحات'}</p>
-        </div>
-      </div>
-      <div class="product-price">${p.price ? p.price + ' ت' : 'تماس'}</div>
-      <div class="product-actions">
-        <button class="btn-icon danger" onclick="deleteProduct(${i})" title="حذف">🗑️</button>
-      </div>
-    </div>
-  `).join('');
-}
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ در حال ذخیره...';
+  showStatus('⏳ در حال ذخیره توی دیتابیس...', 'loading');
 
-function addProduct() {
-  const name = document.getElementById('pName').value.trim();
-  const price = document.getElementById('pPrice').value.trim();
-  const category = document.getElementById('pCategory').value;
-  const emoji = document.getElementById('pEmoji').value.trim() || '🎯';
-  const desc = document.getElementById('pDesc').value.trim();
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        phone: phone,
+        rubika_id: rubika,
+        updated_at: new Date().toISOString()
+      })
+    });
 
-  if (!name) {
-    showToast('❌ اسم محصول رو بنویس!', true);
-    return;
+    if (res.ok) {
+      showStatus('🎉 با موفقیت ذخیره شد! سایت آپدیت شد', 'success');
+      updatePreview();
+    } else {
+      const err = await res.text();
+      showStatus('❌ خطا: ' + err, 'error');
+    }
+  } catch (err) {
+    showStatus('❌ خطا در اتصال: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '💾 ذخیره و آپدیت سایت';
   }
-
-  const products = getProducts();
-  products.push({ name, price, category, emoji, desc });
-  saveProducts(products);
-  loadProducts();
-  updateStats();
-
-  // Clear form
-  document.getElementById('pName').value = '';
-  document.getElementById('pPrice').value = '';
-  document.getElementById('pDesc').value = '';
-
-  showToast('✅ محصول اضافه شد!');
 }
 
-function deleteProduct(index) {
-  if (!confirm('مطمئنی می‌خوای این محصول رو حذف کنی؟')) return;
-  const products = getProducts();
-  products.splice(index, 1);
-  saveProducts(products);
-  loadProducts();
-  updateStats();
-  showToast('🗑️ محصول حذف شد');
+// ==== Preview ====
+function updatePreview() {
+  const phone = document.getElementById('phone').value || '-';
+  const rubika = document.getElementById('rubika').value || '-';
+  document.getElementById('previewPhone').textContent = phone;
+  document.getElementById('previewRubika').textContent = '@' + rubika;
 }
 
-function updateStats() {
-  document.getElementById('statProducts').textContent = getProducts().length;
-}
-
-function resetProducts() {
-  if (!confirm('⚠️ مطمئنی؟ همه محصولات حذف می‌شن!')) return;
-  localStorage.removeItem('cv_products');
-  loadProducts();
-  updateStats();
-  showToast('🗑️ همه محصولات حذف شدند');
-}
-
-// ==== Settings ====
-function changeCredentials() {
-  const newUser = document.getElementById('newUsername').value.trim();
-  const newPass = document.getElementById('newPassword').value.trim();
-
-  if (newUser) localStorage.setItem('cv_username', newUser);
-  if (newPass) localStorage.setItem('cv_password', newPass);
-
-  if (!newUser && !newPass) {
-    showToast('❌ چیزی وارد نکردی!', true);
-    return;
-  }
-
-  showToast('✅ تغییرات ذخیره شد');
-  document.getElementById('newUsername').value = '';
-  document.getElementById('newPassword').value = '';
-}
-
-// ==== Toast ====
-function showToast(msg, isError = false) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.className = 'toast show' + (isError ? ' error' : '');
-  setTimeout(() => toast.classList.remove('show'), 3000);
-}
+document.getElementById('phone').addEventListener('input', updatePreview);
+document.getElementById('rubika').addEventListener('input', updatePreview);
 </script>
 
 </body>
