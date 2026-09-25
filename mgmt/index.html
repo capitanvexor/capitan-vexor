@@ -218,7 +218,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
   border-color: var(--cyan);
 }
-.chat-list-item .name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+.chat-list-item .name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
 .chat-list-item .name-text { display: flex; align-items: center; gap: 6px; }
 .chat-list-item .preview { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .chat-list-item .time { font-size: 0.7rem; color: #666; margin-top: 4px; }
@@ -226,6 +226,27 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   background: var(--danger); color: white; font-size: 0.7rem;
   padding: 2px 8px; border-radius: 50px; font-weight: 700;
   animation: pulse 1.5s infinite;
+}
+.delete-chat-btn {
+  background: rgba(255,56,96,0.1);
+  border: 1px solid rgba(255,56,96,0.3);
+  color: var(--danger);
+  border-radius: 8px;
+  width: 26px;
+  height: 26px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  padding: 0;
+}
+.delete-chat-btn:hover {
+  background: var(--danger);
+  color: white;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(255,56,96,0.6);
 }
 
 .chat-main {
@@ -420,62 +441,29 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       </div>
 
       <div id="fields-clash" class="form-row three">
-        <div class="form-group">
-          <label>🏰 تاون هال</label>
-          <input type="number" id="pTownHall" placeholder="14">
-        </div>
-        <div class="form-group">
-          <label>🏗️ لول بیلدر</label>
-          <input type="number" id="pBuilder" placeholder="10">
-        </div>
-        <div class="form-group">
-          <label>✏️ تغییر نام</label>
-          <input type="number" id="pNameChanges" placeholder="1">
-        </div>
+        <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="pTownHall" placeholder="14"></div>
+        <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
+        <div class="form-group"><label>✏️ تغییر نام</label><input type="number" id="pNameChanges" placeholder="1"></div>
       </div>
 
       <div id="fields-cod" class="form-row three" style="display:none;">
-        <div class="form-group">
-          <label>🎖️ رنک</label>
-          <input type="text" id="pRank" placeholder="Legendary">
-        </div>
-        <div class="form-group">
-          <label>📊 لول پلیر</label>
-          <input type="number" id="pPlayerLevel" placeholder="150">
-        </div>
-        <div class="form-group">
-          <label>🎨 تعداد اسکین</label>
-          <input type="number" id="pSkins" placeholder="50">
-        </div>
+        <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pRank" placeholder="Legendary"></div>
+        <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="pPlayerLevel" placeholder="150"></div>
+        <div class="form-group"><label>🎨 تعداد اسکین</label><input type="number" id="pSkins" placeholder="50"></div>
       </div>
 
       <div id="fields-item" class="form-row" style="display:none;">
-        <div class="form-group">
-          <label>🏷️ نوع آیتم</label>
-          <input type="text" id="pItemType" placeholder="بلیط طلایی">
-        </div>
-        <div class="form-group">
-          <label>📦 مقدار</label>
-          <input type="text" id="pItemAmount" placeholder="۱ عدد">
-        </div>
+        <div class="form-group"><label>🏷️ نوع آیتم</label><input type="text" id="pItemType" placeholder="بلیط طلایی"></div>
+        <div class="form-group"><label>📦 مقدار</label><input type="text" id="pItemAmount" placeholder="۱ عدد"></div>
       </div>
 
       <div class="form-row">
-        <div class="form-group">
-          <label>🆔 کد محصول</label>
-          <input type="text" id="pCode" placeholder="232" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label>💰 قیمت (تومان) *</label>
-          <input type="number" id="pPrice" placeholder="5800000">
-        </div>
+        <div class="form-group"><label>🆔 کد محصول</label><input type="text" id="pCode" placeholder="232" dir="ltr"></div>
+        <div class="form-group"><label>💰 قیمت (تومان) *</label><input type="number" id="pPrice" placeholder="5800000"></div>
       </div>
 
       <div class="form-row">
-        <div class="form-group">
-          <label>💵 قیمت دلاری</label>
-          <input type="text" id="pPriceUsd" placeholder="95$" dir="ltr">
-        </div>
+        <div class="form-group"><label>💵 قیمت دلاری</label><input type="text" id="pPriceUsd" placeholder="95$" dir="ltr"></div>
         <div class="form-group">
           <label>✅ وضعیت</label>
           <select id="pStatus">
@@ -542,14 +530,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div class="tab-content" id="tab-contact">
     <div class="card">
       <div class="card-title">📞 اطلاعات تماس</div>
-      <div class="form-group">
-        <label>📱 شماره تماس</label>
-        <input type="text" id="phone" placeholder="09388499513" dir="ltr">
-      </div>
-      <div class="form-group">
-        <label>💬 آیدی روبیکا</label>
-        <input type="text" id="rubika" placeholder="oooo1219" dir="ltr">
-      </div>
+      <div class="form-group"><label>📱 شماره تماس</label><input type="text" id="phone" placeholder="09388499513" dir="ltr"></div>
+      <div class="form-group"><label>💬 آیدی روبیکا</label><input type="text" id="rubika" placeholder="oooo1219" dir="ltr"></div>
       <button class="save-btn" onclick="saveSettings()">💾 ذخیره</button>
     </div>
   </div>
@@ -566,16 +548,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <input type="hidden" id="editId">
     <input type="hidden" id="editImages" value="[]">
 
-    <div class="form-group">
-      <label>🎮 عنوان *</label>
-      <input type="text" id="editTitle">
-    </div>
-
-    <div class="form-group">
-      <label>💬 شعار</label>
-      <input type="text" id="editSlogan">
-    </div>
-
+    <div class="form-group"><label>🎮 عنوان *</label><input type="text" id="editTitle"></div>
+    <div class="form-group"><label>💬 شعار</label><input type="text" id="editSlogan"></div>
     <div class="form-group">
       <label>📂 دسته‌بندی</label>
       <select id="editCategory">
@@ -620,16 +594,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       </div>
     </div>
 
-    <div class="form-group">
-      <label>📝 توضیحات</label>
-      <textarea id="editDesc" rows="3"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>📸 عکس‌های فعلی</label>
-      <div class="existing-images" id="existingImages"></div>
-    </div>
-
+    <div class="form-group"><label>📝 توضیحات</label><textarea id="editDesc" rows="3"></textarea></div>
+    <div class="form-group"><label>📸 عکس‌های فعلی</label><div class="existing-images" id="existingImages"></div></div>
     <div class="form-group">
       <label>➕ عکس‌های جدید (خودکار فشرده میشن ⚡)</label>
       <div class="upload-area" onclick="document.getElementById('editImagesInput').click()">
@@ -665,7 +631,6 @@ let chatsChannel = null;
 let messagesChannel = null;
 let totalUnread = 0;
 
-// ==== Login ====
 function login() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
@@ -713,7 +678,6 @@ function showStatus(msg, type = 'loading') {
   if (type !== 'loading') setTimeout(() => box.classList.remove('show'), 4000);
 }
 
-// ==== Category Fields ====
 function updateCategoryFields() {
   const cat = document.getElementById('pCategory').value;
   document.getElementById('fields-clash').style.display = (cat === 'کلش') ? 'grid' : 'none';
@@ -721,33 +685,19 @@ function updateCategoryFields() {
   document.getElementById('fields-item').style.display = (cat.includes('آیتم')) ? 'grid' : 'none';
 }
 
-// ==== Compress + Upload ====
 async function compressAndUpload(file) {
-  try {
-    const options = {
-      maxSizeMB: 0.3,
-      maxWidthOrHeight: 1200,
-      useWebWorker: true,
-      fileType: 'image/jpeg',
-      initialQuality: 0.8
-    };
-    const compressedFile = await imageCompression(file, options);
-    const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.jpg`;
-    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'image/jpeg'
-      },
-      body: compressedFile
-    });
-    if (!res.ok) throw new Error('خطا در آپلود');
-    return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
-  } catch (err) { throw err; }
+  const options = { maxSizeMB: 0.3, maxWidthOrHeight: 1200, useWebWorker: true, fileType: 'image/jpeg', initialQuality: 0.8 };
+  const compressedFile = await imageCompression(file, options);
+  const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.jpg`;
+  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, {
+    method: 'POST',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'image/jpeg' },
+    body: compressedFile
+  });
+  if (!res.ok) throw new Error('خطا در آپلود');
+  return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 }
 
-// ==== Images ====
 function handleImages(event) {
   selectedImages = [...selectedImages, ...Array.from(event.target.files)];
   renderImagePreviews();
@@ -763,17 +713,12 @@ function renderImagePreviews() {
     preview.appendChild(item);
   });
 }
-function removeImage(i) {
-  selectedImages.splice(i, 1);
-  renderImagePreviews();
-}
+function removeImage(i) { selectedImages.splice(i, 1); renderImagePreviews(); }
 
-// ==== Add Product ====
 async function addProduct() {
   const title = document.getElementById('pTitle').value.trim();
   const price = document.getElementById('pPrice').value.trim();
   const cat = document.getElementById('pCategory').value;
-
   if (!title || !price) { showStatus('❌ عنوان و قیمت اجباری!', 'error'); return; }
 
   const btn = document.getElementById('addBtn');
@@ -788,15 +733,12 @@ async function addProduct() {
     }
 
     const product = {
-      title: title,
-      slogan: document.getElementById('pSlogan').value.trim(),
-      category: cat,
+      title, slogan: document.getElementById('pSlogan').value.trim(), category: cat,
       account_code: document.getElementById('pCode').value.trim(),
       price: parseInt(price),
       price_usd: document.getElementById('pPriceUsd').value.trim(),
       description: document.getElementById('pDesc').value.trim(),
-      status: document.getElementById('pStatus').value,
-      images: imageUrls
+      status: document.getElementById('pStatus').value, images: imageUrls
     };
 
     if (cat === 'کلش') {
@@ -814,43 +756,27 @@ async function addProduct() {
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
       method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(product)
     });
 
     if (res.ok) {
       showStatus('🎉 محصول ثبت شد!', 'success');
       ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pRank','pPlayerLevel','pSkins','pItemType','pItemAmount','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = '';
+        const el = document.getElementById(id); if (el) el.value = '';
       });
-      selectedImages = [];
-      renderImagePreviews();
-      loadProducts();
-    } else {
-      showStatus('❌ خطا', 'error');
-    }
-  } catch (err) {
-    showStatus('❌ خطا: ' + err.message, 'error');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '🚀 ثبت محصول';
-  }
+      selectedImages = []; renderImagePreviews(); loadProducts();
+    } else { showStatus('❌ خطا', 'error'); }
+  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
+  finally { btn.disabled = false; btn.textContent = '🚀 ثبت محصول'; }
 }
 
-// ==== Load Products ====
 async function loadProducts() {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    allProductsData = await res.json();
-    filterList(currentListFilter);
-  } catch (err) { console.error(err); }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  allProductsData = await res.json();
+  filterList(currentListFilter);
 }
 
 function filterList(status) {
@@ -873,17 +799,12 @@ function renderProducts(products) {
     return `
       <div class="product-item">
         ${img}
-        <div class="product-details">
-          <h4>${p.title}</h4>
-          <p>${p.category} | کد: ${p.account_code || '-'}</p>
-        </div>
+        <div class="product-details"><h4>${p.title}</h4><p>${p.category} | کد: ${p.account_code || '-'}</p></div>
         <div class="product-price">
           ${Number(p.price).toLocaleString('fa-IR')} ت
           ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}
         </div>
-        <span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">
-          ${statusIcon} ${p.status}
-        </span>
+        <span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">${statusIcon} ${p.status}</span>
         <div class="product-actions">
           <button class="btn-icon" onclick="openEditModal(${p.id})">✏️</button>
           <button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button>
@@ -899,24 +820,14 @@ async function toggleStatus(id, currentStatus) {
   else if (currentStatus === 'فروش رفته') newStatus = 'ناموجود';
   else newStatus = 'موجود';
 
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
-      method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ status: newStatus })
-    });
-    if (res.ok) {
-      showStatus(`✅ وضعیت به "${newStatus}" تغییر کرد`, 'success');
-      loadProducts();
-    }
-  } catch (err) { showStatus('❌ خطا', 'error'); }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: newStatus })
+  });
+  if (res.ok) { showStatus(`✅ وضعیت به "${newStatus}" تغییر کرد`, 'success'); loadProducts(); }
 }
 
-// ==== Edit ====
 function openEditModal(id) {
   const p = allProductsData.find(x => x.id === id);
   if (!p) return;
@@ -942,9 +853,7 @@ function openEditModal(id) {
   const images = p.images || [];
   document.getElementById('editImages').value = JSON.stringify(images);
   renderExistingImages(images);
-
-  editNewImages = [];
-  renderEditImagesPreview();
+  editNewImages = []; renderEditImagesPreview();
   document.getElementById('editModal').classList.add('show');
 }
 
@@ -969,9 +878,7 @@ function removeExistingImage(index) {
   renderExistingImages(images);
 }
 
-function closeEditModal() {
-  document.getElementById('editModal').classList.remove('show');
-}
+function closeEditModal() { document.getElementById('editModal').classList.remove('show'); }
 
 function handleEditImages(event) {
   editNewImages = [...editNewImages, ...Array.from(event.target.files)];
@@ -988,25 +895,19 @@ function renderEditImagesPreview() {
     preview.appendChild(item);
   });
 }
-function removeEditImage(i) {
-  editNewImages.splice(i, 1);
-  renderEditImagesPreview();
-}
+function removeEditImage(i) { editNewImages.splice(i, 1); renderEditImagesPreview(); }
 
 async function saveEdit() {
   const id = document.getElementById('editId').value;
   const title = document.getElementById('editTitle').value.trim();
   const price = document.getElementById('editPrice').value.trim();
-
   if (!title || !price) { alert('عنوان و قیمت اجباری!'); return; }
 
   const btn = document.getElementById('saveEditBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ ذخیره...';
+  btn.disabled = true; btn.textContent = '⏳ ذخیره...';
 
   try {
     let existingImages = JSON.parse(document.getElementById('editImages').value);
-
     if (editNewImages.length > 0) {
       btn.textContent = '⏳ آپلود عکس...';
       const newUrls = await Promise.all(editNewImages.map(compressAndUpload));
@@ -1014,8 +915,7 @@ async function saveEdit() {
     }
 
     const updateData = {
-      title: title,
-      slogan: document.getElementById('editSlogan').value.trim(),
+      title, slogan: document.getElementById('editSlogan').value.trim(),
       category: document.getElementById('editCategory').value,
       town_hall: parseInt(document.getElementById('editTownHall').value) || null,
       builder_level: parseInt(document.getElementById('editBuilder').value) || null,
@@ -1035,53 +935,35 @@ async function saveEdit() {
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
       method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(updateData)
     });
 
-    if (res.ok) {
-      showStatus('🎉 تغییرات ذخیره شد!', 'success');
-      closeEditModal();
-      loadProducts();
-    } else {
-      alert('خطا');
-    }
-  } catch (err) {
-    alert('خطا: ' + err.message);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '💾 ذخیره';
-  }
+    if (res.ok) { showStatus('🎉 ذخیره شد!', 'success'); closeEditModal(); loadProducts(); }
+    else { alert('خطا'); }
+  } catch (err) { alert('خطا: ' + err.message); }
+  finally { btn.disabled = false; btn.textContent = '💾 ذخیره'; }
 }
 
 async function deleteProduct(id) {
   if (!confirm('مطمئنی؟')) return;
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
-      method: 'DELETE',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    showStatus('🗑️ حذف شد', 'success');
-    loadProducts();
-  } catch (err) { showStatus('❌ خطا', 'error'); }
+  await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
+    method: 'DELETE',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  showStatus('🗑️ حذف شد', 'success');
+  loadProducts();
 }
 
-// ==== Settings ====
 async function loadSettings() {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    const data = await res.json();
-    if (data && data.length > 0) {
-      document.getElementById('phone').value = data[0].phone || '';
-      document.getElementById('rubika').value = data[0].rubika_id || '';
-    }
-  } catch (err) { console.error(err); }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  const data = await res.json();
+  if (data && data.length > 0) {
+    document.getElementById('phone').value = data[0].phone || '';
+    document.getElementById('rubika').value = data[0].rubika_id || '';
+  }
 }
 
 async function saveSettings() {
@@ -1089,26 +971,22 @@ async function saveSettings() {
   const rubika = document.getElementById('rubika').value.trim();
   if (!phone || !rubika) { showStatus('❌ کامل کن!', 'error'); return; }
   showStatus('⏳ ذخیره...', 'loading');
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, {
-      method: 'PATCH',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, rubika_id: rubika, updated_at: new Date().toISOString() })
-    });
-    if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
-  } catch (err) { showStatus('❌ خطا', 'error'); }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, {
+    method: 'PATCH',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ phone, rubika_id: rubika, updated_at: new Date().toISOString() })
+  });
+  if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
 }
 
-// ==== Chat Admin ====
+// ===== Chat Admin =====
 async function loadChats() {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    const chats = await res.json();
-    renderChatList(chats);
-    updateUnreadBadge(chats);
-  } catch (err) { console.error(err); }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  const chats = await res.json();
+  renderChatList(chats);
+  updateUnreadBadge(chats);
 }
 
 function renderChatList(chats) {
@@ -1125,7 +1003,10 @@ function renderChatList(chats) {
       <div class="chat-list-item ${active}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')">
         <div class="name">
           <span class="name-text">👤 ${escapeHtml(c.visitor_name)}</span>
-          ${unread}
+          <div style="display:flex;align-items:center;gap:6px;">
+            ${unread}
+            <button class="delete-chat-btn" onclick="event.stopPropagation(); deleteChat(${c.id}, '${escapeHtml(c.visitor_name)}')" title="حذف چت">🗑️</button>
+          </div>
         </div>
         ${c.visitor_phone ? `<div class="preview">📞 ${escapeHtml(c.visitor_phone)}</div>` : ''}
         <div class="time">${time}</div>
@@ -1137,37 +1018,53 @@ function renderChatList(chats) {
 function updateUnreadBadge(chats) {
   totalUnread = chats.reduce((sum, c) => sum + (c.unread_count || 0), 0);
   const badge = document.getElementById('chatTabBadge');
-  if (totalUnread > 0) {
-    badge.textContent = totalUnread;
-    badge.style.display = 'inline-block';
-  } else {
-    badge.style.display = 'none';
-  }
+  if (totalUnread > 0) { badge.textContent = totalUnread; badge.style.display = 'inline-block'; }
+  else { badge.style.display = 'none'; }
+}
+
+async function deleteChat(id, name) {
+  if (!confirm(`مطمئنی می‌خوای چت "${name}" رو حذف کنی؟\n\nتمام پیام‌ها هم پاک میشن!`)) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${id}`, {
+      method: 'DELETE',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    if (res.ok) {
+      showStatus('🗑️ چت حذف شد', 'success');
+      if (currentChatId === id) {
+        currentChatId = null;
+        document.getElementById('chatMain').innerHTML = `
+          <div class="admin-empty">
+            <div class="icon">💬</div>
+            <h3>یه گفتگو انتخاب کن</h3>
+            <p>از لیست سمت راست، یه مشتری رو انتخاب کن</p>
+          </div>
+        `;
+      }
+      loadChats();
+    } else { showStatus('❌ خطا در حذف', 'error'); }
+  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
 
 async function openChat(id, name) {
   currentChatId = id;
   currentChatName = name;
 
-  // صفر کردن unread_count
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, {
-      method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ unread_count: 0 })
-    });
-    loadChats();
-  } catch (err) { console.error(err); }
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ unread_count: 0 })
+  });
+  loadChats();
 
   const main = document.getElementById('chatMain');
   main.innerHTML = `
     <div class="chat-main-header">
       <h3>👤 ${escapeHtml(name)}</h3>
-      <div class="visitor-info">در حال بارگذاری...</div>
     </div>
     <div class="chat-main-messages" id="chatMainMessages">
       <div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div>
@@ -1182,13 +1079,11 @@ async function openChat(id, name) {
 }
 
 async function loadChatMessages(chatId) {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    const messages = await res.json();
-    renderChatMessages(messages);
-  } catch (err) { console.error(err); }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  const messages = await res.json();
+  renderChatMessages(messages);
 }
 
 function renderChatMessages(messages) {
@@ -1215,41 +1110,27 @@ async function sendAdminMessage() {
   const text = input.value.trim();
   if (!text || !currentChatId) return;
   input.value = '';
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text })
-    });
-    await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
-      method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ last_message_at: new Date().toISOString() })
-    });
-    loadChatMessages(currentChatId);
-    loadChats();
-  } catch (err) { alert('خطا: ' + err.message); }
+  await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
+    method: 'POST',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text })
+  });
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
+    method: 'PATCH',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ last_message_at: new Date().toISOString() })
+  });
+  loadChatMessages(currentChatId);
+  loadChats();
 }
 
-// ==== Realtime ====
 function subscribeToChats() {
   if (chatsChannel) return;
   chatsChannel = supabaseClient
     .channel('admin-chats')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
-      // اگه پیام از طرف بازدیدکننده بود، unread رو زیاد کن
-      if (payload.new && payload.new.sender === 'visitor') {
-        incrementUnread(payload.new.chat_id);
-      }
+      if (payload.new && payload.new.sender === 'visitor') incrementUnread(payload.new.chat_id);
       if (currentChatId) loadChatMessages(currentChatId);
       loadChats();
     })
@@ -1257,39 +1138,28 @@ function subscribeToChats() {
 }
 
 async function incrementUnread(chatId) {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=unread_count`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    const data = await res.json();
-    const current = (data[0] && data[0].unread_count) || 0;
-    if (currentChatId === chatId) return; // اگه همین چت بازه، unread نکن
-    await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, {
-      method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ unread_count: current + 1 })
-    });
-  } catch (err) { console.error(err); }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=unread_count`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  const data = await res.json();
+  const current = (data[0] && data[0].unread_count) || 0;
+  if (currentChatId === chatId) return;
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, {
+    method: 'PATCH',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ unread_count: current + 1 })
+  });
 }
 
 function subscribeToChatMessages(chatId) {
   if (messagesChannel) supabaseClient.removeChannel(messagesChannel);
   messagesChannel = supabaseClient
     .channel('admin-chat-' + chatId)
-    .on('postgres_changes', {
-      event: 'INSERT',
-      schema: 'public',
-      table: 'messages',
-      filter: `chat_id=eq.${chatId}`
-    }, () => loadChatMessages(chatId))
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `chat_id=eq.${chatId}` },
+      () => loadChatMessages(chatId))
     .subscribe();
 }
 
-// ==== Helpers ====
 function escapeHtml(text) {
   if (!text) return '';
   const div = document.createElement('div');
