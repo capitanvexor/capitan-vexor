@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>دسته‌بندی | 𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Capitan Vexor">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="icon" type="image/png" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
@@ -143,7 +150,7 @@ nav {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.float-buttons { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+.float-buttons { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -168,7 +175,7 @@ nav {
   .product-title { font-size: 0.9rem; }
   .product-price { font-size: 1.1rem; }
   .container { padding: 120px 15px 60px; }
-  .float-buttons { bottom: 15px; left: 15px; }
+  .float-buttons { bottom: 15px; right: 15px; }
   .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
 }
 </style>
@@ -432,37 +439,15 @@ function openChat() {
 
 loadProducts();
 loadContact();
-</script>
 
-<script>
-// ===== Click Sound (Web Audio API) =====
-let audioContext = null;
-function playClick() {
-  try {
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioContext.state === 'suspended') {
-      audioContext.resume();
-    }
-    const now = audioContext.currentTime;
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(900, now);
-    oscillator.frequency.exponentialRampToValueAtTime(400, now + 0.08);
-    gainNode.gain.setValueAtTime(0.2, now);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-    oscillator.start(now);
-    oscillator.stop(now + 0.1);
-  } catch (e) {}
+// ===== PWA Service Worker =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then((reg) => console.log('✅ PWA registered!'))
+      .catch((err) => console.log('❌ PWA error:', err));
+  });
 }
-document.addEventListener('click', (e) => {
-  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .tab, .btn-icon, .status-badge, .save-btn, .contact-btn, .btn-action, .thumb, .stat-box, .product-card');
-  if (target) playClick();
-}, true);
 </script>
 
 </body>
