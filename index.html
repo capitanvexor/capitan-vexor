@@ -156,6 +156,146 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 }
 .section-sub { text-align: center; color: var(--text-dim); margin-bottom: 45px; font-size: 0.95rem; }
 
+/* ===== بنر اسلایدری ===== */
+.slider-section {
+  padding: 20px 15px 50px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.slider-container {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 255, 231, 0.2);
+}
+.slider-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.slide {
+  min-width: 100%;
+  padding: 60px 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  position: relative;
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.15), transparent 70%);
+  pointer-events: none;
+}
+.slide-cod    { background: linear-gradient(135deg, #1a3a2a, #0a5c2e, #00a86b); }
+.slide-coc    { background: linear-gradient(135deg, #0a2a3a, #00a8c0, #00ffe7); }
+.slide-royal  { background: linear-gradient(135deg, #3a1a4a, #7c3aed, #a855f7); }
+.slide-free   { background: linear-gradient(135deg, #4a1a1a, #dc2626, #f97316); }
+
+.slide-icon {
+  font-size: 90px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.4));
+  animation: slideIconFloat 3s ease-in-out infinite;
+}
+@keyframes slideIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.slide-title {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 12px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.slide-sub {
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 28px;
+  max-width: 500px;
+  font-weight: 500;
+}
+.slide-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #fff;
+  color: #0a0a0f;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+.slide-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  font-family: Arial, sans-serif;
+  padding-bottom: 4px;
+}
+.slider-arrow:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+.slider-prev { right: 20px; }
+.slider-next { left: 20px; }
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+.slider-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.slider-dots .dot.active {
+  background: #fff;
+  width: 28px;
+  border-radius: 5px;
+}
+@media (max-width: 600px) {
+  .slide { padding: 50px 55px; min-height: 380px; }
+  .slide-icon { font-size: 70px; }
+  .slider-arrow { width: 44px; height: 44px; font-size: 26px; }
+  .slider-prev { right: 12px; }
+  .slider-next { left: 12px; }
+  .slide-btn { padding: 12px 24px; font-size: 0.9rem; }
+}
+
 .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
 .category-card {
   background: var(--glass); border: 1px solid var(--border); border-radius: 22px;
@@ -186,7 +326,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
   color: #0a0a0f; border-radius: 50px; font-weight: 700;
   font-size: 0.9rem;
 }
-
 .category-card.free-card {
   background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
   min-height: 280px;
@@ -573,6 +712,52 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
   </div>
 </section>
 
+<!-- ===== بنر اسلایدری ===== -->
+<section class="slider-section">
+  <div class="slider-container">
+    <button class="slider-arrow slider-prev" onclick="sliderPrev()" aria-label="قبلی">‹</button>
+
+    <div class="slider-track" id="sliderTrack">
+      <div class="slide slide-cod">
+        <div class="slide-icon">🎯</div>
+        <h2 class="slide-title">فروشگاه کالاف دیوتی</h2>
+        <p class="slide-sub">مطمئن‌ترین فروشگاه کالاف دیوتی موبایل در ایران</p>
+        <a href="category.html?cat=کالاف" class="slide-btn">🛒 خرید کالاف دیوتی</a>
+      </div>
+
+      <div class="slide slide-coc">
+        <div class="slide-icon">🏰</div>
+        <h2 class="slide-title">فروشگاه کلش آف کلنز</h2>
+        <p class="slide-sub">مطمئن‌ترین فروشگاه کلش آف کلنز در ایران</p>
+        <a href="category.html?cat=کلش" class="slide-btn">🛒 خرید کلش آف کلنز</a>
+      </div>
+
+      <div class="slide slide-royal">
+        <div class="slide-icon">👑</div>
+        <h2 class="slide-title">فروشگاه کلش رویال</h2>
+        <p class="slide-sub">اکانت‌های کلش رویال با آرنا بالا</p>
+        <a href="category.html?cat=کلش رویال" class="slide-btn">🛒 خرید کلش رویال</a>
+      </div>
+
+      <div class="slide slide-free">
+        <div class="slide-icon">🔥</div>
+        <h2 class="slide-title">فروشگاه فری فایر</h2>
+        <p class="slide-sub">اکانت‌های فری فایر با رنک بالا</p>
+        <a href="category.html?cat=فری فایر" class="slide-btn">🛒 خرید فری فایر</a>
+      </div>
+    </div>
+
+    <button class="slider-arrow slider-next" onclick="sliderNext()" aria-label="بعدی">›</button>
+
+    <div class="slider-dots" id="sliderDots">
+      <span class="dot active" onclick="sliderGo(0)"></span>
+      <span class="dot" onclick="sliderGo(1)"></span>
+      <span class="dot" onclick="sliderGo(2)"></span>
+      <span class="dot" onclick="sliderGo(3)"></span>
+    </div>
+  </div>
+</section>
+
 <section id="products">
   <h2 class="section-title">🛒 دسته‌بندی‌ها</h2>
   <p class="section-sub">یکی از دسته‌های زیر رو انتخاب کن</p>
@@ -661,7 +846,6 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
   </div>
 </section>
 
-<!-- ===== بخش چطور خرید کنیم ===== -->
 <section id="how-to-buy">
   <h2 class="section-title">🛒 چطور خرید کنیم؟</h2>
   <p class="section-sub">فقط ۴ قدم ساده تا خرید</p>
@@ -1038,12 +1222,99 @@ async function loadContact() {
 
 loadContact();
 
+// ==========================================
+// بنر اسلایدری
+// ==========================================
+let currentSlide = 0;
+let slideCount = 4;
+let sliderAutoPlay = null;
+let sliderTrack, sliderDots;
+
+function initSlider() {
+  sliderTrack = document.getElementById('sliderTrack');
+  sliderDots = document.getElementById('sliderDots');
+  if (!sliderTrack || !sliderDots) return;
+
+  slideCount = sliderTrack.children.length;
+  updateSlider();
+  startAutoPlay();
+
+  let startX = 0;
+  let endX = 0;
+  sliderTrack.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    stopAutoPlay();
+  }, { passive: true });
+  sliderTrack.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) sliderNext();
+      else sliderPrev();
+    }
+    startAutoPlay();
+  }, { passive: true });
+}
+
+function updateSlider() {
+  if (!sliderTrack) return;
+  sliderTrack.style.transform = `translateX(${currentSlide * 100}%)`;
+  if (sliderDots) {
+    const dots = sliderDots.querySelectorAll('.dot');
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+}
+
+function sliderNext() {
+  currentSlide = (currentSlide + 1) % slideCount;
+  updateSlider();
+  resetAutoPlay();
+}
+
+function sliderPrev() {
+  currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+  updateSlider();
+  resetAutoPlay();
+}
+
+function sliderGo(index) {
+  currentSlide = index;
+  updateSlider();
+  resetAutoPlay();
+}
+
+function startAutoPlay() {
+  stopAutoPlay();
+  sliderAutoPlay = setInterval(() => {
+    currentSlide = (currentSlide + 1) % slideCount;
+    updateSlider();
+  }, 5000);
+}
+
+function stopAutoPlay() {
+  if (sliderAutoPlay) {
+    clearInterval(sliderAutoPlay);
+    sliderAutoPlay = null;
+  }
+}
+
+function resetAutoPlay() {
+  stopAutoPlay();
+  startAutoPlay();
+}
+
+window.addEventListener('load', initSlider);
+
+// ==========================================
+// Service Worker
+// ==========================================
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js')
       .then((reg) => {
         console.log('✅ SW registered');
-
         reg.addEventListener('updatefound', () => {
           const newWorker = reg.installing;
           newWorker.addEventListener('statechange', () => {
