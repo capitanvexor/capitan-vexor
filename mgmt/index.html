@@ -33,7 +33,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -6s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
 
-/* Login */
 .login-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
 .login-box {
   background: var(--glass); border: 1px solid var(--border); border-radius: 25px;
@@ -431,13 +430,19 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <div class="form-group">
         <label>📂 دسته‌بندی *</label>
         <select id="pCategory" onchange="updateCategoryFields()">
-          <option value="کلش">🏰 کلش</option>
-          <option value="کالاف">🎯 کالاف</option>
-          <option value="کلش رویال">👑 کلش رویال</option>
-          <option value="فری فایر">🔥 فری فایر</option>
-          <option value="آیتم کلش">💎 آیتم کلش</option>
-          <option value="آیتم کالاف">🔫 آیتم کالاف</option>
-          <option value="آزاد">✨ آزاد</option>
+          <optgroup label="🎮 بازی‌ها">
+            <option value="کلش">🏰 کلش</option>
+            <option value="کالاف">🎯 کالاف</option>
+            <option value="کلش رویال">👑 کلش رویال</option>
+            <option value="فری فایر">🔥 فری فایر</option>
+          </optgroup>
+          <optgroup label="💎 آیتم‌ها">
+            <option value="آیتم کلش">💎 آیتم کلش</option>
+            <option value="آیتم کالاف">🔫 آیتم کالاف</option>
+          </optgroup>
+          <optgroup label="✨ سایر">
+            <option value="آزاد">✨ آزاد</option>
+          </optgroup>
         </select>
       </div>
 
@@ -447,12 +452,25 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
         <div class="form-group"><label>✏️ تغییر نام</label><input type="number" id="pNameChanges" placeholder="1"></div>
       </div>
+      <div id="fields-clash-2" class="form-row three">
+        <div class="form-group"><label>💎 تعداد جم</label><input type="number" id="pGems" placeholder="5000"></div>
+        <div class="form-group"><label>⭐ ستاره بونوس</label><input type="number" id="pStarBonus" placeholder="5"></div>
+        <div class="form-group"><label>🏗️ بیلدرها</label><input type="text" id="pBuilderCount" placeholder="5/5"></div>
+      </div>
 
       <!-- فیلدهای کالاف -->
       <div id="fields-cod" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pRank" placeholder="Legendary"></div>
         <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="pPlayerLevel" placeholder="150"></div>
         <div class="form-group"><label>🎨 تعداد اسکین</label><input type="number" id="pSkins" placeholder="50"></div>
+      </div>
+      <div id="fields-cod-2" class="form-row three" style="display:none;">
+        <div class="form-group"><label>💰 تعداد CP</label><input type="number" id="pCp" placeholder="1500"></div>
+        <div class="form-group"><label>🎟️ بتل پس</label><input type="text" id="pBattlePass" placeholder="فصل 5"></div>
+        <div class="form-group"><label>🔴 Mythic</label><input type="number" id="pMythic" placeholder="5"></div>
+      </div>
+      <div id="fields-cod-3" class="form-row" style="display:none;">
+        <div class="form-group"><label>🟡 Legendary</label><input type="number" id="pLegendary" placeholder="10"></div>
       </div>
 
       <!-- فیلدهای آیتم -->
@@ -479,6 +497,14 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <div id="fields-free" class="form-row" style="display:none;">
         <div class="form-group"><label>📝 مشخصات ۱</label><input type="text" id="pFree1" placeholder="مثلاً: لول"></div>
         <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
+      </div>
+
+      <!-- ⭐ فیلدهای دلخواه -->
+      <div class="form-group" style="margin-top: 15px; padding: 15px; background: rgba(168,85,247,0.05); border: 1px dashed var(--purple); border-radius: 12px;">
+        <label style="color: var(--purple);">⭐ فیلدهای دلخواه (اختیاری)</label>
+        <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 10px;">میتونی هر تعداد فیلد دلخواه اضافه کنی</p>
+        <div id="customFieldsContainer"></div>
+        <button type="button" onclick="addCustomField()" style="margin-top: 8px; padding: 8px 16px; background: rgba(168,85,247,0.2); border: 1px solid var(--purple); color: var(--purple); border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.85rem;">➕ افزودن فیلد دلخواه</button>
       </div>
 
       <div class="form-row">
@@ -551,7 +577,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div class="tab-content" id="tab-stats">
     <div class="card">
       <div class="card-title">📊 آمار سایت</div>
-
       <div style="text-align: center; padding: 20px 0;">
         <div style="font-size: 5rem; margin-bottom: 15px; filter: drop-shadow(0 0 30px #ff9500);">📈</div>
         <h2 style="font-size: 1.4rem; margin-bottom: 10px; background: linear-gradient(90deg, #00ffe7, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;">
@@ -560,14 +585,12 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <p style="color: #a0a0b0; font-size: 0.9rem; max-width: 500px; margin: 0 auto 25px;">
           برای دیدن آمار کامل سایت (بازدیدکننده‌ها، صفحات پربازدید، منابع ورودی و...) روی دکمه زیر کلیک کن
         </p>
-
         <a href="https://statsfa.com/dashboard" target="_blank" 
            style="display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: linear-gradient(90deg, #ff9500, #ff5e00); color: white; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 30px rgba(255,149,0,0.5); transition: 0.3s;"
            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 0 50px rgba(255,149,0,0.9)'"
            onmouseout="this.style.transform=''; this.style.boxShadow='0 0 30px rgba(255,149,0,0.5)'">
           📊 رفتن به پنل آمار
         </a>
-
         <div style="margin-top: 30px; padding: 20px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto; text-align: right;">
           <h4 style="color: var(--cyan); margin-bottom: 15px; font-size: 1rem;">📋 چی توی پنل آمار می‌بینی؟</h4>
           <ul style="list-style: none; padding: 0; color: var(--text-dim); font-size: 0.9rem; line-height: 2;">
@@ -578,7 +601,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
             <li>⏰ <strong style="color: var(--text);">ساعت پربازدید:</strong> چه ساعتی بیشتر میان</li>
           </ul>
         </div>
-
         <div style="margin-top: 20px; padding: 15px; background: rgba(16,185,129,0.1); border: 1px solid #10b981; border-radius: 12px; font-size: 0.85rem; color: #10b981;">
           ✅ آمار کاملاً خصوصی — فقط خودت می‌تونی ببینی
         </div>
@@ -601,7 +623,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div class="tab-content" id="tab-settings">
     <div class="card">
       <div class="card-title">⚙️ تنظیمات امنیتی</div>
-
       <div class="password-box">
         <h4>🔐 تغییر نام کاربری و رمز عبور</h4>
         <div class="form-group">
@@ -626,7 +647,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </div>
         <button class="save-btn" onclick="changeCredentials()">💾 ذخیره تغییرات</button>
       </div>
-
       <div style="margin-top: 20px; padding: 15px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 12px; font-size: 0.85rem; color: var(--text-dim); line-height: 1.8;">
         💡 <strong style="color: var(--cyan);">نکته:</strong> نام کاربری و رمز عبور بعد از تغییر، <strong>توی همین مرورگر</strong> ذخیره میشن. اگه مرورگرت رو پاک کنی، به مقادیر پیش‌فرض برمی‌گرده:
         <br>👤 نام کاربری پیش‌فرض: <strong style="color: var(--cyan);" dir="ltr">admin</strong>
@@ -667,11 +687,24 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="editBuilder"></div>
       <div class="form-group"><label>✏️ تغییر نام</label><input type="number" id="editNameChanges"></div>
     </div>
+    <div class="form-row three">
+      <div class="form-group"><label>💎 جم</label><input type="number" id="editGems"></div>
+      <div class="form-group"><label>⭐ ستاره</label><input type="number" id="editStarBonus"></div>
+      <div class="form-group"><label>🏗️ بیلدرها</label><input type="text" id="editBuilderCount"></div>
+    </div>
 
     <div class="form-row three">
       <div class="form-group"><label>🎖️ رنک</label><input type="text" id="editRank"></div>
       <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="editPlayerLevel"></div>
       <div class="form-group"><label>🎨 اسکین</label><input type="number" id="editSkins"></div>
+    </div>
+    <div class="form-row three">
+      <div class="form-group"><label>💰 CP</label><input type="number" id="editCp"></div>
+      <div class="form-group"><label>🎟️ بتل پس</label><input type="text" id="editBattlePass"></div>
+      <div class="form-group"><label>🔴 Mythic</label><input type="number" id="editMythic"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>🟡 Legendary</label><input type="number" id="editLegendary"></div>
     </div>
 
     <div class="form-row">
@@ -732,8 +765,8 @@ let currentChatName = null;
 let chatsChannel = null;
 let messagesChannel = null;
 let totalUnread = 0;
+let customFieldsCount = 0;
 
-// ==== Login ====
 function login() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
@@ -792,11 +825,52 @@ function updateCategoryFields() {
   const isFree = cat === 'آزاد';
   
   document.getElementById('fields-clash').style.display = isClash ? 'grid' : 'none';
+  document.getElementById('fields-clash-2').style.display = isClash ? 'grid' : 'none';
   document.getElementById('fields-cod').style.display = isCod ? 'grid' : 'none';
+  document.getElementById('fields-cod-2').style.display = isCod ? 'grid' : 'none';
+  document.getElementById('fields-cod-3').style.display = isCod ? 'grid' : 'none';
   document.getElementById('fields-item').style.display = isItem ? 'grid' : 'none';
   document.getElementById('fields-royal').style.display = isClashRoyal ? 'grid' : 'none';
   document.getElementById('fields-freefire').style.display = isFreeFire ? 'grid' : 'none';
   document.getElementById('fields-free').style.display = isFree ? 'grid' : 'none';
+}
+
+function addCustomField() {
+  customFieldsCount++;
+  const id = customFieldsCount;
+  const container = document.getElementById('customFieldsContainer');
+  const div = document.createElement('div');
+  div.className = 'form-row';
+  div.id = 'custom-field-' + id;
+  div.style.marginBottom = '8px';
+  div.innerHTML = `
+    <div class="form-group" style="margin:0;">
+      <input type="text" id="cf-label-${id}" placeholder="عنوان (مثلاً: تعداد جم)">
+    </div>
+    <div class="form-group" style="margin:0; display: flex; gap: 8px;">
+      <input type="text" id="cf-value-${id}" placeholder="مقدار">
+      <button type="button" onclick="removeCustomField(${id})" style="padding: 0 15px; background: rgba(255,56,96,0.2); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; cursor: pointer; font-size: 1.2rem;">×</button>
+    </div>
+  `;
+  container.appendChild(div);
+}
+
+function removeCustomField(id) {
+  const el = document.getElementById('custom-field-' + id);
+  if (el) el.remove();
+}
+
+function getCustomFields() {
+  const fields = [];
+  document.querySelectorAll('[id^="cf-label-"]').forEach(labelEl => {
+    const id = labelEl.id.replace('cf-label-', '');
+    const label = labelEl.value.trim();
+    const value = document.getElementById('cf-value-' + id)?.value.trim();
+    if (label && value) {
+      fields.push({ label, value });
+    }
+  });
+  return fields;
 }
 
 async function compressAndUpload(file) {
@@ -859,10 +933,17 @@ async function addProduct() {
       product.town_hall = parseInt(document.getElementById('pTownHall').value) || null;
       product.builder_level = parseInt(document.getElementById('pBuilder').value) || null;
       product.name_changes = parseInt(document.getElementById('pNameChanges').value) || null;
+      product.gems = parseInt(document.getElementById('pGems').value) || null;
+      product.star_bonus = parseInt(document.getElementById('pStarBonus').value) || null;
+      product.builder_count = document.getElementById('pBuilderCount').value.trim() || null;
     } else if (cat === 'کالاف') {
       product.rank = document.getElementById('pRank').value.trim();
       product.player_level = parseInt(document.getElementById('pPlayerLevel').value) || null;
       product.skins_count = parseInt(document.getElementById('pSkins').value) || null;
+      product.cp = parseInt(document.getElementById('pCp').value) || null;
+      product.battle_pass = document.getElementById('pBattlePass').value.trim() || null;
+      product.mythic_count = parseInt(document.getElementById('pMythic').value) || null;
+      product.legendary_count = parseInt(document.getElementById('pLegendary').value) || null;
     } else if (cat.includes('آیتم')) {
       product.item_type = document.getElementById('pItemType').value.trim();
       product.item_amount = document.getElementById('pItemAmount').value.trim();
@@ -881,15 +962,33 @@ async function addProduct() {
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
       method: 'POST',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
       body: JSON.stringify(product)
     });
 
     if (res.ok) {
+      const result = await res.json();
       showStatus('🎉 محصول ثبت شد!', 'success');
-      ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pRank','pPlayerLevel','pSkins','pItemType','pItemAmount','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
+      
+      const customFields = getCustomFields();
+      if (customFields.length > 0 && result && result[0]) {
+        const productId = result[0].id;
+        for (const field of customFields) {
+          await fetch(`${SUPABASE_URL}/rest/v1/product_custom_fields`, {
+            method: 'POST',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ product_id: productId, field_label: field.label, field_value: field.value })
+          });
+        }
+      }
+      
+      ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pGems','pStarBonus','pBuilderCount','pRank','pPlayerLevel','pSkins','pCp','pBattlePass','pMythic','pLegendary','pItemType','pItemAmount','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = '';
       });
+      
+      document.getElementById('customFieldsContainer').innerHTML = '';
+      customFieldsCount = 0;
+      
       selectedImages = []; renderImagePreviews(); loadProducts();
     } else { showStatus('❌ خطا', 'error'); }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
@@ -964,9 +1063,16 @@ function openEditModal(id) {
   document.getElementById('editTownHall').value = p.town_hall || '';
   document.getElementById('editBuilder').value = p.builder_level || '';
   document.getElementById('editNameChanges').value = p.name_changes || '';
+  document.getElementById('editGems').value = p.gems || '';
+  document.getElementById('editStarBonus').value = p.star_bonus || '';
+  document.getElementById('editBuilderCount').value = p.builder_count || '';
   document.getElementById('editRank').value = p.rank || '';
   document.getElementById('editPlayerLevel').value = p.player_level || '';
   document.getElementById('editSkins').value = p.skins_count || '';
+  document.getElementById('editCp').value = p.cp || '';
+  document.getElementById('editBattlePass').value = p.battle_pass || '';
+  document.getElementById('editMythic').value = p.mythic_count || '';
+  document.getElementById('editLegendary').value = p.legendary_count || '';
   document.getElementById('editItemType').value = p.item_type || '';
   document.getElementById('editItemAmount').value = p.item_amount || '';
   document.getElementById('editCode').value = p.account_code || '';
@@ -1045,9 +1151,16 @@ async function saveEdit() {
       town_hall: parseInt(document.getElementById('editTownHall').value) || null,
       builder_level: parseInt(document.getElementById('editBuilder').value) || null,
       name_changes: parseInt(document.getElementById('editNameChanges').value) || null,
+      gems: parseInt(document.getElementById('editGems').value) || null,
+      star_bonus: parseInt(document.getElementById('editStarBonus').value) || null,
+      builder_count: document.getElementById('editBuilderCount').value.trim() || null,
       rank: document.getElementById('editRank').value.trim(),
       player_level: parseInt(document.getElementById('editPlayerLevel').value) || null,
       skins_count: parseInt(document.getElementById('editSkins').value) || null,
+      cp: parseInt(document.getElementById('editCp').value) || null,
+      battle_pass: document.getElementById('editBattlePass').value.trim() || null,
+      mythic_count: parseInt(document.getElementById('editMythic').value) || null,
+      legendary_count: parseInt(document.getElementById('editLegendary').value) || null,
       item_type: document.getElementById('editItemType').value.trim(),
       item_amount: document.getElementById('editItemAmount').value.trim(),
       account_code: document.getElementById('editCode').value.trim(),
