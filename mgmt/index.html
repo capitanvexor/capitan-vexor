@@ -33,6 +33,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -6s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
 
+/* Login */
 .login-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
 .login-box {
   background: var(--glass); border: 1px solid var(--border); border-radius: 25px;
@@ -432,26 +433,52 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <select id="pCategory" onchange="updateCategoryFields()">
           <option value="کلش">🏰 کلش</option>
           <option value="کالاف">🎯 کالاف</option>
+          <option value="کلش رویال">👑 کلش رویال</option>
+          <option value="فری فایر">🔥 فری فایر</option>
           <option value="آیتم کلش">💎 آیتم کلش</option>
           <option value="آیتم کالاف">🔫 آیتم کالاف</option>
+          <option value="آزاد">✨ آزاد</option>
         </select>
       </div>
 
+      <!-- فیلدهای کلش -->
       <div id="fields-clash" class="form-row three">
         <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="pTownHall" placeholder="14"></div>
         <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
         <div class="form-group"><label>✏️ تغییر نام</label><input type="number" id="pNameChanges" placeholder="1"></div>
       </div>
 
+      <!-- فیلدهای کالاف -->
       <div id="fields-cod" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pRank" placeholder="Legendary"></div>
         <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="pPlayerLevel" placeholder="150"></div>
         <div class="form-group"><label>🎨 تعداد اسکین</label><input type="number" id="pSkins" placeholder="50"></div>
       </div>
 
+      <!-- فیلدهای آیتم -->
       <div id="fields-item" class="form-row" style="display:none;">
         <div class="form-group"><label>🏷️ نوع آیتم</label><input type="text" id="pItemType" placeholder="بلیط طلایی"></div>
         <div class="form-group"><label>📦 مقدار</label><input type="text" id="pItemAmount" placeholder="۱ عدد"></div>
+      </div>
+
+      <!-- فیلدهای کلش رویال -->
+      <div id="fields-royal" class="form-row three" style="display:none;">
+        <div class="form-group"><label>👑 سطح آرنا</label><input type="number" id="pArena" placeholder="15"></div>
+        <div class="form-group"><label>🏆 تعداد جام</label><input type="number" id="pTrophies" placeholder="5000"></div>
+        <div class="form-group"><label>📊 لول کینگ</label><input type="number" id="pKingLevel" placeholder="10"></div>
+      </div>
+
+      <!-- فیلدهای فری فایر -->
+      <div id="fields-freefire" class="form-row three" style="display:none;">
+        <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pFFRank" placeholder="Heroic"></div>
+        <div class="form-group"><label>📊 لول</label><input type="number" id="pFFLevel" placeholder="60"></div>
+        <div class="form-group"><label>💎 تعداد جم</label><input type="number" id="pFFGems" placeholder="1000"></div>
+      </div>
+
+      <!-- فیلدهای آزاد -->
+      <div id="fields-free" class="form-row" style="display:none;">
+        <div class="form-group"><label>📝 مشخصات ۱</label><input type="text" id="pFree1" placeholder="مثلاً: لول"></div>
+        <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
       </div>
 
       <div class="form-row">
@@ -627,8 +654,11 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <select id="editCategory">
         <option value="کلش">🏰 کلش</option>
         <option value="کالاف">🎯 کالاف</option>
+        <option value="کلش رویال">👑 کلش رویال</option>
+        <option value="فری فایر">🔥 فری فایر</option>
         <option value="آیتم کلش">💎 آیتم کلش</option>
         <option value="آیتم کالاف">🔫 آیتم کالاف</option>
+        <option value="آزاد">✨ آزاد</option>
       </select>
     </div>
 
@@ -703,6 +733,7 @@ let chatsChannel = null;
 let messagesChannel = null;
 let totalUnread = 0;
 
+// ==== Login ====
 function login() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
@@ -752,9 +783,20 @@ function showStatus(msg, type = 'loading') {
 
 function updateCategoryFields() {
   const cat = document.getElementById('pCategory').value;
-  document.getElementById('fields-clash').style.display = (cat === 'کلش') ? 'grid' : 'none';
-  document.getElementById('fields-cod').style.display = (cat === 'کالاف') ? 'grid' : 'none';
-  document.getElementById('fields-item').style.display = (cat.includes('آیتم')) ? 'grid' : 'none';
+  
+  const isClash = cat === 'کلش';
+  const isCod = cat === 'کالاف';
+  const isItem = cat.includes('آیتم');
+  const isClashRoyal = cat === 'کلش رویال';
+  const isFreeFire = cat === 'فری فایر';
+  const isFree = cat === 'آزاد';
+  
+  document.getElementById('fields-clash').style.display = isClash ? 'grid' : 'none';
+  document.getElementById('fields-cod').style.display = isCod ? 'grid' : 'none';
+  document.getElementById('fields-item').style.display = isItem ? 'grid' : 'none';
+  document.getElementById('fields-royal').style.display = isClashRoyal ? 'grid' : 'none';
+  document.getElementById('fields-freefire').style.display = isFreeFire ? 'grid' : 'none';
+  document.getElementById('fields-free').style.display = isFree ? 'grid' : 'none';
 }
 
 async function compressAndUpload(file) {
@@ -824,6 +866,17 @@ async function addProduct() {
     } else if (cat.includes('آیتم')) {
       product.item_type = document.getElementById('pItemType').value.trim();
       product.item_amount = document.getElementById('pItemAmount').value.trim();
+    } else if (cat === 'کلش رویال') {
+      product.arena = parseInt(document.getElementById('pArena').value) || null;
+      product.trophies = parseInt(document.getElementById('pTrophies').value) || null;
+      product.king_level = parseInt(document.getElementById('pKingLevel').value) || null;
+    } else if (cat === 'فری فایر') {
+      product.rank = document.getElementById('pFFRank').value.trim();
+      product.player_level = parseInt(document.getElementById('pFFLevel').value) || null;
+      product.skins_count = parseInt(document.getElementById('pFFGems').value) || null;
+    } else if (cat === 'آزاد') {
+      product.item_type = document.getElementById('pFree1').value.trim();
+      product.item_amount = document.getElementById('pFree2').value.trim();
     }
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
@@ -834,7 +887,7 @@ async function addProduct() {
 
     if (res.ok) {
       showStatus('🎉 محصول ثبت شد!', 'success');
-      ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pRank','pPlayerLevel','pSkins','pItemType','pItemAmount','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
+      ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pRank','pPlayerLevel','pSkins','pItemType','pItemAmount','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = '';
       });
       selectedImages = []; renderImagePreviews(); loadProducts();
@@ -1069,17 +1122,14 @@ function changeCredentials() {
     showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error');
     return;
   }
-
   if (!newUser && !newPass) {
     showStatus('❌ چیزی برای تغییر وارد نکردی!', 'error');
     return;
   }
-
   if (newPass && newPass !== confirmPass) {
     showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error');
     return;
   }
-
   if (newPass && newPass.length < 4) {
     showStatus('❌ رمز جدید باید حداقل ۴ کاراکتر باشه!', 'error');
     return;
