@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>جزئیات محصول | 𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Capitan Vexor">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="icon" type="image/png" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
@@ -165,7 +172,6 @@ nav {
   font-size: 0.85rem; color: var(--text-dim);
 }
 
-/* ==== Chat Window - راست ==== */
 .chat-window {
   position: fixed; 
   bottom: 15px; 
@@ -197,9 +203,7 @@ nav {
   font-size: 1.3rem; box-shadow: 0 0 15px rgba(0,255,231,0.5);
   overflow: hidden; flex-shrink: 0;
 }
-.chat-avatar img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-}
+.chat-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .chat-header-name { font-weight: 800; font-size: 0.9rem; }
 .chat-header-status { font-size: 0.7rem; color: var(--text-dim); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
 .online-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; animation: blink 1.5s infinite; }
@@ -226,16 +230,7 @@ nav {
 }
 .chat-start-btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0,255,231,0.6); }
 
-.chat-messages { 
-  flex: 1; 
-  overflow-y: auto; 
-  padding: 15px; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 10px; 
-  background: rgba(0,0,0,0.2);
-  min-height: 0;
-}
+.chat-messages { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.2); min-height: 0; }
 .chat-bubble { max-width: 80%; padding: 10px 14px; border-radius: 16px; animation: bubbleIn 0.3s ease-out; word-wrap: break-word; }
 @keyframes bubbleIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .chat-bubble.theirs { align-self: flex-start; background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15)); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
@@ -244,46 +239,12 @@ nav {
 .chat-time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 .chat-empty { text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 40px 20px; }
 
-.chat-input-area { 
-  padding: 10px 12px; 
-  border-top: 1px solid var(--border); 
-  display: flex; 
-  gap: 10px; 
-  background: rgba(0,0,0,0.3);
-  flex-shrink: 0;
-  align-items: center;
-}
-.chat-input-area .chat-input-field { 
-  flex: 1; 
-  border-radius: 50px; 
-  padding: 12px 18px;
-  font-size: 0.95rem;
-}
-.chat-send-btn { 
-  width: 50px; 
-  height: 50px; 
-  border-radius: 50%; 
-  background: linear-gradient(135deg, var(--cyan), var(--purple)); 
-  border: none; 
-  color: #0a0a0f; 
-  font-size: 1.4rem; 
-  cursor: pointer; 
-  transition: 0.3s; 
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 20px rgba(0,255,231,0.5);
-}
-.chat-send-btn:hover { 
-  transform: scale(1.1); 
-  box-shadow: 0 0 30px rgba(0,255,231,0.9);
-}
-.chat-send-btn:active {
-  transform: scale(0.95);
-}
+.chat-input-area { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: rgba(0,0,0,0.3); flex-shrink: 0; align-items: center; }
+.chat-input-area .chat-input-field { flex: 1; border-radius: 50px; padding: 12px 18px; font-size: 0.95rem; }
+.chat-send-btn { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.4rem; cursor: pointer; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0,255,231,0.5); }
+.chat-send-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(0,255,231,0.9); }
+.chat-send-btn:active { transform: scale(0.95); }
 
-/* ==== Floating Buttons - راست ==== */
 .float-buttons { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
@@ -300,17 +261,7 @@ nav {
   .actions { flex-direction: column; }
   .float-buttons { bottom: 15px; right: 15px; }
   .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
-  
-  .chat-window {
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    top: 8px;
-    width: auto;
-    max-width: none;
-    height: auto;
-    max-height: none;
-  }
+  .chat-window { left: 8px; right: 8px; bottom: 8px; top: 8px; width: auto; max-width: none; height: auto; max-height: none; }
 }
 </style>
 </head>
@@ -333,7 +284,7 @@ nav {
 <div class="chat-window" id="chatWindow">
   <div class="chat-header">
     <div class="chat-header-info">
-      <div class="chat-avatar"><img src="support-avatar.png" alt="پشتیبانی"></div>
+      <div class="chat-avatar"><img src="support-avatar.png" alt="پشتیبان"></div>
       <div>
         <div class="chat-header-name">پشتیبانی کاپیتان وکثور</div>
         <div class="chat-header-status">
@@ -510,37 +461,15 @@ function changeImage(src, thumbEl) {
 }
 
 loadContact().then(() => loadProduct());
-</script>
 
-<script>
-// ===== Click Sound (Web Audio API) =====
-let audioContext = null;
-function playClick() {
-  try {
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioContext.state === 'suspended') {
-      audioContext.resume();
-    }
-    const now = audioContext.currentTime;
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(900, now);
-    oscillator.frequency.exponentialRampToValueAtTime(400, now + 0.08);
-    gainNode.gain.setValueAtTime(0.2, now);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-    oscillator.start(now);
-    oscillator.stop(now + 0.1);
-  } catch (e) {}
+// ===== PWA Service Worker =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then((reg) => console.log('✅ PWA registered!'))
+      .catch((err) => console.log('❌ PWA error:', err));
+  });
 }
-document.addEventListener('click', (e) => {
-  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .tab, .btn-icon, .status-badge, .save-btn, .contact-btn, .btn-action, .thumb, .stat-box');
-  if (target) playClick();
-}, true);
 </script>
 
 </body>
