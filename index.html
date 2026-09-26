@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓 | خرید اکانت و آیتم بازی</title>
-<meta name="description" content="فروشگاه کاپیتان وکثور - خرید اکانت کالاف دیوتی موبایل، کلش آف کلنز، آیتم کلش و آیتم کالاف با ضمانت ۱۰۰٪">
-<meta name="keywords" content="کاپیتان وکثور, خرید اکانت, کالاف دیوتی, کلش آف کلنز, آیتم کلش, آیتم کالاف, capitan vexor">
+<meta name="description" content="فروشگاه کاپیتان وکثور - خرید اکانت کالاف دیوتی موبایل، کلش آف کلنز، کلش رویال، فری فایر، آیتم کلش و آیتم کالاف با ضمانت ۱۰۰٪">
+<meta name="keywords" content="کاپیتان وکثور, خرید اکانت, کالاف دیوتی, کلش آف کلنز, کلش رویال, فری فایر, آیتم کلش, آیتم کالاف, capitan vexor">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a0a0f">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -156,7 +156,7 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 }
 .section-sub { text-align: center; color: var(--text-dim); margin-bottom: 45px; font-size: 0.95rem; }
 
-.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
 .category-card {
   background: var(--glass); border: 1px solid var(--border); border-radius: 22px;
   overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
@@ -186,6 +186,29 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
   color: #0a0a0f; border-radius: 50px; font-weight: 700;
   font-size: 0.9rem;
 }
+
+/* کارت آزاد (با ایموجی) */
+.category-card.free-card {
+  background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.category-card.free-card .free-inner {
+  text-align: center;
+  padding: 30px 20px;
+}
+.category-card.free-card .free-emoji {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 20px var(--cyan));
+  transition: 0.3s;
+}
+.category-card.free-card:hover .free-emoji { transform: scale(1.2) rotate(10deg); }
+.category-card.free-card .category-title { font-size: 1.4rem; }
+.category-card.free-card .category-desc { font-size: 0.9rem; }
 
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .feature {
@@ -361,7 +384,7 @@ footer {
 }
 .chat-send-btn:active { transform: scale(0.95); }
 
-/* ==== THEME: LIGHT (روز) ==== */
+/* ==== THEME: LIGHT ==== */
 body.theme-light {
   --bg-dark: #f5f0e8;
   --text: #1a1a2e;
@@ -385,7 +408,7 @@ body.theme-light .chat-input-field { background: rgba(255,255,255,0.9); color: #
 body.theme-light .chat-time { color: #666; opacity: 0.8; }
 body.theme-light .copyright { color: #888; }
 
-/* ==== THEME: COLORFUL (رنگارنگ) ==== */
+/* ==== THEME: COLORFUL ==== */
 body.theme-colorful {
   --bg-dark: #1a0533;
   --text: #ffffff;
@@ -506,8 +529,8 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
       <div class="category-body">
         <div class="category-icon">🎯</div>
         <h3 class="category-title">کالاف</h3>
-        <p class="category-desc">اکانت کالاف دیوتی موبایل با رنک‌های مختلف</p>
-        <span class="category-btn">مشاهده اکانت‌ها →</span>
+        <p class="category-desc">اکانت کالاف دیوتی موبایل</p>
+        <span class="category-btn">مشاهده →</span>
       </div>
     </a>
 
@@ -518,8 +541,32 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
       <div class="category-body">
         <div class="category-icon">🏰</div>
         <h3 class="category-title">کلش</h3>
-        <p class="category-desc">اکانت کلش آف کلنز از تاون هال ۱ تا ۱۸</p>
-        <span class="category-btn">مشاهده اکانت‌ها →</span>
+        <p class="category-desc">اکانت کلش آف کلنز</p>
+        <span class="category-btn">مشاهده →</span>
+      </div>
+    </a>
+
+    <a href="category.html?cat=کلش رویال" class="category-card reveal">
+      <div class="category-image-wrap">
+        <img src="clash-royal.jpg" alt="کلش رویال" class="category-image" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="category-body">
+        <div class="category-icon">👑</div>
+        <h3 class="category-title">کلش رویال</h3>
+        <p class="category-desc">اکانت کلش رویال با آرنا بالا</p>
+        <span class="category-btn">مشاهده →</span>
+      </div>
+    </a>
+
+    <a href="category.html?cat=فری فایر" class="category-card reveal">
+      <div class="category-image-wrap">
+        <img src="freefire.jpg" alt="فری فایر" class="category-image" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="category-body">
+        <div class="category-icon">🔥</div>
+        <h3 class="category-title">فری فایر</h3>
+        <p class="category-desc">اکانت فری فایر با رنک بالا</p>
+        <span class="category-btn">مشاهده →</span>
       </div>
     </a>
 
@@ -530,8 +577,8 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
       <div class="category-body">
         <div class="category-icon">💎</div>
         <h3 class="category-title">آیتم کلش</h3>
-        <p class="category-desc">بلیط طلایی، منظره و آیتم‌های ویژه کلش</p>
-        <span class="category-btn">مشاهده آیتم‌ها →</span>
+        <p class="category-desc">بلیط طلایی، منظره و...</p>
+        <span class="category-btn">مشاهده →</span>
       </div>
     </a>
 
@@ -542,8 +589,17 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
       <div class="category-body">
         <div class="category-icon">🔫</div>
         <h3 class="category-title">آیتم کالاف</h3>
-        <p class="category-desc">آیتم‌ها و اسکین‌های ویژه کالاف دیوتی موبایل</p>
-        <span class="category-btn">مشاهده آیتم‌ها →</span>
+        <p class="category-desc">آیتم‌ها و اسکین‌های ویژه</p>
+        <span class="category-btn">مشاهده →</span>
+      </div>
+    </a>
+
+    <a href="category.html?cat=آزاد" class="category-card free-card reveal">
+      <div class="free-inner">
+        <span class="free-emoji">✨</span>
+        <h3 class="category-title">آزاد</h3>
+        <p class="category-desc">هر چیزی که بخوای اینجاست!</p>
+        <span class="category-btn">مشاهده →</span>
       </div>
     </a>
   </div>
@@ -644,7 +700,36 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 
-// Theme Toggle
+// ===== صدای کلیک =====
+let audioContext = null;
+function playClick() {
+  try {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+    const now = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(900, now);
+    oscillator.frequency.exponentialRampToValueAtTime(400, now + 0.08);
+    gainNode.gain.setValueAtTime(0.15, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    oscillator.start(now);
+    oscillator.stop(now + 0.1);
+  } catch (e) {}
+}
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .tab, .btn-icon, .status-badge, .save-btn, .btn-buy, .btn-action, .stat-box, .chat-close');
+  if (target) playClick();
+}, true);
+
+// ===== Theme Toggle =====
 const themes = ['dark', 'light', 'colorful'];
 const themeIcons = { dark: '🌙', light: '☀️', colorful: '🎨' };
 let currentTheme = localStorage.getItem('cv_theme') || 'dark';
@@ -833,7 +918,7 @@ async function loadContact() {
 
 loadContact();
 
-// ===== PWA Service Worker =====
+// ===== PWA =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js')
