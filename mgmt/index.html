@@ -229,7 +229,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 }
 .delete-chat-btn:hover { background: var(--danger); color: white; transform: scale(1.15); box-shadow: 0 0 10px rgba(255,56,96,0.6); }
 
-/* ===== نشان قرمز پیام خونده‌نشده ===== */
 .unread-badge {
   background: linear-gradient(135deg, #ff3860, #ff0055);
   color: white;
@@ -400,6 +399,16 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   font-family: inherit;
   font-size: 0.85rem;
 }
+.notif-permission.success-banner {
+  background: rgba(16,185,129,0.1);
+  border-color: #10b981;
+  color: #10b981;
+}
+.notif-permission.error-banner {
+  background: rgba(255,56,96,0.1);
+  border-color: #ff3860;
+  color: #ff3860;
+}
 
 @media (max-width: 700px) {
   .chat-wrap { grid-template-columns: 1fr; height: auto; }
@@ -464,17 +473,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div class="tab-content active" id="tab-add">
     <div class="card">
       <div class="card-title">➕ افزودن محصول جدید</div>
-
-      <div class="form-group">
-        <label>🎮 عنوان *</label>
-        <input type="text" id="pTitle" placeholder="مثلاً: اکانت کلش TH14">
-      </div>
-
-      <div class="form-group">
-        <label>💬 شعار (اختیاری)</label>
-        <input type="text" id="pSlogan" placeholder="🔥 نقد و اقساط تضمینی">
-      </div>
-
+      <div class="form-group"><label>🎮 عنوان *</label><input type="text" id="pTitle" placeholder="مثلاً: اکانت کلش TH14"></div>
+      <div class="form-group"><label>💬 شعار (اختیاری)</label><input type="text" id="pSlogan" placeholder="🔥 نقد و اقساط تضمینی"></div>
       <div class="form-group">
         <label>📂 دسته‌بندی *</label>
         <select id="pCategory" onchange="updateCategoryFields()">
@@ -494,7 +494,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </select>
       </div>
 
-      <!-- فیلدهای کلش -->
       <div id="fields-clash" class="form-row three">
         <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="pTownHall" placeholder="14"></div>
         <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
@@ -506,7 +505,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="form-group"><label>🏗️ بیلدرها</label><input type="text" id="pBuilderCount" placeholder="5/5"></div>
       </div>
 
-      <!-- فیلدهای کالاف -->
       <div id="fields-cod" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pRank" placeholder="Legendary"></div>
         <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="pPlayerLevel" placeholder="150"></div>
@@ -521,33 +519,28 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="form-group"><label>🟡 Legendary</label><input type="number" id="pLegendary" placeholder="10"></div>
       </div>
 
-      <!-- فیلدهای آیتم -->
       <div id="fields-item" class="form-row" style="display:none;">
         <div class="form-group"><label>🏷️ نوع آیتم</label><input type="text" id="pItemType" placeholder="بلیط طلایی"></div>
         <div class="form-group"><label>📦 مقدار</label><input type="text" id="pItemAmount" placeholder="۱ عدد"></div>
       </div>
 
-      <!-- فیلدهای کلش رویال -->
       <div id="fields-royal" class="form-row three" style="display:none;">
         <div class="form-group"><label>👑 سطح آرنا</label><input type="number" id="pArena" placeholder="15"></div>
         <div class="form-group"><label>🏆 تعداد جام</label><input type="number" id="pTrophies" placeholder="5000"></div>
         <div class="form-group"><label>📊 لول کینگ</label><input type="number" id="pKingLevel" placeholder="10"></div>
       </div>
 
-      <!-- فیلدهای فری فایر -->
       <div id="fields-freefire" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pFFRank" placeholder="Heroic"></div>
         <div class="form-group"><label>📊 لول</label><input type="number" id="pFFLevel" placeholder="60"></div>
         <div class="form-group"><label>💎 تعداد جم</label><input type="number" id="pFFGems" placeholder="1000"></div>
       </div>
 
-      <!-- فیلدهای آزاد -->
       <div id="fields-free" class="form-row" style="display:none;">
         <div class="form-group"><label>📝 مشخصات ۱</label><input type="text" id="pFree1" placeholder="مثلاً: لول"></div>
         <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
       </div>
 
-      <!-- ⭐ فیلدهای دلخواه -->
       <div class="form-group" style="margin-top: 15px; padding: 15px; background: rgba(168,85,247,0.05); border: 1px dashed var(--purple); border-radius: 12px;">
         <label style="color: var(--purple);">⭐ فیلدهای دلخواه (اختیاری)</label>
         <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 10px;">میتونی هر تعداد فیلد دلخواه اضافه کنی</p>
@@ -631,27 +624,12 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
           آمار زنده سایت
         </h2>
         <p style="color: #a0a0b0; font-size: 0.9rem; max-width: 500px; margin: 0 auto 25px;">
-          برای دیدن آمار کامل سایت (بازدیدکننده‌ها، صفحات پربازدید، منابع ورودی و...) روی دکمه زیر کلیک کن
+          برای دیدن آمار کامل سایت روی دکمه زیر کلیک کن
         </p>
         <a href="https://statsfa.com/dashboard" target="_blank" 
-           style="display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: linear-gradient(90deg, #ff9500, #ff5e00); color: white; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 30px rgba(255,149,0,0.5); transition: 0.3s;"
-           onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 0 50px rgba(255,149,0,0.9)'"
-           onmouseout="this.style.transform=''; this.style.boxShadow='0 0 30px rgba(255,149,0,0.5)'">
+           style="display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: linear-gradient(90deg, #ff9500, #ff5e00); color: white; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 30px rgba(255,149,0,0.5); transition: 0.3s;">
           📊 رفتن به پنل آمار
         </a>
-        <div style="margin-top: 30px; padding: 20px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto; text-align: right;">
-          <h4 style="color: var(--cyan); margin-bottom: 15px; font-size: 1rem;">📋 چی توی پنل آمار می‌بینی؟</h4>
-          <ul style="list-style: none; padding: 0; color: var(--text-dim); font-size: 0.9rem; line-height: 2;">
-            <li>👥 <strong style="color: var(--text);">بازدیدکننده‌ها:</strong> چند نفر امروز / این هفته / این ماه</li>
-            <li>📄 <strong style="color: var(--text);">صفحات پربازدید:</strong> کدوم محصول بیشتر دیده شده</li>
-            <li>🌍 <strong style="color: var(--text);">منابع ورودی:</strong> از گوگل، روبیکا یا مستقیم</li>
-            <li>📱 <strong style="color: var(--text);">نوع دستگاه:</strong> موبایل یا کامپیوتر</li>
-            <li>⏰ <strong style="color: var(--text);">ساعت پربازدید:</strong> چه ساعتی بیشتر میان</li>
-          </ul>
-        </div>
-        <div style="margin-top: 20px; padding: 15px; background: rgba(16,185,129,0.1); border: 1px solid #10b981; border-radius: 12px; font-size: 0.85rem; color: #10b981;">
-          ✅ آمار کاملاً خصوصی — فقط خودت می‌تونی ببینی
-        </div>
       </div>
     </div>
   </div>
@@ -681,9 +659,9 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <button class="save-btn" onclick="changeCredentials()">💾 ذخیره تغییرات</button>
       </div>
       <div style="margin-top: 20px; padding: 15px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 12px; font-size: 0.85rem; color: var(--text-dim); line-height: 1.8;">
-        💡 <strong style="color: var(--cyan);">نکته:</strong> نام کاربری و رمز عبور بعد از تغییر، توی همین مرورگر ذخیره میشن.
-        <br>👤 نام کاربری پیش‌فرض: <strong style="color: var(--cyan);" dir="ltr">admin</strong>
-        <br>🔑 رمز پیش‌فرض: <strong style="color: var(--cyan);" dir="ltr">vexor2024</strong>
+        💡 <strong style="color: var(--cyan);">نام کاربری و رمز پیش‌فرض:</strong>
+        <br>👤 <span dir="ltr">admin</span>
+        <br>🔑 <span dir="ltr">vexor2024</span>
       </div>
     </div>
   </div>
@@ -696,10 +674,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <h2>✏️ ویرایش محصول</h2>
       <button class="modal-close" onclick="closeEditModal()">✕</button>
     </div>
-
     <input type="hidden" id="editId">
     <input type="hidden" id="editImages" value="[]">
-
     <div class="form-group"><label>🎮 عنوان *</label><input type="text" id="editTitle"></div>
     <div class="form-group"><label>💬 شعار</label><input type="text" id="editSlogan"></div>
     <div class="form-group">
@@ -714,7 +690,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <option value="آزاد">✨ آزاد</option>
       </select>
     </div>
-
     <div class="form-row three">
       <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="editTownHall"></div>
       <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="editBuilder"></div>
@@ -725,7 +700,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <div class="form-group"><label>⭐ ستاره</label><input type="number" id="editStarBonus"></div>
       <div class="form-group"><label>🏗️ بیلدرها</label><input type="text" id="editBuilderCount"></div>
     </div>
-
     <div class="form-row three">
       <div class="form-group"><label>🎖️ رنک</label><input type="text" id="editRank"></div>
       <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="editPlayerLevel"></div>
@@ -739,17 +713,14 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <div class="form-row">
       <div class="form-group"><label>🟡 Legendary</label><input type="number" id="editLegendary"></div>
     </div>
-
     <div class="form-row">
       <div class="form-group"><label>🏷️ نوع آیتم</label><input type="text" id="editItemType"></div>
       <div class="form-group"><label>📦 مقدار</label><input type="text" id="editItemAmount"></div>
     </div>
-
     <div class="form-row">
       <div class="form-group"><label>🆔 کد</label><input type="text" id="editCode" dir="ltr"></div>
       <div class="form-group"><label>💰 قیمت (تومان) *</label><input type="number" id="editPrice"></div>
     </div>
-
     <div class="form-row">
       <div class="form-group"><label>💵 قیمت دلاری</label><input type="text" id="editPriceUsd" dir="ltr"></div>
       <div class="form-group">
@@ -761,7 +732,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </select>
       </div>
     </div>
-
     <div class="form-group"><label>📝 توضیحات</label><textarea id="editDesc" rows="3"></textarea></div>
     <div class="form-group"><label>📸 عکس‌های فعلی</label><div class="existing-images" id="existingImages"></div></div>
     <div class="form-group">
@@ -773,7 +743,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       </div>
       <div class="images-preview" id="editImagesPreview"></div>
     </div>
-
     <div class="modal-actions">
       <button class="modal-btn secondary" onclick="closeEditModal()">انصراف</button>
       <button class="modal-btn primary" id="saveEditBtn" onclick="saveEdit()">💾 ذخیره</button>
@@ -836,7 +805,12 @@ function showDashboard() {
 
 function checkNotificationBanner() {
   const banner = document.getElementById('notifBanner');
-  if (!('Notification' in window)) return;
+  if (!('Notification' in window)) {
+    banner.innerHTML = `<div class="notif-permission error-banner"><span>❌ مرورگر شما از نوتیفیکیشن پشتیبانی نمی‌کنه</span></div>`;
+    return;
+  }
+  
+  console.log('📋 Notification permission:', Notification.permission);
   
   if (Notification.permission === 'default') {
     banner.innerHTML = `
@@ -845,10 +819,18 @@ function checkNotificationBanner() {
         <button onclick="requestNotifPermission()">فعال‌سازی نوتیف</button>
       </div>
     `;
+  } else if (Notification.permission === 'granted') {
+    banner.innerHTML = `
+      <div class="notif-permission success-banner">
+        <span>✅ نوتیفیکیشن فعاله! پیام‌های جدید بهت اطلاع داده میشه</span>
+        <button onclick="testNotification()" style="background: #10b981; color: white;">تست نوتیف</button>
+      </div>
+    `;
   } else if (Notification.permission === 'denied') {
     banner.innerHTML = `
-      <div class="notif-permission" style="background: rgba(255,56,96,0.1); border-color: #ff3860; color: #ff3860;">
-        <span>🔕 نوتیفیکیشن توسط مرورگر مسدود شده. از تنظیمات مرورگر فعالش کن</span>
+      <div class="notif-permission error-banner">
+        <span>🔕 نوتیفیکیشن توسط مرورگر مسدود شده. باید از تنظیمات مرورگر بازش کنی</span>
+        <button onclick="showNotifHelp()" style="background: #ff3860; color: white;">راهنما</button>
       </div>
     `;
   }
@@ -857,16 +839,44 @@ function checkNotificationBanner() {
 function requestNotifPermission() {
   if ('Notification' in window) {
     Notification.requestPermission().then(p => {
+      console.log('📋 New permission:', p);
       checkNotificationBanner();
       if (p === 'granted') {
-        new Notification('🔔 نوتیفیکیشن فعال شد!', {
-          body: 'از این به بعد پیام‌های جدید رو می‌بینی',
-          dir: 'rtl',
-          lang: 'fa'
-        });
+        testNotification();
       }
     });
   }
+}
+
+function testNotification() {
+  if (Notification.permission !== 'granted') return;
+  
+  try {
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.ready.then(reg => {
+        reg.showNotification('🔔 تست موفق!', {
+          body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه',
+          icon: 'icon-512.png',
+          dir: 'rtl',
+          lang: 'fa',
+          vibrate: [200, 100, 200]
+        });
+      });
+    } else {
+      new Notification('🔔 تست موفق!', {
+        body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه',
+        icon: 'icon-512.png',
+        dir: 'rtl'
+      });
+    }
+  } catch (e) {
+    console.error('Notification error:', e);
+    alert('خطا در نوتیف: ' + e.message);
+  }
+}
+
+function showNotifHelp() {
+  alert('برای فعال کردن نوتیف:\n\n1. Chrome → Settings\n2. Site Settings → Notifications\n3. انvexor.github.io رو از Blocked حذف کن\n4. صفحه رو رفرش کن');
 }
 
 function logout() {
@@ -895,7 +905,6 @@ function showStatus(msg, type = 'loading') {
 
 function updateCategoryFields() {
   const cat = document.getElementById('pCategory').value;
-  
   const isClash = cat === 'کلش';
   const isCod = cat === 'کالاف';
   const isItem = cat.includes('آیتم');
@@ -952,9 +961,6 @@ function getCustomFields() {
   return fields;
 }
 
-// ==========================================
-// صدا و نوتیفیکیشن
-// ==========================================
 function playNotificationSound() {
   try {
     if (!notificationAudioCtx) {
@@ -983,23 +989,62 @@ function playNotificationSound() {
 }
 
 function showNotification(title, body) {
-  if (!('Notification' in window)) return;
+  console.log('🔔 Showing notification:', title, body);
+  
+  if (!('Notification' in window)) {
+    console.warn('❌ Notifications not supported');
+    return;
+  }
+  
+  console.log('📋 Permission:', Notification.permission);
+  
   if (Notification.permission === 'granted') {
     try {
-      const notif = new Notification(title, {
-        body: body,
-        icon: 'icon-512.png',
-        badge: 'icon-512.png',
-        tag: 'cv-chat',
-        dir: 'rtl',
-        lang: 'fa',
-        requireInteraction: true
-      });
-      notif.onclick = () => {
-        window.focus();
-        notif.close();
-      };
-    } catch (e) { console.log('Notification error:', e); }
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.ready.then(registration => {
+          registration.showNotification(title, {
+            body: body,
+            icon: '/icon-512.png',
+            badge: '/icon-512.png',
+            dir: 'rtl',
+            lang: 'fa',
+            tag: 'cv-chat-' + Date.now(),
+            vibrate: [200, 100, 200]
+          }).then(() => console.log('✅ SW Notification sent!'))
+            .catch(err => {
+              console.error('❌ SW Notif error:', err);
+              fallbackNotification(title, body);
+            });
+        });
+      } else {
+        fallbackNotification(title, body);
+      }
+    } catch (e) {
+      console.error('❌ Notification error:', e);
+    }
+  } else if (Notification.permission === 'default') {
+    Notification.requestPermission().then(p => {
+      if (p === 'granted') showNotification(title, body);
+    });
+  }
+}
+
+function fallbackNotification(title, body) {
+  try {
+    const notif = new Notification(title, {
+      body: body,
+      icon: 'icon-512.png',
+      dir: 'rtl',
+      lang: 'fa',
+      tag: 'cv-chat-' + Date.now()
+    });
+    console.log('✅ Fallback Notification sent!');
+    notif.onclick = () => {
+      window.focus();
+      notif.close();
+    };
+  } catch (e) {
+    console.error('❌ Fallback Notification error:', e);
   }
 }
 
@@ -1382,32 +1427,19 @@ function changeCredentials() {
   const savedPass = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
 
   if (currentUser !== savedUser || currentPass !== savedPass) {
-    showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error');
-    return;
+    showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error'); return;
   }
-  if (!newUser && !newPass) {
-    showStatus('❌ چیزی برای تغییر وارد نکردی!', 'error');
-    return;
-  }
-  if (newPass && newPass !== confirmPass) {
-    showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error');
-    return;
-  }
-  if (newPass && newPass.length < 4) {
-    showStatus('❌ رمز جدید باید حداقل ۴ کاراکتر باشه!', 'error');
-    return;
-  }
+  if (!newUser && !newPass) { showStatus('❌ چیزی برای تغییر وارد نکردی!', 'error'); return; }
+  if (newPass && newPass !== confirmPass) { showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error'); return; }
+  if (newPass && newPass.length < 4) { showStatus('❌ رمز جدید باید حداقل ۴ کاراکتر باشه!', 'error'); return; }
 
   if (newUser) localStorage.setItem('cv_username', newUser);
   if (newPass) localStorage.setItem('cv_password', newPass);
 
   showStatus('🎉 نام کاربری و رمز عبور تغییر کرد!', 'success');
-
-  document.getElementById('currentUsername').value = '';
-  document.getElementById('currentPassword').value = '';
-  document.getElementById('newUsername').value = '';
-  document.getElementById('newPassword').value = '';
-  document.getElementById('confirmPassword').value = '';
+  ['currentUsername','currentPassword','newUsername','newPassword','confirmPassword'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
 }
 
 async function loadChats() {
@@ -1431,14 +1463,13 @@ function renderChatList(chats) {
     const hasUnread = (c.unread_count || 0) > 0;
     const unreadBadge = hasUnread ? `<span class="unread-badge">${c.unread_count}</span>` : '';
     const unreadClass = hasUnread ? 'has-unread' : '';
-    
     return `
       <div class="chat-list-item ${active} ${unreadClass}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')">
         <div class="name">
           <span class="name-text">👤 ${escapeHtml(c.visitor_name)}</span>
           <div style="display:flex;align-items:center;gap:6px;">
             ${unreadBadge}
-            <button class="delete-chat-btn" onclick="event.stopPropagation(); deleteChat(${c.id}, '${escapeHtml(c.visitor_name)}')" title="حذف چت">🗑️</button>
+            <button class="delete-chat-btn" onclick="event.stopPropagation(); deleteChat(${c.id}, '${escapeHtml(c.visitor_name)}')">🗑️</button>
           </div>
         </div>
         ${c.visitor_phone ? `<div class="preview">📞 ${escapeHtml(c.visitor_phone)}</div>` : ''}
@@ -1456,7 +1487,7 @@ function updateUnreadBadge(chats) {
 }
 
 async function deleteChat(id, name) {
-  if (!confirm(`مطمئنی می‌خوای چت "${name}" رو حذف کنی؟\n\nتمام پیام‌ها هم پاک میشن!`)) return;
+  if (!confirm(`مطمئنی چت "${name}" رو حذف کنی؟\n\nتمام پیام‌ها هم پاک میشن!`)) return;
   try {
     await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${id}`, {
       method: 'DELETE',
@@ -1559,15 +1590,24 @@ async function sendAdminMessage() {
 
 function subscribeToChats() {
   if (chatsChannel) return;
+  
+  console.log('🔔 Starting chat subscription...');
+  
   chatsChannel = supabaseClient
     .channel('admin-chats')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, (payload) => {
+      console.log('📋 Chat updated:', payload.eventType);
+      loadChats();
+    })
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
       const newMsg = payload.new;
+      console.log('💬 New message:', newMsg);
       
       if (newMsg && newMsg.sender === 'visitor') {
         const chat = allChatsData?.find(c => c.id === newMsg.chat_id);
         const visitorName = chat?.visitor_name || 'کاربر';
+        
+        console.log('🔔 Visitor message from:', visitorName);
         
         playNotificationSound();
         showNotification(`💬 پیام جدید از ${visitorName}`, newMsg.message || 'پیام جدید');
@@ -1581,7 +1621,9 @@ function subscribeToChats() {
       if (currentChatId) loadChatMessages(currentChatId);
       loadChats();
     })
-    .subscribe();
+    .subscribe((status) => {
+      console.log('📡 Subscription status:', status);
+    });
 }
 
 async function incrementUnread(chatId) {
