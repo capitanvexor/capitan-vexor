@@ -187,7 +187,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
   font-size: 0.9rem;
 }
 
-/* کارت آزاد (با ایموجی) */
 .category-card.free-card {
   background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
   min-height: 280px;
@@ -195,10 +194,7 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
   align-items: center;
   justify-content: center;
 }
-.category-card.free-card .free-inner {
-  text-align: center;
-  padding: 30px 20px;
-}
+.category-card.free-card .free-inner { text-align: center; padding: 30px 20px; }
 .category-card.free-card .free-emoji {
   font-size: 5rem;
   display: block;
@@ -384,7 +380,6 @@ footer {
 }
 .chat-send-btn:active { transform: scale(0.95); }
 
-/* ==== THEME: LIGHT ==== */
 body.theme-light {
   --bg-dark: #f5f0e8;
   --text: #1a1a2e;
@@ -408,7 +403,6 @@ body.theme-light .chat-input-field { background: rgba(255,255,255,0.9); color: #
 body.theme-light .chat-time { color: #666; opacity: 0.8; }
 body.theme-light .copyright { color: #888; }
 
-/* ==== THEME: COLORFUL ==== */
 body.theme-colorful {
   --bg-dark: #1a0533;
   --text: #ffffff;
@@ -503,7 +497,7 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
 
   <div class="stats">
     <div class="stat-box">
-      <div class="num" data-target="1" data-suffix="K+">۱K+</div>
+      <div class="num" data-target="100" data-suffix="K+">۱۰۰K+</div>
       <div class="label">🛒 فروش موفق</div>
     </div>
     <div class="stat-box">
@@ -700,7 +694,7 @@ body.theme-colorful .float-btn.chat { background: linear-gradient(135deg, #ff2ec
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 
-// ===== صدای کلیک =====
+// صدای کلیک
 let audioContext = null;
 function playClick() {
   try {
@@ -729,7 +723,7 @@ document.addEventListener('click', (e) => {
   if (target) playClick();
 }, true);
 
-// ===== Theme Toggle =====
+// Theme Toggle
 const themes = ['dark', 'light', 'colorful'];
 const themeIcons = { dark: '🌙', light: '☀️', colorful: '🎨' };
 let currentTheme = localStorage.getItem('cv_theme') || 'dark';
@@ -871,7 +865,7 @@ function animateCounter(el) {
   const target = +el.dataset.target;
   const suffix = el.dataset.suffix || '';
   let count = 0;
-  const step = target / 40;
+  const step = target / 50;
   const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
   const timer = setInterval(() => {
     count += step;
@@ -918,7 +912,7 @@ async function loadContact() {
 
 loadContact();
 
-// ===== PWA =====
+// PWA
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js')
