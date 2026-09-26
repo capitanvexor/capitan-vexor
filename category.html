@@ -51,8 +51,8 @@ nav {
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
 }
-.nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
-.nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+.nav-links { display: flex; gap: 15px; list-style: none; flex-wrap: wrap; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.85rem; transition: 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px 60px; }
@@ -167,8 +167,8 @@ nav {
 .float-btn:hover { transform: scale(1.15) rotate(10deg); }
 
 @media (max-width: 768px) {
-  .nav-links { gap: 12px; }
-  .nav-links a { font-size: 0.8rem; }
+  .nav-links { gap: 8px; }
+  .nav-links a { font-size: 0.75rem; }
   .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
   .product-image-wrap { height: 160px; }
   .product-body { padding: 14px; }
@@ -190,8 +190,11 @@ nav {
     <li><a href="index.html">🏠 خانه</a></li>
     <li><a href="category.html?cat=کالاف" data-cat="کالاف">🎯 کالاف</a></li>
     <li><a href="category.html?cat=کلش" data-cat="کلش">🏰 کلش</a></li>
+    <li><a href="category.html?cat=کلش رویال" data-cat="کلش رویال">👑 رویال</a></li>
+    <li><a href="category.html?cat=فری فایر" data-cat="فری فایر">🔥 فری فایر</a></li>
     <li><a href="category.html?cat=آیتم کلش" data-cat="آیتم کلش">💎 آیتم کلش</a></li>
     <li><a href="category.html?cat=آیتم کالاف" data-cat="آیتم کالاف">🔫 آیتم کالاف</a></li>
+    <li><a href="category.html?cat=آزاد" data-cat="آزاد">✨ آزاد</a></li>
   </ul>
 </nav>
 
@@ -238,8 +241,11 @@ const category = params.get('cat') || 'کلش';
 const categoryInfo = {
   'کالاف': { icon: '🎯', desc: 'اکانت‌های کالاف دیوتی موبایل با رنک‌های مختلف' },
   'کلش': { icon: '🏰', desc: 'اکانت‌های کلش آف کلنز از تاون هال ۱ تا ۱۸' },
+  'کلش رویال': { icon: '👑', desc: 'اکانت‌های کلش رویال با آرنا بالا' },
+  'فری فایر': { icon: '🔥', desc: 'اکانت‌های فری فایر با رنک Heroic و Grandmaster' },
   'آیتم کلش': { icon: '💎', desc: 'بلیط طلایی، منظره و آیتم‌های ویژه کلش' },
-  'آیتم کالاف': { icon: '🔫', desc: 'آیتم‌ها و اسکین‌های ویژه کالاف دیوتی موبایل' }
+  'آیتم کالاف': { icon: '🔫', desc: 'آیتم‌ها و اسکین‌های ویژه کالاف دیوتی موبایل' },
+  'آزاد': { icon: '✨', desc: 'هر محصولی که دنبالش هستی اینجاست' }
 };
 
 let allProducts = [];
@@ -280,7 +286,7 @@ function buildFilters() {
     `;
   }
 
-  if (category === 'کالاف') {
+  if (category === 'کالاف' || category === 'فری فایر') {
     html += `
       <div class="filter-group">
         <label>🎖️ رنک</label>
@@ -289,8 +295,25 @@ function buildFilters() {
           <option value="Legendary">Legendary</option>
           <option value="Master">Master</option>
           <option value="Grandmaster">Grandmaster</option>
+          <option value="Heroic">Heroic</option>
           <option value="Pro">Pro</option>
           <option value="Elite">Elite</option>
+        </select>
+      </div>
+    `;
+  }
+
+  if (category === 'کلش رویال') {
+    html += `
+      <div class="filter-group">
+        <label>👑 سطح آرنا</label>
+        <select id="filterArena" onchange="applyFilters()">
+          <option value="">همه آرناها</option>
+          <option value="10">آرنا ۱۰</option>
+          <option value="12">آرنا ۱۲</option>
+          <option value="14">آرنا ۱۴</option>
+          <option value="15">آرنا ۱۵</option>
+          <option value="16">آرنا ۱۶</option>
         </select>
       </div>
     `;
@@ -344,6 +367,7 @@ function applyFilters() {
   const search = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
   const filterTH = document.getElementById('filterTH')?.value || '';
   const filterRank = document.getElementById('filterRank')?.value || '';
+  const filterArena = document.getElementById('filterArena')?.value || '';
   const filterItemType = (document.getElementById('filterItemType')?.value || '').trim().toLowerCase();
   const minPrice = parseInt(document.getElementById('minPrice')?.value) || 0;
   const maxPrice = parseInt(document.getElementById('maxPrice')?.value) || Infinity;
@@ -356,6 +380,7 @@ function applyFilters() {
     }
     if (filterTH && p.town_hall != filterTH) return false;
     if (filterRank && (p.rank || '').toLowerCase() !== filterRank.toLowerCase()) return false;
+    if (filterArena && p.arena != filterArena) return false;
     if (filterItemType && !(p.item_type || '').toLowerCase().includes(filterItemType)) return false;
     if (p.price && p.price < minPrice) return false;
     if (p.price && p.price > maxPrice) return false;
@@ -393,9 +418,20 @@ function renderProducts(products) {
       if (p.rank) specs += `<span class="spec-tag">🎖️ ${p.rank}</span>`;
       if (p.player_level) specs += `<span class="spec-tag">📊 لول ${p.player_level}</span>`;
       if (p.skins_count) specs += `<span class="spec-tag">🎨 ${p.skins_count} اسکین</span>`;
+    } else if (p.category === 'کلش رویال') {
+      if (p.arena) specs += `<span class="spec-tag">👑 آرنا ${p.arena}</span>`;
+      if (p.trophies) specs += `<span class="spec-tag">🏆 ${p.trophies} جام</span>`;
+      if (p.king_level) specs += `<span class="spec-tag">📊 کینگ ${p.king_level}</span>`;
+    } else if (p.category === 'فری فایر') {
+      if (p.rank) specs += `<span class="spec-tag">🎖️ ${p.rank}</span>`;
+      if (p.player_level) specs += `<span class="spec-tag">📊 لول ${p.player_level}</span>`;
+      if (p.skins_count) specs += `<span class="spec-tag">💎 ${p.skins_count} جم</span>`;
     } else if (p.category && p.category.includes('آیتم')) {
       if (p.item_type) specs += `<span class="spec-tag">🏷️ ${p.item_type}</span>`;
       if (p.item_amount) specs += `<span class="spec-tag">📦 ${p.item_amount}</span>`;
+    } else if (p.category === 'آزاد') {
+      if (p.item_type) specs += `<span class="spec-tag">📝 ${p.item_type}</span>`;
+      if (p.item_amount) specs += `<span class="spec-tag">📝 ${p.item_amount}</span>`;
     }
 
     return `
@@ -437,10 +473,39 @@ function openChat() {
   window.location.href = 'index.html#chat';
 }
 
+// صدای کلیک
+let audioContext = null;
+function playClick() {
+  try {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+    const now = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(900, now);
+    oscillator.frequency.exponentialRampToValueAtTime(400, now + 0.08);
+    gainNode.gain.setValueAtTime(0.15, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    oscillator.start(now);
+    oscillator.stop(now + 0.1);
+  } catch (e) {}
+}
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .tab, .btn-icon, .status-badge, .save-btn, .btn-buy, .btn-action, .stat-box, .product-card');
+  if (target) playClick();
+}, true);
+
 loadProducts();
 loadContact();
 
-// ===== PWA Service Worker =====
+// ===== PWA =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js')
