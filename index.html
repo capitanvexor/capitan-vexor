@@ -6,6 +6,13 @@
 <title>𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓 | خرید اکانت و آیتم بازی</title>
 <meta name="description" content="فروشگاه کاپیتان وکثور - خرید اکانت کالاف دیوتی موبایل، کلش آف کلنز، آیتم کلش و آیتم کالاف با ضمانت ۱۰۰٪">
 <meta name="keywords" content="کاپیتان وکثور, خرید اکانت, کالاف دیوتی, کلش آف کلنز, آیتم کلش, آیتم کالاف, capitan vexor">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Capitan Vexor">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="icon" type="image/png" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
@@ -221,7 +228,6 @@ footer {
 .footer-links a:hover { color: var(--cyan); }
 .copyright { color: #888; font-size: 0.75rem; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.05); }
 
-/* ==== Floating Buttons - راست ==== */
 .float-buttons { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
 .float-btn {
   width: 55px; height: 55px; border-radius: 50%;
@@ -241,7 +247,6 @@ footer {
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* ==== Chat Window - راست ==== */
 .chat-window {
   position: fixed; 
   bottom: 15px; 
@@ -827,6 +832,15 @@ async function loadContact() {
 }
 
 loadContact();
+
+// ===== PWA Service Worker =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then((reg) => console.log('✅ PWA registered!'))
+      .catch((err) => console.log('❌ PWA error:', err));
+  });
+}
 </script>
 
 <!-- Statsfa Website Analytics Start -->
