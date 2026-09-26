@@ -410,6 +410,84 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   color: #ff3860;
 }
 
+/* ===== ضبط وییس ===== */
+.voice-recorder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding: 8px 15px;
+  background: rgba(255,56,96,0.1);
+  border: 1px solid var(--danger);
+  border-radius: 50px;
+  animation: recordingPulse 1.5s ease-in-out infinite;
+}
+@keyframes recordingPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,56,96,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255,56,96,0); }
+}
+.voice-recorder .dot-rec {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #ff3860;
+  animation: dotBlink 1s infinite;
+}
+@keyframes dotBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.voice-recorder .timer {
+  color: #ff3860; font-weight: 700; font-size: 0.95rem; min-width: 50px;
+}
+.voice-recorder .cancel-rec,
+.voice-recorder .send-rec {
+  width: 38px; height: 38px; border-radius: 50%; border: none;
+  cursor: pointer; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center; transition: 0.3s;
+}
+.voice-recorder .cancel-rec {
+  background: rgba(255,56,96,0.2); color: #ff3860;
+}
+.voice-recorder .cancel-rec:hover { background: #ff3860; color: white; }
+.voice-recorder .send-rec {
+  background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f;
+}
+.voice-recorder .send-rec:hover { transform: scale(1.1); }
+
+.mic-btn {
+  width: 45px; height: 45px; border-radius: 50%;
+  background: rgba(168,85,247,0.15);
+  border: 1px solid var(--purple); color: var(--purple);
+  font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.mic-btn:hover { background: var(--purple); color: white; transform: scale(1.05); }
+.mic-btn:active { transform: scale(0.95); }
+
+.voice-player {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; background: rgba(0,0,0,0.2);
+  border-radius: 25px; min-width: 200px;
+}
+.voice-player .play-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: none;
+  cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: 0.2s;
+}
+.bubble.mine .voice-player .play-btn { background: #0a0a0f; color: var(--cyan); }
+.bubble.theirs .voice-player .play-btn { background: var(--cyan); color: #0a0a0f; }
+.voice-player .play-btn:hover { transform: scale(1.1); }
+.voice-player .waveform {
+  flex: 1; height: 24px; display: flex; align-items: center; gap: 2px;
+}
+.voice-player .waveform .bar {
+  width: 3px; border-radius: 2px; opacity: 0.5;
+}
+.bubble.mine .voice-player .waveform .bar { background: #0a0a0f; }
+.bubble.theirs .voice-player .waveform .bar { background: var(--cyan); }
+.voice-player .duration {
+  font-size: 0.75rem; font-weight: 700; min-width: 35px; text-align: center;
+}
+.bubble.mine .voice-player .duration { color: #0a0a0f; }
+.bubble.theirs .voice-player .duration { color: var(--cyan); }
+
 @media (max-width: 700px) {
   .chat-wrap { grid-template-columns: 1fr; height: auto; }
   .chat-list-sidebar { max-height: 220px; }
@@ -620,16 +698,9 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <div class="card-title">📊 آمار سایت</div>
       <div style="text-align: center; padding: 20px 0;">
         <div style="font-size: 5rem; margin-bottom: 15px; filter: drop-shadow(0 0 30px #ff9500);">📈</div>
-        <h2 style="font-size: 1.4rem; margin-bottom: 10px; background: linear-gradient(90deg, #00ffe7, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;">
-          آمار زنده سایت
-        </h2>
-        <p style="color: #a0a0b0; font-size: 0.9rem; max-width: 500px; margin: 0 auto 25px;">
-          برای دیدن آمار کامل سایت روی دکمه زیر کلیک کن
-        </p>
-        <a href="https://statsfa.com/dashboard" target="_blank" 
-           style="display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: linear-gradient(90deg, #ff9500, #ff5e00); color: white; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 30px rgba(255,149,0,0.5); transition: 0.3s;">
-          📊 رفتن به پنل آمار
-        </a>
+        <h2 style="font-size: 1.4rem; margin-bottom: 10px; background: linear-gradient(90deg, #00ffe7, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;">آمار زنده سایت</h2>
+        <p style="color: #a0a0b0; font-size: 0.9rem; max-width: 500px; margin: 0 auto 25px;">برای دیدن آمار کامل سایت روی دکمه زیر کلیک کن</p>
+        <a href="https://statsfa.com/dashboard" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: linear-gradient(90deg, #ff9500, #ff5e00); color: white; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 30px rgba(255,149,0,0.5);">📊 رفتن به پنل آمار</a>
       </div>
     </div>
   </div>
@@ -773,6 +844,13 @@ let notificationAudioCtx = null;
 let originalTitle = document.title;
 let titleFlashInterval = null;
 
+// Voice recording
+let mediaRecorder = null;
+let audioChunks = [];
+let recordingStartTime = null;
+let recordingTimer = null;
+let recordingStream = null;
+
 function login() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
@@ -791,12 +869,8 @@ document.getElementById('password').addEventListener('keypress', e => { if (e.ke
 function showDashboard() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('dashboard').classList.add('active');
-  
-  if ('Notification' in window && Notification.permission === 'default') {
-    Notification.requestPermission();
-  }
+  if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission();
   checkNotificationBanner();
-  
   loadProducts();
   loadSettings();
   loadChats();
@@ -805,74 +879,31 @@ function showDashboard() {
 
 function checkNotificationBanner() {
   const banner = document.getElementById('notifBanner');
-  if (!('Notification' in window)) {
-    banner.innerHTML = `<div class="notif-permission error-banner"><span>❌ مرورگر شما از نوتیفیکیشن پشتیبانی نمی‌کنه</span></div>`;
-    return;
-  }
-  
-  console.log('📋 Notification permission:', Notification.permission);
-  
+  if (!('Notification' in window)) return;
   if (Notification.permission === 'default') {
-    banner.innerHTML = `
-      <div class="notif-permission">
-        <span>🔔 برای دریافت نوتیفیکیشن پیام‌های جدید، اجازه بده</span>
-        <button onclick="requestNotifPermission()">فعال‌سازی نوتیف</button>
-      </div>
-    `;
+    banner.innerHTML = `<div class="notif-permission"><span>🔔 برای دریافت نوتیفیکیشن پیام‌های جدید، اجازه بده</span><button onclick="requestNotifPermission()">فعال‌سازی نوتیف</button></div>`;
   } else if (Notification.permission === 'granted') {
-    banner.innerHTML = `
-      <div class="notif-permission success-banner">
-        <span>✅ نوتیفیکیشن فعاله! پیام‌های جدید بهت اطلاع داده میشه</span>
-        <button onclick="testNotification()" style="background: #10b981; color: white;">تست نوتیف</button>
-      </div>
-    `;
+    banner.innerHTML = `<div class="notif-permission success-banner"><span>✅ نوتیفیکیشن فعاله! پیام‌های جدید بهت اطلاع داده میشه</span><button onclick="testNotification()" style="background: #10b981; color: white;">تست نوتیف</button></div>`;
   } else if (Notification.permission === 'denied') {
-    banner.innerHTML = `
-      <div class="notif-permission error-banner">
-        <span>🔕 نوتیفیکیشن توسط مرورگر مسدود شده. باید از تنظیمات مرورگر بازش کنی</span>
-        <button onclick="showNotifHelp()" style="background: #ff3860; color: white;">راهنما</button>
-      </div>
-    `;
+    banner.innerHTML = `<div class="notif-permission error-banner"><span>🔕 نوتیفیکیشن مسدود شده</span><button onclick="showNotifHelp()" style="background: #ff3860; color: white;">راهنما</button></div>`;
   }
 }
 
 function requestNotifPermission() {
-  if ('Notification' in window) {
-    Notification.requestPermission().then(p => {
-      console.log('📋 New permission:', p);
-      checkNotificationBanner();
-      if (p === 'granted') {
-        testNotification();
-      }
-    });
-  }
+  if ('Notification' in window) Notification.requestPermission().then(p => { checkNotificationBanner(); if (p === 'granted') testNotification(); });
 }
 
 function testNotification() {
   if (Notification.permission !== 'granted') return;
-  
   try {
     if (navigator.serviceWorker && navigator.serviceWorker.controller) {
       navigator.serviceWorker.ready.then(reg => {
-        reg.showNotification('🔔 تست موفق!', {
-          body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه',
-          icon: 'icon-512.png',
-          dir: 'rtl',
-          lang: 'fa',
-          vibrate: [200, 100, 200]
-        });
+        reg.showNotification('🔔 تست موفق!', { body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl', lang: 'fa', vibrate: [200, 100, 200] });
       });
     } else {
-      new Notification('🔔 تست موفق!', {
-        body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه',
-        icon: 'icon-512.png',
-        dir: 'rtl'
-      });
+      new Notification('🔔 تست موفق!', { body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl' });
     }
-  } catch (e) {
-    console.error('Notification error:', e);
-    alert('خطا در نوتیف: ' + e.message);
-  }
+  } catch (e) { console.error(e); alert('خطا: ' + e.message); }
 }
 
 function showNotifHelp() {
@@ -884,9 +915,7 @@ function logout() {
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('dashboard').classList.remove('active');
 }
-window.addEventListener('load', () => {
-  if (sessionStorage.getItem('cv_logged_in') === 'true') showDashboard();
-});
+window.addEventListener('load', () => { if (sessionStorage.getItem('cv_logged_in') === 'true') showDashboard(); });
 
 function switchTab(name, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -911,7 +940,6 @@ function updateCategoryFields() {
   const isClashRoyal = cat === 'کلش رویال';
   const isFreeFire = cat === 'فری فایر';
   const isFree = cat === 'آزاد';
-  
   document.getElementById('fields-clash').style.display = isClash ? 'grid' : 'none';
   document.getElementById('fields-clash-2').style.display = isClash ? 'grid' : 'none';
   document.getElementById('fields-cod').style.display = isCod ? 'grid' : 'none';
@@ -932,9 +960,7 @@ function addCustomField() {
   div.id = 'custom-field-' + id;
   div.style.marginBottom = '8px';
   div.innerHTML = `
-    <div class="form-group" style="margin:0;">
-      <input type="text" id="cf-label-${id}" placeholder="عنوان (مثلاً: تعداد جم)">
-    </div>
+    <div class="form-group" style="margin:0;"><input type="text" id="cf-label-${id}" placeholder="عنوان"></div>
     <div class="form-group" style="margin:0; display: flex; gap: 8px;">
       <input type="text" id="cf-value-${id}" placeholder="مقدار">
       <button type="button" onclick="removeCustomField(${id})" style="padding: 0 15px; background: rgba(255,56,96,0.2); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; cursor: pointer; font-size: 1.2rem;">×</button>
@@ -943,10 +969,7 @@ function addCustomField() {
   container.appendChild(div);
 }
 
-function removeCustomField(id) {
-  const el = document.getElementById('custom-field-' + id);
-  if (el) el.remove();
-}
+function removeCustomField(id) { const el = document.getElementById('custom-field-' + id); if (el) el.remove(); }
 
 function getCustomFields() {
   const fields = [];
@@ -954,98 +977,57 @@ function getCustomFields() {
     const id = labelEl.id.replace('cf-label-', '');
     const label = labelEl.value.trim();
     const value = document.getElementById('cf-value-' + id)?.value.trim();
-    if (label && value) {
-      fields.push({ label, value });
-    }
+    if (label && value) fields.push({ label, value });
   });
   return fields;
 }
 
 function playNotificationSound() {
   try {
-    if (!notificationAudioCtx) {
-      notificationAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (notificationAudioCtx.state === 'suspended') {
-      notificationAudioCtx.resume();
-    }
+    if (!notificationAudioCtx) notificationAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (notificationAudioCtx.state === 'suspended') notificationAudioCtx.resume();
     const ctx = notificationAudioCtx;
     const now = ctx.currentTime;
-    
     [880, 1174].forEach((freq, i) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
+      osc.connect(gain); gain.connect(ctx.destination);
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now + i * 0.15);
       gain.gain.setValueAtTime(0, now + i * 0.15);
       gain.gain.linearRampToValueAtTime(0.3, now + i * 0.15 + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.4);
-      osc.start(now + i * 0.15);
-      osc.stop(now + i * 0.15 + 0.5);
+      osc.start(now + i * 0.15); osc.stop(now + i * 0.15 + 0.5);
     });
-  } catch (e) { console.log('Sound error:', e); }
+  } catch (e) {}
 }
 
 function showNotification(title, body) {
   console.log('🔔 Showing notification:', title, body);
-  
-  if (!('Notification' in window)) {
-    console.warn('❌ Notifications not supported');
-    return;
-  }
-  
-  console.log('📋 Permission:', Notification.permission);
-  
+  if (!('Notification' in window)) return;
   if (Notification.permission === 'granted') {
     try {
       if (navigator.serviceWorker && navigator.serviceWorker.controller) {
         navigator.serviceWorker.ready.then(registration => {
           registration.showNotification(title, {
-            body: body,
-            icon: '/icon-512.png',
-            badge: '/icon-512.png',
-            dir: 'rtl',
-            lang: 'fa',
-            tag: 'cv-chat-' + Date.now(),
-            vibrate: [200, 100, 200]
-          }).then(() => console.log('✅ SW Notification sent!'))
-            .catch(err => {
-              console.error('❌ SW Notif error:', err);
-              fallbackNotification(title, body);
-            });
+            body: body, icon: '/icon-512.png', badge: '/icon-512.png',
+            dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now(), vibrate: [200, 100, 200]
+          });
         });
       } else {
         fallbackNotification(title, body);
       }
-    } catch (e) {
-      console.error('❌ Notification error:', e);
-    }
+    } catch (e) { console.error(e); }
   } else if (Notification.permission === 'default') {
-    Notification.requestPermission().then(p => {
-      if (p === 'granted') showNotification(title, body);
-    });
+    Notification.requestPermission().then(p => { if (p === 'granted') showNotification(title, body); });
   }
 }
 
 function fallbackNotification(title, body) {
   try {
-    const notif = new Notification(title, {
-      body: body,
-      icon: 'icon-512.png',
-      dir: 'rtl',
-      lang: 'fa',
-      tag: 'cv-chat-' + Date.now()
-    });
-    console.log('✅ Fallback Notification sent!');
-    notif.onclick = () => {
-      window.focus();
-      notif.close();
-    };
-  } catch (e) {
-    console.error('❌ Fallback Notification error:', e);
-  }
+    const notif = new Notification(title, { body, icon: 'icon-512.png', dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now() });
+    notif.onclick = () => { window.focus(); notif.close(); };
+  } catch (e) { console.error(e); }
 }
 
 function flashPageTitle(newTitle) {
@@ -1055,12 +1037,8 @@ function flashPageTitle(newTitle) {
     document.title = toggle ? newTitle : originalTitle;
     toggle = !toggle;
   }, 1000);
-  
   const stopFlash = () => {
-    if (titleFlashInterval) {
-      clearInterval(titleFlashInterval);
-      titleFlashInterval = null;
-    }
+    if (titleFlashInterval) { clearInterval(titleFlashInterval); titleFlashInterval = null; }
     document.title = originalTitle;
     window.removeEventListener('focus', stopFlash);
   };
@@ -1081,10 +1059,7 @@ async function compressAndUpload(file) {
   return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 }
 
-function handleImages(event) {
-  selectedImages = [...selectedImages, ...Array.from(event.target.files)];
-  renderImagePreviews();
-}
+function handleImages(event) { selectedImages = [...selectedImages, ...Array.from(event.target.files)]; renderImagePreviews(); }
 function renderImagePreviews() {
   const preview = document.getElementById('imagesPreview');
   preview.innerHTML = '';
@@ -1103,18 +1078,14 @@ async function addProduct() {
   const price = document.getElementById('pPrice').value.trim();
   const cat = document.getElementById('pCategory').value;
   if (!title || !price) { showStatus('❌ عنوان و قیمت اجباری!', 'error'); return; }
-
   const btn = document.getElementById('addBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ ذخیره...';
-
+  btn.disabled = true; btn.textContent = '⏳ ذخیره...';
   try {
     let imageUrls = [];
     if (selectedImages.length > 0) {
-      showStatus('⏳ فشرده‌سازی و آپلود عکس‌ها...', 'loading');
+      showStatus('⏳ آپلود عکس‌ها...', 'loading');
       imageUrls = await Promise.all(selectedImages.map(compressAndUpload));
     }
-
     const product = {
       title, slogan: document.getElementById('pSlogan').value.trim(), category: cat,
       account_code: document.getElementById('pCode').value.trim(),
@@ -1123,7 +1094,6 @@ async function addProduct() {
       description: document.getElementById('pDesc').value.trim(),
       status: document.getElementById('pStatus').value, images: imageUrls
     };
-
     if (cat === 'کلش') {
       product.town_hall = parseInt(document.getElementById('pTownHall').value) || null;
       product.builder_level = parseInt(document.getElementById('pBuilder').value) || null;
@@ -1154,17 +1124,14 @@ async function addProduct() {
       product.item_type = document.getElementById('pFree1').value.trim();
       product.item_amount = document.getElementById('pFree2').value.trim();
     }
-
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
       method: 'POST',
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
       body: JSON.stringify(product)
     });
-
     if (res.ok) {
       const result = await res.json();
       showStatus('🎉 محصول ثبت شد!', 'success');
-      
       const customFields = getCustomFields();
       if (customFields.length > 0 && result && result[0]) {
         const productId = result[0].id;
@@ -1176,14 +1143,11 @@ async function addProduct() {
           });
         }
       }
-      
       ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pGems','pStarBonus','pBuilderCount','pRank','pPlayerLevel','pSkins','pCp','pBattlePass','pMythic','pLegendary','pItemType','pItemAmount','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = '';
       });
-      
       document.getElementById('customFieldsContainer').innerHTML = '';
       customFieldsCount = 0;
-      
       selectedImages = []; renderImagePreviews(); loadProducts();
     } else { showStatus('❌ خطا', 'error'); }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
@@ -1219,10 +1183,7 @@ function renderProducts(products) {
       <div class="product-item">
         ${img}
         <div class="product-details"><h4>${p.title}</h4><p>${p.category} | کد: ${p.account_code || '-'}</p></div>
-        <div class="product-price">
-          ${Number(p.price).toLocaleString('fa-IR')} ت
-          ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}
-        </div>
+        <div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}</div>
         <span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">${statusIcon} ${p.status}</span>
         <div class="product-actions">
           <button class="btn-icon" onclick="openEditModal(${p.id})">✏️</button>
@@ -1238,7 +1199,6 @@ async function toggleStatus(id, currentStatus) {
   if (currentStatus === 'موجود') newStatus = 'فروش رفته';
   else if (currentStatus === 'فروش رفته') newStatus = 'ناموجود';
   else newStatus = 'موجود';
-
   const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
     method: 'PATCH',
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
@@ -1250,7 +1210,6 @@ async function toggleStatus(id, currentStatus) {
 function openEditModal(id) {
   const p = allProductsData.find(x => x.id === id);
   if (!p) return;
-
   document.getElementById('editId').value = p.id;
   document.getElementById('editTitle').value = p.title || '';
   document.getElementById('editSlogan').value = p.slogan || '';
@@ -1275,7 +1234,6 @@ function openEditModal(id) {
   document.getElementById('editPriceUsd').value = p.price_usd || '';
   document.getElementById('editStatus').value = p.status || 'موجود';
   document.getElementById('editDesc').value = p.description || '';
-
   const images = p.images || [];
   document.getElementById('editImages').value = JSON.stringify(images);
   renderExistingImages(images);
@@ -1285,31 +1243,19 @@ function openEditModal(id) {
 
 function renderExistingImages(images) {
   const container = document.getElementById('existingImages');
-  if (!images || images.length === 0) {
-    container.innerHTML = '<p style="color:#666;font-size:0.85rem;">عکسی نداره</p>';
-    return;
-  }
+  if (!images || images.length === 0) { container.innerHTML = '<p style="color:#666;font-size:0.85rem;">عکسی نداره</p>'; return; }
   container.innerHTML = images.map((img, i) => `
-    <div class="existing-img-item">
-      <img src="${img}">
-      <button class="delete-img" onclick="removeExistingImage(${i})">×</button>
-    </div>
+    <div class="existing-img-item"><img src="${img}"><button class="delete-img" onclick="removeExistingImage(${i})">×</button></div>
   `).join('');
 }
-
 function removeExistingImage(index) {
   const images = JSON.parse(document.getElementById('editImages').value);
   images.splice(index, 1);
   document.getElementById('editImages').value = JSON.stringify(images);
   renderExistingImages(images);
 }
-
 function closeEditModal() { document.getElementById('editModal').classList.remove('show'); }
-
-function handleEditImages(event) {
-  editNewImages = [...editNewImages, ...Array.from(event.target.files)];
-  renderEditImagesPreview();
-}
+function handleEditImages(event) { editNewImages = [...editNewImages, ...Array.from(event.target.files)]; renderEditImagesPreview(); }
 function renderEditImagesPreview() {
   const preview = document.getElementById('editImagesPreview');
   preview.innerHTML = '';
@@ -1328,10 +1274,8 @@ async function saveEdit() {
   const title = document.getElementById('editTitle').value.trim();
   const price = document.getElementById('editPrice').value.trim();
   if (!title || !price) { alert('عنوان و قیمت اجباری!'); return; }
-
   const btn = document.getElementById('saveEditBtn');
   btn.disabled = true; btn.textContent = '⏳ ذخیره...';
-
   try {
     let existingImages = JSON.parse(document.getElementById('editImages').value);
     if (editNewImages.length > 0) {
@@ -1339,7 +1283,6 @@ async function saveEdit() {
       const newUrls = await Promise.all(editNewImages.map(compressAndUpload));
       existingImages = [...existingImages, ...newUrls];
     }
-
     const updateData = {
       title, slogan: document.getElementById('editSlogan').value.trim(),
       category: document.getElementById('editCategory').value,
@@ -1365,13 +1308,11 @@ async function saveEdit() {
       description: document.getElementById('editDesc').value.trim(),
       images: existingImages
     };
-
     const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
       method: 'PATCH',
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(updateData)
     });
-
     if (res.ok) { showStatus('🎉 ذخیره شد!', 'success'); closeEditModal(); loadProducts(); }
     else { alert('خطا'); }
   } catch (err) { alert('خطا: ' + err.message); }
@@ -1422,21 +1363,15 @@ function changeCredentials() {
   const newUser = document.getElementById('newUsername').value.trim();
   const newPass = document.getElementById('newPassword').value.trim();
   const confirmPass = document.getElementById('confirmPassword').value.trim();
-
   const savedUser = localStorage.getItem('cv_username') || DEFAULT_USERNAME;
   const savedPass = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
-
-  if (currentUser !== savedUser || currentPass !== savedPass) {
-    showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error'); return;
-  }
-  if (!newUser && !newPass) { showStatus('❌ چیزی برای تغییر وارد نکردی!', 'error'); return; }
+  if (currentUser !== savedUser || currentPass !== savedPass) { showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error'); return; }
+  if (!newUser && !newPass) { showStatus('❌ چیزی وارد نکردی!', 'error'); return; }
   if (newPass && newPass !== confirmPass) { showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error'); return; }
-  if (newPass && newPass.length < 4) { showStatus('❌ رمز جدید باید حداقل ۴ کاراکتر باشه!', 'error'); return; }
-
+  if (newPass && newPass.length < 4) { showStatus('❌ رمز باید حداقل ۴ کاراکتر باشه!', 'error'); return; }
   if (newUser) localStorage.setItem('cv_username', newUser);
   if (newPass) localStorage.setItem('cv_password', newPass);
-
-  showStatus('🎉 نام کاربری و رمز عبور تغییر کرد!', 'success');
+  showStatus('🎉 تغییر کرد!', 'success');
   ['currentUsername','currentPassword','newUsername','newPassword','confirmPassword'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -1487,7 +1422,7 @@ function updateUnreadBadge(chats) {
 }
 
 async function deleteChat(id, name) {
-  if (!confirm(`مطمئنی چت "${name}" رو حذف کنی؟\n\nتمام پیام‌ها هم پاک میشن!`)) return;
+  if (!confirm(`مطمئنی چت "${name}" رو حذف کنی؟`)) return;
   try {
     await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${id}`, {
       method: 'DELETE',
@@ -1501,41 +1436,38 @@ async function deleteChat(id, name) {
       showStatus('🗑️ چت حذف شد', 'success');
       if (currentChatId === id) {
         currentChatId = null;
-        document.getElementById('chatMain').innerHTML = `
-          <div class="admin-empty">
-            <div class="icon">💬</div>
-            <h3>یه گفتگو انتخاب کن</h3>
-            <p>از لیست سمت راست، یه مشتری رو انتخاب کن</p>
-          </div>
-        `;
+        document.getElementById('chatMain').innerHTML = `<div class="admin-empty"><div class="icon">💬</div><h3>یه گفتگو انتخاب کن</h3></div>`;
       }
       loadChats();
-    } else { showStatus('❌ خطا در حذف', 'error'); }
+    }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
 
 async function openChat(id, name) {
-  currentChatId = id;
-  currentChatName = name;
-
+  currentChatId = id; currentChatName = name;
   await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, {
     method: 'PATCH',
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ unread_count: 0 })
   });
   loadChats();
-
   const main = document.getElementById('chatMain');
   main.innerHTML = `
-    <div class="chat-main-header">
-      <h3>👤 ${escapeHtml(name)}</h3>
-    </div>
+    <div class="chat-main-header"><h3>👤 ${escapeHtml(name)}</h3></div>
     <div class="chat-main-messages" id="chatMainMessages">
       <div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div>
     </div>
-    <div class="chat-main-input">
+    <div class="chat-main-input" id="chatInputArea">
+      <button type="button" class="mic-btn" id="micBtn" onclick="startRecording()" title="ضبط وییس">🎤</button>
       <input type="text" id="adminChatInput" placeholder="پاسخ بنویس..." onkeypress="if(event.key==='Enter') sendAdminMessage()">
       <button onclick="sendAdminMessage()">📤</button>
+    </div>
+    <div class="voice-recorder" id="voiceRecorder" style="display:none;">
+      <span class="dot-rec"></span>
+      <span class="timer" id="recTimer">0:00</span>
+      <div style="flex:1;"></div>
+      <button class="cancel-rec" onclick="cancelRecording()" title="لغو">✕</button>
+      <button class="send-rec" onclick="stopAndSendVoice()" title="ارسال">📤</button>
     </div>
   `;
   loadChatMessages(id);
@@ -1559,9 +1491,16 @@ function renderChatMessages(messages) {
   }
   container.innerHTML = messages.map(m => {
     const isAdmin = m.sender === 'admin';
+    const isVoice = m.message_type === 'voice' || m.voice_url;
+    let content;
+    if (isVoice && m.voice_url) {
+      content = renderVoicePlayer(m.voice_url, m.voice_duration || 0, isAdmin);
+    } else {
+      content = `<div class="text">${escapeHtml(m.message)}</div>`;
+    }
     return `
       <div class="bubble ${isAdmin ? 'mine' : 'theirs'}">
-        <div class="text">${escapeHtml(m.message)}</div>
+        ${content}
         <div class="time">${formatTime(m.created_at)}</div>
       </div>
     `;
@@ -1577,7 +1516,7 @@ async function sendAdminMessage() {
   await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
     method: 'POST',
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text })
+    body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text, message_type: 'text' })
   });
   await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
     method: 'PATCH',
@@ -1588,41 +1527,144 @@ async function sendAdminMessage() {
   loadChats();
 }
 
+// ===== Voice =====
+async function startRecording() {
+  try {
+    recordingStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 44100 } });
+    audioChunks = [];
+    mediaRecorder = new MediaRecorder(recordingStream, {
+      mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4'
+    });
+    mediaRecorder.ondataavailable = (event) => { if (event.data.size > 0) audioChunks.push(event.data); };
+    mediaRecorder.start();
+    recordingStartTime = Date.now();
+    document.getElementById('chatInputArea').style.display = 'none';
+    document.getElementById('voiceRecorder').style.display = 'flex';
+    recordingTimer = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+      const mins = Math.floor(elapsed / 60);
+      const secs = elapsed % 60;
+      document.getElementById('recTimer').textContent = `${mins}:${String(secs).padStart(2,'0')}`;
+      if (elapsed >= 120) stopAndSendVoice();
+    }, 100);
+  } catch (err) {
+    if (err.name === 'NotAllowedError') alert('❌ دسترسی به میکروفن رد شد!');
+    else alert('❌ خطا: ' + err.message);
+  }
+}
+
+function cancelRecording() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+  if (recordingStream) recordingStream.getTracks().forEach(t => t.stop());
+  if (recordingTimer) { clearInterval(recordingTimer); recordingTimer = null; }
+  audioChunks = [];
+  document.getElementById('voiceRecorder').style.display = 'none';
+  document.getElementById('chatInputArea').style.display = 'flex';
+  document.getElementById('recTimer').textContent = '0:00';
+}
+
+async function stopAndSendVoice() {
+  if (!mediaRecorder || mediaRecorder.state === 'inactive') return;
+  const duration = Math.floor((Date.now() - recordingStartTime) / 1000);
+  return new Promise((resolve) => {
+    mediaRecorder.onstop = async () => {
+      try {
+        const audioBlob = new Blob(audioChunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+        if (recordingStream) recordingStream.getTracks().forEach(t => t.stop());
+        if (recordingTimer) { clearInterval(recordingTimer); recordingTimer = null; }
+        document.getElementById('voiceRecorder').style.display = 'none';
+        document.getElementById('chatInputArea').style.display = 'flex';
+        document.getElementById('recTimer').textContent = '0:00';
+        showStatus('⏳ آپلود وییس...', 'loading');
+        const fileName = `voice-${Date.now()}-${Math.random().toString(36).substr(2, 9)}.webm`;
+        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/voice-messages/${fileName}`, {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': audioBlob.type },
+          body: audioBlob
+        });
+        if (!uploadRes.ok) throw new Error('خطا در آپلود');
+        const voiceUrl = `${SUPABASE_URL}/storage/v1/object/public/voice-messages/${fileName}`;
+        await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: currentChatId, sender: 'admin',
+            message: `🎤 وییس (${duration} ثانیه)`,
+            message_type: 'voice', voice_url: voiceUrl, voice_duration: duration
+          })
+        });
+        await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
+          method: 'PATCH',
+          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ last_message_at: new Date().toISOString() })
+        });
+        showStatus('✅ وییس ارسال شد!', 'success');
+        loadChatMessages(currentChatId);
+        loadChats();
+        resolve();
+      } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); resolve(); }
+    };
+    mediaRecorder.stop();
+  });
+}
+
+function renderVoicePlayer(url, duration, isAdmin) {
+  const bars = Array.from({length: 25}, () => Math.floor(Math.random() * 20) + 4);
+  const barsHtml = bars.map(h => `<div class="bar" style="height: ${h}px;"></div>`).join('');
+  const mins = Math.floor(duration / 60);
+  const secs = duration % 60;
+  const durationText = `${mins}:${String(secs).padStart(2,'0')}`;
+  const playerId = 'voice-' + Math.random().toString(36).substr(2, 9);
+  return `
+    <div class="voice-player" id="${playerId}">
+      <button class="play-btn" onclick="playVoice('${playerId}', '${url}', ${duration})">▶️</button>
+      <div class="waveform">${barsHtml}</div>
+      <span class="duration">${durationText}</span>
+    </div>
+    <audio id="audio-${playerId}" src="${url}" preload="none"></audio>
+  `;
+}
+
+function playVoice(playerId, url, duration) {
+  const audio = document.getElementById('audio-' + playerId);
+  const btn = document.querySelector(`#${playerId} .play-btn`);
+  if (!audio || !btn) return;
+  if (!audio.paused) { audio.pause(); audio.currentTime = 0; btn.textContent = '▶️'; return; }
+  document.querySelectorAll('.voice-player audio').forEach(a => {
+    if (a.id !== 'audio-' + playerId) {
+      a.pause(); a.currentTime = 0;
+      const otherBtn = a.parentElement?.querySelector('.play-btn');
+      if (otherBtn) otherBtn.textContent = '▶️';
+    }
+  });
+  btn.textContent = '⏸️';
+  audio.play();
+  audio.onended = () => { btn.textContent = '▶️'; audio.currentTime = 0; };
+  audio.onerror = () => { btn.textContent = '▶️'; alert('❌ خطا در پخش'); };
+}
+
 function subscribeToChats() {
   if (chatsChannel) return;
-  
   console.log('🔔 Starting chat subscription...');
-  
   chatsChannel = supabaseClient
     .channel('admin-chats')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, (payload) => {
-      console.log('📋 Chat updated:', payload.eventType);
-      loadChats();
-    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
       const newMsg = payload.new;
-      console.log('💬 New message:', newMsg);
-      
       if (newMsg && newMsg.sender === 'visitor') {
         const chat = allChatsData?.find(c => c.id === newMsg.chat_id);
         const visitorName = chat?.visitor_name || 'کاربر';
-        
-        console.log('🔔 Visitor message from:', visitorName);
-        
         playNotificationSound();
         showNotification(`💬 پیام جدید از ${visitorName}`, newMsg.message || 'پیام جدید');
         flashPageTitle(`💬 پیام جدید از ${visitorName}`);
-        
-        if (currentChatId !== newMsg.chat_id) {
-          incrementUnread(newMsg.chat_id);
-        }
+        if (currentChatId !== newMsg.chat_id) incrementUnread(newMsg.chat_id);
       }
-      
       if (currentChatId) loadChatMessages(currentChatId);
       loadChats();
     })
-    .subscribe((status) => {
+    .subscribe((status, err) => {
       console.log('📡 Subscription status:', status);
+      if (err) console.error('Error:', err);
     });
 }
 
@@ -1643,21 +1685,12 @@ function subscribeToChatMessages(chatId) {
   if (messagesChannel) supabaseClient.removeChannel(messagesChannel);
   messagesChannel = supabaseClient
     .channel('admin-chat-' + chatId)
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `chat_id=eq.${chatId}` },
-      () => loadChatMessages(chatId))
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `chat_id=eq.${chatId}` }, () => loadChatMessages(chatId))
     .subscribe();
 }
 
-function escapeHtml(text) {
-  if (!text) return '';
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-function formatTime(iso) {
-  const d = new Date(iso);
-  return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
-}
+function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+function formatTime(iso) { const d = new Date(iso); return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); }
 
 updateCategoryFields();
 </script>
