@@ -24,6 +24,38 @@
 html { scroll-behavior: smooth; }
 body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-height: 1.7; overflow-x: hidden; }
 
+.loader {
+  position: fixed; inset: 0; background: var(--bg-dark);
+  display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 25px;
+  z-index: 99999; transition: opacity 0.5s, visibility 0.5s;
+}
+.loader.hide { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-size: clamp(1.5rem, 6vw, 3rem); font-weight: 900;
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--pink) 100%);
+  background-size: 200% 200%; -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; letter-spacing: 2px;
+  animation: gradientMove 2s ease infinite;
+}
+.loader-bar {
+  width: 180px; height: 3px; background: rgba(255,255,255,0.1);
+  border-radius: 10px; overflow: hidden; position: relative;
+}
+.loader-bar::after {
+  content: ''; position: absolute; left: 0; top: 0; height: 100%;
+  width: 30%; background: linear-gradient(90deg, var(--cyan), var(--purple));
+  border-radius: 10px; animation: loadingBar 1.2s ease-in-out infinite;
+}
+@keyframes loadingBar {
+  0% { left: 0; width: 30%; }
+  50% { width: 60%; }
+  100% { left: 100%; width: 30%; }
+}
+
+#particles-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none;
+}
 .bg-glow { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
 .bg-glow::before, .bg-glow::after {
   content: ''; position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.35;
@@ -32,11 +64,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-h
 .bg-glow::before { width: 400px; height: 400px; background: var(--cyan); top: -100px; right: -100px; }
 .bg-glow::after { width: 500px; height: 500px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -7s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.15);} }
-
-#particles-canvas {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -1; pointer-events: none;
-}
 
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -335,6 +362,11 @@ footer {
 </head>
 <body>
 
+<div class="loader" id="loader">
+  <div class="loader-logo">𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</div>
+  <div class="loader-bar"></div>
+</div>
+
 <div class="bg-glow"></div>
 <canvas id="particles-canvas"></canvas>
 
@@ -523,7 +555,14 @@ footer {
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 
-// تایپ اسم سایت
+// Loader
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 800);
+});
+
+// Typing
 function typeTitle() {
   const el = document.getElementById('typingTitle');
   if (!el) return;
@@ -539,14 +578,103 @@ function typeTitle() {
     }
   }, 100);
 }
-setTimeout(typeTitle, 800);
+setTimeout(typeTitle, 1000);
 
-// شمارنده‌های آمار
+// Particles
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1.8 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.color = Math.random() > 0.5 ? '0,255,231' : '168,85,247';
+  }
+  update() {
+    this.x += this.speedX; this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    if (mouse.x && mouse.y) {
+      const dx = mouse.x - this.x, dy = mouse.y - this.y;
+      const distSq = dx * dx + dy * dy;
+      if (distSq < 10000) { this.x -= dx / 50; this.y -= dy / 50; }
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color}, 0.6)`;
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particles = [];
+  const count = window.innerWidth < 768 ? 18 : 45;
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+initParticles();
+
+function connectParticles() {
+  const maxDistSq = 9000;
+  for (let a = 0; a < particles.length; a++) {
+    for (let b = a + 1; b < particles.length; b++) {
+      const dx = particles[a].x - particles[b].x;
+      const dy = particles[a].y - particles[b].y;
+      const distSq = dx * dx + dy * dy;
+      if (distSq < maxDistSq) {
+        const dist = Math.sqrt(distSq);
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(0,255,231,${0.12 * (1 - dist / 95)})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[a].x, particles[a].y);
+        ctx.lineTo(particles[b].x, particles[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+let lastFrameTime = 0;
+function animateParticles(timestamp) {
+  if (timestamp - lastFrameTime < 50) {
+    requestAnimationFrame(animateParticles);
+    return;
+  }
+  lastFrameTime = timestamp;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  connectParticles();
+  requestAnimationFrame(animateParticles);
+}
+requestAnimationFrame(animateParticles);
+
+window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+// Reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('active');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Counters
 function animateCounter(el) {
   const target = +el.dataset.target;
   const suffix = el.dataset.suffix || '';
   let count = 0;
-  const step = target / 50;
+  const step = target / 40;
   const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
   const timer = setInterval(() => {
     count += step;
@@ -557,11 +685,11 @@ function animateCounter(el) {
 }
 setTimeout(() => {
   document.querySelectorAll('.num[data-target]').forEach((el, i) => {
-    setTimeout(() => animateCounter(el), i * 200);
+    setTimeout(() => animateCounter(el), i * 150);
   });
 }, 1500);
 
-// لود اطلاعات تماس
+// Load Contact
 async function loadContact() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
@@ -593,8 +721,6 @@ async function loadContact() {
 
 loadContact();
 </script>
-
-<script src="effects.js"></script>
 
 <!-- Statsfa Website Analytics Start -->
 <script data-host="https://statsfa.com" data-dnt="false" src="https://statsfa.com/js/script.js" id="ZwSg9rf6GA" async defer></script>
