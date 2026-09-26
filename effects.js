@@ -1,9 +1,11 @@
 // ==========================================
-// Capitan Vexor - Effects Library
+// Capitan Vexor - Effects Library v2
 // ==========================================
 
 // ===== 1. Loader سینمایی =====
 (function() {
+  if (sessionStorage.getItem('cv_loader_seen')) return;
+  
   const loaderHTML = `
     <div id="cv-loader">
       <div class="cv-loader-content">
@@ -18,7 +20,6 @@
 
   const styleHTML = `
     <style id="cv-effects-style">
-      /* ==== Loader ==== */
       #cv-loader {
         position: fixed; inset: 0; z-index: 999999;
         background: #0a0a0f;
@@ -67,7 +68,6 @@
         box-shadow: 0 0 15px #00ffe7;
       }
 
-      /* ==== Custom Cursor ==== */
       .cv-cursor {
         position: fixed; width: 40px; height: 40px;
         border: 2px solid #00ffe7; border-radius: 50%;
@@ -92,7 +92,6 @@
         .cv-cursor, .cv-cursor-dot { display: none; }
       }
 
-      /* ==== Click Ripple ==== */
       .cv-ripple {
         position: fixed; width: 20px; height: 20px;
         border: 2px solid #00ffe7; border-radius: 50%;
@@ -105,18 +104,18 @@
         100% { width: 150px; height: 150px; opacity: 0; }
       }
 
-      /* ==== Welcome Popup ==== */
       .cv-popup {
         position: fixed; bottom: 30px; right: 30px;
         background: linear-gradient(135deg, rgba(15,15,25,0.98), rgba(20,20,35,0.98));
         border: 1px solid rgba(0,255,231,0.3);
-        border-radius: 20px; padding: 20px 25px;
+        border-radius: 20px; padding: 20px 45px 20px 25px;
         box-shadow: 0 25px 60px rgba(0,255,231,0.3);
         backdrop-filter: blur(20px);
         z-index: 99997; max-width: 350px;
         transform: translateX(500px);
         transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         display: flex; align-items: center; gap: 15px;
+        position: fixed;
       }
       .cv-popup.show { transform: translateX(0); }
       .cv-popup-icon { font-size: 2.5rem; flex-shrink: 0; }
@@ -138,7 +137,6 @@
         .cv-popup { bottom: 20px; right: 20px; left: 20px; max-width: none; }
       }
 
-      /* ==== Toast Notification ==== */
       .cv-toast {
         position: fixed; top: 80px; left: 50%;
         transform: translateX(-50%) translateY(-100px);
@@ -154,50 +152,43 @@
       .cv-toast.show { transform: translateX(-50%) translateY(0); }
       .cv-toast.error { border-color: #ff3860; box-shadow: 0 20px 50px rgba(255,56,96,0.4); }
 
-      /* ==== Section Reveal ==== */
       .cv-reveal {
         opacity: 0; transform: translateY(60px);
         transition: opacity 0.8s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .cv-reveal.cv-visible { opacity: 1; transform: translateY(0); }
 
-      /* ==== Gradient Text Animation ==== */
-      .cv-gradient-text {
-        background: linear-gradient(90deg, #00ffe7, #a855f7, #ff2ec4, #00ffe7);
-        background-size: 300% 300%;
-        -webkit-background-clip: text; background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: cv-gradient 4s ease infinite;
-      }
-
-      /* ==== Tilt Cards ==== */
       .cv-tilt { transition: transform 0.3s; transform-style: preserve-3d; }
     </style>
   `;
   document.head.insertAdjacentHTML('beforeend', styleHTML);
 
-  // شمارنده لودر
   let progress = 0;
   const counter = document.querySelector('.cv-loader-counter');
   const barFill = document.querySelector('.cv-loader-bar-fill');
   const interval = setInterval(() => {
-    progress += Math.random() * 15;
+    progress += Math.random() * 20;
     if (progress >= 100) {
       progress = 100;
       clearInterval(interval);
       setTimeout(() => {
-        document.getElementById('cv-loader').classList.add('hide');
-        setTimeout(() => document.getElementById('cv-loader')?.remove(), 700);
-      }, 300);
+        const loader = document.getElementById('cv-loader');
+        if (loader) {
+          loader.classList.add('hide');
+          sessionStorage.setItem('cv_loader_seen', 'true');
+          setTimeout(() => loader.remove(), 700);
+        }
+      }, 400);
     }
     if (counter) counter.textContent = Math.floor(progress).toLocaleString('fa-IR') + '٪';
     if (barFill) barFill.style.width = progress + '%';
-  }, 100);
+  }, 150);
 })();
 
 // ===== 2. موس تعاملی =====
 (function() {
   if (window.innerWidth < 768) return;
+  if (document.querySelector('.cv-cursor')) return;
   
   const cursor = document.createElement('div');
   cursor.className = 'cv-cursor';
@@ -226,7 +217,7 @@
   animate();
 
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('button, a, .category-card, .float-btn, .stat-box, .product-card, .tab')) {
+    if (e.target.closest('button, a, .category-card, .float-btn, .stat-box, .product-card, .tab, .btn-buy, .btn-action')) {
       cursor.classList.add('hover');
     } else {
       cursor.classList.remove('hover');
@@ -338,6 +329,7 @@
 // ===== 5. Popup خوش‌آمد =====
 (function() {
   if (sessionStorage.getItem('cv_popup_seen')) return;
+  if (document.querySelector('.cv-popup')) return;
   
   setTimeout(() => {
     const popup = document.createElement('div');
@@ -378,14 +370,20 @@
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal, section, .category-card, .feature, .stat-box').forEach(el => {
-    el.classList.add('cv-reveal');
-    observer.observe(el);
+  
+  document.querySelectorAll('section, .category-card, .feature, .stat-box, .product-card, .step, .guarantee').forEach(el => {
+    if (!el.classList.contains('cv-reveal')) {
+      el.classList.add('cv-reveal');
+      observer.observe(el);
+    }
   });
 })();
 
 // ===== 7. Toast Notification =====
 window.cvToast = function(msg, isError = false) {
+  const existing = document.querySelector('.cv-toast');
+  if (existing) existing.remove();
+  
   const toast = document.createElement('div');
   toast.className = 'cv-toast' + (isError ? ' error' : '');
   toast.textContent = msg;
@@ -401,35 +399,47 @@ window.cvToast = function(msg, isError = false) {
 (function() {
   if (window.innerWidth < 768) return;
   
-  document.querySelectorAll('.category-card, .product-card').forEach(card => {
-    card.classList.add('cv-tilt');
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+  function applyTilt() {
+    document.querySelectorAll('.category-card, .product-card').forEach(card => {
+      if (card.dataset.tiltApplied) return;
+      card.dataset.tiltApplied = 'true';
+      card.classList.add('cv-tilt');
+      
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
+  }
+  
+  applyTilt();
+  setTimeout(applyTilt, 500);
+  setTimeout(applyTilt, 1500);
 })();
 
 // ===== 9. Transition بین صفحات =====
 (function() {
-  document.querySelectorAll('a[href$=".html"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('http')) return;
-      e.preventDefault();
-      document.body.style.transition = 'opacity 0.3s';
-      document.body.style.opacity = '0';
-      setTimeout(() => window.location.href = href, 300);
-    });
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:')) return;
+    if (!href.endsWith('.html') && !href.includes('.html?')) return;
+    if (link.target === '_blank') return;
+    
+    e.preventDefault();
+    document.body.style.transition = 'opacity 0.3s';
+    document.body.style.opacity = '0';
+    setTimeout(() => window.location.href = href, 300);
   });
 })();
 
