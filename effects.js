@@ -1,5 +1,5 @@
 // ==========================================
-// Capitan Vexor - Effects Library v2
+// Capitan Vexor - Effects Library v3
 // ==========================================
 
 // ===== 1. Loader سینمایی =====
@@ -115,7 +115,6 @@
         transform: translateX(500px);
         transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         display: flex; align-items: center; gap: 15px;
-        position: fixed;
       }
       .cv-popup.show { transform: translateX(0); }
       .cv-popup-icon { font-size: 2.5rem; flex-shrink: 0; }
@@ -152,11 +151,20 @@
       .cv-toast.show { transform: translateX(-50%) translateY(0); }
       .cv-toast.error { border-color: #ff3860; box-shadow: 0 20px 50px rgba(255,56,96,0.4); }
 
+      /* ==== Reveal (با فورس‌شو) ==== */
       .cv-reveal {
-        opacity: 0; transform: translateY(60px);
-        transition: opacity 0.8s, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0; transform: translateY(40px);
+        transition: opacity 0.7s, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: cv-force-show 0.8s 1.5s forwards;
       }
-      .cv-reveal.cv-visible { opacity: 1; transform: translateY(0); }
+      .cv-reveal.cv-visible {
+        opacity: 1;
+        transform: translateY(0);
+        animation: none;
+      }
+      @keyframes cv-force-show {
+        to { opacity: 1; transform: translateY(0); }
+      }
 
       .cv-tilt { transition: transform 0.3s; transform-style: preserve-3d; }
     </style>
@@ -361,21 +369,33 @@
   }, 3000);
 })();
 
-// ===== 6. Reveal on Scroll =====
+// ===== 6. Reveal on Scroll (فقط بخش‌ها، نه کارت‌ها) =====
 (function() {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('cv-visible'), i * 100);
+        entry.target.classList.add('cv-visible');
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05 });
   
-  document.querySelectorAll('section, .category-card, .feature, .stat-box, .product-card, .step, .guarantee').forEach(el => {
-    if (!el.classList.contains('cv-reveal')) {
-      el.classList.add('cv-reveal');
-      observer.observe(el);
-    }
+  // فقط section هایی که کارت دارن رو اسکیپ کن
+  document.querySelectorAll('section').forEach(el => {
+    if (el.querySelector('.category-card, .product-card')) return;
+    el.classList.add('cv-reveal');
+    observer.observe(el);
+  });
+  
+  // feature ها
+  document.querySelectorAll('.feature').forEach(el => {
+    el.classList.add('cv-reveal');
+    observer.observe(el);
+  });
+  
+  // stat-box ها
+  document.querySelectorAll('.stat-box').forEach(el => {
+    el.classList.add('cv-reveal');
+    observer.observe(el);
   });
 })();
 
@@ -458,4 +478,4 @@ window.cvType = function(el, text, speed = 80) {
   }, speed);
 };
 
-console.log('🎨 Capitan Vexor Effects Loaded!');
+console.log('🎨 Capitan Vexor Effects v3 Loaded!');
