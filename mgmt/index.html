@@ -25,41 +25,22 @@
 }
 body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 .bg-glow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.bg-glow::before, .bg-glow::after {
-  content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.4;
-  animation: float 12s ease-in-out infinite;
-}
+.bg-glow::before, .bg-glow::after { content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.4; animation: float 12s ease-in-out infinite; }
 .bg-glow::before { width: 500px; height: 500px; background: var(--cyan); top: -100px; right: -100px; }
 .bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -6s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
 
 .login-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-.login-box {
-  background: var(--glass); border: 1px solid var(--border); border-radius: 25px;
-  padding: 45px 35px; backdrop-filter: blur(20px); width: 100%; max-width: 420px;
-  text-align: center; box-shadow: 0 25px 60px rgba(0,255,231,0.1);
-}
+.login-box { background: var(--glass); border: 1px solid var(--border); border-radius: 25px; padding: 45px 35px; backdrop-filter: blur(20px); width: 100%; max-width: 420px; text-align: center; box-shadow: 0 25px 60px rgba(0,255,231,0.1); }
 .login-icon { font-size: 4rem; margin-bottom: 15px; filter: drop-shadow(0 0 25px var(--cyan)); animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
-.login-box h1 {
-  font-size: 1.5rem; margin-bottom: 8px;
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;
-}
+.login-box h1 { font-size: 1.5rem; margin-bottom: 8px; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
 .login-box .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 30px; }
 .input-group { position: relative; margin-bottom: 18px; }
-.input-group input {
-  width: 100%; padding: 15px 45px 15px 18px;
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px;
-  color: var(--text); font-size: 1rem; outline: none; transition: 0.3s; font-family: inherit;
-}
+.input-group input { width: 100%; padding: 15px 45px 15px 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 1rem; outline: none; transition: 0.3s; font-family: inherit; }
 .input-group input:focus { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,255,231,0.3); }
 .input-group .icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; opacity: 0.6; }
-.login-btn {
-  width: 100%; padding: 15px; background: linear-gradient(90deg, var(--cyan), var(--purple));
-  color: #0a0a0f; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700;
-  cursor: pointer; transition: 0.3s; font-family: inherit; margin-top: 10px; box-shadow: 0 0 25px rgba(0,255,231,0.4);
-}
+.login-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; margin-top: 10px; box-shadow: 0 0 25px rgba(0,255,231,0.4); }
 .login-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,255,231,0.7); }
 .error-msg { background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); padding: 12px; border-radius: 10px; margin-top: 15px; font-size: 0.9rem; display: none; }
 .error-msg.show { display: block; }
@@ -68,133 +49,61 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 
 .dashboard { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
 .dashboard.active { display: block; }
-.dash-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 20px; background: var(--glass); border: 1px solid var(--border);
-  border-radius: 18px; margin-bottom: 25px; backdrop-filter: blur(20px);
-  flex-wrap: wrap; gap: 15px;
-}
-.dash-header h1 {
-  font-size: 1.3rem; background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;
-}
-.logout-btn {
-  padding: 10px 20px; background: rgba(255,56,96,0.15); border: 1px solid var(--danger);
-  color: var(--danger); border-radius: 10px; cursor: pointer; font-family: inherit;
-  font-weight: 600; transition: 0.3s; font-size: 0.85rem;
-}
+.dash-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: var(--glass); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 25px; backdrop-filter: blur(20px); flex-wrap: wrap; gap: 15px; }
+.dash-header h1 { font-size: 1.3rem; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+.logout-btn { padding: 10px 20px; background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; cursor: pointer; font-family: inherit; font-weight: 600; transition: 0.3s; font-size: 0.85rem; }
 .logout-btn:hover { background: var(--danger); color: white; }
 
 .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.tab {
-  padding: 12px 22px; background: var(--glass); border: 1px solid var(--border);
-  border-radius: 12px; cursor: pointer; transition: 0.3s; font-family: inherit;
-  color: var(--text-dim); font-weight: 600; font-size: 0.9rem; position: relative;
-  display: flex; align-items: center; gap: 8px;
-}
+.tab { padding: 12px 22px; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; transition: 0.3s; font-family: inherit; color: var(--text-dim); font-weight: 600; font-size: 0.9rem; position: relative; display: flex; align-items: center; gap: 8px; }
 .tab:hover { color: var(--cyan); border-color: var(--cyan); }
-.tab.active {
-  background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15));
-  color: var(--cyan); border-color: var(--cyan);
-}
-.tab-badge {
-  background: var(--danger); color: white; font-size: 0.7rem; font-weight: 700;
-  padding: 2px 8px; border-radius: 50px; min-width: 20px; text-align: center;
-  animation: pulse 1.5s infinite;
-}
+.tab.active { background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15)); color: var(--cyan); border-color: var(--cyan); }
+.tab-badge { background: var(--danger); color: white; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 50px; min-width: 20px; text-align: center; animation: pulse 1.5s infinite; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-.card {
-  background: var(--glass); border: 1px solid var(--border); border-radius: 20px;
-  padding: 25px; backdrop-filter: blur(20px); margin-bottom: 20px;
-}
-.card-title {
-  font-size: 1.1rem; font-weight: 700; color: var(--cyan);
-  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
-}
+.card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; padding: 25px; backdrop-filter: blur(20px); margin-bottom: 20px; }
+.card-title { font-size: 1.1rem; font-weight: 700; color: var(--cyan); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
 .form-group { margin-bottom: 15px; }
-.form-group label {
-  display: block; font-size: 0.85rem; color: var(--text-dim);
-  margin-bottom: 6px; font-weight: 600;
-}
-.form-group input, .form-group textarea, .form-group select {
-  width: 100%; padding: 13px 16px; background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border); border-radius: 10px;
-  color: var(--text); font-size: 0.95rem; outline: none; transition: 0.3s; font-family: inherit;
-}
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-  border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.2);
-}
+.form-group label { display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 13px 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 0.95rem; outline: none; transition: 0.3s; font-family: inherit; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.2); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 .form-row.three { grid-template-columns: 1fr 1fr 1fr; }
 
-.save-btn {
-  width: 100%; padding: 14px; background: linear-gradient(90deg, var(--cyan), var(--purple));
-  color: #0a0a0f; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700;
-  cursor: pointer; transition: 0.3s; font-family: inherit; box-shadow: 0 0 25px rgba(0,255,231,0.4);
-}
+.save-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; box-shadow: 0 0 25px rgba(0,255,231,0.4); }
 .save-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,255,231,0.7); }
 .save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.upload-area {
-  border: 2px dashed var(--border); border-radius: 12px; padding: 30px 20px;
-  text-align: center; cursor: pointer; transition: 0.3s; background: rgba(0,0,0,0.2);
-}
+.upload-area { border: 2px dashed var(--border); border-radius: 12px; padding: 30px 20px; text-align: center; cursor: pointer; transition: 0.3s; background: rgba(0,0,0,0.2); }
 .upload-area:hover { border-color: var(--cyan); background: rgba(0,255,231,0.05); }
 .upload-area .icon { font-size: 3rem; margin-bottom: 10px; }
 .upload-area p { color: var(--text-dim); font-size: 0.9rem; }
 .upload-area input { display: none; }
 .images-preview { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-.img-preview-item {
-  position: relative; width: 80px; height: 80px; border-radius: 10px;
-  overflow: hidden; border: 2px solid var(--border);
-}
+.img-preview-item { position: relative; width: 80px; height: 80px; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); }
 .img-preview-item img { width: 100%; height: 100%; object-fit: cover; }
-.img-preview-item .remove {
-  position: absolute; top: 3px; right: 3px; background: rgba(255,56,96,0.9);
-  color: white; border: none; border-radius: 50%; width: 22px; height: 22px;
-  cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center;
-}
+.img-preview-item .remove { position: absolute; top: 3px; right: 3px; background: rgba(255,56,96,0.9); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
 
-.status {
-  padding: 15px 20px; border-radius: 12px; margin-bottom: 20px;
-  font-weight: 600; display: none; align-items: center; gap: 10px;
-}
+.status { padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; font-weight: 600; display: none; align-items: center; gap: 10px; }
 .status.show { display: flex; }
 .status.success { background: rgba(16,185,129,0.15); border: 1px solid var(--success); color: var(--success); }
 .status.error { background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); }
 .status.loading { background: rgba(0,255,231,0.1); border: 1px solid var(--cyan); color: var(--cyan); }
 
 .products-list { display: grid; gap: 12px; }
-.product-item {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border);
-  border-radius: 12px; padding: 15px;
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 15px; flex-wrap: wrap; transition: 0.3s;
-}
+.product-item { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; transition: 0.3s; }
 .product-item:hover { border-color: var(--cyan); }
-.product-thumb {
-  width: 60px; height: 60px; border-radius: 10px; object-fit: cover;
-  border: 1px solid var(--border);
-}
+.product-thumb { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border); }
 .product-details h4 { font-size: 1rem; margin-bottom: 3px; }
 .product-details p { font-size: 0.8rem; color: var(--text-dim); }
 .product-price { color: var(--cyan); font-weight: 700; font-size: 0.9rem; }
 .product-actions { display: flex; gap: 8px; }
-.btn-icon {
-  width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border);
-  background: transparent; color: var(--text); cursor: pointer; transition: 0.3s;
-  font-size: 1rem; display: flex; align-items: center; justify-content: center;
-}
+.btn-icon { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; transition: 0.3s; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
 .btn-icon:hover { background: rgba(0,255,231,0.1); border-color: var(--cyan); }
 .btn-icon.danger:hover { background: rgba(255,56,96,0.15); border-color: var(--danger); color: var(--danger); }
 
-.status-badge {
-  padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
-  cursor: pointer; transition: 0.3s; border: 1px solid;
-  display: inline-flex; align-items: center; gap: 5px;
-}
+.status-badge { padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: 0.3s; border: 1px solid; display: inline-flex; align-items: center; gap: 5px; }
 .status-badge.available { background: rgba(16,185,129,0.15); color: var(--success); border-color: var(--success); }
 .status-badge.sold { background: rgba(255,56,96,0.15); color: var(--danger); border-color: var(--danger); }
 .status-badge.unavailable { background: rgba(100,100,100,0.15); color: #999; border-color: #666; }
@@ -204,287 +113,93 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .empty-state .icon { font-size: 3rem; margin-bottom: 10px; opacity: 0.5; }
 
 .chat-wrap { display: grid; grid-template-columns: 320px 1fr; gap: 15px; height: 620px; }
-.chat-list-sidebar {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px;
-  overflow-y: auto; padding: 10px;
-}
-.chat-list-item {
-  padding: 12px 14px; border-radius: 12px; cursor: pointer; transition: 0.3s;
-  border: 1px solid transparent; margin-bottom: 8px; position: relative;
-}
+.chat-list-sidebar { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px; overflow-y: auto; padding: 10px; }
+.chat-list-item { padding: 12px 14px; border-radius: 12px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; margin-bottom: 8px; position: relative; }
 .chat-list-item:hover { background: rgba(0,255,231,0.05); border-color: var(--border); }
-.chat-list-item.active {
-  background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1));
-  border-color: var(--cyan);
-}
+.chat-list-item.active { background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1)); border-color: var(--cyan); }
 .chat-list-item .name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
 .chat-list-item .name-text { display: flex; align-items: center; gap: 6px; }
 .chat-list-item .preview { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .chat-list-item .time { font-size: 0.7rem; color: #666; margin-top: 4px; }
-.delete-chat-btn {
-  background: rgba(255,56,96,0.1); border: 1px solid rgba(255,56,96,0.3);
-  color: var(--danger); border-radius: 8px; width: 26px; height: 26px;
-  font-size: 0.75rem; cursor: pointer; display: flex;
-  align-items: center; justify-content: center; transition: 0.3s; padding: 0;
-}
+.delete-chat-btn { background: rgba(255,56,96,0.1); border: 1px solid rgba(255,56,96,0.3); color: var(--danger); border-radius: 8px; width: 26px; height: 26px; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; padding: 0; }
 .delete-chat-btn:hover { background: var(--danger); color: white; transform: scale(1.15); box-shadow: 0 0 10px rgba(255,56,96,0.6); }
 
-.unread-badge {
-  background: linear-gradient(135deg, #ff3860, #ff0055);
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 50px;
-  min-width: 22px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(255,56,96,0.8);
-  animation: unreadPulse 1.5s ease-in-out infinite;
-}
-@keyframes unreadPulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,56,96,0.8); }
-  50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,56,96,1); }
-}
-.chat-list-item.has-unread {
-  background: rgba(255,56,96,0.08);
-  border-color: rgba(255,56,96,0.4) !important;
-}
-.chat-list-item.has-unread .name-text {
-  color: #ff3860;
-  font-weight: 800;
-}
+.unread-badge { background: linear-gradient(135deg, #ff3860, #ff0055); color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 50px; min-width: 22px; text-align: center; box-shadow: 0 0 10px rgba(255,56,96,0.8); animation: unreadPulse 1.5s ease-in-out infinite; }
+@keyframes unreadPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,56,96,0.8); } 50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,56,96,1); } }
+.chat-list-item.has-unread { background: rgba(255,56,96,0.08); border-color: rgba(255,56,96,0.4) !important; }
+.chat-list-item.has-unread .name-text { color: #ff3860; font-weight: 800; }
 
-.chat-main {
-  background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px;
-  display: flex; flex-direction: column; overflow: hidden;
-}
-.chat-main-header {
-  padding: 15px 20px; border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08));
-}
+.chat-main { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px; display: flex; flex-direction: column; overflow: hidden; }
+.chat-main-header { padding: 15px 20px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08)); }
 .chat-main-header h3 { font-size: 1rem; color: var(--cyan); }
-.chat-main-messages {
-  flex: 1; overflow-y: auto; padding: 18px;
-  display: flex; flex-direction: column; gap: 12px;
-}
-.chat-main-input {
-  padding: 12px; border-top: 1px solid var(--border);
-  display: flex; gap: 8px; background: rgba(0,0,0,0.3);
-}
-.chat-main-input input {
-  flex: 1; padding: 12px 16px; background: rgba(0,0,0,0.4);
-  border: 1px solid var(--border); border-radius: 50px;
-  color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none;
-}
+.chat-main-messages { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.chat-main-input { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; background: rgba(0,0,0,0.3); }
+.chat-main-input input { flex: 1; padding: 12px 16px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 50px; color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none; }
 .chat-main-input input:focus { border-color: var(--cyan); }
-.chat-main-input button {
-  width: 45px; height: 45px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
-}
+.chat-main-input button { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
 .chat-main-input button:hover { transform: scale(1.1); }
 
-.admin-empty {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  height: 100%; color: var(--text-dim); text-align: center; padding: 40px;
-}
+.admin-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-dim); text-align: center; padding: 40px; }
 .admin-empty .icon { font-size: 4rem; margin-bottom: 15px; opacity: 0.4; }
 
-.bubble {
-  max-width: 80%; padding: 10px 14px; border-radius: 16px;
-  animation: bubbleIn 0.3s ease-out; word-wrap: break-word;
-}
+.bubble { max-width: 80%; padding: 10px 14px; border-radius: 16px; animation: bubbleIn 0.3s ease-out; word-wrap: break-word; }
 @keyframes bubbleIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.bubble.theirs {
-  align-self: flex-start;
-  background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15));
-  border: 1px solid var(--border); border-bottom-right-radius: 4px;
-}
-.bubble.mine {
-  align-self: flex-end;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  color: #0a0a0f; border-bottom-left-radius: 4px; font-weight: 600;
-}
+.bubble.theirs { align-self: flex-start; background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15)); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
+.bubble.mine { align-self: flex-end; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; border-bottom-left-radius: 4px; font-weight: 600; }
 .bubble .text { font-size: 0.9rem; line-height: 1.5; }
 .bubble .time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(10px); z-index: 99999;
-  display: none; justify-content: center; align-items: center; padding: 20px;
-}
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 99999; display: none; justify-content: center; align-items: center; padding: 20px; }
 .modal-overlay.show { display: flex; }
-.modal {
-  background: var(--bg-dark); border: 1px solid var(--border);
-  border-radius: 25px; padding: 30px; width: 100%; max-width: 600px;
-  max-height: 90vh; overflow-y: auto;
-  box-shadow: 0 25px 60px rgba(0,255,231,0.2);
-}
-.modal-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border);
-}
-.modal-header h2 {
-  font-size: 1.3rem; background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  font-weight: 900;
-}
-.modal-close {
-  background: transparent; border: none; color: var(--text-dim);
-  font-size: 1.5rem; cursor: pointer; width: 35px; height: 35px;
-  border-radius: 10px; transition: 0.3s;
-}
+.modal { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 25px; padding: 30px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 60px rgba(0,255,231,0.2); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+.modal-header h2 { font-size: 1.3rem; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+.modal-close { background: transparent; border: none; color: var(--text-dim); font-size: 1.5rem; cursor: pointer; width: 35px; height: 35px; border-radius: 10px; transition: 0.3s; }
 .modal-close:hover { background: rgba(255,56,96,0.15); color: var(--danger); }
 .modal-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-.modal-btn {
-  flex: 1; padding: 13px; border-radius: 12px; border: none;
-  font-family: inherit; font-weight: 700; font-size: 0.95rem;
-  cursor: pointer; transition: 0.3s; min-width: 120px;
-}
-.modal-btn.primary {
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  color: #0a0a0f; box-shadow: 0 0 20px rgba(0,255,231,0.4);
-}
+.modal-btn { flex: 1; padding: 13px; border-radius: 12px; border: none; font-family: inherit; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.3s; min-width: 120px; }
+.modal-btn.primary { background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; box-shadow: 0 0 20px rgba(0,255,231,0.4); }
 .modal-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,255,231,0.7); }
 .modal-btn.secondary { background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); }
 .modal-btn.secondary:hover { border-color: var(--cyan); color: var(--cyan); }
 
 .existing-images { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-.existing-img-item {
-  position: relative; width: 80px; height: 80px; border-radius: 10px;
-  overflow: hidden; border: 2px solid var(--border);
-}
+.existing-img-item { position: relative; width: 80px; height: 80px; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); }
 .existing-img-item img { width: 100%; height: 100%; object-fit: cover; }
-.existing-img-item .delete-img {
-  position: absolute; top: 3px; right: 3px;
-  background: rgba(255,56,96,0.9); color: white; border: none;
-  border-radius: 50%; width: 22px; height: 22px; cursor: pointer;
-  font-size: 0.8rem; display: flex; align-items: center; justify-content: center;
-}
+.existing-img-item .delete-img { position: absolute; top: 3px; right: 3px; background: rgba(255,56,96,0.9); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
 
-.password-box {
-  background: rgba(255,56,96,0.05);
-  border: 1px solid rgba(255,56,96,0.3);
-  border-radius: 15px;
-  padding: 20px;
-  margin-top: 15px;
-}
-.password-box h4 {
-  color: var(--danger); font-size: 1rem; margin-bottom: 15px;
-  display: flex; align-items: center; gap: 8px;
-}
+.password-box { background: rgba(255,56,96,0.05); border: 1px solid rgba(255,56,96,0.3); border-radius: 15px; padding: 20px; margin-top: 15px; }
+.password-box h4 { color: var(--danger); font-size: 1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 
-.notif-permission {
-  background: rgba(255,200,0,0.1);
-  border: 1px solid #ffcc00;
-  color: #ffcc00;
-  padding: 12px 18px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  font-size: 0.85rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.notif-permission button {
-  padding: 8px 16px;
-  background: #ffcc00;
-  color: #0a0a0f;
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.85rem;
-}
-.notif-permission.success-banner {
-  background: rgba(16,185,129,0.1);
-  border-color: #10b981;
-  color: #10b981;
-}
-.notif-permission.error-banner {
-  background: rgba(255,56,96,0.1);
-  border-color: #ff3860;
-  color: #ff3860;
-}
+.notif-permission { background: rgba(255,200,0,0.1); border: 1px solid #ffcc00; color: #ffcc00; padding: 12px 18px; border-radius: 12px; margin-bottom: 15px; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.notif-permission button { padding: 8px 16px; background: #ffcc00; color: #0a0a0f; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.85rem; }
+.notif-permission.success-banner { background: rgba(16,185,129,0.1); border-color: #10b981; color: #10b981; }
+.notif-permission.error-banner { background: rgba(255,56,96,0.1); border-color: #ff3860; color: #ff3860; }
 
 /* ===== ضبط وییس ===== */
-.voice-recorder {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  padding: 8px 15px;
-  background: rgba(255,56,96,0.1);
-  border: 1px solid var(--danger);
-  border-radius: 50px;
-  animation: recordingPulse 1.5s ease-in-out infinite;
-}
-@keyframes recordingPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,56,96,0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(255,56,96,0); }
-}
-.voice-recorder .dot-rec {
-  width: 12px; height: 12px; border-radius: 50%;
-  background: #ff3860;
-  animation: dotBlink 1s infinite;
-}
+.voice-recorder { display: flex; align-items: center; gap: 10px; flex: 1; padding: 8px 15px; background: rgba(255,56,96,0.1); border: 1px solid var(--danger); border-radius: 50px; animation: recordingPulse 1.5s ease-in-out infinite; }
+@keyframes recordingPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,56,96,0.4); } 50% { box-shadow: 0 0 0 8px rgba(255,56,96,0); } }
+.voice-recorder .dot-rec { width: 12px; height: 12px; border-radius: 50%; background: #ff3860; animation: dotBlink 1s infinite; }
 @keyframes dotBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-.voice-recorder .timer {
-  color: #ff3860; font-weight: 700; font-size: 0.95rem; min-width: 50px;
-}
-.voice-recorder .cancel-rec,
-.voice-recorder .send-rec {
-  width: 38px; height: 38px; border-radius: 50%; border: none;
-  cursor: pointer; font-size: 1.1rem;
-  display: flex; align-items: center; justify-content: center; transition: 0.3s;
-}
-.voice-recorder .cancel-rec {
-  background: rgba(255,56,96,0.2); color: #ff3860;
-}
+.voice-recorder .timer { color: #ff3860; font-weight: 700; font-size: 0.95rem; min-width: 50px; }
+.voice-recorder .cancel-rec, .voice-recorder .send-rec { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+.voice-recorder .cancel-rec { background: rgba(255,56,96,0.2); color: #ff3860; }
 .voice-recorder .cancel-rec:hover { background: #ff3860; color: white; }
-.voice-recorder .send-rec {
-  background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f;
-}
+.voice-recorder .send-rec { background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; }
 .voice-recorder .send-rec:hover { transform: scale(1.1); }
-
-.mic-btn {
-  width: 45px; height: 45px; border-radius: 50%;
-  background: rgba(168,85,247,0.15);
-  border: 1px solid var(--purple); color: var(--purple);
-  font-size: 1.2rem; cursor: pointer; transition: 0.3s;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
+.mic-btn { width: 45px; height: 45px; border-radius: 50%; background: rgba(168,85,247,0.15); border: 1px solid var(--purple); color: var(--purple); font-size: 1.2rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .mic-btn:hover { background: var(--purple); color: white; transform: scale(1.05); }
 .mic-btn:active { transform: scale(0.95); }
-
-.voice-player {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px; background: rgba(0,0,0,0.2);
-  border-radius: 25px; min-width: 200px;
-}
-.voice-player .play-btn {
-  width: 38px; height: 38px; border-radius: 50%; border: none;
-  cursor: pointer; font-size: 1rem;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: 0.2s;
-}
+.voice-player { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(0,0,0,0.2); border-radius: 25px; min-width: 200px; }
+.voice-player .play-btn { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s; }
 .bubble.mine .voice-player .play-btn { background: #0a0a0f; color: var(--cyan); }
 .bubble.theirs .voice-player .play-btn { background: var(--cyan); color: #0a0a0f; }
 .voice-player .play-btn:hover { transform: scale(1.1); }
-.voice-player .waveform {
-  flex: 1; height: 24px; display: flex; align-items: center; gap: 2px;
-}
-.voice-player .waveform .bar {
-  width: 3px; border-radius: 2px; opacity: 0.5;
-}
+.voice-player .waveform { flex: 1; height: 24px; display: flex; align-items: center; gap: 2px; }
+.voice-player .waveform .bar { width: 3px; border-radius: 2px; opacity: 0.5; }
 .bubble.mine .voice-player .waveform .bar { background: #0a0a0f; }
 .bubble.theirs .voice-player .waveform .bar { background: var(--cyan); }
-.voice-player .duration {
-  font-size: 0.75rem; font-weight: 700; min-width: 35px; text-align: center;
-}
+.voice-player .duration { font-size: 0.75rem; font-weight: 700; min-width: 35px; text-align: center; }
 .bubble.mine .voice-player .duration { color: #0a0a0f; }
 .bubble.theirs .voice-player .duration { color: var(--cyan); }
 
@@ -511,14 +226,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <div class="login-icon">🔐</div>
     <h1>𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓</h1>
     <p class="subtitle">ورود به پنل مدیریت</p>
-    <div class="input-group">
-      <span class="icon">👤</span>
-      <input type="text" id="username" placeholder="نام کاربری">
-    </div>
-    <div class="input-group">
-      <span class="icon">🔑</span>
-      <input type="password" id="password" placeholder="رمز عبور">
-    </div>
+    <div class="input-group"><span class="icon">👤</span><input type="text" id="username" placeholder="نام کاربری"></div>
+    <div class="input-group"><span class="icon">🔑</span><input type="password" id="password" placeholder="رمز عبور"></div>
     <button class="login-btn" onclick="login()">🚀 ورود به پنل</button>
     <div class="error-msg" id="errorMsg">❌ نام کاربری یا رمز عبور اشتباه است!</div>
     <a href="../" class="back-link">← بازگشت به سایت</a>
@@ -538,10 +247,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   <div class="tabs">
     <button class="tab active" onclick="switchTab('add', this)">➕ افزودن</button>
     <button class="tab" onclick="switchTab('list', this)">📦 لیست</button>
-    <button class="tab" onclick="switchTab('chat', this)">
-      💬 چت زنده
-      <span class="tab-badge" id="chatTabBadge" style="display:none;">0</span>
-    </button>
+    <button class="tab" onclick="switchTab('chat', this)">💬 چت زنده<span class="tab-badge" id="chatTabBadge" style="display:none;">0</span></button>
     <button class="tab" onclick="switchTab('stats', this)">📊 آمار</button>
     <button class="tab" onclick="switchTab('contact', this)">📞 تماس</button>
     <button class="tab" onclick="switchTab('settings', this)">⚙️ تنظیمات</button>
@@ -557,63 +263,103 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <label>📂 دسته‌بندی *</label>
         <select id="pCategory" onchange="updateCategoryFields()">
           <optgroup label="🎮 بازی‌ها">
-            <option value="کلش">🏰 کلش</option>
-            <option value="کالاف">🎯 کالاف</option>
+            <option value="کالاف">🎯 کالاف دیوتی</option>
+            <option value="کلش">🏰 کلش آف کلنز</option>
             <option value="کلش رویال">👑 کلش رویال</option>
             <option value="فری فایر">🔥 فری فایر</option>
-          </optgroup>
-          <optgroup label="💎 آیتم‌ها">
-            <option value="آیتم کلش">💎 آیتم کلش</option>
-            <option value="آیتم کالاف">🔫 آیتم کالاف</option>
           </optgroup>
           <optgroup label="✨ سایر">
             <option value="آزاد">✨ آزاد</option>
           </optgroup>
+          <optgroup label="💎 آیتم‌ها">
+            <option value="آیتم کلش">💎 آیتم کلش</option>
+            <option value="آیتم کالاف">🔫 آیتم کالاف</option>
+            <option value="آیتم فری فایر">🎁 آیتم فری فایر</option>
+            <option value="آیتم کلش رویال">🎁 آیتم کلش رویال</option>
+          </optgroup>
         </select>
       </div>
 
-      <div id="fields-clash" class="form-row three">
+      <!-- فیلدهای کلش -->
+      <div id="fields-clash" class="form-row three" style="display:none;">
         <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="pTownHall" placeholder="14"></div>
         <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
         <div class="form-group"><label>✏️ تغییر نام</label><input type="number" id="pNameChanges" placeholder="1"></div>
       </div>
-      <div id="fields-clash-2" class="form-row three">
+      <div id="fields-clash-2" class="form-row three" style="display:none;">
         <div class="form-group"><label>💎 تعداد جم</label><input type="number" id="pGems" placeholder="5000"></div>
         <div class="form-group"><label>⭐ ستاره بونوس</label><input type="number" id="pStarBonus" placeholder="5"></div>
         <div class="form-group"><label>🏗️ بیلدرها</label><input type="text" id="pBuilderCount" placeholder="5/5"></div>
       </div>
 
-      <div id="fields-cod" class="form-row three" style="display:none;">
+      <!-- فیلدهای کالاف -->
+      <div id="fields-cod" class="form-row three">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pRank" placeholder="Legendary"></div>
         <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="pPlayerLevel" placeholder="150"></div>
         <div class="form-group"><label>🎨 تعداد اسکین</label><input type="number" id="pSkins" placeholder="50"></div>
       </div>
-      <div id="fields-cod-2" class="form-row three" style="display:none;">
+      <div id="fields-cod-2" class="form-row three">
         <div class="form-group"><label>💰 تعداد CP</label><input type="number" id="pCp" placeholder="1500"></div>
         <div class="form-group"><label>🎟️ بتل پس</label><input type="text" id="pBattlePass" placeholder="فصل 5"></div>
         <div class="form-group"><label>🔴 Mythic</label><input type="number" id="pMythic" placeholder="5"></div>
       </div>
-      <div id="fields-cod-3" class="form-row" style="display:none;">
+      <div id="fields-cod-3" class="form-row">
         <div class="form-group"><label>🟡 Legendary</label><input type="number" id="pLegendary" placeholder="10"></div>
       </div>
 
+      <!-- فیلدهای آیتم کلش و کالاف -->
       <div id="fields-item" class="form-row" style="display:none;">
         <div class="form-group"><label>🏷️ نوع آیتم</label><input type="text" id="pItemType" placeholder="بلیط طلایی"></div>
         <div class="form-group"><label>📦 مقدار</label><input type="text" id="pItemAmount" placeholder="۱ عدد"></div>
       </div>
 
+      <!-- فیلدهای آیتم فری فایر (جدید) -->
+      <div id="fields-item-ff" class="form-row three" style="display:none;">
+        <div class="form-group">
+          <label>🏷️ نوع آیتم</label>
+          <select id="pFFItemType">
+            <option value="جم">💎 جم</option>
+            <option value="بتل پس">🎟️ بتل پس</option>
+            <option value="پاس رفیل">📅 پاس رفیل</option>
+            <option value="اسکین">🎨 اسکین</option>
+            <option value="پکیج ویژه">🎁 پکیج ویژه</option>
+          </select>
+        </div>
+        <div class="form-group"><label>📦 مقدار</label><input type="text" id="pFFItemAmount" placeholder="1000"></div>
+        <div class="form-group"><label>⏱️ مدت</label><input type="text" id="pFFItemDuration" placeholder="30 روز"></div>
+      </div>
+
+      <!-- فیلدهای آیتم کلش رویال (جدید) -->
+      <div id="fields-item-royal" class="form-row three" style="display:none;">
+        <div class="form-group">
+          <label>🏷️ نوع آیتم</label>
+          <select id="pRoyalItemType">
+            <option value="سکه طلایی">🪙 سکه طلایی</option>
+            <option value="جم">💎 جم</option>
+            <option value="بتل پس رویال">🎟️ بتل پس رویال</option>
+            <option value="صندوق ویژه">🎁 صندوق ویژه</option>
+            <option value="ارتقا">⬆️ ارتقا</option>
+          </select>
+        </div>
+        <div class="form-group"><label>📦 مقدار</label><input type="text" id="pRoyalItemAmount" placeholder="500"></div>
+        <div class="form-group"><label>⏱️ مدت</label><input type="text" id="pRoyalItemDuration" placeholder="30 روز"></div>
+      </div>
+
+      <!-- فیلدهای کلش رویال -->
       <div id="fields-royal" class="form-row three" style="display:none;">
         <div class="form-group"><label>👑 سطح آرنا</label><input type="number" id="pArena" placeholder="15"></div>
         <div class="form-group"><label>🏆 تعداد جام</label><input type="number" id="pTrophies" placeholder="5000"></div>
         <div class="form-group"><label>📊 لول کینگ</label><input type="number" id="pKingLevel" placeholder="10"></div>
       </div>
 
+      <!-- فیلدهای فری فایر -->
       <div id="fields-freefire" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pFFRank" placeholder="Heroic"></div>
         <div class="form-group"><label>📊 لول</label><input type="number" id="pFFLevel" placeholder="60"></div>
         <div class="form-group"><label>💎 تعداد جم</label><input type="number" id="pFFGems" placeholder="1000"></div>
       </div>
 
+      <!-- فیلدهای آزاد -->
       <div id="fields-free" class="form-row" style="display:none;">
         <div class="form-group"><label>📝 مشخصات ۱</label><input type="text" id="pFree1" placeholder="مثلاً: لول"></div>
         <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
@@ -643,10 +389,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </div>
       </div>
 
-      <div class="form-group">
-        <label>📝 توضیحات</label>
-        <textarea id="pDesc" rows="3" placeholder="توضیحات کامل..."></textarea>
-      </div>
+      <div class="form-group"><label>📝 توضیحات</label><textarea id="pDesc" rows="3" placeholder="توضیحات کامل..."></textarea></div>
 
       <div class="form-group">
         <label>📸 عکس‌ها (خودکار فشرده میشن ⚡)</label>
@@ -752,13 +495,15 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <div class="form-group">
       <label>📂 دسته‌بندی</label>
       <select id="editCategory">
-        <option value="کلش">🏰 کلش</option>
-        <option value="کالاف">🎯 کالاف</option>
+        <option value="کالاف">🎯 کالاف دیوتی</option>
+        <option value="کلش">🏰 کلش آف کلنز</option>
         <option value="کلش رویال">👑 کلش رویال</option>
         <option value="فری فایر">🔥 فری فایر</option>
+        <option value="آزاد">✨ آزاد</option>
         <option value="آیتم کلش">💎 آیتم کلش</option>
         <option value="آیتم کالاف">🔫 آیتم کالاف</option>
-        <option value="آزاد">✨ آزاد</option>
+        <option value="آیتم فری فایر">🎁 آیتم فری فایر</option>
+        <option value="آیتم کلش رویال">🎁 آیتم کلش رویال</option>
       </select>
     </div>
     <div class="form-row three">
@@ -825,7 +570,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 const DEFAULT_USERNAME = 'admin';
 const DEFAULT_PASSWORD = 'vexor2024';
 
@@ -843,8 +587,6 @@ let customFieldsCount = 0;
 let notificationAudioCtx = null;
 let originalTitle = document.title;
 let titleFlashInterval = null;
-
-// Voice recording
 let mediaRecorder = null;
 let audioChunks = [];
 let recordingStartTime = null;
@@ -883,7 +625,7 @@ function checkNotificationBanner() {
   if (Notification.permission === 'default') {
     banner.innerHTML = `<div class="notif-permission"><span>🔔 برای دریافت نوتیفیکیشن پیام‌های جدید، اجازه بده</span><button onclick="requestNotifPermission()">فعال‌سازی نوتیف</button></div>`;
   } else if (Notification.permission === 'granted') {
-    banner.innerHTML = `<div class="notif-permission success-banner"><span>✅ نوتیفیکیشن فعاله! پیام‌های جدید بهت اطلاع داده میشه</span><button onclick="testNotification()" style="background: #10b981; color: white;">تست نوتیف</button></div>`;
+    banner.innerHTML = `<div class="notif-permission success-banner"><span>✅ نوتیفیکیشن فعاله!</span><button onclick="testNotification()" style="background: #10b981; color: white;">تست نوتیف</button></div>`;
   } else if (Notification.permission === 'denied') {
     banner.innerHTML = `<div class="notif-permission error-banner"><span>🔕 نوتیفیکیشن مسدود شده</span><button onclick="showNotifHelp()" style="background: #ff3860; color: white;">راهنما</button></div>`;
   }
@@ -898,17 +640,15 @@ function testNotification() {
   try {
     if (navigator.serviceWorker && navigator.serviceWorker.controller) {
       navigator.serviceWorker.ready.then(reg => {
-        reg.showNotification('🔔 تست موفق!', { body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl', lang: 'fa', vibrate: [200, 100, 200] });
+        reg.showNotification('🔔 تست موفق!', { body: 'نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl', lang: 'fa', vibrate: [200, 100, 200] });
       });
     } else {
-      new Notification('🔔 تست موفق!', { body: 'اگه این پیام رو می‌بینی، نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl' });
+      new Notification('🔔 تست موفق!', { body: 'نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl' });
     }
-  } catch (e) { console.error(e); alert('خطا: ' + e.message); }
+  } catch (e) { alert('خطا: ' + e.message); }
 }
 
-function showNotifHelp() {
-  alert('برای فعال کردن نوتیف:\n\n1. Chrome → Settings\n2. Site Settings → Notifications\n3. انvexor.github.io رو از Blocked حذف کن\n4. صفحه رو رفرش کن');
-}
+function showNotifHelp() { alert('برای فعال کردن نوتیف:\n1. Chrome → Settings\n2. Site Settings → Notifications\n3. آدرس سایت رو از Blocked حذف کن\n4. صفحه رو رفرش کن'); }
 
 function logout() {
   sessionStorage.removeItem('cv_logged_in');
@@ -936,16 +676,21 @@ function updateCategoryFields() {
   const cat = document.getElementById('pCategory').value;
   const isClash = cat === 'کلش';
   const isCod = cat === 'کالاف';
-  const isItem = cat.includes('آیتم');
   const isClashRoyal = cat === 'کلش رویال';
   const isFreeFire = cat === 'فری فایر';
   const isFree = cat === 'آزاد';
+  const isItemClashOrCod = cat === 'آیتم کلش' || cat === 'آیتم کالاف';
+  const isItemFF = cat === 'آیتم فری فایر';
+  const isItemRoyal = cat === 'آیتم کلش رویال';
+  
   document.getElementById('fields-clash').style.display = isClash ? 'grid' : 'none';
   document.getElementById('fields-clash-2').style.display = isClash ? 'grid' : 'none';
   document.getElementById('fields-cod').style.display = isCod ? 'grid' : 'none';
   document.getElementById('fields-cod-2').style.display = isCod ? 'grid' : 'none';
   document.getElementById('fields-cod-3').style.display = isCod ? 'grid' : 'none';
-  document.getElementById('fields-item').style.display = isItem ? 'grid' : 'none';
+  document.getElementById('fields-item').style.display = isItemClashOrCod ? 'grid' : 'none';
+  document.getElementById('fields-item-ff').style.display = isItemFF ? 'grid' : 'none';
+  document.getElementById('fields-item-royal').style.display = isItemRoyal ? 'grid' : 'none';
   document.getElementById('fields-royal').style.display = isClashRoyal ? 'grid' : 'none';
   document.getElementById('fields-freefire').style.display = isFreeFire ? 'grid' : 'none';
   document.getElementById('fields-free').style.display = isFree ? 'grid' : 'none';
@@ -959,18 +704,10 @@ function addCustomField() {
   div.className = 'form-row';
   div.id = 'custom-field-' + id;
   div.style.marginBottom = '8px';
-  div.innerHTML = `
-    <div class="form-group" style="margin:0;"><input type="text" id="cf-label-${id}" placeholder="عنوان"></div>
-    <div class="form-group" style="margin:0; display: flex; gap: 8px;">
-      <input type="text" id="cf-value-${id}" placeholder="مقدار">
-      <button type="button" onclick="removeCustomField(${id})" style="padding: 0 15px; background: rgba(255,56,96,0.2); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; cursor: pointer; font-size: 1.2rem;">×</button>
-    </div>
-  `;
+  div.innerHTML = `<div class="form-group" style="margin:0;"><input type="text" id="cf-label-${id}" placeholder="عنوان"></div><div class="form-group" style="margin:0; display: flex; gap: 8px;"><input type="text" id="cf-value-${id}" placeholder="مقدار"><button type="button" onclick="removeCustomField(${id})" style="padding: 0 15px; background: rgba(255,56,96,0.2); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; cursor: pointer; font-size: 1.2rem;">×</button></div>`;
   container.appendChild(div);
 }
-
 function removeCustomField(id) { const el = document.getElementById('custom-field-' + id); if (el) el.remove(); }
-
 function getCustomFields() {
   const fields = [];
   document.querySelectorAll('[id^="cf-label-"]').forEach(labelEl => {
@@ -992,8 +729,7 @@ function playNotificationSound() {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.connect(gain); gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, now + i * 0.15);
+      osc.type = 'sine'; osc.frequency.setValueAtTime(freq, now + i * 0.15);
       gain.gain.setValueAtTime(0, now + i * 0.15);
       gain.gain.linearRampToValueAtTime(0.3, now + i * 0.15 + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.4);
@@ -1003,45 +739,25 @@ function playNotificationSound() {
 }
 
 function showNotification(title, body) {
-  console.log('🔔 Showing notification:', title, body);
   if (!('Notification' in window)) return;
   if (Notification.permission === 'granted') {
     try {
       if (navigator.serviceWorker && navigator.serviceWorker.controller) {
         navigator.serviceWorker.ready.then(registration => {
-          registration.showNotification(title, {
-            body: body, icon: '/icon-512.png', badge: '/icon-512.png',
-            dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now(), vibrate: [200, 100, 200]
-          });
+          registration.showNotification(title, { body, icon: '/icon-512.png', badge: '/icon-512.png', dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now(), vibrate: [200, 100, 200] });
         });
-      } else {
-        fallbackNotification(title, body);
-      }
-    } catch (e) { console.error(e); }
-  } else if (Notification.permission === 'default') {
-    Notification.requestPermission().then(p => { if (p === 'granted') showNotification(title, body); });
+      } else { fallbackNotification(title, body); }
+    } catch (e) {}
   }
 }
-
 function fallbackNotification(title, body) {
-  try {
-    const notif = new Notification(title, { body, icon: 'icon-512.png', dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now() });
-    notif.onclick = () => { window.focus(); notif.close(); };
-  } catch (e) { console.error(e); }
+  try { const notif = new Notification(title, { body, icon: 'icon-512.png', dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now() }); notif.onclick = () => { window.focus(); notif.close(); }; } catch (e) {}
 }
-
 function flashPageTitle(newTitle) {
   if (titleFlashInterval) clearInterval(titleFlashInterval);
   let toggle = false;
-  titleFlashInterval = setInterval(() => {
-    document.title = toggle ? newTitle : originalTitle;
-    toggle = !toggle;
-  }, 1000);
-  const stopFlash = () => {
-    if (titleFlashInterval) { clearInterval(titleFlashInterval); titleFlashInterval = null; }
-    document.title = originalTitle;
-    window.removeEventListener('focus', stopFlash);
-  };
+  titleFlashInterval = setInterval(() => { document.title = toggle ? newTitle : originalTitle; toggle = !toggle; }, 1000);
+  const stopFlash = () => { if (titleFlashInterval) { clearInterval(titleFlashInterval); titleFlashInterval = null; } document.title = originalTitle; window.removeEventListener('focus', stopFlash); };
   window.addEventListener('focus', stopFlash);
   setTimeout(stopFlash, 60000);
 }
@@ -1050,11 +766,7 @@ async function compressAndUpload(file) {
   const options = { maxSizeMB: 0.3, maxWidthOrHeight: 1200, useWebWorker: true, fileType: 'image/jpeg', initialQuality: 0.8 };
   const compressedFile = await imageCompression(file, options);
   const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.jpg`;
-  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, {
-    method: 'POST',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'image/jpeg' },
-    body: compressedFile
-  });
+  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'image/jpeg' }, body: compressedFile });
   if (!res.ok) throw new Error('خطا در آپلود');
   return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 }
@@ -1109,9 +821,17 @@ async function addProduct() {
       product.battle_pass = document.getElementById('pBattlePass').value.trim() || null;
       product.mythic_count = parseInt(document.getElementById('pMythic').value) || null;
       product.legendary_count = parseInt(document.getElementById('pLegendary').value) || null;
-    } else if (cat.includes('آیتم')) {
+    } else if (cat === 'آیتم کلش' || cat === 'آیتم کالاف') {
       product.item_type = document.getElementById('pItemType').value.trim();
       product.item_amount = document.getElementById('pItemAmount').value.trim();
+    } else if (cat === 'آیتم فری فایر') {
+      product.item_type = document.getElementById('pFFItemType').value;
+      product.item_amount = document.getElementById('pFFItemAmount').value.trim();
+      product.item_duration = document.getElementById('pFFItemDuration').value.trim();
+    } else if (cat === 'آیتم کلش رویال') {
+      product.item_type = document.getElementById('pRoyalItemType').value;
+      product.item_amount = document.getElementById('pRoyalItemAmount').value.trim();
+      product.item_duration = document.getElementById('pRoyalItemDuration').value.trim();
     } else if (cat === 'کلش رویال') {
       product.arena = parseInt(document.getElementById('pArena').value) || null;
       product.trophies = parseInt(document.getElementById('pTrophies').value) || null;
@@ -1124,11 +844,7 @@ async function addProduct() {
       product.item_type = document.getElementById('pFree1').value.trim();
       product.item_amount = document.getElementById('pFree2').value.trim();
     }
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
-      method: 'POST',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
-      body: JSON.stringify(product)
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, body: JSON.stringify(product) });
     if (res.ok) {
       const result = await res.json();
       showStatus('🎉 محصول ثبت شد!', 'success');
@@ -1136,16 +852,10 @@ async function addProduct() {
       if (customFields.length > 0 && result && result[0]) {
         const productId = result[0].id;
         for (const field of customFields) {
-          await fetch(`${SUPABASE_URL}/rest/v1/product_custom_fields`, {
-            method: 'POST',
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ product_id: productId, field_label: field.label, field_value: field.value })
-          });
+          await fetch(`${SUPABASE_URL}/rest/v1/product_custom_fields`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ product_id: productId, field_label: field.label, field_value: field.value }) });
         }
       }
-      ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pGems','pStarBonus','pBuilderCount','pRank','pPlayerLevel','pSkins','pCp','pBattlePass','pMythic','pLegendary','pItemType','pItemAmount','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => {
-        const el = document.getElementById(id); if (el) el.value = '';
-      });
+      ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pGems','pStarBonus','pBuilderCount','pRank','pPlayerLevel','pSkins','pCp','pBattlePass','pMythic','pLegendary','pItemType','pItemAmount','pFFItemAmount','pFFItemDuration','pRoyalItemAmount','pRoyalItemDuration','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
       document.getElementById('customFieldsContainer').innerHTML = '';
       customFieldsCount = 0;
       selectedImages = []; renderImagePreviews(); loadProducts();
@@ -1155,9 +865,7 @@ async function addProduct() {
 }
 
 async function loadProducts() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
   allProductsData = await res.json();
   filterList(currentListFilter);
 }
@@ -1171,26 +879,12 @@ function filterList(status) {
 
 function renderProducts(products) {
   const list = document.getElementById('productsList');
-  if (!products || products.length === 0) {
-    list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>محصولی نیست</p></div>`;
-    return;
-  }
+  if (!products || products.length === 0) { list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>محصولی نیست</p></div>`; return; }
   list.innerHTML = products.map(p => {
     const img = p.images && p.images[0] ? `<img src="${p.images[0]}" class="product-thumb">` : '<div style="font-size:2rem;">🎯</div>';
     const statusClass = p.status === 'موجود' ? 'available' : (p.status === 'فروش رفته' ? 'sold' : 'unavailable');
     const statusIcon = p.status === 'موجود' ? '✅' : (p.status === 'فروش رفته' ? '🔴' : '❌');
-    return `
-      <div class="product-item">
-        ${img}
-        <div class="product-details"><h4>${p.title}</h4><p>${p.category} | کد: ${p.account_code || '-'}</p></div>
-        <div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}</div>
-        <span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">${statusIcon} ${p.status}</span>
-        <div class="product-actions">
-          <button class="btn-icon" onclick="openEditModal(${p.id})">✏️</button>
-          <button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button>
-        </div>
-      </div>
-    `;
+    return `<div class="product-item">${img}<div class="product-details"><h4>${p.title}</h4><p>${p.category} | کد: ${p.account_code || '-'}</p></div><div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}</div><span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">${statusIcon} ${p.status}</span><div class="product-actions"><button class="btn-icon" onclick="openEditModal(${p.id})">✏️</button><button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button></div></div>`;
   }).join('');
 }
 
@@ -1199,11 +893,7 @@ async function toggleStatus(id, currentStatus) {
   if (currentStatus === 'موجود') newStatus = 'فروش رفته';
   else if (currentStatus === 'فروش رفته') newStatus = 'ناموجود';
   else newStatus = 'موجود';
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
-    method: 'PATCH',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ status: newStatus })
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ status: newStatus }) });
   if (res.ok) { showStatus(`✅ وضعیت به "${newStatus}" تغییر کرد`, 'success'); loadProducts(); }
 }
 
@@ -1213,7 +903,7 @@ function openEditModal(id) {
   document.getElementById('editId').value = p.id;
   document.getElementById('editTitle').value = p.title || '';
   document.getElementById('editSlogan').value = p.slogan || '';
-  document.getElementById('editCategory').value = p.category || 'کلش';
+  document.getElementById('editCategory').value = p.category || 'کالاف';
   document.getElementById('editTownHall').value = p.town_hall || '';
   document.getElementById('editBuilder').value = p.builder_level || '';
   document.getElementById('editNameChanges').value = p.name_changes || '';
@@ -1244,9 +934,7 @@ function openEditModal(id) {
 function renderExistingImages(images) {
   const container = document.getElementById('existingImages');
   if (!images || images.length === 0) { container.innerHTML = '<p style="color:#666;font-size:0.85rem;">عکسی نداره</p>'; return; }
-  container.innerHTML = images.map((img, i) => `
-    <div class="existing-img-item"><img src="${img}"><button class="delete-img" onclick="removeExistingImage(${i})">×</button></div>
-  `).join('');
+  container.innerHTML = images.map((img, i) => `<div class="existing-img-item"><img src="${img}"><button class="delete-img" onclick="removeExistingImage(${i})">×</button></div>`).join('');
 }
 function removeExistingImage(index) {
   const images = JSON.parse(document.getElementById('editImages').value);
@@ -1308,11 +996,7 @@ async function saveEdit() {
       description: document.getElementById('editDesc').value.trim(),
       images: existingImages
     };
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
-      method: 'PATCH',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(updateData)
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify(updateData) });
     if (res.ok) { showStatus('🎉 ذخیره شد!', 'success'); closeEditModal(); loadProducts(); }
     else { alert('خطا'); }
   } catch (err) { alert('خطا: ' + err.message); }
@@ -1321,18 +1005,13 @@ async function saveEdit() {
 
 async function deleteProduct(id) {
   if (!confirm('مطمئنی؟')) return;
-  await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, {
-    method: 'DELETE',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
+  await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
   showStatus('🗑️ حذف شد', 'success');
   loadProducts();
 }
 
 async function loadSettings() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
   const data = await res.json();
   if (data && data.length > 0) {
     document.getElementById('phone').value = data[0].phone || '';
@@ -1348,11 +1027,7 @@ async function saveSettings() {
   const telegram = document.getElementById('telegram')?.value.trim() || '';
   if (!phone || !rubika) { showStatus('❌ شماره و روبیکا اجباری!', 'error'); return; }
   showStatus('⏳ ذخیره...', 'loading');
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, {
-    method: 'PATCH',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ phone, rubika_id: rubika, telegram_id: telegram, updated_at: new Date().toISOString() })
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, rubika_id: rubika, telegram_id: telegram, updated_at: new Date().toISOString() }) });
   if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
   else showStatus('❌ خطا', 'error');
 }
@@ -1372,15 +1047,11 @@ function changeCredentials() {
   if (newUser) localStorage.setItem('cv_username', newUser);
   if (newPass) localStorage.setItem('cv_password', newPass);
   showStatus('🎉 تغییر کرد!', 'success');
-  ['currentUsername','currentPassword','newUsername','newPassword','confirmPassword'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
+  ['currentUsername','currentPassword','newUsername','newPassword','confirmPassword'].forEach(id => { document.getElementById(id).value = ''; });
 }
 
 async function loadChats() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
   allChatsData = await res.json();
   renderChatList(allChatsData);
   updateUnreadBadge(allChatsData);
@@ -1388,29 +1059,14 @@ async function loadChats() {
 
 function renderChatList(chats) {
   const list = document.getElementById('chatList');
-  if (!chats || chats.length === 0) {
-    list.innerHTML = `<div class="admin-empty"><div class="icon">📭</div><p>هنوز چتی نداری</p></div>`;
-    return;
-  }
+  if (!chats || chats.length === 0) { list.innerHTML = `<div class="admin-empty"><div class="icon">📭</div><p>هنوز چتی نداری</p></div>`; return; }
   list.innerHTML = chats.map(c => {
     const time = c.last_message_at ? new Date(c.last_message_at).toLocaleString('fa-IR', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
     const active = currentChatId === c.id ? 'active' : '';
     const hasUnread = (c.unread_count || 0) > 0;
     const unreadBadge = hasUnread ? `<span class="unread-badge">${c.unread_count}</span>` : '';
     const unreadClass = hasUnread ? 'has-unread' : '';
-    return `
-      <div class="chat-list-item ${active} ${unreadClass}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')">
-        <div class="name">
-          <span class="name-text">👤 ${escapeHtml(c.visitor_name)}</span>
-          <div style="display:flex;align-items:center;gap:6px;">
-            ${unreadBadge}
-            <button class="delete-chat-btn" onclick="event.stopPropagation(); deleteChat(${c.id}, '${escapeHtml(c.visitor_name)}')">🗑️</button>
-          </div>
-        </div>
-        ${c.visitor_phone ? `<div class="preview">📞 ${escapeHtml(c.visitor_phone)}</div>` : ''}
-        <div class="time">${time}</div>
-      </div>
-    `;
+    return `<div class="chat-list-item ${active} ${unreadClass}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')"><div class="name"><span class="name-text">👤 ${escapeHtml(c.visitor_name)}</span><div style="display:flex;align-items:center;gap:6px;">${unreadBadge}<button class="delete-chat-btn" onclick="event.stopPropagation(); deleteChat(${c.id}, '${escapeHtml(c.visitor_name)}')">🗑️</button></div></div>${c.visitor_phone ? `<div class="preview">📞 ${escapeHtml(c.visitor_phone)}</div>` : ''}<div class="time">${time}</div></div>`;
   }).join('');
 }
 
@@ -1424,20 +1080,11 @@ function updateUnreadBadge(chats) {
 async function deleteChat(id, name) {
   if (!confirm(`مطمئنی چت "${name}" رو حذف کنی؟`)) return;
   try {
-    await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${id}`, {
-      method: 'DELETE',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, {
-      method: 'DELETE',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
+    await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
     if (res.ok) {
       showStatus('🗑️ چت حذف شد', 'success');
-      if (currentChatId === id) {
-        currentChatId = null;
-        document.getElementById('chatMain').innerHTML = `<div class="admin-empty"><div class="icon">💬</div><h3>یه گفتگو انتخاب کن</h3></div>`;
-      }
+      if (currentChatId === id) { currentChatId = null; document.getElementById('chatMain').innerHTML = `<div class="admin-empty"><div class="icon">💬</div><h3>یه گفتگو انتخاب کن</h3></div>`; }
       loadChats();
     }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
@@ -1445,39 +1092,16 @@ async function deleteChat(id, name) {
 
 async function openChat(id, name) {
   currentChatId = id; currentChatName = name;
-  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, {
-    method: 'PATCH',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ unread_count: 0 })
-  });
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ unread_count: 0 }) });
   loadChats();
   const main = document.getElementById('chatMain');
-  main.innerHTML = `
-    <div class="chat-main-header"><h3>👤 ${escapeHtml(name)}</h3></div>
-    <div class="chat-main-messages" id="chatMainMessages">
-      <div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div>
-    </div>
-    <div class="chat-main-input" id="chatInputArea">
-      <button type="button" class="mic-btn" id="micBtn" onclick="startRecording()" title="ضبط وییس">🎤</button>
-      <input type="text" id="adminChatInput" placeholder="پاسخ بنویس..." onkeypress="if(event.key==='Enter') sendAdminMessage()">
-      <button onclick="sendAdminMessage()">📤</button>
-    </div>
-    <div class="voice-recorder" id="voiceRecorder" style="display:none;">
-      <span class="dot-rec"></span>
-      <span class="timer" id="recTimer">0:00</span>
-      <div style="flex:1;"></div>
-      <button class="cancel-rec" onclick="cancelRecording()" title="لغو">✕</button>
-      <button class="send-rec" onclick="stopAndSendVoice()" title="ارسال">📤</button>
-    </div>
-  `;
+  main.innerHTML = `<div class="chat-main-header"><h3>👤 ${escapeHtml(name)}</h3></div><div class="chat-main-messages" id="chatMainMessages"><div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div></div><div class="chat-main-input" id="chatInputArea"><button type="button" class="mic-btn" id="micBtn" onclick="startRecording()" title="ضبط وییس">🎤</button><input type="text" id="adminChatInput" placeholder="پاسخ بنویس..." onkeypress="if(event.key==='Enter') sendAdminMessage()"><button onclick="sendAdminMessage()">📤</button></div><div class="voice-recorder" id="voiceRecorder" style="display:none;"><span class="dot-rec"></span><span class="timer" id="recTimer">0:00</span><div style="flex:1;"></div><button class="cancel-rec" onclick="cancelRecording()" title="لغو">✕</button><button class="send-rec" onclick="stopAndSendVoice()" title="ارسال">📤</button></div>`;
   loadChatMessages(id);
   subscribeToChatMessages(id);
 }
 
 async function loadChatMessages(chatId) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
   const messages = await res.json();
   renderChatMessages(messages);
 }
@@ -1485,25 +1109,14 @@ async function loadChatMessages(chatId) {
 function renderChatMessages(messages) {
   const container = document.getElementById('chatMainMessages');
   if (!container) return;
-  if (!messages || messages.length === 0) {
-    container.innerHTML = '<div style="text-align:center;color:#666;padding:20px;">هنوز پیامی نیست</div>';
-    return;
-  }
+  if (!messages || messages.length === 0) { container.innerHTML = '<div style="text-align:center;color:#666;padding:20px;">هنوز پیامی نیست</div>'; return; }
   container.innerHTML = messages.map(m => {
     const isAdmin = m.sender === 'admin';
     const isVoice = m.message_type === 'voice' || m.voice_url;
     let content;
-    if (isVoice && m.voice_url) {
-      content = renderVoicePlayer(m.voice_url, m.voice_duration || 0, isAdmin);
-    } else {
-      content = `<div class="text">${escapeHtml(m.message)}</div>`;
-    }
-    return `
-      <div class="bubble ${isAdmin ? 'mine' : 'theirs'}">
-        ${content}
-        <div class="time">${formatTime(m.created_at)}</div>
-      </div>
-    `;
+    if (isVoice && m.voice_url) { content = renderVoicePlayer(m.voice_url, m.voice_duration || 0, isAdmin); }
+    else { content = `<div class="text">${escapeHtml(m.message)}</div>`; }
+    return `<div class="bubble ${isAdmin ? 'mine' : 'theirs'}">${content}<div class="time">${formatTime(m.created_at)}</div></div>`;
   }).join('');
   container.scrollTop = container.scrollHeight;
 }
@@ -1513,28 +1126,17 @@ async function sendAdminMessage() {
   const text = input.value.trim();
   if (!text || !currentChatId) return;
   input.value = '';
-  await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
-    method: 'POST',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text, message_type: 'text' })
-  });
-  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
-    method: 'PATCH',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ last_message_at: new Date().toISOString() })
-  });
+  await fetch(`${SUPABASE_URL}/rest/v1/messages`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text, message_type: 'text' }) });
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ last_message_at: new Date().toISOString() }) });
   loadChatMessages(currentChatId);
   loadChats();
 }
 
-// ===== Voice =====
 async function startRecording() {
   try {
     recordingStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 44100 } });
     audioChunks = [];
-    mediaRecorder = new MediaRecorder(recordingStream, {
-      mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4'
-    });
+    mediaRecorder = new MediaRecorder(recordingStream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4' });
     mediaRecorder.ondataavailable = (event) => { if (event.data.size > 0) audioChunks.push(event.data); };
     mediaRecorder.start();
     recordingStartTime = Date.now();
@@ -1577,27 +1179,11 @@ async function stopAndSendVoice() {
         document.getElementById('recTimer').textContent = '0:00';
         showStatus('⏳ آپلود وییس...', 'loading');
         const fileName = `voice-${Date.now()}-${Math.random().toString(36).substr(2, 9)}.webm`;
-        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/voice-messages/${fileName}`, {
-          method: 'POST',
-          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': audioBlob.type },
-          body: audioBlob
-        });
+        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/voice-messages/${fileName}`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': audioBlob.type }, body: audioBlob });
         if (!uploadRes.ok) throw new Error('خطا در آپلود');
         const voiceUrl = `${SUPABASE_URL}/storage/v1/object/public/voice-messages/${fileName}`;
-        await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
-          method: 'POST',
-          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: currentChatId, sender: 'admin',
-            message: `🎤 وییس (${duration} ثانیه)`,
-            message_type: 'voice', voice_url: voiceUrl, voice_duration: duration
-          })
-        });
-        await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, {
-          method: 'PATCH',
-          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ last_message_at: new Date().toISOString() })
-        });
+        await fetch(`${SUPABASE_URL}/rest/v1/messages`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: `🎤 وییس (${duration} ثانیه)`, message_type: 'voice', voice_url: voiceUrl, voice_duration: duration }) });
+        await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ last_message_at: new Date().toISOString() }) });
         showStatus('✅ وییس ارسال شد!', 'success');
         loadChatMessages(currentChatId);
         loadChats();
@@ -1615,14 +1201,7 @@ function renderVoicePlayer(url, duration, isAdmin) {
   const secs = duration % 60;
   const durationText = `${mins}:${String(secs).padStart(2,'0')}`;
   const playerId = 'voice-' + Math.random().toString(36).substr(2, 9);
-  return `
-    <div class="voice-player" id="${playerId}">
-      <button class="play-btn" onclick="playVoice('${playerId}', '${url}', ${duration})">▶️</button>
-      <div class="waveform">${barsHtml}</div>
-      <span class="duration">${durationText}</span>
-    </div>
-    <audio id="audio-${playerId}" src="${url}" preload="none"></audio>
-  `;
+  return `<div class="voice-player" id="${playerId}"><button class="play-btn" onclick="playVoice('${playerId}', '${url}', ${duration})">▶️</button><div class="waveform">${barsHtml}</div><span class="duration">${durationText}</span></div><audio id="audio-${playerId}" src="${url}" preload="none"></audio>`;
 }
 
 function playVoice(playerId, url, duration) {
@@ -1631,11 +1210,7 @@ function playVoice(playerId, url, duration) {
   if (!audio || !btn) return;
   if (!audio.paused) { audio.pause(); audio.currentTime = 0; btn.textContent = '▶️'; return; }
   document.querySelectorAll('.voice-player audio').forEach(a => {
-    if (a.id !== 'audio-' + playerId) {
-      a.pause(); a.currentTime = 0;
-      const otherBtn = a.parentElement?.querySelector('.play-btn');
-      if (otherBtn) otherBtn.textContent = '▶️';
-    }
+    if (a.id !== 'audio-' + playerId) { a.pause(); a.currentTime = 0; const otherBtn = a.parentElement?.querySelector('.play-btn'); if (otherBtn) otherBtn.textContent = '▶️'; }
   });
   btn.textContent = '⏸️';
   audio.play();
@@ -1645,7 +1220,6 @@ function playVoice(playerId, url, duration) {
 
 function subscribeToChats() {
   if (chatsChannel) return;
-  console.log('🔔 Starting chat subscription...');
   chatsChannel = supabaseClient
     .channel('admin-chats')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
@@ -1662,23 +1236,14 @@ function subscribeToChats() {
       if (currentChatId) loadChatMessages(currentChatId);
       loadChats();
     })
-    .subscribe((status, err) => {
-      console.log('📡 Subscription status:', status);
-      if (err) console.error('Error:', err);
-    });
+    .subscribe();
 }
 
 async function incrementUnread(chatId) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=unread_count`, {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=unread_count`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
   const data = await res.json();
   const current = (data[0] && data[0].unread_count) || 0;
-  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, {
-    method: 'PATCH',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ unread_count: current + 1 })
-  });
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ unread_count: current + 1 }) });
 }
 
 function subscribeToChatMessages(chatId) {
