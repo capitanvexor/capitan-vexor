@@ -221,11 +221,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .chat-list-item .name-text { display: flex; align-items: center; gap: 6px; }
 .chat-list-item .preview { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .chat-list-item .time { font-size: 0.7rem; color: #666; margin-top: 4px; }
-.chat-list-item .unread-count {
-  background: var(--danger); color: white; font-size: 0.7rem;
-  padding: 2px 8px; border-radius: 50px; font-weight: 700;
-  animation: pulse 1.5s infinite;
-}
 .delete-chat-btn {
   background: rgba(255,56,96,0.1); border: 1px solid rgba(255,56,96,0.3);
   color: var(--danger); border-radius: 8px; width: 26px; height: 26px;
@@ -233,6 +228,32 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   align-items: center; justify-content: center; transition: 0.3s; padding: 0;
 }
 .delete-chat-btn:hover { background: var(--danger); color: white; transform: scale(1.15); box-shadow: 0 0 10px rgba(255,56,96,0.6); }
+
+/* ===== نشان قرمز پیام خونده‌نشده ===== */
+.unread-badge {
+  background: linear-gradient(135deg, #ff3860, #ff0055);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 50px;
+  min-width: 22px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255,56,96,0.8);
+  animation: unreadPulse 1.5s ease-in-out infinite;
+}
+@keyframes unreadPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,56,96,0.8); }
+  50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,56,96,1); }
+}
+.chat-list-item.has-unread {
+  background: rgba(255,56,96,0.08);
+  border-color: rgba(255,56,96,0.4) !important;
+}
+.chat-list-item.has-unread .name-text {
+  color: #ff3860;
+  font-weight: 800;
+}
 
 .chat-main {
   background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px;
@@ -354,6 +375,32 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   display: flex; align-items: center; gap: 8px;
 }
 
+.notif-permission {
+  background: rgba(255,200,0,0.1);
+  border: 1px solid #ffcc00;
+  color: #ffcc00;
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.notif-permission button {
+  padding: 8px 16px;
+  background: #ffcc00;
+  color: #0a0a0f;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
 @media (max-width: 700px) {
   .chat-wrap { grid-template-columns: 1fr; height: auto; }
   .chat-list-sidebar { max-height: 220px; }
@@ -398,6 +445,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <button class="logout-btn" onclick="logout()">🚪 خروج</button>
   </div>
 
+  <div id="notifBanner"></div>
   <div id="statusBox" class="status"></div>
 
   <div class="tabs">
@@ -625,30 +673,15 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
       <div class="card-title">⚙️ تنظیمات امنیتی</div>
       <div class="password-box">
         <h4>🔐 تغییر نام کاربری و رمز عبور</h4>
-        <div class="form-group">
-          <label>👤 نام کاربری فعلی</label>
-          <input type="text" id="currentUsername" placeholder="نام کاربری فعلی" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label>🔑 رمز عبور فعلی</label>
-          <input type="password" id="currentPassword" placeholder="رمز فعلی" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label>👤 نام کاربری جدید</label>
-          <input type="text" id="newUsername" placeholder="نام کاربری جدید" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label>🔑 رمز عبور جدید</label>
-          <input type="password" id="newPassword" placeholder="رمز جدید" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label>🔑 تکرار رمز عبور جدید</label>
-          <input type="password" id="confirmPassword" placeholder="رمز جدید رو تکرار کن" dir="ltr">
-        </div>
+        <div class="form-group"><label>👤 نام کاربری فعلی</label><input type="text" id="currentUsername" placeholder="نام کاربری فعلی" dir="ltr"></div>
+        <div class="form-group"><label>🔑 رمز عبور فعلی</label><input type="password" id="currentPassword" placeholder="رمز فعلی" dir="ltr"></div>
+        <div class="form-group"><label>👤 نام کاربری جدید</label><input type="text" id="newUsername" placeholder="نام کاربری جدید" dir="ltr"></div>
+        <div class="form-group"><label>🔑 رمز عبور جدید</label><input type="password" id="newPassword" placeholder="رمز جدید" dir="ltr"></div>
+        <div class="form-group"><label>🔑 تکرار رمز عبور جدید</label><input type="password" id="confirmPassword" placeholder="رمز جدید رو تکرار کن" dir="ltr"></div>
         <button class="save-btn" onclick="changeCredentials()">💾 ذخیره تغییرات</button>
       </div>
       <div style="margin-top: 20px; padding: 15px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 12px; font-size: 0.85rem; color: var(--text-dim); line-height: 1.8;">
-        💡 <strong style="color: var(--cyan);">نکته:</strong> نام کاربری و رمز عبور بعد از تغییر، <strong>توی همین مرورگر</strong> ذخیره میشن. اگه مرورگرت رو پاک کنی، به مقادیر پیش‌فرض برمی‌گرده:
+        💡 <strong style="color: var(--cyan);">نکته:</strong> نام کاربری و رمز عبور بعد از تغییر، توی همین مرورگر ذخیره میشن.
         <br>👤 نام کاربری پیش‌فرض: <strong style="color: var(--cyan);" dir="ltr">admin</strong>
         <br>🔑 رمز پیش‌فرض: <strong style="color: var(--cyan);" dir="ltr">vexor2024</strong>
       </div>
@@ -759,6 +792,7 @@ const DEFAULT_PASSWORD = 'vexor2024';
 let selectedImages = [];
 let editNewImages = [];
 let allProductsData = [];
+let allChatsData = [];
 let currentListFilter = 'all';
 let currentChatId = null;
 let currentChatName = null;
@@ -766,6 +800,9 @@ let chatsChannel = null;
 let messagesChannel = null;
 let totalUnread = 0;
 let customFieldsCount = 0;
+let notificationAudioCtx = null;
+let originalTitle = document.title;
+let titleFlashInterval = null;
 
 function login() {
   const user = document.getElementById('username').value.trim();
@@ -785,11 +822,53 @@ document.getElementById('password').addEventListener('keypress', e => { if (e.ke
 function showDashboard() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('dashboard').classList.add('active');
+  
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+  checkNotificationBanner();
+  
   loadProducts();
   loadSettings();
   loadChats();
   subscribeToChats();
 }
+
+function checkNotificationBanner() {
+  const banner = document.getElementById('notifBanner');
+  if (!('Notification' in window)) return;
+  
+  if (Notification.permission === 'default') {
+    banner.innerHTML = `
+      <div class="notif-permission">
+        <span>🔔 برای دریافت نوتیفیکیشن پیام‌های جدید، اجازه بده</span>
+        <button onclick="requestNotifPermission()">فعال‌سازی نوتیف</button>
+      </div>
+    `;
+  } else if (Notification.permission === 'denied') {
+    banner.innerHTML = `
+      <div class="notif-permission" style="background: rgba(255,56,96,0.1); border-color: #ff3860; color: #ff3860;">
+        <span>🔕 نوتیفیکیشن توسط مرورگر مسدود شده. از تنظیمات مرورگر فعالش کن</span>
+      </div>
+    `;
+  }
+}
+
+function requestNotifPermission() {
+  if ('Notification' in window) {
+    Notification.requestPermission().then(p => {
+      checkNotificationBanner();
+      if (p === 'granted') {
+        new Notification('🔔 نوتیفیکیشن فعال شد!', {
+          body: 'از این به بعد پیام‌های جدید رو می‌بینی',
+          dir: 'rtl',
+          lang: 'fa'
+        });
+      }
+    });
+  }
+}
+
 function logout() {
   sessionStorage.removeItem('cv_logged_in');
   document.getElementById('loginScreen').style.display = 'flex';
@@ -871,6 +950,77 @@ function getCustomFields() {
     }
   });
   return fields;
+}
+
+// ==========================================
+// صدا و نوتیفیکیشن
+// ==========================================
+function playNotificationSound() {
+  try {
+    if (!notificationAudioCtx) {
+      notificationAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (notificationAudioCtx.state === 'suspended') {
+      notificationAudioCtx.resume();
+    }
+    const ctx = notificationAudioCtx;
+    const now = ctx.currentTime;
+    
+    [880, 1174].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + i * 0.15);
+      gain.gain.setValueAtTime(0, now + i * 0.15);
+      gain.gain.linearRampToValueAtTime(0.3, now + i * 0.15 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.4);
+      osc.start(now + i * 0.15);
+      osc.stop(now + i * 0.15 + 0.5);
+    });
+  } catch (e) { console.log('Sound error:', e); }
+}
+
+function showNotification(title, body) {
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'granted') {
+    try {
+      const notif = new Notification(title, {
+        body: body,
+        icon: 'icon-512.png',
+        badge: 'icon-512.png',
+        tag: 'cv-chat',
+        dir: 'rtl',
+        lang: 'fa',
+        requireInteraction: true
+      });
+      notif.onclick = () => {
+        window.focus();
+        notif.close();
+      };
+    } catch (e) { console.log('Notification error:', e); }
+  }
+}
+
+function flashPageTitle(newTitle) {
+  if (titleFlashInterval) clearInterval(titleFlashInterval);
+  let toggle = false;
+  titleFlashInterval = setInterval(() => {
+    document.title = toggle ? newTitle : originalTitle;
+    toggle = !toggle;
+  }, 1000);
+  
+  const stopFlash = () => {
+    if (titleFlashInterval) {
+      clearInterval(titleFlashInterval);
+      titleFlashInterval = null;
+    }
+    document.title = originalTitle;
+    window.removeEventListener('focus', stopFlash);
+  };
+  window.addEventListener('focus', stopFlash);
+  setTimeout(stopFlash, 60000);
 }
 
 async function compressAndUpload(file) {
@@ -1264,9 +1414,9 @@ async function loadChats() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, {
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
   });
-  const chats = await res.json();
-  renderChatList(chats);
-  updateUnreadBadge(chats);
+  allChatsData = await res.json();
+  renderChatList(allChatsData);
+  updateUnreadBadge(allChatsData);
 }
 
 function renderChatList(chats) {
@@ -1278,13 +1428,16 @@ function renderChatList(chats) {
   list.innerHTML = chats.map(c => {
     const time = c.last_message_at ? new Date(c.last_message_at).toLocaleString('fa-IR', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
     const active = currentChatId === c.id ? 'active' : '';
-    const unread = c.unread_count > 0 ? `<span class="unread-count">${c.unread_count}</span>` : '';
+    const hasUnread = (c.unread_count || 0) > 0;
+    const unreadBadge = hasUnread ? `<span class="unread-badge">${c.unread_count}</span>` : '';
+    const unreadClass = hasUnread ? 'has-unread' : '';
+    
     return `
-      <div class="chat-list-item ${active}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')">
+      <div class="chat-list-item ${active} ${unreadClass}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')">
         <div class="name">
           <span class="name-text">👤 ${escapeHtml(c.visitor_name)}</span>
           <div style="display:flex;align-items:center;gap:6px;">
-            ${unread}
+            ${unreadBadge}
             <button class="delete-chat-btn" onclick="event.stopPropagation(); deleteChat(${c.id}, '${escapeHtml(c.visitor_name)}')" title="حذف چت">🗑️</button>
           </div>
         </div>
@@ -1410,7 +1563,21 @@ function subscribeToChats() {
     .channel('admin-chats')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
-      if (payload.new && payload.new.sender === 'visitor') incrementUnread(payload.new.chat_id);
+      const newMsg = payload.new;
+      
+      if (newMsg && newMsg.sender === 'visitor') {
+        const chat = allChatsData?.find(c => c.id === newMsg.chat_id);
+        const visitorName = chat?.visitor_name || 'کاربر';
+        
+        playNotificationSound();
+        showNotification(`💬 پیام جدید از ${visitorName}`, newMsg.message || 'پیام جدید');
+        flashPageTitle(`💬 پیام جدید از ${visitorName}`);
+        
+        if (currentChatId !== newMsg.chat_id) {
+          incrementUnread(newMsg.chat_id);
+        }
+      }
+      
       if (currentChatId) loadChatMessages(currentChatId);
       loadChats();
     })
@@ -1423,7 +1590,6 @@ async function incrementUnread(chatId) {
   });
   const data = await res.json();
   const current = (data[0] && data[0].unread_count) || 0;
-  if (currentChatId === chatId) return;
   await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, {
     method: 'PATCH',
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
