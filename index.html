@@ -55,63 +55,14 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 12px 2
 .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
 .nav-links a:hover { color: var(--cyan); }
 
-/* ===== نوار اطلاعیه ===== */
-.announcement-bar {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 14px 25px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-align: center;
-  line-height: 1.6;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-  animation: annSlideDown 0.6s ease-out;
-  margin-top: 60px;
-  direction: rtl;
-  z-index: 999;
-}
-@keyframes annSlideDown {
-  from { transform: translateY(-100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-.announcement-bar .ann-icon {
-  font-size: 1.4rem;
-  flex-shrink: 0;
-  animation: annIconPulse 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
-}
-@keyframes annIconPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-.announcement-bar .ann-message {
-  flex: 1;
-  min-width: 0;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-.announcement-bar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent);
-  pointer-events: none;
-}
-@media (min-width: 768px) {
-  .announcement-bar { margin-top: 55px; padding: 16px 30px; }
-}
-@media (max-width: 767px) {
-  .announcement-bar { margin-top: 130px; padding: 12px 15px; font-size: 0.85rem; gap: 8px; }
-  .announcement-bar .ann-icon { font-size: 1.2rem; }
-}
+.announcement-bar { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 25px; font-weight: 700; font-size: 0.95rem; text-align: center; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; box-shadow: 0 5px 20px rgba(0,0,0,0.3); animation: annSlideDown 0.6s ease-out; margin-top: 60px; direction: rtl; z-index: 999; }
+@keyframes annSlideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.announcement-bar .ann-icon { font-size: 1.4rem; flex-shrink: 0; animation: annIconPulse 2s ease-in-out infinite; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+@keyframes annIconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+.announcement-bar .ann-message { flex: 1; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
+.announcement-bar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent); pointer-events: none; }
+@media (min-width: 768px) { .announcement-bar { margin-top: 55px; padding: 16px 30px; } }
+@media (max-width: 767px) { .announcement-bar { margin-top: 130px; padding: 12px 15px; font-size: 0.85rem; gap: 8px; } .announcement-bar .ann-icon { font-size: 1.2rem; } }
 
 .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 60px; }
 .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: var(--glass); border: 1px solid var(--border); border-radius: 50px; font-size: 0.85rem; color: var(--cyan); margin-bottom: 25px; animation: pulse 2s ease-in-out infinite; }
@@ -139,10 +90,10 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
 .slide { min-width: 100%; padding: 60px 70px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 420px; position: relative; }
 .slide::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.15), transparent 70%); pointer-events: none; }
-.slide-cod    { background: linear-gradient(135deg, #1a3a2a, #0a5c2e, #00a86b); }
-.slide-coc    { background: linear-gradient(135deg, #0a2a3a, #00a8c0, #00ffe7); }
-.slide-royal  { background: linear-gradient(135deg, #3a1a4a, #7c3aed, #a855f7); }
-.slide-free   { background: linear-gradient(135deg, #4a1a1a, #dc2626, #f97316); }
+.slide-cod { background: linear-gradient(135deg, #1a3a2a, #0a5c2e, #00a86b); }
+.slide-coc { background: linear-gradient(135deg, #0a2a3a, #00a8c0, #00ffe7); }
+.slide-royal { background: linear-gradient(135deg, #3a1a4a, #7c3aed, #a855f7); }
+.slide-free { background: linear-gradient(135deg, #4a1a1a, #dc2626, #f97316); }
 .slide-icon { font-size: 90px; margin-bottom: 15px; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.4)); animation: slideIconFloat 3s ease-in-out infinite; }
 @keyframes slideIconFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 .slide-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; color: #fff; margin-bottom: 12px; text-shadow: 0 4px 20px rgba(0,0,0,0.4); }
@@ -156,14 +107,7 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .slider-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; }
 .slider-dots .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
 .slider-dots .dot.active { background: #fff; width: 28px; border-radius: 5px; }
-@media (max-width: 600px) {
-  .slide { padding: 50px 55px; min-height: 380px; }
-  .slide-icon { font-size: 70px; }
-  .slider-arrow { width: 44px; height: 44px; font-size: 26px; }
-  .slider-prev { right: 12px; }
-  .slider-next { left: 12px; }
-  .slide-btn { padding: 12px 24px; font-size: 0.9rem; }
-}
+@media (max-width: 600px) { .slide { padding: 50px 55px; min-height: 380px; } .slide-icon { font-size: 70px; } .slider-arrow { width: 44px; height: 44px; font-size: 26px; } .slider-prev { right: 12px; } .slider-next { left: 12px; } .slide-btn { padding: 12px 24px; font-size: 0.9rem; } }
 
 .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
 .category-card { background: var(--glass); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; position: relative; text-decoration: none; color: inherit; display: flex; flex-direction: column; cursor: pointer; }
@@ -179,8 +123,8 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .category-desc { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 18px; }
 .category-btn { display: inline-block; padding: 10px 28px; background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; border-radius: 50px; font-weight: 700; font-size: 0.9rem; }
 .category-card.item-clash { background: linear-gradient(135deg, rgba(0,255,231,0.12), rgba(168,85,247,0.12)); }
-.category-card.item-cod   { background: linear-gradient(135deg, rgba(255,46,196,0.12), rgba(168,85,247,0.12)); }
-.category-card.item-ff    { background: linear-gradient(135deg, rgba(255,80,0,0.15), rgba(255,0,80,0.12)); }
+.category-card.item-cod { background: linear-gradient(135deg, rgba(255,46,196,0.12), rgba(168,85,247,0.12)); }
+.category-card.item-ff { background: linear-gradient(135deg, rgba(255,80,0,0.15), rgba(255,0,80,0.12)); }
 .category-card.item-royal { background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(168,85,247,0.15)); }
 .category-card.free-card { background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1)); min-height: 280px; display: flex; align-items: center; justify-content: center; }
 .category-card.free-card .free-inner { text-align: center; padding: 30px 20px; }
@@ -209,6 +153,20 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .guarantee-icon { font-size: 3.5rem; margin-bottom: 15px; display: inline-block; animation: pulse 2s ease-in-out infinite; }
 .guarantee h3 { font-size: 1.4rem; margin-bottom: 15px; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .guarantee p { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 0.9rem; }
+
+/* ===== بخش امتیازدهی ===== */
+.rating-section { max-width: 700px; margin: 50px auto; padding: 40px 30px; text-align: center; background: linear-gradient(135deg, rgba(255,204,0,0.08), rgba(255,149,0,0.05)); border: 2px solid rgba(255,204,0,0.3); border-radius: 25px; box-shadow: 0 15px 50px rgba(255,204,0,0.15); direction: rtl; }
+.rating-title { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 900; margin-bottom: 12px; background: linear-gradient(90deg, #ffcc00, #ff9500); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.rating-subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 30px; }
+.stars-container { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; direction: ltr; }
+.star { font-size: clamp(2.5rem, 8vw, 3.5rem); cursor: pointer; transition: all 0.2s ease; filter: grayscale(1) brightness(0.6); user-select: none; line-height: 1; }
+.star:hover, .star.hover, .star.active { filter: grayscale(0) brightness(1.2); transform: scale(1.15); text-shadow: 0 0 20px rgba(255, 204, 0, 0.9); }
+.star:active { transform: scale(0.95); }
+.rating-feedback { min-height: 30px; font-size: 0.95rem; font-weight: 700; margin-top: 15px; opacity: 0; transition: opacity 0.3s; color: var(--cyan); }
+.rating-feedback.show { opacity: 1; animation: thankPulse 0.5s ease; }
+@keyframes thankPulse { 0% { transform: scale(0.8); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+.rating-stars-text { font-size: 1rem; font-weight: 700; color: #ffcc00; margin-top: 8px; min-height: 20px; }
+@media (max-width: 600px) { .rating-section { padding: 30px 20px; margin: 30px 15px; } .stars-container { gap: 8px; } }
 
 footer { background: rgba(10,10,15,0.9); border-top: 1px solid var(--border); padding: 40px 20px 25px; text-align: center; margin-top: 50px; transition: background 0.4s; }
 .footer-logo { font-size: 1.3rem; font-weight: 900; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px; }
@@ -258,7 +216,7 @@ footer { background: rgba(10,10,15,0.9); border-top: 1px solid var(--border); pa
 .chat-input-area { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: rgba(0,0,0,0.3); flex-shrink: 0; align-items: center; }
 .chat-input-area .chat-input-field { flex: 1; border-radius: 50px; padding: 12px 18px; font-size: 0.95rem; }
 .chat-send-btn { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.4rem; cursor: pointer; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0,255,231,0.5); }
-.chat-send-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(0,255,231,0.9); }
+.chat-send-btn:hover { transform: scale(1.1); }
 
 body.theme-light { --bg-dark: #f5f0e8; --text: #1a1a2e; --text-dim: #555; --glass: rgba(0,0,0,0.04); --border: rgba(100,100,200,0.3); --cyan: #0088cc; --purple: #6a4c93; --pink: #e63980; }
 body.theme-light nav { background: rgba(245,240,232,0.95); }
@@ -323,7 +281,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   </ul>
 </nav>
 
-<!-- ===== نوار اطلاعیه ===== -->
 <div id="announcementBar" class="announcement-bar" style="display: none;">
   <span class="ann-icon">📢</span>
   <span class="ann-message"></span>
@@ -345,30 +302,10 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   <div class="slider-container">
     <button class="slider-arrow slider-prev" onclick="sliderPrev()" aria-label="قبلی">‹</button>
     <div class="slider-track" id="sliderTrack">
-      <div class="slide slide-cod">
-        <div class="slide-icon">🎯</div>
-        <h2 class="slide-title">فروشگاه کالاف دیوتی</h2>
-        <p class="slide-sub">مطمئن‌ترین فروشگاه کالاف دیوتی موبایل در ایران</p>
-        <a href="category.html?cat=کالاف" class="slide-btn">🛒 خرید کالاف دیوتی</a>
-      </div>
-      <div class="slide slide-coc">
-        <div class="slide-icon">🏰</div>
-        <h2 class="slide-title">فروشگاه کلش آف کلنز</h2>
-        <p class="slide-sub">مطمئن‌ترین فروشگاه کلش آف کلنز در ایران</p>
-        <a href="category.html?cat=کلش" class="slide-btn">🛒 خرید کلش آف کلنز</a>
-      </div>
-      <div class="slide slide-royal">
-        <div class="slide-icon">👑</div>
-        <h2 class="slide-title">فروشگاه کلش رویال</h2>
-        <p class="slide-sub">اکانت‌های کلش رویال با آرنا بالا</p>
-        <a href="category.html?cat=کلش رویال" class="slide-btn">🛒 خرید کلش رویال</a>
-      </div>
-      <div class="slide slide-free">
-        <div class="slide-icon">🔥</div>
-        <h2 class="slide-title">فروشگاه فری فایر</h2>
-        <p class="slide-sub">اکانت‌های فری فایر با رنک بالا</p>
-        <a href="category.html?cat=فری فایر" class="slide-btn">🛒 خرید فری فایر</a>
-      </div>
+      <div class="slide slide-cod"><div class="slide-icon">🎯</div><h2 class="slide-title">فروشگاه کالاف دیوتی</h2><p class="slide-sub">مطمئن‌ترین فروشگاه کالاف دیوتی موبایل در ایران</p><a href="category.html?cat=کالاف" class="slide-btn">🛒 خرید کالاف دیوتی</a></div>
+      <div class="slide slide-coc"><div class="slide-icon">🏰</div><h2 class="slide-title">فروشگاه کلش آف کلنز</h2><p class="slide-sub">مطمئن‌ترین فروشگاه کلش آف کلنز در ایران</p><a href="category.html?cat=کلش" class="slide-btn">🛒 خرید کلش آف کلنز</a></div>
+      <div class="slide slide-royal"><div class="slide-icon">👑</div><h2 class="slide-title">فروشگاه کلش رویال</h2><p class="slide-sub">اکانت‌های کلش رویال با آرنا بالا</p><a href="category.html?cat=کلش رویال" class="slide-btn">🛒 خرید کلش رویال</a></div>
+      <div class="slide slide-free"><div class="slide-icon">🔥</div><h2 class="slide-title">فروشگاه فری فایر</h2><p class="slide-sub">اکانت‌های فری فایر با رنک بالا</p><a href="category.html?cat=فری فایر" class="slide-btn">🛒 خرید فری فایر</a></div>
     </div>
     <button class="slider-arrow slider-next" onclick="sliderNext()" aria-label="بعدی">›</button>
     <div class="slider-dots" id="sliderDots">
@@ -384,102 +321,15 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   <h2 class="section-title">🛒 دسته‌بندی‌ها</h2>
   <p class="section-sub">یکی از دسته‌های زیر رو انتخاب کن</p>
   <div class="category-grid">
-    <a href="category.html?cat=کالاف" class="category-card reveal">
-      <div class="category-image-wrap">
-        <img src="call-of-duty.jpg" alt="کالاف دیوتی" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">🎯</div>
-        <h3 class="category-title">کالاف دیوتی</h3>
-        <p class="category-desc">اکانت کالاف دیوتی موبایل</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=کلش" class="category-card reveal">
-      <div class="category-image-wrap">
-        <img src="clash-of-clans.jpg" alt="کلش آف کلنز" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">🏰</div>
-        <h3 class="category-title">کلش آف کلنز</h3>
-        <p class="category-desc">اکانت کلش آف کلنز</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=کلش رویال" class="category-card reveal">
-      <div class="category-image-wrap">
-        <img src="clash-royal.jpg" alt="کلش رویال" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">👑</div>
-        <h3 class="category-title">کلش رویال</h3>
-        <p class="category-desc">اکانت کلش رویال با آرنا بالا</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=فری فایر" class="category-card reveal">
-      <div class="category-image-wrap">
-        <img src="images.jpeg" alt="فری فایر" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">🔥</div>
-        <h3 class="category-title">فری فایر</h3>
-        <p class="category-desc">اکانت فری فایر با رنک بالا</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=آزاد" class="category-card free-card reveal">
-      <div class="free-inner">
-        <span class="free-emoji">✨</span>
-        <h3 class="category-title">آزاد</h3>
-        <p class="category-desc">هر چیزی که بخوای اینجاست!</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=آیتم کلش" class="category-card item-clash reveal">
-      <div class="category-image-wrap">
-        <img src="clash-items.jpg" alt="آیتم کلش" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">💎</div>
-        <h3 class="category-title">آیتم کلش</h3>
-        <p class="category-desc">بلیط طلایی، منظره و...</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=آیتم کالاف" class="category-card item-cod reveal">
-      <div class="category-image-wrap">
-        <img src="cod-items.jpg" alt="آیتم کالاف" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">🔫</div>
-        <h3 class="category-title">آیتم کالاف</h3>
-        <p class="category-desc">CP، بتل پس و اسکین‌ها</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=آیتم فری فایر" class="category-card item-ff reveal">
-      <div class="category-image-wrap">
-        <img src="ff-items.jpg" alt="آیتم فری فایر" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">🎁</div>
-        <h3 class="category-title">آیتم فری فایر</h3>
-        <p class="category-desc">جم، بتل پس، پاس رفیل</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
-    <a href="category.html?cat=آیتم کلش رویال" class="category-card item-royal reveal">
-      <div class="category-image-wrap">
-        <img src="royal-items.jpg" alt="آیتم کلش رویال" class="category-image" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="category-body">
-        <div class="category-icon">🎁</div>
-        <h3 class="category-title">آیتم کلش رویال</h3>
-        <p class="category-desc">سکه، جم، بتل پس رویال</p>
-        <span class="category-btn">مشاهده →</span>
-      </div>
-    </a>
+    <a href="category.html?cat=کالاف" class="category-card reveal"><div class="category-image-wrap"><img src="call-of-duty.jpg" alt="کالاف دیوتی" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">🎯</div><h3 class="category-title">کالاف دیوتی</h3><p class="category-desc">اکانت کالاف دیوتی موبایل</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=کلش" class="category-card reveal"><div class="category-image-wrap"><img src="clash-of-clans.jpg" alt="کلش آف کلنز" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">🏰</div><h3 class="category-title">کلش آف کلنز</h3><p class="category-desc">اکانت کلش آف کلنز</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=کلش رویال" class="category-card reveal"><div class="category-image-wrap"><img src="clash-royal.jpg" alt="کلش رویال" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">👑</div><h3 class="category-title">کلش رویال</h3><p class="category-desc">اکانت کلش رویال با آرنا بالا</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=فری فایر" class="category-card reveal"><div class="category-image-wrap"><img src="images.jpeg" alt="فری فایر" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">🔥</div><h3 class="category-title">فری فایر</h3><p class="category-desc">اکانت فری فایر با رنک بالا</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=آزاد" class="category-card free-card reveal"><div class="free-inner"><span class="free-emoji">✨</span><h3 class="category-title">آزاد</h3><p class="category-desc">هر چیزی که بخوای اینجاست!</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=آیتم کلش" class="category-card item-clash reveal"><div class="category-image-wrap"><img src="clash-items.jpg" alt="آیتم کلش" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">💎</div><h3 class="category-title">آیتم کلش</h3><p class="category-desc">بلیط طلایی، منظره و...</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=آیتم کالاف" class="category-card item-cod reveal"><div class="category-image-wrap"><img src="cod-items.jpg" alt="آیتم کالاف" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">🔫</div><h3 class="category-title">آیتم کالاف</h3><p class="category-desc">CP، بتل پس و اسکین‌ها</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=آیتم فری فایر" class="category-card item-ff reveal"><div class="category-image-wrap"><img src="ff-items.jpg" alt="آیتم فری فایر" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">🎁</div><h3 class="category-title">آیتم فری فایر</h3><p class="category-desc">جم، بتل پس، پاس رفیل</p><span class="category-btn">مشاهده →</span></div></a>
+    <a href="category.html?cat=آیتم کلش رویال" class="category-card item-royal reveal"><div class="category-image-wrap"><img src="royal-items.jpg" alt="آیتم کلش رویال" class="category-image" loading="lazy" onerror="this.style.display='none'"></div><div class="category-body"><div class="category-icon">🎁</div><h3 class="category-title">آیتم کلش رویال</h3><p class="category-desc">سکه، جم، بتل پس رویال</p><span class="category-btn">مشاهده →</span></div></a>
   </div>
 </section>
 
@@ -515,6 +365,21 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
       <a href="#" id="telegramLink" target="_blank" style="display:inline-block; padding: 12px 25px; background: linear-gradient(90deg, #0088cc, #00b4ff); color: white; border-radius: 50px; text-decoration: none; font-weight: 700;">✈️ تلگرام</a>
     </div>
   </div>
+</section>
+
+<!-- ===== بخش امتیازدهی ===== -->
+<section class="rating-section reveal">
+  <h2 class="rating-title">⭐ به کاپیتان وکثور امتیاز بدید</h2>
+  <p class="rating-subtitle">نظر شما برای ما ارزشمنده</p>
+  <div class="stars-container" id="starsContainer">
+    <span class="star" data-value="1" onclick="submitRating(1)">⭐</span>
+    <span class="star" data-value="2" onclick="submitRating(2)">⭐</span>
+    <span class="star" data-value="3" onclick="submitRating(3)">⭐</span>
+    <span class="star" data-value="4" onclick="submitRating(4)">⭐</span>
+    <span class="star" data-value="5" onclick="submitRating(5)">⭐</span>
+  </div>
+  <div class="rating-stars-text" id="ratingStarsText"></div>
+  <div class="rating-feedback" id="ratingFeedback"></div>
 </section>
 
 <footer>
@@ -600,7 +465,7 @@ function playClick() {
   } catch (e) {}
 }
 document.addEventListener('click', (e) => {
-  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .stat-box, .chat-close');
+  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .stat-box, .chat-close, .star');
   if (target) playClick();
 }, true);
 
@@ -615,11 +480,7 @@ function applyTheme(theme) {
   if (btn) btn.textContent = themeIcons[theme];
   localStorage.setItem('cv_theme', theme);
 }
-function changeTheme() {
-  const i = themes.indexOf(currentTheme);
-  currentTheme = themes[(i + 1) % themes.length];
-  applyTheme(currentTheme);
-}
+function changeTheme() { const i = themes.indexOf(currentTheme); currentTheme = themes[(i + 1) % themes.length]; applyTheme(currentTheme); }
 applyTheme(currentTheme);
 
 window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader').classList.add('hide'); }, 800); });
@@ -630,12 +491,7 @@ function typeTitle() {
   const text = '𝑪𝑨𝑷𝑰𝑻𝑨𝑵..-𝒗𝒆𝒙𝒐𝒓';
   let i = 0;
   el.innerHTML = '<span class="cursor"></span>';
-  const timer = setInterval(() => {
-    if (i < text.length) {
-      el.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
-      i++;
-    } else clearInterval(timer);
-  }, 100);
+  const timer = setInterval(() => { if (i < text.length) { el.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>'; i++; } else clearInterval(timer); }, 100);
 }
 setTimeout(typeTitle, 1000);
 
@@ -659,19 +515,11 @@ class Particle {
     this.x += this.speedX; this.y += this.speedY;
     if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
     if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-    if (mouse.x && mouse.y) {
-      const dx = mouse.x - this.x, dy = mouse.y - this.y;
-      const distSq = dx * dx + dy * dy;
-      if (distSq < 10000) { this.x -= dx / 50; this.y -= dy / 50; }
-    }
+    if (mouse.x && mouse.y) { const dx = mouse.x - this.x, dy = mouse.y - this.y; const distSq = dx * dx + dy * dy; if (distSq < 10000) { this.x -= dx / 50; this.y -= dy / 50; } }
   }
   draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = `rgba(${this.color}, 0.6)`; ctx.fill(); }
 }
-function initParticles() {
-  particles = [];
-  const count = window.innerWidth < 768 ? 18 : 45;
-  for (let i = 0; i < count; i++) particles.push(new Particle());
-}
+function initParticles() { particles = []; const count = window.innerWidth < 768 ? 18 : 45; for (let i = 0; i < count; i++) particles.push(new Particle()); }
 initParticles();
 function connectParticles() {
   const maxDistSq = 9000;
@@ -711,33 +559,19 @@ function animateCounter(el) {
   let count = 0;
   const step = target / 50;
   const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
-  const timer = setInterval(() => {
-    count += step;
-    if (count >= target) { count = target; clearInterval(timer); }
-    let num = Math.floor(count).toString().replace(/\d/g, d => persianDigits[d]);
-    el.textContent = num + suffix;
-  }, 30);
+  const timer = setInterval(() => { count += step; if (count >= target) { count = target; clearInterval(timer); } let num = Math.floor(count).toString().replace(/\d/g, d => persianDigits[d]); el.textContent = num + suffix; }, 30);
 }
-setTimeout(() => {
-  document.querySelectorAll('.num[data-target]').forEach((el, i) => {
-    setTimeout(() => animateCounter(el), i * 150);
-  });
-}, 1500);
+setTimeout(() => { document.querySelectorAll('.num[data-target]').forEach((el, i) => { setTimeout(() => animateCounter(el), i * 150); }); }, 1500);
 
 async function loadContact() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
     const data = await res.json();
     if (data && data.length > 0) {
       const rubikaLink = document.getElementById('rubikaLink');
       if (rubikaLink) rubikaLink.href = `https://rubika.ir/${data[0].rubika_id}`;
       const telegramLink = document.getElementById('telegramLink');
-      if (telegramLink) {
-        if (data[0].telegram_id) telegramLink.href = `https://t.me/${data[0].telegram_id}`;
-        else telegramLink.style.display = 'none';
-      }
+      if (telegramLink) { if (data[0].telegram_id) telegramLink.href = `https://t.me/${data[0].telegram_id}`; else telegramLink.style.display = 'none'; }
       const floatPhone = document.getElementById('floatPhone');
       if (floatPhone) floatPhone.href = `tel:${data[0].phone}`;
     }
@@ -755,12 +589,9 @@ const COLOR_PRESETS = {
   'blue-cyan':   { c1: '#0088cc', c2: '#00ffe7', text: '#ffffff' },
   'black-gold':  { c1: '#1a1a2e', c2: '#4a3a1e', text: '#ffcc00' }
 };
-
 async function loadAnnouncement() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?select=*&order=id.desc&limit=1`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?select=*&order=id.desc&limit=1`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
     const data = await res.json();
     if (!data || data.length === 0) return;
     const ann = data[0];
@@ -773,11 +604,8 @@ async function loadAnnouncement() {
     let c1, c2, textColor;
     if (preset === 'custom' && ann.color_custom) {
       const parts = ann.color_custom.split(',');
-      c1 = parts[0] || '#00ffe7';
-      c2 = parts[1] || '#a855f7';
-      const r = parseInt(c1.substr(1,2), 16);
-      const g = parseInt(c1.substr(3,2), 16);
-      const b = parseInt(c1.substr(5,2), 16);
+      c1 = parts[0] || '#00ffe7'; c2 = parts[1] || '#a855f7';
+      const r = parseInt(c1.substr(1,2), 16); const g = parseInt(c1.substr(3,2), 16); const b = parseInt(c1.substr(5,2), 16);
       const brightness = (r * 299 + g * 587 + b * 114) / 1000;
       textColor = brightness > 128 ? '#0a0a0f' : '#ffffff';
     } else {
@@ -789,11 +617,66 @@ async function loadAnnouncement() {
     bar.querySelector('.ann-icon').textContent = icon;
     bar.querySelector('.ann-message').textContent = message;
     bar.style.display = 'flex';
-    console.log('📢 اطلاعیه نمایش داده شد:', message);
   } catch (err) { console.error('Announcement load error:', err); }
 }
-
 window.addEventListener('load', () => { setTimeout(loadAnnouncement, 500); });
+
+// ===== امتیازدهی =====
+const ratingMessages = {
+  1: '😢 متأسفیم که راضی نبودی',
+  2: '😐 امیدواریم بهتر بشیم',
+  3: '🙂 ممنون از نظرت',
+  4: '😊 خوشحالیم که راضی بودی',
+  5: '🤩 وای! فوق‌العاده! ممنون ❤️'
+};
+
+let ratingSubmitted = false;
+
+document.querySelectorAll('.star').forEach(star => {
+  star.addEventListener('mouseenter', () => {
+    if (ratingSubmitted) return;
+    const val = parseInt(star.dataset.value);
+    document.querySelectorAll('.star').forEach((s, i) => { s.classList.toggle('hover', i < val); });
+    document.getElementById('ratingStarsText').textContent = '⭐'.repeat(val);
+  });
+});
+document.getElementById('starsContainer')?.addEventListener('mouseleave', () => {
+  if (ratingSubmitted) return;
+  document.querySelectorAll('.star').forEach(s => s.classList.remove('hover'));
+  document.getElementById('ratingStarsText').textContent = '';
+});
+
+async function submitRating(stars) {
+  if (ratingSubmitted) return;
+  if (stars < 1 || stars > 5) return;
+  ratingSubmitted = true;
+  document.querySelectorAll('.star').forEach((s, i) => { s.classList.toggle('active', i < stars); });
+  document.getElementById('ratingStarsText').textContent = '⭐'.repeat(stars);
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ stars: stars }) });
+    const feedback = document.getElementById('ratingFeedback');
+    if (res.ok) {
+      feedback.textContent = ratingMessages[stars] || 'ممنون از نظرت! ❤️';
+      feedback.classList.add('show');
+      setTimeout(() => {
+        ratingSubmitted = false;
+        document.querySelectorAll('.star').forEach(s => s.classList.remove('active', 'hover'));
+        document.getElementById('ratingStarsText').textContent = '';
+        feedback.classList.remove('show');
+      }, 3000);
+    } else {
+      feedback.textContent = '❌ خطا، دوباره تلاش کن';
+      feedback.style.color = '#ff3860';
+      feedback.classList.add('show');
+      setTimeout(() => { ratingSubmitted = false; feedback.classList.remove('show'); feedback.style.color = ''; }, 3000);
+    }
+  } catch (err) {
+    console.error('Rating error:', err);
+    document.getElementById('ratingFeedback').textContent = '❌ خطا در ارسال';
+    document.getElementById('ratingFeedback').classList.add('show');
+    setTimeout(() => { ratingSubmitted = false; document.getElementById('ratingFeedback').classList.remove('show'); }, 3000);
+  }
+}
 
 // ===== اسلایدر =====
 let currentSlide = 0;
@@ -819,10 +702,7 @@ function initSlider() {
 function updateSlider() {
   if (!sliderTrack) return;
   sliderTrack.style.transform = `translateX(${currentSlide * 100}%)`;
-  if (sliderDots) {
-    const dots = sliderDots.querySelectorAll('.dot');
-    dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-  }
+  if (sliderDots) { const dots = sliderDots.querySelectorAll('.dot'); dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide)); }
 }
 function sliderNext() { currentSlide = (currentSlide + 1) % slideCount; updateSlider(); resetAutoPlay(); }
 function sliderPrev() { currentSlide = (currentSlide - 1 + slideCount) % slideCount; updateSlider(); resetAutoPlay(); }
@@ -837,7 +717,6 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js')
       .then((reg) => {
-        console.log('✅ SW registered');
         reg.addEventListener('updatefound', () => {
           const newWorker = reg.installing;
           newWorker.addEventListener('statechange', () => {
