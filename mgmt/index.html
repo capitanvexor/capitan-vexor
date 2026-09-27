@@ -30,7 +30,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .input-group input:focus { border-color:var(--cyan); box-shadow:0 0 20px rgba(0,255,231,0.3); }
 .input-group .icon { position:absolute; right:15px; top:50%; transform:translateY(-50%); font-size:1.2rem; opacity:0.6; }
 .login-btn { width:100%; padding:15px; background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; transition:0.3s; font-family:inherit; margin-top:10px; box-shadow:0 0 25px rgba(0,255,231,0.4); }
-.login-btn:hover { transform:translateY(-2px); box-shadow:0 0 40px rgba(0,255,231,0.7); }
+.login-btn:hover { transform:translateY(-2px); }
 .error-msg { background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); padding:12px; border-radius:10px; margin-top:15px; font-size:0.9rem; display:none; }
 .error-msg.show { display:block; }
 .back-link { display:inline-block; margin-top:20px; color:var(--text-dim); text-decoration:none; font-size:0.85rem; }
@@ -60,7 +60,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .form-row.three { grid-template-columns:1fr 1fr 1fr; }
 
 .save-btn { width:100%; padding:14px; background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; transition:0.3s; font-family:inherit; box-shadow:0 0 25px rgba(0,255,231,0.4); }
-.save-btn:hover { transform:translateY(-2px); box-shadow:0 0 40px rgba(0,255,231,0.7); }
+.save-btn:hover { transform:translateY(-2px); }
 .save-btn:disabled { opacity:0.6; cursor:not-allowed; }
 
 .upload-area { border:2px dashed var(--border); border-radius:12px; padding:30px 20px; text-align:center; cursor:pointer; transition:0.3s; background:rgba(0,0,0,0.2); }
@@ -109,7 +109,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .chat-list-item .preview { font-size:0.75rem; color:var(--text-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .chat-list-item .time { font-size:0.7rem; color:#666; margin-top:4px; }
 .delete-chat-btn { background:rgba(255,56,96,0.1); border:1px solid rgba(255,56,96,0.3); color:var(--danger); border-radius:8px; width:26px; height:26px; font-size:0.75rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.3s; padding:0; }
-.delete-chat-btn:hover { background:var(--danger); color:white; transform:scale(1.15); }
+.delete-chat-btn:hover { background:var(--danger); color:white; }
 
 .unread-badge { background:linear-gradient(135deg,#ff3860,#ff0055); color:white; font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:50px; min-width:22px; text-align:center; box-shadow:0 0 10px rgba(255,56,96,0.8); animation:unreadPulse 1.5s ease-in-out infinite; }
 @keyframes unreadPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
@@ -123,7 +123,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .chat-main-input { padding:12px; border-top:1px solid var(--border); display:flex; gap:8px; background:rgba(0,0,0,0.3); }
 .chat-main-input input { flex:1; padding:12px 16px; background:rgba(0,0,0,0.4); border:1px solid var(--border); border-radius:50px; color:var(--text); font-family:inherit; font-size:0.9rem; outline:none; }
 .chat-main-input input:focus { border-color:var(--cyan); }
-.chat-main-input button { width:45px; height:45px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--purple)); border:none; color:#0a0a0f; font-size:1.2rem; cursor:pointer; transition:0.3s; }
+.chat-main-input button { width:45px; height:45px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--purple)); border:none; color:#0a0a0f; font-size:1.2rem; cursor:pointer; }
 
 .admin-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:var(--text-dim); text-align:center; padding:40px; }
 .admin-empty .icon { font-size:4rem; margin-bottom:15px; opacity:0.4; }
@@ -160,7 +160,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .notif-permission.success-banner { background:rgba(16,185,129,0.1); border-color:#10b981; color:#10b981; }
 .notif-permission.error-banner { background:rgba(255,56,96,0.1); border-color:#ff3860; color:#ff3860; }
 
-/* Voice */
 .voice-recorder { display:flex; align-items:center; gap:10px; flex:1; padding:8px 15px; background:rgba(255,56,96,0.1); border:1px solid var(--danger); border-radius:50px; }
 .voice-recorder .dot-rec { width:12px; height:12px; border-radius:50%; background:#ff3860; animation:dotBlink 1s infinite; }
 @keyframes dotBlink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
@@ -180,7 +179,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .bubble.theirs .voice-player .waveform .bar { background:var(--cyan); }
 .voice-player .duration { font-size:0.75rem; font-weight:700; min-width:35px; text-align:center; }
 
-/* Announce */
 .color-picker-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:8px; }
 .color-option { padding:12px 8px; border-radius:10px; cursor:pointer; text-align:center; font-size:0.75rem; font-weight:700; color:white; border:3px solid transparent; transition:0.3s; text-shadow:0 1px 3px rgba(0,0,0,0.5); }
 .color-option:hover { transform:translateY(-3px) scale(1.02); }
@@ -227,6 +225,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     <button class="tab" onclick="switchTab('stats', this)">📊 آمار</button>
     <button class="tab" onclick="switchTab('contact', this)">📞 تماس</button>
     <button class="tab" onclick="switchTab('announce', this)">📢 اطلاعیه</button>
+    <button class="tab" onclick="switchTab('ratings', this)">⭐ امتیازها</button>
     <button class="tab" onclick="switchTab('settings', this)">⚙️ تنظیمات</button>
   </div>
 
@@ -429,10 +428,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
   <div class="tab-content" id="tab-announce">
     <div class="card">
       <div class="card-title">📢 مدیریت اطلاعیه</div>
-      <div class="form-group">
-        <label>📢 آیکون</label>
-        <input type="text" id="annIcon" placeholder="📢" value="📢" maxlength="4" style="font-size:1.5rem; text-align:center;">
-      </div>
+      <div class="form-group"><label>📢 آیکون</label><input type="text" id="annIcon" placeholder="📢" value="📢" maxlength="4" style="font-size:1.5rem; text-align:center;"></div>
       <div class="form-group">
         <label>🎨 رنگ اطلاعیه</label>
         <div class="color-picker-grid" id="colorPickerGrid">
@@ -469,6 +465,33 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
       <div class="form-row">
         <button class="save-btn" id="saveAnnBtn" onclick="saveAnnouncement()">🚀 ذخیره اطلاعیه</button>
         <button class="save-btn" onclick="deleteAnnouncement()" style="background:linear-gradient(90deg,#ff3860,#cc0033);">🗑️ پاک کردن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ratings -->
+  <div class="tab-content" id="tab-ratings">
+    <div class="card">
+      <div class="card-title">⭐ آمار امتیازها</div>
+      <div id="ratingsStats" style="text-align:center; padding:20px 0;">
+        <div style="display:inline-block; padding:25px 40px; background:linear-gradient(135deg,rgba(255,204,0,0.15),rgba(255,149,0,0.15)); border:2px solid #ffcc00; border-radius:20px; margin:10px;">
+          <div style="font-size:3rem; margin-bottom:8px;">⭐</div>
+          <div style="font-size:2.5rem; font-weight:900; color:#ffcc00;" id="avgRating">0.0</div>
+          <div style="color:var(--text-dim); font-size:0.85rem;">میانگین امتیاز</div>
+        </div>
+        <div style="display:inline-block; padding:25px 40px; background:rgba(0,255,231,0.08); border:2px solid var(--cyan); border-radius:20px; margin:10px;">
+          <div style="font-size:3rem; margin-bottom:8px;">👥</div>
+          <div style="font-size:2.5rem; font-weight:900; color:var(--cyan);" id="totalRatings">0</div>
+          <div style="color:var(--text-dim); font-size:0.85rem;">تعداد کل امتیازها</div>
+        </div>
+      </div>
+      <div style="margin-top:30px;">
+        <h4 style="color:var(--cyan); margin-bottom:15px; font-size:1rem;">📊 توزیع ستاره‌ها</h4>
+        <div id="ratingsChart"></div>
+      </div>
+      <div style="margin-top:25px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="save-btn" onclick="loadRatings()" style="flex:1;">🔄 بروزرسانی</button>
+        <button onclick="clearAllRatings()" style="padding:14px 24px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:12px; cursor:pointer; font-family:inherit; font-weight:700;">🗑️ پاک کردن همه</button>
       </div>
     </div>
   </div>
@@ -623,13 +646,8 @@ function login() {
   const pass = document.getElementById('password').value.trim();
   const savedUser = localStorage.getItem('cv_username') || DEFAULT_USERNAME;
   const savedPass = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
-  if (user === savedUser && pass === savedPass) {
-    sessionStorage.setItem('cv_logged_in', 'true');
-    showDashboard();
-  } else {
-    document.getElementById('errorMsg').classList.add('show');
-    setTimeout(() => document.getElementById('errorMsg').classList.remove('show'), 3000);
-  }
+  if (user === savedUser && pass === savedPass) { sessionStorage.setItem('cv_logged_in', 'true'); showDashboard(); }
+  else { document.getElementById('errorMsg').classList.add('show'); setTimeout(() => document.getElementById('errorMsg').classList.remove('show'), 3000); }
 }
 document.getElementById('password').addEventListener('keypress', e => { if (e.key === 'Enter') login(); });
 
@@ -638,41 +656,20 @@ function showDashboard() {
   document.getElementById('dashboard').classList.add('active');
   if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission();
   checkNotificationBanner();
-  loadProducts();
-  loadSettings();
-  loadChats();
-  loadAnnouncement();
-  subscribeToChats();
+  loadProducts(); loadSettings(); loadChats(); loadAnnouncement(); subscribeToChats();
 }
 
 function checkNotificationBanner() {
   const banner = document.getElementById('notifBanner');
   if (!('Notification' in window)) return;
-  if (Notification.permission === 'default') {
-    banner.innerHTML = `<div class="notif-permission"><span>🔔 برای دریافت نوتیف اجازه بده</span><button onclick="requestNotifPermission()">فعال‌سازی</button></div>`;
-  } else if (Notification.permission === 'granted') {
-    banner.innerHTML = `<div class="notif-permission success-banner"><span>✅ نوتیفیکیشن فعاله!</span><button onclick="testNotification()" style="background:#10b981; color:white;">تست</button></div>`;
-  } else if (Notification.permission === 'denied') {
-    banner.innerHTML = `<div class="notif-permission error-banner"><span>🔕 نوتیف مسدود شده</span></div>`;
-  }
+  if (Notification.permission === 'default') banner.innerHTML = `<div class="notif-permission"><span>🔔 برای دریافت نوتیف اجازه بده</span><button onclick="requestNotifPermission()">فعال‌سازی</button></div>`;
+  else if (Notification.permission === 'granted') banner.innerHTML = `<div class="notif-permission success-banner"><span>✅ نوتیفیکیشن فعاله!</span><button onclick="testNotification()" style="background:#10b981; color:white;">تست</button></div>`;
+  else if (Notification.permission === 'denied') banner.innerHTML = `<div class="notif-permission error-banner"><span>🔕 نوتیف مسدود شده</span></div>`;
 }
-
 function requestNotifPermission() { if ('Notification' in window) Notification.requestPermission().then(() => checkNotificationBanner()); }
+function testNotification() { if (Notification.permission !== 'granted') return; try { new Notification('🔔 تست موفق!', { body:'نوتیف کار می‌کنه', icon:'icon-512.png', dir:'rtl' }); } catch(e){} }
 
-function testNotification() {
-  if (Notification.permission !== 'granted') return;
-  try {
-    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-      navigator.serviceWorker.ready.then(reg => { reg.showNotification('🔔 تست موفق!', { body:'نوتیف کار می‌کنه', icon:'icon-512.png', dir:'rtl', lang:'fa' }); });
-    } else { new Notification('🔔 تست موفق!', { body:'نوتیف کار می‌کنه', icon:'icon-512.png', dir:'rtl' }); }
-  } catch (e) {}
-}
-
-function logout() {
-  sessionStorage.removeItem('cv_logged_in');
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('dashboard').classList.remove('active');
-}
+function logout() { sessionStorage.removeItem('cv_logged_in'); document.getElementById('loginScreen').style.display = 'flex'; document.getElementById('dashboard').classList.remove('active'); }
 window.addEventListener('load', () => { if (sessionStorage.getItem('cv_logged_in') === 'true') showDashboard(); });
 
 function switchTab(name, btn) {
@@ -682,6 +679,7 @@ function switchTab(name, btn) {
   document.getElementById('tab-' + name).classList.add('active');
   if (name === 'chat') loadChats();
   if (name === 'announce') loadAnnouncement();
+  if (name === 'ratings') loadRatings();
 }
 
 function showStatus(msg, type = 'loading') {
@@ -753,7 +751,6 @@ function playNotificationSound() {
     });
   } catch (e) {}
 }
-
 function showNotification(title, body) {
   if (!('Notification' in window) || Notification.permission !== 'granted') return;
   try {
@@ -762,7 +759,6 @@ function showNotification(title, body) {
     } else { new Notification(title, { body, icon:'icon-512.png', dir:'rtl' }); }
   } catch (e) {}
 }
-
 function flashPageTitle(newTitle) {
   if (titleFlashInterval) clearInterval(titleFlashInterval);
   let toggle = false;
@@ -940,7 +936,6 @@ function openEditModal(id) {
   editNewImages = []; renderEditImagesPreview();
   document.getElementById('editModal').classList.add('show');
 }
-
 function renderExistingImages(images) {
   const container = document.getElementById('existingImages');
   if (!images || images.length === 0) { container.innerHTML = '<p style="color:#666;font-size:0.85rem;">عکسی نداره</p>'; return; }
@@ -1026,11 +1021,9 @@ async function loadSettings() {
   if (data && data.length > 0) {
     document.getElementById('phone').value = data[0].phone || '';
     document.getElementById('rubika').value = data[0].rubika_id || '';
-    const tg = document.getElementById('telegram');
-    if (tg) tg.value = data[0].telegram_id || '';
+    const tg = document.getElementById('telegram'); if (tg) tg.value = data[0].telegram_id || '';
   }
 }
-
 async function saveSettings() {
   const phone = document.getElementById('phone').value.trim();
   const rubika = document.getElementById('rubika').value.trim();
@@ -1038,8 +1031,7 @@ async function saveSettings() {
   if (!phone || !rubika) { showStatus('❌ شماره و روبیکا اجباری!', 'error'); return; }
   showStatus('⏳ ذخیره...', 'loading');
   const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ phone, rubika_id:rubika, telegram_id:telegram, updated_at:new Date().toISOString() }) });
-  if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
-  else showStatus('❌ خطا', 'error');
+  if (res.ok) showStatus('🎉 ذخیره شد!', 'success'); else showStatus('❌ خطا', 'error');
 }
 
 function changeCredentials() {
@@ -1066,7 +1058,6 @@ async function loadChats() {
   renderChatList(allChatsData);
   updateUnreadBadge(allChatsData);
 }
-
 function renderChatList(chats) {
   const list = document.getElementById('chatList');
   if (!chats || chats.length === 0) { list.innerHTML = `<div class="admin-empty"><div class="icon">📭</div><p>هنوز چتی نداری</p></div>`; return; }
@@ -1079,14 +1070,11 @@ function renderChatList(chats) {
     return `<div class="chat-list-item ${active} ${unreadClass}" onclick="openChat(${c.id}, '${escapeHtml(c.visitor_name)}')"><div class="name"><span class="name-text">👤 ${escapeHtml(c.visitor_name)}</span><div style="display:flex;align-items:center;gap:6px;">${unreadBadge}<button class="delete-chat-btn" onclick="event.stopPropagation(); deleteChat(${c.id}, '${escapeHtml(c.visitor_name)}')">🗑️</button></div></div>${c.visitor_phone ? `<div class="preview">📞 ${escapeHtml(c.visitor_phone)}</div>` : ''}<div class="time">${time}</div></div>`;
   }).join('');
 }
-
 function updateUnreadBadge(chats) {
   totalUnread = chats.reduce((sum, c) => sum + (c.unread_count || 0), 0);
   const badge = document.getElementById('chatTabBadge');
-  if (totalUnread > 0) { badge.textContent = totalUnread; badge.style.display = 'inline-block'; }
-  else { badge.style.display = 'none'; }
+  if (totalUnread > 0) { badge.textContent = totalUnread; badge.style.display = 'inline-block'; } else { badge.style.display = 'none'; }
 }
-
 async function deleteChat(id, name) {
   if (!confirm(`مطمئنی چت "${name}" رو حذف کنی؟`)) return;
   try {
@@ -1099,7 +1087,6 @@ async function deleteChat(id, name) {
     }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
-
 async function openChat(id, name) {
   currentChatId = id; currentChatName = name;
   await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ unread_count:0 }) });
@@ -1109,13 +1096,11 @@ async function openChat(id, name) {
   loadChatMessages(id);
   subscribeToChatMessages(id);
 }
-
 async function loadChatMessages(chatId) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   const messages = await res.json();
   renderChatMessages(messages);
 }
-
 function renderChatMessages(messages) {
   const container = document.getElementById('chatMainMessages');
   if (!container) return;
@@ -1130,7 +1115,6 @@ function renderChatMessages(messages) {
   }).join('');
   container.scrollTop = container.scrollHeight;
 }
-
 async function sendAdminMessage() {
   const input = document.getElementById('adminChatInput');
   const text = input.value.trim();
@@ -1159,12 +1143,8 @@ async function startRecording() {
       document.getElementById('recTimer').textContent = `${mins}:${String(secs).padStart(2,'0')}`;
       if (elapsed >= 120) stopAndSendVoice();
     }, 100);
-  } catch (err) {
-    if (err.name === 'NotAllowedError') alert('❌ دسترسی به میکروفن رد شد!');
-    else alert('❌ خطا: ' + err.message);
-  }
+  } catch (err) { if (err.name === 'NotAllowedError') alert('❌ دسترسی به میکروفن رد شد!'); else alert('❌ خطا: ' + err.message); }
 }
-
 function cancelRecording() {
   if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
   if (recordingStream) recordingStream.getTracks().forEach(t => t.stop());
@@ -1174,7 +1154,6 @@ function cancelRecording() {
   document.getElementById('chatInputArea').style.display = 'flex';
   document.getElementById('recTimer').textContent = '0:00';
 }
-
 async function stopAndSendVoice() {
   if (!mediaRecorder || mediaRecorder.state === 'inactive') return;
   const duration = Math.floor((Date.now() - recordingStartTime) / 1000);
@@ -1195,15 +1174,13 @@ async function stopAndSendVoice() {
         await fetch(`${SUPABASE_URL}/rest/v1/messages`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ chat_id:currentChatId, sender:'admin', message:`🎤 وییس (${duration} ثانیه)`, message_type:'voice', voice_url:voiceUrl, voice_duration:duration }) });
         await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ last_message_at:new Date().toISOString() }) });
         showStatus('✅ وییس ارسال شد!', 'success');
-        loadChatMessages(currentChatId);
-        loadChats();
+        loadChatMessages(currentChatId); loadChats();
         resolve();
       } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); resolve(); }
     };
     mediaRecorder.stop();
   });
 }
-
 function renderVoicePlayer(url, duration, isAdmin) {
   const bars = Array.from({length:25}, () => Math.floor(Math.random() * 20) + 4);
   const barsHtml = bars.map(h => `<div class="bar" style="height:${h}px;"></div>`).join('');
@@ -1212,21 +1189,17 @@ function renderVoicePlayer(url, duration, isAdmin) {
   const playerId = 'voice-' + Math.random().toString(36).substr(2, 9);
   return `<div class="voice-player" id="${playerId}"><button class="play-btn" onclick="playVoice('${playerId}', '${url}')">▶️</button><div class="waveform">${barsHtml}</div><span class="duration">${durationText}</span></div><audio id="audio-${playerId}" src="${url}" preload="none"></audio>`;
 }
-
 function playVoice(playerId, url) {
   const audio = document.getElementById('audio-' + playerId);
   const btn = document.querySelector(`#${playerId} .play-btn`);
   if (!audio || !btn) return;
   if (!audio.paused) { audio.pause(); audio.currentTime = 0; btn.textContent = '▶️'; return; }
-  document.querySelectorAll('.voice-player audio').forEach(a => {
-    if (a.id !== 'audio-' + playerId) { a.pause(); a.currentTime = 0; const ob = a.parentElement?.querySelector('.play-btn'); if (ob) ob.textContent = '▶️'; }
-  });
+  document.querySelectorAll('.voice-player audio').forEach(a => { if (a.id !== 'audio-' + playerId) { a.pause(); a.currentTime = 0; const ob = a.parentElement?.querySelector('.play-btn'); if (ob) ob.textContent = '▶️'; } });
   btn.textContent = '⏸️';
   audio.play();
   audio.onended = () => { btn.textContent = '▶️'; audio.currentTime = 0; };
   audio.onerror = () => { btn.textContent = '▶️'; alert('❌ خطا در پخش'); };
 }
-
 function subscribeToChats() {
   if (chatsChannel) return;
   chatsChannel = supabaseClient
@@ -1247,14 +1220,12 @@ function subscribeToChats() {
     })
     .subscribe();
 }
-
 async function incrementUnread(chatId) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=unread_count`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   const data = await res.json();
   const current = (data[0] && data[0].unread_count) || 0;
   await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ unread_count:current + 1 }) });
 }
-
 function subscribeToChatMessages(chatId) {
   if (messagesChannel) supabaseClient.removeChannel(messagesChannel);
   messagesChannel = supabaseClient
@@ -1262,7 +1233,6 @@ function subscribeToChatMessages(chatId) {
     .on('postgres_changes', { event:'INSERT', schema:'public', table:'messages', filter:`chat_id=eq.${chatId}` }, () => loadChatMessages(chatId))
     .subscribe();
 }
-
 function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 function formatTime(iso) { const d = new Date(iso); return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); }
 
@@ -1275,32 +1245,22 @@ function selectColor(preset, el) {
   customRow.style.display = preset === 'custom' ? 'grid' : 'none';
   updatePreview();
 }
-
 function updatePreview() {
   const preview = document.getElementById('annPreview');
   if (!preview) return;
   const icon = document.getElementById('annIcon').value || '📢';
   const message = document.getElementById('annMessage').value || 'متن اطلاعیه اینجا نشون داده میشه';
   let c1, c2;
-  if (selectedColorPreset === 'custom') {
-    c1 = document.getElementById('annColor1').value;
-    c2 = document.getElementById('annColor2').value;
-  } else {
-    const p = COLOR_PRESETS[selectedColorPreset];
-    c1 = p.c1; c2 = p.c2;
-  }
+  if (selectedColorPreset === 'custom') { c1 = document.getElementById('annColor1').value; c2 = document.getElementById('annColor2').value; }
+  else { const p = COLOR_PRESETS[selectedColorPreset]; c1 = p.c1; c2 = p.c2; }
   const isGoldBg = selectedColorPreset === 'gold-orange' || selectedColorPreset === 'black-gold';
   preview.style.background = `linear-gradient(90deg, ${c1}, ${c2})`;
   preview.style.color = isGoldBg ? (selectedColorPreset === 'gold-orange' ? '#111' : '#ffcc00') : 'white';
   preview.querySelector('.ann-icon').textContent = icon;
   preview.querySelector('.ann-message').textContent = message;
 }
-
 document.getElementById('annIcon').addEventListener('input', updatePreview);
-document.getElementById('annMessage').addEventListener('input', () => {
-  document.getElementById('annCharCount').textContent = document.getElementById('annMessage').value.length;
-  updatePreview();
-});
+document.getElementById('annMessage').addEventListener('input', () => { document.getElementById('annCharCount').textContent = document.getElementById('annMessage').value.length; updatePreview(); });
 document.getElementById('annColor1').addEventListener('input', updatePreview);
 document.getElementById('annColor2').addEventListener('input', updatePreview);
 
@@ -1326,7 +1286,6 @@ async function loadAnnouncement() {
     updatePreview();
   } catch (err) { console.error('Announcement load error:', err); }
 }
-
 async function saveAnnouncement() {
   const message = document.getElementById('annMessage').value.trim();
   if (!message) { showStatus('❌ متن اطلاعیه اجباریه!', 'error'); return; }
@@ -1357,7 +1316,6 @@ async function saveAnnouncement() {
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
   finally { btn.disabled = false; btn.textContent = '🚀 ذخیره اطلاعیه'; }
 }
-
 async function deleteAnnouncement() {
   if (!confirm('مطمئنی می‌خوای اطلاعیه رو پاک کنی؟')) return;
   try {
@@ -1372,6 +1330,44 @@ async function deleteAnnouncement() {
     document.getElementById('annCharCount').textContent = '0';
     updatePreview();
     showStatus('🗑️ اطلاعیه پاک شد', 'success');
+  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
+}
+
+// ===== Ratings =====
+async function loadRatings() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=stars`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
+    const data = await res.json();
+    if (!data || data.length === 0) {
+      document.getElementById('avgRating').textContent = '0.0';
+      document.getElementById('totalRatings').textContent = '0';
+      document.getElementById('ratingsChart').innerHTML = '<p style="text-align:center;color:#666;padding:20px;">هنوز امتیازی ثبت نشده</p>';
+      return;
+    }
+    const total = data.length;
+    const sum = data.reduce((s, r) => s + r.stars, 0);
+    const avg = (sum / total).toFixed(1);
+    document.getElementById('avgRating').textContent = avg;
+    document.getElementById('totalRatings').textContent = total;
+    const distribution = { 1:0, 2:0, 3:0, 4:0, 5:0 };
+    data.forEach(r => { if (r.stars >= 1 && r.stars <= 5) distribution[r.stars]++; });
+    const maxCount = Math.max(...Object.values(distribution), 1);
+    let chartHtml = '';
+    for (let i = 5; i >= 1; i--) {
+      const count = distribution[i];
+      const percent = total > 0 ? (count / total * 100) : 0;
+      const barWidth = (count / maxCount * 100);
+      const stars = '⭐'.repeat(i);
+      chartHtml += `<div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="min-width:80px; font-size:0.9rem;">${stars}</div><div style="flex:1; height:25px; background:rgba(0,0,0,0.3); border-radius:50px; overflow:hidden;"><div style="height:100%; width:${barWidth}%; background:linear-gradient(90deg,#ffcc00,#ff9500); transition:width 0.5s;"></div></div><div style="min-width:100px; text-align:left; color:var(--text-dim); font-size:0.85rem;"><strong style="color:var(--cyan);">${count}</strong> (${percent.toFixed(1)}%)</div></div>`;
+    }
+    document.getElementById('ratingsChart').innerHTML = chartHtml;
+  } catch (err) { console.error('Load ratings error:', err); showStatus('❌ خطا در بارگذاری', 'error'); }
+}
+async function clearAllRatings() {
+  if (!confirm('مطمئنی می‌خوای همه امتیازها رو پاک کنی؟')) return;
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=gt.0`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
+    if (res.ok) { showStatus('🗑️ همه امتیازها پاک شدن', 'success'); loadRatings(); }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
 
