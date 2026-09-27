@@ -33,22 +33,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .error-msg { background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); padding:12px; border-radius:10px; margin-top:15px; font-size:0.9rem; display:none; }
 .error-msg.show { display:block; }
 .back-link { display:inline-block; margin-top:20px; color:var(--text-dim); text-decoration:none; font-size:0.85rem; }
-.pin-screen { min-height:100vh; display:none; justify-content:center; align-items:center; padding:20px; }
-.pin-screen.active { display:flex; }
-.pin-box { background:var(--glass); border:1px solid var(--border); border-radius:25px; padding:45px 35px; backdrop-filter:blur(20px); width:100%; max-width:420px; text-align:center; box-shadow:0 25px 60px rgba(0,255,231,0.1); }
-.pin-icon { font-size:4rem; margin-bottom:15px; filter:drop-shadow(0 0 25px var(--cyan)); }
-.pin-box h1 { font-size:1.4rem; margin-bottom:8px; background:linear-gradient(90deg,var(--cyan),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; }
-.pin-box .subtitle { color:var(--text-dim); font-size:0.9rem; margin-bottom:30px; }
-.pin-inputs { display:flex; gap:10px; justify-content:center; direction:ltr; margin-bottom:25px; flex-wrap:wrap; }
-.pin-input { width:50px; height:60px; text-align:center; font-size:1.5rem; font-weight:900; background:rgba(0,0,0,0.3); border:2px solid var(--border); border-radius:12px; color:var(--text); outline:none; font-family:inherit; transition:0.3s; }
-.pin-input:focus { border-color:var(--cyan); box-shadow:0 0 20px rgba(0,255,231,0.3); }
-.pin-input.filled { border-color:var(--cyan); background:rgba(0,255,231,0.1); }
-.pin-timer { color:var(--text-dim); font-size:0.85rem; margin-bottom:15px; min-height:20px; }
-.pin-btn { width:100%; padding:15px; background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; transition:0.3s; font-family:inherit; box-shadow:0 0 25px rgba(0,255,231,0.4); }
-.pin-btn:hover { transform:translateY(-2px); }
-.pin-btn:disabled { opacity:0.5; cursor:not-allowed; }
-.pin-error { background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); padding:12px; border-radius:10px; margin-top:15px; font-size:0.9rem; display:none; }
-.pin-error.show { display:block; }
 .dashboard { display:none; padding:20px; max-width:1100px; margin:0 auto; }
 .dashboard.active { display:block; }
 .dash-header { display:flex; justify-content:space-between; align-items:center; padding:20px; background:var(--glass); border:1px solid var(--border); border-radius:18px; margin-bottom:25px; backdrop-filter:blur(20px); flex-wrap:wrap; gap:15px; }
@@ -183,14 +167,13 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .announcement-bar .ann-message { flex:1; min-width:0; word-wrap:break-word; overflow-wrap:break-word; word-break:break-word; }
 @keyframes annIconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
 @media (max-width:700px) { .chat-wrap { grid-template-columns:1fr; height:auto; } .chat-list-sidebar { max-height:220px; } .chat-main { height:500px; } }
-@media (max-width:600px) { .login-box{padding:35px 25px;} .card{padding:18px;} .form-row,.form-row.three{grid-template-columns:1fr;} .modal{padding:20px;} .color-picker-grid{grid-template-columns:repeat(2,1fr);} .pin-input{width:42px; height:52px; font-size:1.3rem;} }
+@media (max-width:600px) { .login-box{padding:35px 25px;} .card{padding:18px;} .form-row,.form-row.three{grid-template-columns:1fr;} .modal{padding:20px;} .color-picker-grid{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
 <body>
 
 <div class="bg-glow"></div>
 
-<!-- Login Screen -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-icon">🔐</div>
@@ -204,28 +187,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
   </div>
 </div>
 
-<!-- PIN Screen -->
-<div class="pin-screen" id="pinScreen">
-  <div class="pin-box">
-    <div class="pin-icon">📱</div>
-    <h1>کد تلگرامی</h1>
-    <p class="subtitle">کد ۶ رقمی که به تلگرامت فرستادیم رو وارد کن</p>
-    <div class="pin-inputs" id="pinInputs">
-      <input type="password" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]*">
-      <input type="password" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]*">
-      <input type="password" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]*">
-      <input type="password" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]*">
-      <input type="password" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]*">
-      <input type="password" maxlength="1" class="pin-input" inputmode="numeric" pattern="[0-9]*">
-    </div>
-    <div class="pin-timer" id="pinTimer"></div>
-    <button class="pin-btn" id="pinVerifyBtn" onclick="verifyCode()">✅ تایید و ورود</button>
-    <button class="pin-btn" id="pinResendBtn" onclick="sendCode()" style="margin-top:8px; background:rgba(255,255,255,0.08); color:var(--text); box-shadow:none;">🔄 ارسال مجدد کد</button>
-    <div class="pin-error" id="pinError">❌ کد اشتباه است!</div>
-  </div>
-</div>
-
-<!-- Dashboard -->
 <div class="dashboard" id="dashboard">
   <div class="dash-header">
     <h1>⚓ پنل مدیریت کاپیتان وکثور</h1>
@@ -246,7 +207,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     <button class="tab" onclick="switchTab('settings', this)">⚙️ تنظیمات</button>
   </div>
 
-  <!-- Tab Add -->
   <div class="tab-content active" id="tab-add">
     <div class="card">
       <div class="card-title">➕ افزودن محصول جدید</div>
@@ -392,7 +352,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Tab List -->
   <div class="tab-content" id="tab-list">
     <div class="card">
       <div class="card-title">📦 لیست محصولات</div>
@@ -406,7 +365,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Tab Chat -->
   <div class="tab-content" id="tab-chat">
     <div class="chat-wrap">
       <div class="chat-list-sidebar" id="chatList">
@@ -421,7 +379,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Tab Stats -->
   <div class="tab-content" id="tab-stats">
     <div class="card">
       <div class="card-title">📊 آمار سایت</div>
@@ -433,7 +390,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Tab Contact -->
   <div class="tab-content" id="tab-contact">
     <div class="card">
       <div class="card-title">📞 اطلاعات تماس</div>
@@ -444,7 +400,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Tab Announce -->
   <div class="tab-content" id="tab-announce">
     <div class="card">
       <div class="card-title">📢 مدیریت اطلاعیه</div>
@@ -489,7 +444,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Tab Ratings -->
   <div class="tab-content" id="tab-ratings">
     <div class="card">
       <div class="card-title">⭐ آمار امتیازهای تاییدشده</div>
@@ -530,20 +484,9 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Tab Settings -->
   <div class="tab-content" id="tab-settings">
     <div class="card">
-      <div class="card-title">🔒 امنیت پیشرفته</div>
-      <div class="password-box" style="border-color:var(--cyan); background:rgba(0,255,231,0.05);">
-        <h4 style="color:var(--cyan);">📱 امنیت تلگرامی</h4>
-        <p style="color:var(--text-dim); font-size:0.85rem; line-height:1.8;">
-          ✅ <strong style="color:#10b981;">امنیت ورود به پنل فعاله!</strong>
-          <br>هر بار که وارد پنل می‌شی، یه کد ۶ رقمی به تلگرامت فرستاده میشه.
-          <br><br>
-          💡 <strong>چت‌آیدی:</strong> <code style="color:var(--cyan);" dir="ltr">8379105900</code>
-          <br>💡 <strong>ربات:</strong> <code style="color:var(--cyan);" dir="ltr">@CapitanVexorBot</code>
-        </p>
-      </div>
+      <div class="card-title">⚙️ تنظیمات امنیتی</div>
       <div class="password-box">
         <h4>🔐 تغییر نام کاربری و رمز عبور</h4>
         <div class="form-group"><label>👤 نام کاربری فعلی</label><input type="text" id="currentUsername" dir="ltr"></div>
@@ -560,7 +503,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
   </div>
 </div>
 
-<!-- Edit Modal -->
 <div class="modal-overlay" id="editModal">
   <div class="modal">
     <div class="modal-header">
@@ -668,7 +610,6 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const DEFAULT_USERNAME = 'admin';
 const DEFAULT_PASSWORD = 'vexor2024';
-const EDGE_URL = 'https://pvghoflyhkppgpralypc.supabase.co/functions/v1/smooth-task';
 
 let selectedImages = [];
 let editNewImages = [];
@@ -691,9 +632,6 @@ let recordingTimer = null;
 let recordingStream = null;
 let currentAnnouncement = null;
 let selectedColorPreset = 'cyan-purple';
-let codeExpiresAt = null;
-let pinTimerInterval = null;
-let resendCooldown = 0;
 
 const COLOR_PRESETS = {
   'cyan-purple': { c1:'#00ffe7', c2:'#a855f7' },
@@ -712,10 +650,8 @@ function login() {
   const savedUser = localStorage.getItem('cv_username') || DEFAULT_USERNAME;
   const savedPass = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
   if (user === savedUser && pass === savedPass) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('pinScreen').classList.add('active');
-    initPinInputs();
-    sendCode();
+    sessionStorage.setItem('cv_logged_in', 'true');
+    showDashboard();
   } else {
     document.getElementById('errorMsg').classList.add('show');
     setTimeout(() => document.getElementById('errorMsg').classList.remove('show'), 3000);
@@ -723,145 +659,8 @@ function login() {
 }
 document.getElementById('password').addEventListener('keypress', e => { if (e.key === 'Enter') login(); });
 
-function initPinInputs() {
-  const inputs = document.querySelectorAll('.pin-input');
-  inputs.forEach((input, i) => {
-    input.value = '';
-    input.classList.remove('filled');
-    input.addEventListener('input', () => {
-      if (input.value) {
-        input.classList.add('filled');
-        if (i < inputs.length - 1) inputs[i + 1].focus();
-      } else {
-        input.classList.remove('filled');
-      }
-      const allFilled = Array.from(inputs).every(inp => inp.value.length === 1);
-      if (allFilled) verifyCode();
-    });
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Backspace' && !input.value && i > 0) {
-        inputs[i - 1].focus();
-        inputs[i - 1].value = '';
-        inputs[i - 1].classList.remove('filled');
-      }
-    });
-  });
-  inputs[0].focus();
-}
-
-async function sendCode() {
-  if (resendCooldown > 0) {
-    showPinError(`⏱️ لطفاً ${resendCooldown} ثانیه صبر کن`);
-    return;
-  }
-  const resendBtn = document.getElementById('pinResendBtn');
-  const verifyBtn = document.getElementById('pinVerifyBtn');
-  if (resendBtn) { resendBtn.disabled = true; resendBtn.textContent = '⏳ در حال ارسال...'; }
-  if (verifyBtn) verifyBtn.disabled = true;
-  try {
-    const res = await fetch(EDGE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'send' })
-    });
-    const data = await res.json();
-    if (data.ok) {
-      codeExpiresAt = Date.now() + 5 * 60 * 1000;
-      startCodeTimer();
-      if (resendBtn) resendBtn.disabled = true;
-      resendCooldown = 60;
-      startResendCooldown();
-      showPinError('✅ کد به تلگرامت ارسال شد!', true);
-    } else {
-      showPinError('❌ ' + (data.error || 'خطا در ارسال'));
-      if (resendBtn) { resendBtn.disabled = false; resendBtn.textContent = '🔄 ارسال مجدد کد'; }
-      if (verifyBtn) verifyBtn.disabled = false;
-    }
-  } catch (err) {
-    console.error(err);
-    showPinError('❌ خطا در ارتباط با سرور');
-    if (resendBtn) { resendBtn.disabled = false; resendBtn.textContent = '🔄 ارسال مجدد کد'; }
-    if (verifyBtn) verifyBtn.disabled = false;
-  }
-}
-
-function startCodeTimer() {
-  if (pinTimerInterval) clearInterval(pinTimerInterval);
-  const timerEl = document.getElementById('pinTimer');
-  const check = () => {
-    const remaining = Math.max(0, Math.ceil((codeExpiresAt - Date.now()) / 1000));
-    if (remaining > 0) {
-      const m = Math.floor(remaining / 60);
-      const s = remaining % 60;
-      timerEl.textContent = `⏱️ اعتبار کد: ${m}:${String(s).padStart(2, '0')}`;
-    } else {
-      timerEl.textContent = '⏱️ کد منقضی شد، دوباره ارسال کن';
-      clearInterval(pinTimerInterval);
-    }
-  };
-  check();
-  pinTimerInterval = setInterval(check, 1000);
-}
-
-function startResendCooldown() {
-  const resendBtn = document.getElementById('pinResendBtn');
-  const t = setInterval(() => {
-    resendCooldown--;
-    if (resendCooldown <= 0) {
-      clearInterval(t);
-      if (resendBtn) { resendBtn.disabled = false; resendBtn.textContent = '🔄 ارسال مجدد کد'; }
-    } else {
-      if (resendBtn) resendBtn.textContent = `⏱️ ارسال مجدد در ${resendCooldown} ثانیه`;
-    }
-  }, 1000);
-}
-
-async function verifyCode() {
-  const inputs = document.querySelectorAll('.pin-input');
-  const enteredCode = Array.from(inputs).map(inp => inp.value).join('');
-  if (enteredCode.length !== 6) return;
-
-  const verifyBtn = document.getElementById('pinVerifyBtn');
-  if (verifyBtn) { verifyBtn.disabled = true; verifyBtn.textContent = '⏳ بررسی...'; }
-
-  try {
-    const res = await fetch(EDGE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'verify', code: enteredCode })
-    });
-    const data = await res.json();
-    if (data.ok) {
-      sessionStorage.setItem('cv_logged_in', 'true');
-      document.getElementById('pinScreen').classList.remove('active');
-      showDashboard();
-    } else {
-      showPinError('❌ ' + (data.error || 'کد اشتباه است'));
-      inputs.forEach(inp => { inp.value = ''; inp.classList.remove('filled'); });
-      inputs[0].focus();
-    }
-  } catch (err) {
-    console.error(err);
-    showPinError('❌ خطا در ارتباط با سرور');
-  } finally {
-    if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = '✅ تایید و ورود'; }
-  }
-}
-
-function showPinError(msg, success = false) {
-  const el = document.getElementById('pinError');
-  if (!el) return;
-  el.textContent = msg;
-  el.style.color = success ? '#10b981' : '#ff3860';
-  el.style.borderColor = success ? '#10b981' : '#ff3860';
-  el.style.background = success ? 'rgba(16,185,129,0.15)' : 'rgba(255,56,96,0.15)';
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 4000);
-}
-
 function showDashboard() {
   document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('pinScreen').classList.remove('active');
   document.getElementById('dashboard').classList.add('active');
   if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission();
   checkNotificationBanner();
@@ -876,7 +675,7 @@ function checkNotificationBanner() {
 }
 function requestNotifPermission() { if ('Notification' in window) Notification.requestPermission().then(() => checkNotificationBanner()); }
 function testNotification() { if (Notification.permission !== 'granted') return; try { new Notification('🔔 تست موفق!', { body:'نوتیف کار می‌کنه', icon:'icon-512.png', dir:'rtl' }); } catch(e){} }
-function logout() { sessionStorage.removeItem('cv_logged_in'); document.getElementById('loginScreen').style.display = 'flex'; document.getElementById('pinScreen').classList.remove('active'); document.getElementById('dashboard').classList.remove('active'); document.getElementById('username').value = ''; document.getElementById('password').value = ''; }
+function logout() { sessionStorage.removeItem('cv_logged_in'); document.getElementById('loginScreen').style.display = 'flex'; document.getElementById('dashboard').classList.remove('active'); document.getElementById('username').value = ''; document.getElementById('password').value = ''; }
 window.addEventListener('load', () => { if (sessionStorage.getItem('cv_logged_in') === 'true') showDashboard(); });
 
 function switchTab(name, btn) {
