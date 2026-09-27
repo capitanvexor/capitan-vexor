@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
-:root { --bg-dark:#0a0a0f; --cyan:#00ffe7; --purple:#a855f7; --pink:#ff2ec4; --text:#fff; --text-dim:#a0a0b0; --glass:rgba(255,255,255,0.04); --border:rgba(0,255,231,0.2); }
+:root { --bg-dark:#0a0a0f; --cyan:#00ffe7; --purple:#a855f7; --pink:#ff2ec4; --text:#fff; --text-dim:#a0a0b0; --glass:rgba(255,255,255,0.05); --border:rgba(0,255,231,0.25); }
 html { scroll-behavior: smooth; }
 body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-height: 1.7; overflow-x: hidden; transition: background 0.4s, color 0.4s; }
 
@@ -46,14 +46,13 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 12px 2
 .nav-links a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
 .nav-links a:hover { color: var(--cyan); }
 
-.announcement-bar { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 25px; font-weight: 700; font-size: 0.95rem; text-align: center; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; box-shadow: 0 5px 20px rgba(0,0,0,0.3); animation: annSlideDown 0.6s ease-out; margin-top: 60px; direction: rtl; z-index: 999; }
+.announcement-bar { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 25px; font-weight: 700; font-size: 0.95rem; text-align: center; line-height: 1.6; word-wrap: break-word; box-shadow: 0 5px 20px rgba(0,0,0,0.3); animation: annSlideDown 0.6s ease-out; margin-top: 60px; direction: rtl; z-index: 999; }
 @keyframes annSlideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 .announcement-bar .ann-icon { font-size: 1.4rem; flex-shrink: 0; animation: annIconPulse 2s ease-in-out infinite; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
 @keyframes annIconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-.announcement-bar .ann-message { flex: 1; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
-.announcement-bar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent); pointer-events: none; }
+.announcement-bar .ann-message { flex: 1; min-width: 0; word-wrap: break-word; }
 @media (min-width: 768px) { .announcement-bar { margin-top: 55px; padding: 16px 30px; } }
-@media (max-width: 767px) { .announcement-bar { margin-top: 130px; padding: 12px 15px; font-size: 0.85rem; gap: 8px; } .announcement-bar .ann-icon { font-size: 1.2rem; } }
+@media (max-width: 767px) { .announcement-bar { margin-top: 130px; padding: 12px 15px; font-size: 0.85rem; gap: 8px; } }
 
 .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 60px; }
 .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: var(--glass); border: 1px solid var(--border); border-radius: 50px; font-size: 0.85rem; color: var(--cyan); margin-bottom: 25px; animation: pulse 2s ease-in-out infinite; }
@@ -123,80 +122,141 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .category-card.free-card .category-title { font-size: 1.4rem; }
 .category-card.free-card .category-desc { font-size: 0.9rem; }
 
+/* ===== Steps ===== */
 .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
-.step-card { position: relative; background: var(--glass); border: 1px solid var(--border); border-radius: 20px; padding: 35px 20px 25px; text-align: center; transition: all 0.3s ease; }
+.step-card { position: relative; background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 20px; padding: 40px 20px 28px; text-align: center; transition: all 0.3s ease; }
 .step-card:hover { transform: translateY(-8px); border-color: var(--purple); box-shadow: 0 25px 50px rgba(168, 85, 247, 0.3); }
-.step-num { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; font-weight: 900; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(0, 255, 231, 0.5); }
-.step-icon { font-size: 44px; display: block; margin: 10px 0 14px; }
-.step-title { font-size: 16px; color: var(--cyan); margin-bottom: 8px; font-weight: 800; }
-.step-desc { color: var(--text-dim); font-size: 13px; line-height: 1.6; }
-
-/* ===== دکمه‌های تماس توی مرحله ۲ ===== */
+.step-num { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; font-weight: 900; font-size: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(0, 255, 231, 0.6); }
+.step-icon { font-size: 40px; display: block; margin: 0 0 14px; }
+.step-title { font-size: 17px; color: var(--cyan); margin-bottom: 10px; font-weight: 800; }
+.step-desc { color: var(--text-dim); font-size: 13px; line-height: 1.7; margin-bottom: 12px; }
 .step-contact-btns { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
 .step-btn { padding: 8px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; font-family: inherit; transition: 0.3s; display: inline-flex; align-items: center; gap: 4px; color: white; white-space: nowrap; }
 .step-btn.chat-btn { background: linear-gradient(135deg, #00ffe7, #a855f7); box-shadow: 0 0 15px rgba(0,255,231,0.4); }
-.step-btn.chat-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 25px rgba(0,255,231,0.8); }
+.step-btn.chat-btn:hover { transform: translateY(-2px) scale(1.05); }
 .step-btn.rubika-btn { background: linear-gradient(135deg, #ff2ec4, #a855f7); box-shadow: 0 0 15px rgba(255,46,196,0.4); }
-.step-btn.rubika-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 25px rgba(255,46,196,0.8); }
+.step-btn.rubika-btn:hover { transform: translateY(-2px) scale(1.05); }
 .step-btn.telegram-btn { background: linear-gradient(135deg, #0088cc, #00b4ff); box-shadow: 0 0 15px rgba(0,136,204,0.4); }
-.step-btn.telegram-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 25px rgba(0,136,204,0.8); }
-.step-contact { padding: 35px 20px 30px; }
+.step-btn.telegram-btn:hover { transform: translateY(-2px) scale(1.05); }
 
-/* ===== بخش امتیازدهی ===== */
-.rating-section { max-width: 750px; margin: 60px auto; padding: 50px 35px 45px; text-align: center; background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,149,0,0.05), rgba(168,85,247,0.08)); border: 2px solid rgba(255,204,0,0.4); border-radius: 30px; box-shadow: 0 20px 60px rgba(255,204,0,0.2); direction: rtl; position: relative; overflow: hidden; }
-.rating-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,204,0,0.15) 0%, transparent 60%); animation: ratingBgRotate 20s linear infinite; pointer-events: none; }
-@keyframes ratingBgRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.rating-section::after { content: '✨ ⭐ ✨'; position: absolute; top: 15px; right: 20px; font-size: 1rem; opacity: 0.6; animation: starFloat 3s ease-in-out infinite; pointer-events: none; }
-@keyframes starFloat { 0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; } 50% { transform: translateY(-5px) rotate(10deg); opacity: 1; } }
+/* ===== Features ===== */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.feature { 
+  background: rgba(255,255,255,0.06); 
+  border: 2px solid rgba(0,255,231,0.25); 
+  border-radius: 20px; 
+  padding: 30px 20px; 
+  text-align: center; 
+  transition: 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+  opacity: 0;
+  transition: 0.35s;
+}
+.feature:hover::before { opacity: 1; }
+.feature:hover { 
+  border-color: var(--cyan); 
+  transform: translateY(-8px); 
+  box-shadow: 0 20px 50px rgba(0,255,231,0.3);
+  background: rgba(255,255,255,0.09);
+}
+.feature-icon { 
+  font-size: 2.6rem; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 15px; 
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15));
+  border: 2px solid rgba(0,255,231,0.3);
+  transition: 0.35s;
+}
+.feature:hover .feature-icon { 
+  transform: scale(1.1) rotate(-10deg); 
+  background: linear-gradient(135deg, rgba(0,255,231,0.25), rgba(168,85,247,0.25));
+  border-color: var(--cyan);
+  box-shadow: 0 0 25px rgba(0,255,231,0.5);
+}
+.feature h4 { 
+  color: var(--cyan); 
+  margin-bottom: 8px; 
+  font-size: 1.1rem; 
+  font-weight: 800;
+}
+.feature p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.7; }
+
+/* ===== Guarantee ===== */
+.guarantee { max-width: 900px; margin: 40px auto; background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08)); border: 1px solid var(--border); border-radius: 22px; padding: 35px 25px; text-align: center; }
+.guarantee-icon { font-size: 3.5rem; margin-bottom: 15px; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+.guarantee h3 { font-size: 1.4rem; margin-bottom: 15px; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.guarantee p { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 0.9rem; }
+
+/* ===== Rating ===== */
+.rating-section { 
+  max-width: 750px; 
+  margin: 60px auto; 
+  padding: 50px 35px 45px; 
+  text-align: center; 
+  background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,149,0,0.06), rgba(168,85,247,0.1)); 
+  border: 2px solid rgba(255,204,0,0.4); 
+  border-radius: 30px; 
+  box-shadow: 0 20px 60px rgba(255,204,0,0.2); 
+  direction: rtl; 
+  position: relative; 
+  overflow: hidden;
+}
+.rating-section::after { content: '✨ ⭐ ✨'; position: absolute; top: 15px; right: 20px; font-size: 1rem; opacity: 0.7; animation: starFloat 3s ease-in-out infinite; pointer-events: none; }
+@keyframes starFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(10deg); } }
 .trophy-icon { font-size: 4rem; display: inline-block; margin-bottom: 15px; animation: trophyBounce 2s ease-in-out infinite; filter: drop-shadow(0 10px 25px rgba(255,204,0,0.5)); position: relative; z-index: 1; }
 @keyframes trophyBounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-10px) scale(1.1); } }
 .rating-title { font-size: clamp(1.4rem, 4.5vw, 2rem); font-weight: 900; margin-bottom: 12px; background: linear-gradient(90deg, #ffcc00, #ff9500, #ff2ec4, #ffcc00); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: titleShine 3s ease infinite; position: relative; z-index: 1; }
 @keyframes titleShine { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 .rating-subtitle { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 30px; position: relative; z-index: 1; }
-.stars-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; direction: ltr; position: relative; z-index: 1; padding: 15px 0; }
-.star { font-size: clamp(2.5rem, 9vw, 4rem); cursor: pointer; transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55); filter: grayscale(1) brightness(0.4); user-select: none; line-height: 1; position: relative; display: inline-block; text-shadow: 0 0 0 rgba(255,204,0,0); }
-.star:hover, .star.hover, .star.active { filter: grayscale(0) brightness(1.3); transform: scale(1.25) rotate(-8deg) translateY(-5px); text-shadow: 0 0 30px rgba(255, 204, 0, 1), 0 0 60px rgba(255, 149, 0, 0.7), 0 0 90px rgba(255, 46, 196, 0.4); }
-.star:active { transform: scale(1.05) rotate(0deg); }
+.stars-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; direction: ltr; position: relative; z-index: 1; padding: 15px 0; }
+.star { font-size: clamp(2.2rem, 8vw, 3.5rem); cursor: pointer; transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55); filter: grayscale(1) brightness(0.5); user-select: none; line-height: 1; position: relative; display: inline-block; }
+.star:hover, .star.hover, .star.active { filter: grayscale(0) brightness(1.3); transform: scale(1.25) rotate(-8deg) translateY(-5px); text-shadow: 0 0 30px rgba(255, 204, 0, 1), 0 0 60px rgba(255, 149, 0, 0.7); }
+.star:active { transform: scale(1.05); }
 .rating-stars-text { font-size: 1.1rem; font-weight: 700; color: #ffcc00; margin-top: 8px; min-height: 28px; text-shadow: 0 0 15px rgba(255,204,0,0.6); letter-spacing: 3px; position: relative; z-index: 1; }
-
 .rating-comment-box { max-width: 550px; margin: 25px auto 0; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
-.rating-name-input { width: 100%; padding: 12px 18px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,204,0,0.3); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; }
+.rating-name-input { width: 100%; padding: 13px 18px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,204,0,0.4); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; }
 .rating-name-input:focus { border-color: #ffcc00; box-shadow: 0 0 20px rgba(255,204,0,0.3); }
-.rating-name-input::placeholder { color: rgba(255,255,255,0.4); }
-.rating-comment-input { width: 100%; padding: 14px 18px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,204,0,0.3); border-radius: 14px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; resize: vertical; min-height: 80px; line-height: 1.7; }
+.rating-name-input::placeholder { color: rgba(255,255,255,0.45); }
+.rating-comment-input { width: 100%; padding: 14px 18px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,204,0,0.4); border-radius: 14px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; resize: vertical; min-height: 90px; line-height: 1.7; }
 .rating-comment-input:focus { border-color: #ffcc00; box-shadow: 0 0 20px rgba(255,204,0,0.3); }
-.rating-comment-input::placeholder { color: rgba(255,255,255,0.4); }
+.rating-comment-input::placeholder { color: rgba(255,255,255,0.45); }
 .comment-counter { text-align: left; font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: -6px; padding-left: 5px; }
-.rating-submit-btn { padding: 14px 30px; background: linear-gradient(90deg, #ffcc00, #ff9500); color: #0a0a0f; border: none; border-radius: 50px; font-family: inherit; font-size: 1rem; font-weight: 900; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,204,0,0.4); letter-spacing: 0.5px; }
-.rating-submit-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 40px rgba(255,204,0,0.6); }
-.rating-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-.rating-feedback { min-height: 50px; font-size: 1rem; font-weight: 800; margin-top: 20px; padding: 15px 25px; border-radius: 50px; background: linear-gradient(90deg, rgba(16,185,129,0.15), rgba(0,255,231,0.15)); border: 1px solid rgba(16,185,129,0.4); color: #10b981; opacity: 0; transform: scale(0.8); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); display: inline-block; max-width: 90%; box-shadow: 0 10px 30px rgba(16,185,129,0.2); position: relative; z-index: 1; }
+.rating-submit-btn { padding: 15px 30px; background: linear-gradient(90deg, #ffcc00, #ff9500); color: #0a0a0f; border: none; border-radius: 50px; font-family: inherit; font-size: 1rem; font-weight: 900; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,204,0,0.5); letter-spacing: 0.5px; margin-top: 5px; }
+.rating-submit-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 40px rgba(255,204,0,0.7); }
+.rating-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.rating-feedback { min-height: 50px; font-size: 1rem; font-weight: 800; margin-top: 20px; padding: 15px 25px; border-radius: 50px; background: linear-gradient(90deg, rgba(16,185,129,0.15), rgba(0,255,231,0.15)); border: 1px solid rgba(16,185,129,0.5); color: #10b981; opacity: 0; transform: scale(0.8); transition: all 0.4s; display: inline-block; max-width: 90%; position: relative; z-index: 1; }
 .rating-feedback.show { opacity: 1; transform: scale(1); }
-
 .public-rating-stats { display: none; margin-top: 35px; padding-top: 30px; border-top: 1px dashed rgba(255,204,0,0.3); position: relative; z-index: 1; }
 .public-rating-stats.show { display: block; animation: statsFadeIn 0.8s ease; }
 @keyframes statsFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 .public-stats-wrap { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
-.public-stat { text-align: center; padding: 15px 25px; background: rgba(255,204,0,0.08); border-radius: 18px; border: 1px solid rgba(255,204,0,0.2); transition: 0.3s; min-width: 120px; }
+.public-stat { text-align: center; padding: 18px 28px; background: rgba(255,204,0,0.1); border-radius: 18px; border: 2px solid rgba(255,204,0,0.3); transition: 0.3s; min-width: 130px; }
 .public-stat:hover { transform: translateY(-5px); border-color: #ffcc00; box-shadow: 0 10px 30px rgba(255,204,0,0.3); }
 .public-stat .val { font-size: 2.3rem; font-weight: 900; background: linear-gradient(135deg, #ffcc00, #ff9500); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,204,0,0.5)); }
 .public-stat .lbl { font-size: 0.8rem; color: var(--text-dim); margin-top: 5px; }
 .public-stats-divider { width: 1px; height: 50px; background: linear-gradient(180deg, transparent, rgba(255,204,0,0.5), transparent); }
 .public-comments-list { margin-top: 30px; display: grid; gap: 12px; max-width: 600px; margin-left: auto; margin-right: auto; }
-.public-comment-item { padding: 15px 18px; background: linear-gradient(135deg, rgba(255,204,0,0.06), rgba(255,149,0,0.04)); border: 1px solid rgba(255,204,0,0.2); border-radius: 16px; text-align: right; position: relative; transition: 0.3s; animation: commentFadeIn 0.5s ease; }
-.public-comment-item:hover { border-color: rgba(255,204,0,0.4); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,204,0,0.15); }
-@keyframes commentFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.public-comment-item { padding: 15px 18px; background: linear-gradient(135deg, rgba(255,204,0,0.08), rgba(255,149,0,0.05)); border: 1px solid rgba(255,204,0,0.25); border-radius: 16px; text-align: right; position: relative; transition: 0.3s; }
+.public-comment-item:hover { border-color: rgba(255,204,0,0.5); transform: translateY(-2px); }
 .public-comment-item .comment-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
-.public-comment-item .comment-user { font-weight: 800; color: #ffcc00; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; }
+.public-comment-item .comment-user { font-weight: 800; color: #ffcc00; font-size: 0.9rem; }
 .public-comment-item .comment-stars { font-size: 0.85rem; letter-spacing: 1px; }
-.public-comment-item .comment-text { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.7; word-wrap: break-word; }
-.public-comment-item .comment-date { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 6px; }
-.public-comment-item::before { content: '"'; position: absolute; top: 5px; right: 12px; font-size: 2.5rem; color: rgba(255,204,0,0.15); font-family: serif; line-height: 1; }
-@media (max-width: 600px) { .rating-section { padding: 35px 20px 30px; margin: 40px 15px; } .stars-container { gap: 6px; padding: 10px 0; } .public-stats-wrap { gap: 15px; } .public-stat { padding: 12px 18px; min-width: 100px; } .trophy-icon { font-size: 3rem; } }
-
-.confetti-piece { position: fixed; width: 10px; height: 10px; pointer-events: none; z-index: 99998; animation: confettiFall 3s linear forwards; }
-@keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+.public-comment-item .comment-text { color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.7; word-wrap: break-word; }
+.public-comment-item .comment-date { font-size: 0.7rem; color: rgba(255,255,255,0.45); margin-top: 6px; }
+@media (max-width: 600px) { .rating-section { padding: 35px 20px 30px; margin: 40px 15px; } .stars-container { gap: 6px; padding: 10px 0; } .public-stats-wrap { gap: 15px; } .public-stat { padding: 14px 20px; min-width: 110px; } .trophy-icon { font-size: 3rem; } }
 
 footer { background: rgba(10,10,15,0.9); border-top: 1px solid var(--border); padding: 40px 20px 25px; text-align: center; margin-top: 50px; transition: background 0.4s; }
 .footer-logo { font-size: 1.3rem; font-weight: 900; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px; }
@@ -248,11 +308,13 @@ footer { background: rgba(10,10,15,0.9); border-top: 1px solid var(--border); pa
 .chat-send-btn { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.4rem; cursor: pointer; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(0,255,231,0.5); }
 .chat-send-btn:hover { transform: scale(1.1); }
 
-body.theme-light { --bg-dark: #f5f0e8; --text: #1a1a2e; --text-dim: #555; --glass: rgba(0,0,0,0.04); --border: rgba(100,100,200,0.3); --cyan: #0088cc; --purple: #6a4c93; --pink: #e63980; }
+body.theme-light { --bg-dark: #f5f0e8; --text: #1a1a2e; --text-dim: #555; --glass: rgba(0,0,0,0.05); --border: rgba(100,100,200,0.3); --cyan: #0088cc; --purple: #6a4c93; --pink: #e63980; }
 body.theme-light nav { background: rgba(245,240,232,0.95); }
 body.theme-light footer { background: rgba(245,240,232,0.95); }
 body.theme-light .chat-window { background: rgba(255,255,255,0.98); }
 body.theme-light .chat-messages { background: rgba(0,0,0,0.03); }
+body.theme-light .feature { background: rgba(0,0,0,0.03); }
+
 body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; --glass: rgba(255,255,255,0.07); --border: rgba(255,100,200,0.35); --cyan: #00d4ff; --purple: #ff2ec4; --pink: #ffdd00; }
 
 @media (max-width: 768px) {
@@ -267,11 +329,18 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   section { padding: 55px 15px; }
   .category-grid { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .feature { padding: 22px 12px; }
+  .feature-icon { width: 60px; height: 60px; font-size: 2rem; }
+  .feature h4 { font-size: 0.95rem; }
+  .feature p { font-size: 0.78rem; }
   .bg-glow::before, .bg-glow::after { filter: blur(70px); opacity: 0.25; }
   .theme-btn { top: 12px; left: 12px; width: 40px; height: 40px; font-size: 1.1rem; }
   .chat-window { left: 8px; right: 8px; bottom: 8px; top: 8px; width: auto; max-width: none; height: auto; max-height: none; }
 }
-@media (max-width: 600px) { .step-btn { font-size: 0.72rem; padding: 7px 12px; } }
+@media (max-width: 420px) {
+  .features-grid { grid-template-columns: 1fr; }
+}
 
 .vexor-ad-box { background: linear-gradient(135deg, #0f0f1a 0%, #1b1b3a 50%, #2a1b4d 100%); padding: 40px 20px; display: flex; justify-content: center; font-family: 'Vazirmatn', Tahoma, sans-serif; direction: rtl; }
 .vexor-ad-inner { max-width: 800px; width: 100%; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 200, 0, 0.4); border-radius: 18px; padding: 30px 25px; box-shadow: 0 0 25px rgba(255, 200, 0, 0.15); color: #eee; text-align: right; line-height: 1.9; }
@@ -284,6 +353,10 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
 .vexor-ad-btn { display: block; text-align: center; margin: 20px auto 0; background: linear-gradient(90deg, #ffcc00, #ff9900); color: #111; padding: 14px 24px; border-radius: 12px; font-weight: bold; font-size: 16px; text-decoration: none; max-width: 300px; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 153, 0, 0.4); }
 .vexor-ad-btn:hover { transform: translateY(-3px); }
 @media (max-width: 500px) { .vexor-ad-title { font-size: 20px; } .vexor-ad-text { font-size: 14px; } .vexor-ad-inner { padding: 20px 15px; } }
+
+.confetti-piece { position: fixed; width: 10px; height: 10px; pointer-events: none; z-index: 99998; animation: confettiFall 3s linear forwards; }
+@keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+
 #updateNotice { animation: slideDown 0.4s ease; }
 @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 </style>
@@ -367,14 +440,8 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   <h2 class="section-title">🛒 چطور خرید کنیم؟</h2>
   <p class="section-sub">فقط ۴ قدم ساده تا خرید</p>
   <div class="steps-grid">
+    <div class="step-card reveal"><div class="step-num">۱</div><span class="step-icon">👀</span><h3 class="step-title">انتخاب محصول</h3><p class="step-desc">از لیست محصولات، مورد نظرت رو انتخاب کن</p></div>
     <div class="step-card reveal">
-      <div class="step-num">۱</div>
-      <span class="step-icon">👀</span>
-      <h3 class="step-title">انتخاب محصول</h3>
-      <p class="step-desc">از لیست محصولات، مورد نظرت رو انتخاب کن</p>
-    </div>
-
-    <div class="step-card reveal step-contact">
       <div class="step-num">۲</div>
       <span class="step-icon">💬</span>
       <h3 class="step-title">تماس با مدیریت</h3>
@@ -385,20 +452,8 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <a href="#" id="telegramBtnStep" target="_blank" class="step-btn telegram-btn" style="display:none;">✈️ تلگرام</a>
       </div>
     </div>
-
-    <div class="step-card reveal">
-      <div class="step-num">۳</div>
-      <span class="step-icon">💳</span>
-      <h3 class="step-title">پرداخت</h3>
-      <p class="step-desc">پرداخت نقدی یا اقساطی (طبق توافق)</p>
-    </div>
-
-    <div class="step-card reveal">
-      <div class="step-num">۴</div>
-      <span class="step-icon">🎮</span>
-      <h3 class="step-title">تحویل فوری</h3>
-      <p class="step-desc">محصول بلافاصله تحویل داده میشه</p>
-    </div>
+    <div class="step-card reveal"><div class="step-num">۳</div><span class="step-icon">💳</span><h3 class="step-title">پرداخت</h3><p class="step-desc">پرداخت نقدی یا اقساطی (طبق توافق)</p></div>
+    <div class="step-card reveal"><div class="step-num">۴</div><span class="step-icon">🎮</span><h3 class="step-title">تحویل فوری</h3><p class="step-desc">محصول بلافاصله تحویل داده میشه</p></div>
   </div>
 </section>
 
@@ -406,10 +461,26 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   <h2 class="section-title reveal">چرا کاپیتان وکثور؟</h2>
   <p class="section-sub reveal">دلایلی که ما رو انتخاب می‌کنی</p>
   <div class="features-grid">
-    <div class="feature reveal"><div class="feature-icon">🛡️</div><h4>امنیت ۱۰۰٪</h4><p>تمام محصولات با ضمانت و نقد و اقساط</p></div>
-    <div class="feature reveal"><div class="feature-icon">⚡</div><h4>تحویل فوری</h4><p>بعد از پرداخت، بلافاصله تحویل</p></div>
-    <div class="feature reveal"><div class="feature-icon">💎</div><h4>قیمت مناسب</h4><p>بهترین قیمت‌ها در بازار</p></div>
-    <div class="feature reveal"><div class="feature-icon">🏆</div><h4>پشتیبانی قوی</h4><p>پشتیبانی ۲۴ ساعته</p></div>
+    <div class="feature reveal">
+      <div class="feature-icon">🛡️</div>
+      <h4>امنیت ۱۰۰٪</h4>
+      <p>تمام محصولات با ضمانت و نقد و اقساط</p>
+    </div>
+    <div class="feature reveal">
+      <div class="feature-icon">⚡</div>
+      <h4>تحویل فوری</h4>
+      <p>بعد از پرداخت، بلافاصله تحویل</p>
+    </div>
+    <div class="feature reveal">
+      <div class="feature-icon">💎</div>
+      <h4>قیمت مناسب</h4>
+      <p>بهترین قیمت‌ها در بازار</p>
+    </div>
+    <div class="feature reveal">
+      <div class="feature-icon">🏆</div>
+      <h4>پشتیبانی قوی</h4>
+      <p>پشتیبانی ۲۴ ساعته</p>
+    </div>
   </div>
 </section>
 
@@ -429,7 +500,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   <div class="trophy-icon">🏆</div>
   <h2 class="rating-title">⭐ به کاپیتان وکثور امتیاز بدید</h2>
   <p class="rating-subtitle">نظر شما برای ما ارزشمنده ❤️</p>
-
   <div class="stars-container" id="starsContainer">
     <span class="star" data-value="1" onclick="selectStar(1)">⭐</span>
     <span class="star" data-value="2" onclick="selectStar(2)">⭐</span>
@@ -438,7 +508,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
     <span class="star" data-value="5" onclick="selectStar(5)">⭐</span>
   </div>
   <div class="rating-stars-text" id="ratingStarsText"></div>
-
   <div class="rating-comment-box" id="commentBox">
     <input type="text" id="visitorNameInput2" class="rating-name-input" placeholder="اسمت (اختیاری)" maxlength="30">
     <textarea id="ratingCommentInput" class="rating-comment-input" placeholder="نظرت رو هم بنویس... (اختیاری)" maxlength="300" rows="3"></textarea>
@@ -447,9 +516,7 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
       <span id="submitBtnText">ارسال امتیاز و نظر</span> ✨
     </button>
   </div>
-
   <div class="rating-feedback" id="ratingFeedback"></div>
-
   <div class="public-rating-stats" id="publicRatingStats">
     <div class="public-stats-wrap">
       <div class="public-stat">
@@ -657,22 +724,18 @@ async function loadContact() {
       if (telegramLink) { if (data[0].telegram_id) telegramLink.href = `https://t.me/${data[0].telegram_id}`; else telegramLink.style.display = 'none'; }
       const floatPhone = document.getElementById('floatPhone');
       if (floatPhone) floatPhone.href = `tel:${data[0].phone}`;
-      // دکمه‌های مرحله 2
       const rubikaBtn = document.getElementById('rubikaBtnStep');
       if (rubikaBtn && data[0].rubika_id) rubikaBtn.href = `https://rubika.ir/${data[0].rubika_id}`;
       const telegramBtn = document.getElementById('telegramBtnStep');
       if (telegramBtn) {
-        if (data[0].telegram_id) {
-          telegramBtn.href = `https://t.me/${data[0].telegram_id}`;
-          telegramBtn.style.display = 'inline-flex';
-        } else telegramBtn.style.display = 'none';
+        if (data[0].telegram_id) { telegramBtn.href = `https://t.me/${data[0].telegram_id}`; telegramBtn.style.display = 'inline-flex'; }
+        else telegramBtn.style.display = 'none';
       }
     }
   } catch (err) { console.error(err); }
 }
 loadContact();
 
-// ===== اطلاعیه =====
 const COLOR_PRESETS = {
   'cyan-purple': { c1: '#00ffe7', c2: '#a855f7', text: '#0a0a0f' },
   'red-orange':  { c1: '#ff3860', c2: '#ff9500', text: '#ffffff' },
@@ -714,10 +777,8 @@ async function loadAnnouncement() {
 }
 window.addEventListener('load', () => { setTimeout(loadAnnouncement, 500); });
 
-// ===== امتیازدهی با نظر =====
 let selectedStars = 0;
 let ratingSubmitted = false;
-
 function createConfetti() {
   const colors = ['#ffcc00', '#ff9500', '#ff2ec4', '#00ffe7', '#a855f7', '#10b981'];
   for (let i = 0; i < 50; i++) {
@@ -737,16 +798,12 @@ function createConfetti() {
     }, i * 20);
   }
 }
-
 function selectStar(val) {
   if (ratingSubmitted) return;
   selectedStars = val;
-  document.querySelectorAll('.star').forEach((s, i) => {
-    s.classList.toggle('active', i < val);
-  });
+  document.querySelectorAll('.star').forEach((s, i) => { s.classList.toggle('active', i < val); });
   document.getElementById('ratingStarsText').textContent = '⭐'.repeat(val);
 }
-
 document.querySelectorAll('.star').forEach(star => {
   star.addEventListener('mouseenter', () => {
     if (ratingSubmitted) return;
@@ -758,19 +815,19 @@ document.getElementById('starsContainer')?.addEventListener('mouseleave', () => 
   if (ratingSubmitted) return;
   document.querySelectorAll('.star').forEach(s => s.classList.remove('hover'));
 });
-
 document.getElementById('ratingCommentInput')?.addEventListener('input', (e) => {
   document.getElementById('commentCounter').textContent = e.target.value.length;
 });
-
 async function submitRating() {
   if (ratingSubmitted) return;
   if (selectedStars < 1) {
     const feedback = document.getElementById('ratingFeedback');
     feedback.textContent = '⚠️ لطفاً اول ستاره انتخاب کن';
     feedback.style.color = '#ffcc00';
+    feedback.style.borderColor = 'rgba(255,204,0,0.5)';
+    feedback.style.background = 'rgba(255,204,0,0.1)';
     feedback.classList.add('show');
-    setTimeout(() => { feedback.classList.remove('show'); feedback.style.color = ''; }, 2500);
+    setTimeout(() => { feedback.classList.remove('show'); }, 2500);
     return;
   }
   ratingSubmitted = true;
@@ -782,30 +839,15 @@ async function submitRating() {
   btn.disabled = true;
   btnText.textContent = '⏳ در حال ارسال...';
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings`, { 
-      method: 'POST', 
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({ 
-        stars: selectedStars, 
-        is_approved: false,
-        comment: comment || null,
-        visitor_name: name || null
-      })
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ stars: selectedStars, is_approved: false, comment: comment || null, visitor_name: name || null }) });
     const feedback = document.getElementById('ratingFeedback');
     if (res.ok) {
-      const messages = {
-        1: '😢 متأسفیم که راضی نبودی. نظرت ثبت شد و تایید میشه ❤️',
-        2: '😐 امیدواریم بهتر بشیم. ممنون از نظرت',
-        3: '🙂 ممنون از نظرت! ثبت شد و تایید میشه',
-        4: '😊 خوشحالیم که راضی بودی! ممنون ❤️',
-        5: '🤩 وای! فوق‌العاده! ممنون از حمایتت ❤️'
-      };
+      const messages = { 1: '😢 متأسفیم که راضی نبودی', 2: '😐 امیدواریم بهتر بشیم', 3: '🙂 ممنون از نظرت', 4: '😊 خوشحالیم که راضی بودی', 5: '🤩 وای! فوق‌العاده!' };
       feedback.textContent = '✅ ' + (messages[selectedStars] || 'ممنون از نظرت!');
+      feedback.style.color = '#10b981';
       feedback.classList.add('show');
       setTimeout(() => {
-        ratingSubmitted = false;
-        selectedStars = 0;
+        ratingSubmitted = false; selectedStars = 0;
         document.querySelectorAll('.star').forEach(s => s.classList.remove('active', 'hover'));
         document.getElementById('ratingStarsText').textContent = '';
         document.getElementById('ratingCommentInput').value = '';
@@ -813,29 +855,18 @@ async function submitRating() {
         document.getElementById('commentCounter').textContent = '0';
         feedback.classList.remove('show');
       }, 5000);
-    } else {
-      feedback.textContent = '❌ خطا، دوباره تلاش کن';
-      feedback.style.color = '#ff3860';
-      feedback.classList.add('show');
-      setTimeout(() => { ratingSubmitted = false; feedback.classList.remove('show'); feedback.style.color = ''; }, 3000);
-    }
+    } else { throw new Error('خطا'); }
   } catch (err) {
-    console.error('Rating error:', err);
-    document.getElementById('ratingFeedback').textContent = '❌ خطا در ارسال';
-    document.getElementById('ratingFeedback').classList.add('show');
-    setTimeout(() => { ratingSubmitted = false; document.getElementById('ratingFeedback').classList.remove('show'); }, 3000);
-  } finally {
-    btn.disabled = false;
-    btnText.textContent = 'ارسال امتیاز و نظر';
-  }
+    const feedback = document.getElementById('ratingFeedback');
+    feedback.textContent = '❌ خطا، دوباره تلاش کن';
+    feedback.style.color = '#ff3860';
+    feedback.classList.add('show');
+    setTimeout(() => { ratingSubmitted = false; feedback.classList.remove('show'); }, 3000);
+  } finally { btn.disabled = false; btnText.textContent = 'ارسال امتیاز و نظر'; }
 }
-
-// ===== نمایش آمار و نظرات تاییدشده =====
 async function loadPublicRatingStats() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=*&is_approved=eq.true&order=id.desc&limit=50`, { 
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } 
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=*&is_approved=eq.true&order=id.desc&limit=50`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
     const data = await res.json();
     if (!data || data.length === 0) return;
     const total = data.length;
@@ -845,39 +876,21 @@ async function loadPublicRatingStats() {
     document.getElementById('publicCount').textContent = total;
     const withComments = data.filter(r => r.comment && r.comment.trim().length > 0).slice(0, 10);
     const commentsList = document.getElementById('publicCommentsList');
-    if (withComments.length === 0) {
-      commentsList.innerHTML = '';
-    } else {
+    if (withComments.length === 0) { commentsList.innerHTML = ''; }
+    else {
       commentsList.innerHTML = withComments.map(r => {
         const date = new Date(r.created_at).toLocaleString('fa-IR', { month:'long', day:'numeric' });
         const stars = '⭐'.repeat(r.stars);
         const name = r.visitor_name || 'کاربر ناشناس';
-        return `
-          <div class="public-comment-item">
-            <div class="comment-header">
-              <div class="comment-user"><span>👤 ${escapeHtml(name)}</span></div>
-              <div class="comment-stars">${stars}</div>
-            </div>
-            <div class="comment-text">${escapeHtml(r.comment)}</div>
-            <div class="comment-date">🕐 ${date}</div>
-          </div>
-        `;
+        return `<div class="public-comment-item"><div class="comment-header"><div class="comment-user">👤 ${escapeHtml(name)}</div><div class="comment-stars">${stars}</div></div><div class="comment-text">${escapeHtml(r.comment)}</div><div class="comment-date">🕐 ${date}</div></div>`;
       }).join('');
     }
     document.getElementById('publicRatingStats').classList.add('show');
   } catch (err) { console.error('Stats error:', err); }
 }
-
-function escapeHtml(text) {
-  if (!text) return '';
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
+function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 window.addEventListener('load', () => { setTimeout(loadPublicRatingStats, 600); });
 
-// ===== اسلایدر =====
 let currentSlide = 0;
 let slideCount = 4;
 let sliderAutoPlay = null;
@@ -911,7 +924,6 @@ function stopAutoPlay() { if (sliderAutoPlay) { clearInterval(sliderAutoPlay); s
 function resetAutoPlay() { stopAutoPlay(); startAutoPlay(); }
 window.addEventListener('load', initSlider);
 
-// Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js')
