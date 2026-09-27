@@ -176,7 +176,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .notif-permission.success-banner { background: rgba(16,185,129,0.1); border-color: #10b981; color: #10b981; }
 .notif-permission.error-banner { background: rgba(255,56,96,0.1); border-color: #ff3860; color: #ff3860; }
 
-/* ===== ضبط وییس ===== */
 .voice-recorder { display: flex; align-items: center; gap: 10px; flex: 1; padding: 8px 15px; background: rgba(255,56,96,0.1); border: 1px solid var(--danger); border-radius: 50px; animation: recordingPulse 1.5s ease-in-out infinite; }
 @keyframes recordingPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,56,96,0.4); } 50% { box-shadow: 0 0 0 8px rgba(255,56,96,0); } }
 .voice-recorder .dot-rec { width: 12px; height: 12px; border-radius: 50%; background: #ff3860; animation: dotBlink 1s infinite; }
@@ -189,12 +188,10 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .voice-recorder .send-rec:hover { transform: scale(1.1); }
 .mic-btn { width: 45px; height: 45px; border-radius: 50%; background: rgba(168,85,247,0.15); border: 1px solid var(--purple); color: var(--purple); font-size: 1.2rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .mic-btn:hover { background: var(--purple); color: white; transform: scale(1.05); }
-.mic-btn:active { transform: scale(0.95); }
 .voice-player { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(0,0,0,0.2); border-radius: 25px; min-width: 200px; }
 .voice-player .play-btn { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s; }
 .bubble.mine .voice-player .play-btn { background: #0a0a0f; color: var(--cyan); }
 .bubble.theirs .voice-player .play-btn { background: var(--cyan); color: #0a0a0f; }
-.voice-player .play-btn:hover { transform: scale(1.1); }
 .voice-player .waveform { flex: 1; height: 24px; display: flex; align-items: center; gap: 2px; }
 .voice-player .waveform .bar { width: 3px; border-radius: 2px; opacity: 0.5; }
 .bubble.mine .voice-player .waveform .bar { background: #0a0a0f; }
@@ -202,6 +199,17 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
 .voice-player .duration { font-size: 0.75rem; font-weight: 700; min-width: 35px; text-align: center; }
 .bubble.mine .voice-player .duration { color: #0a0a0f; }
 .bubble.theirs .voice-player .duration { color: var(--cyan); }
+
+/* ===== رنگ‌های اطلاعیه ===== */
+.color-picker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 8px; }
+.color-option { padding: 12px 8px; border-radius: 10px; cursor: pointer; text-align: center; font-size: 0.75rem; font-weight: 700; color: white; border: 3px solid transparent; transition: 0.3s; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+.color-option:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+.color-option.active { border-color: white; box-shadow: 0 0 20px rgba(255,255,255,0.6); transform: scale(1.05); }
+
+.announcement-bar { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 20px; border-radius: 12px; background: linear-gradient(90deg, #00ffe7, #a855f7); color: white; font-weight: 700; font-size: 0.95rem; text-align: center; box-shadow: 0 8px 25px rgba(0,255,231,0.3); line-height: 1.5; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
+.announcement-bar .ann-icon { font-size: 1.4rem; flex-shrink: 0; animation: annIconPulse 2s ease-in-out infinite; }
+.announcement-bar .ann-message { flex: 1; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
+@keyframes annIconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
 @media (max-width: 700px) {
   .chat-wrap { grid-template-columns: 1fr; height: auto; }
@@ -213,6 +221,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   .card { padding: 18px; }
   .form-row, .form-row.three { grid-template-columns: 1fr; }
   .modal { padding: 20px; }
+  .color-picker-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -250,6 +259,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <button class="tab" onclick="switchTab('chat', this)">💬 چت زنده<span class="tab-badge" id="chatTabBadge" style="display:none;">0</span></button>
     <button class="tab" onclick="switchTab('stats', this)">📊 آمار</button>
     <button class="tab" onclick="switchTab('contact', this)">📞 تماس</button>
+    <button class="tab" onclick="switchTab('announce', this)">📢 اطلاعیه</button>
     <button class="tab" onclick="switchTab('settings', this)">⚙️ تنظیمات</button>
   </div>
 
@@ -280,7 +290,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         </select>
       </div>
 
-      <!-- فیلدهای کلش -->
       <div id="fields-clash" class="form-row three" style="display:none;">
         <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="pTownHall" placeholder="14"></div>
         <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
@@ -292,28 +301,25 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="form-group"><label>🏗️ بیلدرها</label><input type="text" id="pBuilderCount" placeholder="5/5"></div>
       </div>
 
-      <!-- فیلدهای کالاف -->
-      <div id="fields-cod" class="form-row three">
+      <div id="fields-cod" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pRank" placeholder="Legendary"></div>
         <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="pPlayerLevel" placeholder="150"></div>
         <div class="form-group"><label>🎨 تعداد اسکین</label><input type="number" id="pSkins" placeholder="50"></div>
       </div>
-      <div id="fields-cod-2" class="form-row three">
+      <div id="fields-cod-2" class="form-row three" style="display:none;">
         <div class="form-group"><label>💰 تعداد CP</label><input type="number" id="pCp" placeholder="1500"></div>
         <div class="form-group"><label>🎟️ بتل پس</label><input type="text" id="pBattlePass" placeholder="فصل 5"></div>
         <div class="form-group"><label>🔴 Mythic</label><input type="number" id="pMythic" placeholder="5"></div>
       </div>
-      <div id="fields-cod-3" class="form-row">
+      <div id="fields-cod-3" class="form-row" style="display:none;">
         <div class="form-group"><label>🟡 Legendary</label><input type="number" id="pLegendary" placeholder="10"></div>
       </div>
 
-      <!-- فیلدهای آیتم کلش و کالاف -->
       <div id="fields-item" class="form-row" style="display:none;">
         <div class="form-group"><label>🏷️ نوع آیتم</label><input type="text" id="pItemType" placeholder="بلیط طلایی"></div>
         <div class="form-group"><label>📦 مقدار</label><input type="text" id="pItemAmount" placeholder="۱ عدد"></div>
       </div>
 
-      <!-- فیلدهای آیتم فری فایر (جدید) -->
       <div id="fields-item-ff" class="form-row three" style="display:none;">
         <div class="form-group">
           <label>🏷️ نوع آیتم</label>
@@ -329,7 +335,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="form-group"><label>⏱️ مدت</label><input type="text" id="pFFItemDuration" placeholder="30 روز"></div>
       </div>
 
-      <!-- فیلدهای آیتم کلش رویال (جدید) -->
       <div id="fields-item-royal" class="form-row three" style="display:none;">
         <div class="form-group">
           <label>🏷️ نوع آیتم</label>
@@ -345,21 +350,18 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="form-group"><label>⏱️ مدت</label><input type="text" id="pRoyalItemDuration" placeholder="30 روز"></div>
       </div>
 
-      <!-- فیلدهای کلش رویال -->
       <div id="fields-royal" class="form-row three" style="display:none;">
         <div class="form-group"><label>👑 سطح آرنا</label><input type="number" id="pArena" placeholder="15"></div>
         <div class="form-group"><label>🏆 تعداد جام</label><input type="number" id="pTrophies" placeholder="5000"></div>
         <div class="form-group"><label>📊 لول کینگ</label><input type="number" id="pKingLevel" placeholder="10"></div>
       </div>
 
-      <!-- فیلدهای فری فایر -->
       <div id="fields-freefire" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pFFRank" placeholder="Heroic"></div>
         <div class="form-group"><label>📊 لول</label><input type="number" id="pFFLevel" placeholder="60"></div>
         <div class="form-group"><label>💎 تعداد جم</label><input type="number" id="pFFGems" placeholder="1000"></div>
       </div>
 
-      <!-- فیلدهای آزاد -->
       <div id="fields-free" class="form-row" style="display:none;">
         <div class="form-group"><label>📝 مشخصات ۱</label><input type="text" id="pFree1" placeholder="مثلاً: لول"></div>
         <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
@@ -459,6 +461,61 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     </div>
   </div>
 
+  <!-- Tab: Announce -->
+  <div class="tab-content" id="tab-announce">
+    <div class="card">
+      <div class="card-title">📢 مدیریت اطلاعیه</div>
+
+      <div class="form-group">
+        <label>📢 آیکون</label>
+        <input type="text" id="annIcon" placeholder="📢" value="📢" maxlength="4" style="font-size: 1.5rem; text-align: center;">
+      </div>
+
+      <div class="form-group">
+        <label>🎨 رنگ اطلاعیه</label>
+        <div class="color-picker-grid" id="colorPickerGrid">
+          <div class="color-option active" data-preset="cyan-purple" style="background: linear-gradient(90deg, #00ffe7, #a855f7);" onclick="selectColor('cyan-purple', this)">فیروزه‌ای-بنفش</div>
+          <div class="color-option" data-preset="red-orange" style="background: linear-gradient(90deg, #ff3860, #ff9500);" onclick="selectColor('red-orange', this)">قرمز-نارنجی</div>
+          <div class="color-option" data-preset="purple-pink" style="background: linear-gradient(90deg, #a855f7, #ff2ec4);" onclick="selectColor('purple-pink', this)">بنفش-صورتی</div>
+          <div class="color-option" data-preset="green-cyan" style="background: linear-gradient(90deg, #10b981, #22d3ee);" onclick="selectColor('green-cyan', this)">سبز-فیروزه‌ای</div>
+          <div class="color-option" data-preset="gold-orange" style="background: linear-gradient(90deg, #ffcc00, #ff9900); color: #111;" onclick="selectColor('gold-orange', this)">طلایی-نارنجی</div>
+          <div class="color-option" data-preset="blue-cyan" style="background: linear-gradient(90deg, #0088cc, #00ffe7);" onclick="selectColor('blue-cyan', this)">آبی-فیروزه‌ای</div>
+          <div class="color-option" data-preset="black-gold" style="background: linear-gradient(90deg, #1a1a2e, #4a3a1e); color: #ffcc00;" onclick="selectColor('black-gold', this)">مشکی-طلایی</div>
+          <div class="color-option" data-preset="custom" style="background: linear-gradient(90deg, #666, #999);" onclick="selectColor('custom', this)">🎨 دلخواه</div>
+        </div>
+      </div>
+
+      <div class="form-row" id="customColorRow" style="display: none;">
+        <div class="form-group"><label>🎨 رنگ 1</label><input type="color" id="annColor1" value="#00ffe7" style="height: 50px; padding: 5px; cursor: pointer;"></div>
+        <div class="form-group"><label>🎨 رنگ 2</label><input type="color" id="annColor2" value="#a855f7" style="height: 50px; padding: 5px; cursor: pointer;"></div>
+      </div>
+
+      <div class="form-group">
+        <label>📝 متن اطلاعیه *</label>
+        <textarea id="annMessage" rows="3" placeholder="مثلاً: 🎉 جشنواره تخفیف ویژه! تا 50% تخفیف روی همه محصولات" maxlength="200"></textarea>
+        <div style="text-align: left; font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;"><span id="annCharCount">0</span>/200</div>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 10px;">
+        <input type="checkbox" id="annActive" checked style="width: auto; cursor: pointer;">
+        <label for="annActive" style="margin: 0; cursor: pointer; color: var(--cyan); font-weight: 700;">✅ اطلاعیه فعال باشه</label>
+      </div>
+
+      <div class="form-group">
+        <label>👁️ پیش‌نمایش</label>
+        <div id="annPreview" class="announcement-bar" style="position: relative; margin-top: 8px;">
+          <span class="ann-icon">📢</span>
+          <span class="ann-message">متن اطلاعیه اینجا نشون داده میشه</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <button class="save-btn" id="saveAnnBtn" onclick="saveAnnouncement()">🚀 ذخیره اطلاعیه</button>
+        <button class="save-btn" onclick="deleteAnnouncement()" style="background: linear-gradient(90deg, #ff3860, #cc0033);">🗑️ پاک کردن</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Tab: Settings -->
   <div class="tab-content" id="tab-settings">
     <div class="card">
@@ -551,7 +608,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <div class="form-group"><label>📝 توضیحات</label><textarea id="editDesc" rows="3"></textarea></div>
     <div class="form-group"><label>📸 عکس‌های فعلی</label><div class="existing-images" id="existingImages"></div></div>
     <div class="form-group">
-      <label>➕ عکس‌های جدید (خودکار فشرده میشن ⚡)</label>
+      <label>➕ عکس‌های جدید</label>
       <div class="upload-area" onclick="document.getElementById('editImagesInput').click()">
         <div class="icon">🖼️</div>
         <p>اضافه کردن عکس جدید</p>
@@ -565,7 +622,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     </div>
   </div>
 </div>
-
 <script>
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
@@ -592,6 +648,19 @@ let audioChunks = [];
 let recordingStartTime = null;
 let recordingTimer = null;
 let recordingStream = null;
+let currentAnnouncement = null;
+let selectedColorPreset = 'cyan-purple';
+
+const COLOR_PRESETS = {
+  'cyan-purple': { c1: '#00ffe7', c2: '#a855f7' },
+  'red-orange':  { c1: '#ff3860', c2: '#ff9500' },
+  'purple-pink': { c1: '#a855f7', c2: '#ff2ec4' },
+  'green-cyan':  { c1: '#10b981', c2: '#22d3ee' },
+  'gold-orange': { c1: '#ffcc00', c2: '#ff9900' },
+  'blue-cyan':   { c1: '#0088cc', c2: '#00ffe7' },
+  'black-gold':  { c1: '#1a1a2e', c2: '#4a3a1e' },
+  'custom':      { c1: '#00ffe7', c2: '#a855f7' }
+};
 
 function login() {
   const user = document.getElementById('username').value.trim();
@@ -616,6 +685,7 @@ function showDashboard() {
   loadProducts();
   loadSettings();
   loadChats();
+  loadAnnouncement();
   subscribeToChats();
 }
 
@@ -663,6 +733,7 @@ function switchTab(name, btn) {
   btn.classList.add('active');
   document.getElementById('tab-' + name).classList.add('active');
   if (name === 'chat') loadChats();
+  if (name === 'announce') loadAnnouncement();
 }
 
 function showStatus(msg, type = 'loading') {
@@ -1256,6 +1327,145 @@ function subscribeToChatMessages(chatId) {
 
 function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 function formatTime(iso) { const d = new Date(iso); return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); }
+
+// ==========================================
+// اطلاعیه
+// ==========================================
+function selectColor(preset, el) {
+  document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  selectedColorPreset = preset;
+  const customRow = document.getElementById('customColorRow');
+  if (preset === 'custom') { customRow.style.display = 'grid'; }
+  else { customRow.style.display = 'none'; }
+  updatePreview();
+}
+
+function updatePreview() {
+  const preview = document.getElementById('annPreview');
+  if (!preview) return;
+  const icon = document.getElementById('annIcon').value || '📢';
+  const message = document.getElementById('annMessage').value || 'متن اطلاعیه اینجا نشون داده میشه';
+  let c1, c2;
+  if (selectedColorPreset === 'custom') {
+    c1 = document.getElementById('annColor1').value;
+    c2 = document.getElementById('annColor2').value;
+  } else {
+    const p = COLOR_PRESETS[selectedColorPreset];
+    c1 = p.c1; c2 = p.c2;
+  }
+  const isGoldBg = selectedColorPreset === 'gold-orange' || selectedColorPreset === 'black-gold';
+  preview.style.background = `linear-gradient(90deg, ${c1}, ${c2})`;
+  preview.style.color = isGoldBg ? (selectedColorPreset === 'gold-orange' ? '#111' : '#ffcc00') : 'white';
+  preview.querySelector('.ann-icon').textContent = icon;
+  preview.querySelector('.ann-message').textContent = message;
+}
+
+document.getElementById('annIcon')?.addEventListener('input', updatePreview);
+document.getElementById('annMessage')?.addEventListener('input', () => {
+  const len = document.getElementById('annMessage').value.length;
+  document.getElementById('annCharCount').textContent = len;
+  updatePreview();
+});
+document.getElementById('annColor1')?.addEventListener('input', updatePreview);
+document.getElementById('annColor2')?.addEventListener('input', updatePreview);
+
+async function loadAnnouncement() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?select=*&order=id.desc&limit=1`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+    if (data && data.length > 0) {
+      currentAnnouncement = data[0];
+      document.getElementById('annMessage').value = data[0].message || '';
+      document.getElementById('annIcon').value = data[0].icon || '📢';
+      document.getElementById('annActive').checked = data[0].is_active !== false;
+      selectedColorPreset = data[0].color_preset || 'cyan-purple';
+      document.querySelectorAll('.color-option').forEach(o => {
+        o.classList.toggle('active', o.dataset.preset === selectedColorPreset);
+      });
+      if (selectedColorPreset === 'custom') {
+        document.getElementById('customColorRow').style.display = 'grid';
+        const parts = (data[0].color_custom || '#00ffe7,#a855f7').split(',');
+        document.getElementById('annColor1').value = parts[0] || '#00ffe7';
+        document.getElementById('annColor2').value = parts[1] || '#a855f7';
+      }
+      document.getElementById('annCharCount').textContent = document.getElementById('annMessage').value.length;
+    }
+    updatePreview();
+  } catch (err) { console.error('Announcement load error:', err); }
+}
+
+async function saveAnnouncement() {
+  const message = document.getElementById('annMessage').value.trim();
+  if (!message) { showStatus('❌ متن اطلاعیه اجباریه!', 'error'); return; }
+  const btn = document.getElementById('saveAnnBtn');
+  btn.disabled = true; btn.textContent = '⏳ ذخیره...';
+  try {
+    const customColor = selectedColorPreset === 'custom' 
+      ? `${document.getElementById('annColor1').value},${document.getElementById('annColor2').value}`
+      : null;
+    const payload = {
+      message: message,
+      icon: document.getElementById('annIcon').value || '📢',
+      color_preset: selectedColorPreset,
+      color_custom: customColor,
+      is_active: document.getElementById('annActive').checked,
+      updated_at: new Date().toISOString()
+    };
+    let res;
+    if (currentAnnouncement) {
+      res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?id=eq.${currentAnnouncement.id}`, {
+        method: 'PATCH',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+        body: JSON.stringify(payload)
+      });
+    } else {
+      res = await fetch(`${SUPABASE_URL}/rest/v1/announcements`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+        body: JSON.stringify(payload)
+      });
+    }
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data[0]) currentAnnouncement = data[0];
+      showStatus('🎉 اطلاعیه ذخیره شد!', 'success');
+      loadAnnouncement();
+    } else {
+      showStatus('❌ خطا در ذخیره', 'error');
+    }
+  } catch (err) {
+    showStatus('❌ خطا: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = '🚀 ذخیره اطلاعیه';
+  }
+}
+
+async function deleteAnnouncement() {
+  if (!confirm('مطمئنی می‌خوای اطلاعیه رو پاک کنی؟')) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/announcements?id=gt.0`, {
+      method: 'DELETE',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    currentAnnouncement = null;
+    document.getElementById('annMessage').value = '';
+    document.getElementById('annIcon').value = '📢';
+    document.getElementById('annActive').checked = true;
+    selectedColorPreset = 'cyan-purple';
+    document.querySelectorAll('.color-option').forEach(o => {
+      o.classList.toggle('active', o.dataset.preset === 'cyan-purple');
+    });
+    document.getElementById('customColorRow').style.display = 'none';
+    document.getElementById('annCharCount').textContent = '0';
+    updatePreview();
+    showStatus('🗑️ اطلاعیه پاک شد', 'success');
+  } catch (err) {
+    showStatus('❌ خطا: ' + err.message, 'error');
+  }
+}
 
 updateCategoryFields();
 </script>
