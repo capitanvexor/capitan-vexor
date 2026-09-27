@@ -56,14 +56,60 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 12px 2
 .nav-links a:hover { color: var(--cyan); }
 
 /* ===== نوار اطلاعیه ===== */
-.announcement-bar { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 25px; font-weight: 700; font-size: 0.95rem; text-align: center; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; box-shadow: 0 5px 20px rgba(0,0,0,0.3); animation: annSlideDown 0.6s ease-out; margin-top: 60px; direction: rtl; }
-@keyframes annSlideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-.announcement-bar .ann-icon { font-size: 1.4rem; flex-shrink: 0; animation: annIconPulse 2s ease-in-out infinite; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
-@keyframes annIconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-.announcement-bar .ann-message { flex: 1; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
-.announcement-bar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent); pointer-events: none; }
-@media (max-width: 600px) {
-  .announcement-bar { padding: 12px 15px; font-size: 0.85rem; gap: 8px; }
+.announcement-bar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 25px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  animation: annSlideDown 0.6s ease-out;
+  margin-top: 60px;
+  direction: rtl;
+  z-index: 999;
+}
+@keyframes annSlideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.announcement-bar .ann-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  animation: annIconPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+@keyframes annIconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+.announcement-bar .ann-message {
+  flex: 1;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.announcement-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent);
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .announcement-bar { margin-top: 55px; padding: 16px 30px; }
+}
+@media (max-width: 767px) {
+  .announcement-bar { margin-top: 130px; padding: 12px 15px; font-size: 0.85rem; gap: 8px; }
   .announcement-bar .ann-icon { font-size: 1.2rem; }
 }
 
@@ -349,7 +395,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=کلش" class="category-card reveal">
       <div class="category-image-wrap">
         <img src="clash-of-clans.jpg" alt="کلش آف کلنز" class="category-image" loading="lazy" onerror="this.style.display='none'">
@@ -361,7 +406,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=کلش رویال" class="category-card reveal">
       <div class="category-image-wrap">
         <img src="clash-royal.jpg" alt="کلش رویال" class="category-image" loading="lazy" onerror="this.style.display='none'">
@@ -373,7 +417,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=فری فایر" class="category-card reveal">
       <div class="category-image-wrap">
         <img src="images.jpeg" alt="فری فایر" class="category-image" loading="lazy" onerror="this.style.display='none'">
@@ -385,7 +428,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=آزاد" class="category-card free-card reveal">
       <div class="free-inner">
         <span class="free-emoji">✨</span>
@@ -394,7 +436,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=آیتم کلش" class="category-card item-clash reveal">
       <div class="category-image-wrap">
         <img src="clash-items.jpg" alt="آیتم کلش" class="category-image" loading="lazy" onerror="this.style.display='none'">
@@ -406,7 +447,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=آیتم کالاف" class="category-card item-cod reveal">
       <div class="category-image-wrap">
         <img src="cod-items.jpg" alt="آیتم کالاف" class="category-image" loading="lazy" onerror="this.style.display='none'">
@@ -418,7 +458,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=آیتم فری فایر" class="category-card item-ff reveal">
       <div class="category-image-wrap">
         <img src="ff-items.jpg" alt="آیتم فری فایر" class="category-image" loading="lazy" onerror="this.style.display='none'">
@@ -430,7 +469,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <span class="category-btn">مشاهده →</span>
       </div>
     </a>
-
     <a href="category.html?cat=آیتم کلش رویال" class="category-card item-royal reveal">
       <div class="category-image-wrap">
         <img src="royal-items.jpg" alt="آیتم کلش رویال" class="category-image" loading="lazy" onerror="this.style.display='none'">
@@ -707,9 +745,7 @@ async function loadContact() {
 }
 loadContact();
 
-// ==========================================
-// نمایش اطلاعیه
-// ==========================================
+// ===== اطلاعیه =====
 const COLOR_PRESETS = {
   'cyan-purple': { c1: '#00ffe7', c2: '#a855f7', text: '#0a0a0f' },
   'red-orange':  { c1: '#ff3860', c2: '#ff9500', text: '#ffffff' },
