@@ -125,11 +125,53 @@ nav {
 }
 .product-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
 .product-title { font-size: 1rem; margin-bottom: 12px; color: var(--text); font-weight: 700; line-height: 1.4; }
-.product-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+.product-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .spec-tag {
   background: rgba(0,255,231,0.08); border: 1px solid var(--border);
   padding: 5px 10px; border-radius: 8px; font-size: 0.72rem; color: var(--cyan);
 }
+
+/* ===== ویژگی‌های اکانت (چنج/سیو/خام) ===== */
+.product-features {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.feature-badge {
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+.feature-badge.change {
+  background: rgba(0,255,231,0.15);
+  border-color: rgba(0,255,231,0.6);
+  color: var(--cyan);
+  box-shadow: 0 0 12px rgba(0,255,231,0.2);
+}
+.feature-badge.save {
+  background: rgba(168,85,247,0.15);
+  border-color: rgba(168,85,247,0.6);
+  color: var(--purple);
+  box-shadow: 0 0 12px rgba(168,85,247,0.2);
+}
+.feature-badge.raw {
+  background: rgba(255,204,0,0.15);
+  border-color: rgba(255,204,0,0.6);
+  color: #ffcc00;
+  box-shadow: 0 0 12px rgba(255,204,0,0.2);
+}
+.product-card:hover .feature-badge {
+  transform: translateY(-2px);
+}
+
 .product-price-box { margin-top: auto; }
 .product-price {
   font-size: 1.3rem; font-weight: 900; color: var(--cyan);
@@ -174,6 +216,7 @@ nav {
   .product-body { padding: 14px; }
   .product-title { font-size: 0.9rem; }
   .product-price { font-size: 1.1rem; }
+  .feature-badge { font-size: 0.65rem; padding: 3px 9px; }
   .container { padding: 120px 15px 60px; }
   .float-buttons { bottom: 15px; right: 15px; }
   .float-btn { width: 50px; height: 50px; font-size: 1.3rem; }
@@ -212,8 +255,7 @@ nav {
       <h3>🔍 فیلتر و جستجو</h3>
       <div class="filter-count" id="resultCount">...</div>
     </div>
-    <div class="filter-grid" id="filterGrid">
-    </div>
+    <div class="filter-grid" id="filterGrid"></div>
   </div>
 
   <div class="products-grid" id="productsGrid">
@@ -245,6 +287,8 @@ const categoryInfo = {
   'فری فایر': { icon: '🔥', desc: 'اکانت‌های فری فایر با رنک Heroic و Grandmaster' },
   'آیتم کلش': { icon: '💎', desc: 'بلیط طلایی، منظره و آیتم‌های ویژه کلش' },
   'آیتم کالاف': { icon: '🔫', desc: 'آیتم‌ها و اسکین‌های ویژه کالاف دیوتی موبایل' },
+  'آیتم فری فایر': { icon: '🎁', desc: 'جم، بتل پس، پاس رفیل و آیتم‌های ویژه فری فایر' },
+  'آیتم کلش رویال': { icon: '🎁', desc: 'سکه، جم، بتل پس رویال و صندوق‌های ویژه' },
   'آزاد': { icon: '✨', desc: 'هر محصولی که دنبالش هستی اینجاست' }
 };
 
@@ -328,6 +372,19 @@ function buildFilters() {
     `;
   }
 
+  // فیلتر ویژگی‌ها (چنج/سیو/خام)
+  html += `
+    <div class="filter-group">
+      <label>🎯 ویژگی</label>
+      <select id="filterFeature" onchange="applyFilters()">
+        <option value="">همه</option>
+        <option value="change">🔄 چنج</option>
+        <option value="save">💾 سیو</option>
+        <option value="raw">✨ خام</option>
+      </select>
+    </div>
+  `;
+
   html += `
     <div class="filter-group">
       <label>💰 از قیمت (تومان)</label>
@@ -369,6 +426,7 @@ function applyFilters() {
   const filterRank = document.getElementById('filterRank')?.value || '';
   const filterArena = document.getElementById('filterArena')?.value || '';
   const filterItemType = (document.getElementById('filterItemType')?.value || '').trim().toLowerCase();
+  const filterFeature = document.getElementById('filterFeature')?.value || '';
   const minPrice = parseInt(document.getElementById('minPrice')?.value) || 0;
   const maxPrice = parseInt(document.getElementById('maxPrice')?.value) || Infinity;
 
@@ -382,6 +440,12 @@ function applyFilters() {
     if (filterRank && (p.rank || '').toLowerCase() !== filterRank.toLowerCase()) return false;
     if (filterArena && p.arena != filterArena) return false;
     if (filterItemType && !(p.item_type || '').toLowerCase().includes(filterItemType)) return false;
+
+    // فیلتر ویژگی
+    if (filterFeature === 'change' && !p.has_change) return false;
+    if (filterFeature === 'save' && !p.has_save) return false;
+    if (filterFeature === 'raw' && !p.is_raw) return false;
+
     if (p.price && p.price < minPrice) return false;
     if (p.price && p.price > maxPrice) return false;
     return true;
@@ -434,6 +498,16 @@ function renderProducts(products) {
       if (p.item_amount) specs += `<span class="spec-tag">📝 ${p.item_amount}</span>`;
     }
 
+    // ویژگی‌های اکانت (چنج/سیو/خام)
+    let featuresHtml = '';
+    if (p.has_change || p.has_save || p.is_raw) {
+      featuresHtml = '<div class="product-features">';
+      if (p.has_change) featuresHtml += '<span class="feature-badge change">🔄 چنج</span>';
+      if (p.has_save) featuresHtml += '<span class="feature-badge save">💾 سیو</span>';
+      if (p.is_raw) featuresHtml += '<span class="feature-badge raw">✨ خام</span>';
+      featuresHtml += '</div>';
+    }
+
     return `
       <a href="product.html?id=${p.id}" class="product-card">
         <div class="product-image-wrap">
@@ -443,6 +517,7 @@ function renderProducts(products) {
         </div>
         <div class="product-body">
           <h3 class="product-title">${p.title || 'بدون عنوان'}</h3>
+          ${featuresHtml}
           <div class="product-specs">${specs}</div>
           <div class="product-price-box">
             <div class="product-price">
@@ -480,9 +555,7 @@ function playClick() {
     if (!audioContext) {
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
-    if (audioContext.state === 'suspended') {
-      audioContext.resume();
-    }
+    if (audioContext.state === 'suspended') audioContext.resume();
     const now = audioContext.currentTime;
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
