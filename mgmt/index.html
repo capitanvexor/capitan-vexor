@@ -11,225 +11,193 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
-:root {
-  --bg-dark: #0a0a0f;
-  --cyan: #00ffe7;
-  --purple: #a855f7;
-  --pink: #ff2ec4;
-  --text: #ffffff;
-  --text-dim: #a0a0b0;
-  --glass: rgba(255,255,255,0.04);
-  --border: rgba(0,255,231,0.2);
-  --danger: #ff3860;
-  --success: #10b981;
-}
-body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-.bg-glow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.bg-glow::before, .bg-glow::after { content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.4; animation: float 12s ease-in-out infinite; }
-.bg-glow::before { width: 500px; height: 500px; background: var(--cyan); top: -100px; right: -100px; }
-.bg-glow::after { width: 600px; height: 600px; background: var(--purple); bottom: -150px; left: -150px; animation-delay: -6s; }
+:root { --bg-dark:#0a0a0f; --cyan:#00ffe7; --purple:#a855f7; --pink:#ff2ec4; --text:#fff; --text-dim:#a0a0b0; --glass:rgba(255,255,255,0.04); --border:rgba(0,255,231,0.2); --danger:#ff3860; --success:#10b981; }
+body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-x:hidden; }
+.bg-glow { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+.bg-glow::before, .bg-glow::after { content:''; position:absolute; border-radius:50%; filter:blur(120px); opacity:0.4; animation:float 12s ease-in-out infinite; }
+.bg-glow::before { width:500px; height:500px; background:var(--cyan); top:-100px; right:-100px; }
+.bg-glow::after { width:600px; height:600px; background:var(--purple); bottom:-150px; left:-150px; animation-delay:-6s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
 
-.login-screen { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-.login-box { background: var(--glass); border: 1px solid var(--border); border-radius: 25px; padding: 45px 35px; backdrop-filter: blur(20px); width: 100%; max-width: 420px; text-align: center; box-shadow: 0 25px 60px rgba(0,255,231,0.1); }
-.login-icon { font-size: 4rem; margin-bottom: 15px; filter: drop-shadow(0 0 25px var(--cyan)); animation: pulse 2s ease-in-out infinite; }
+.login-screen { min-height:100vh; display:flex; justify-content:center; align-items:center; padding:20px; }
+.login-box { background:var(--glass); border:1px solid var(--border); border-radius:25px; padding:45px 35px; backdrop-filter:blur(20px); width:100%; max-width:420px; text-align:center; box-shadow:0 25px 60px rgba(0,255,231,0.1); }
+.login-icon { font-size:4rem; margin-bottom:15px; filter:drop-shadow(0 0 25px var(--cyan)); animation:pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
-.login-box h1 { font-size: 1.5rem; margin-bottom: 8px; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
-.login-box .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 30px; }
-.input-group { position: relative; margin-bottom: 18px; }
-.input-group input { width: 100%; padding: 15px 45px 15px 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: var(--text); font-size: 1rem; outline: none; transition: 0.3s; font-family: inherit; }
-.input-group input:focus { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,255,231,0.3); }
-.input-group .icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; opacity: 0.6; }
-.login-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; margin-top: 10px; box-shadow: 0 0 25px rgba(0,255,231,0.4); }
-.login-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,255,231,0.7); }
-.error-msg { background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); padding: 12px; border-radius: 10px; margin-top: 15px; font-size: 0.9rem; display: none; }
-.error-msg.show { display: block; }
-.back-link { display: inline-block; margin-top: 20px; color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
-.back-link:hover { color: var(--cyan); }
+.login-box h1 { font-size:1.5rem; margin-bottom:8px; background:linear-gradient(90deg,var(--cyan),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; }
+.login-box .subtitle { color:var(--text-dim); font-size:0.9rem; margin-bottom:30px; }
+.input-group { position:relative; margin-bottom:18px; }
+.input-group input { width:100%; padding:15px 45px 15px 18px; background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:12px; color:var(--text); font-size:1rem; outline:none; transition:0.3s; font-family:inherit; }
+.input-group input:focus { border-color:var(--cyan); box-shadow:0 0 20px rgba(0,255,231,0.3); }
+.input-group .icon { position:absolute; right:15px; top:50%; transform:translateY(-50%); font-size:1.2rem; opacity:0.6; }
+.login-btn { width:100%; padding:15px; background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; transition:0.3s; font-family:inherit; margin-top:10px; box-shadow:0 0 25px rgba(0,255,231,0.4); }
+.login-btn:hover { transform:translateY(-2px); box-shadow:0 0 40px rgba(0,255,231,0.7); }
+.error-msg { background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); padding:12px; border-radius:10px; margin-top:15px; font-size:0.9rem; display:none; }
+.error-msg.show { display:block; }
+.back-link { display:inline-block; margin-top:20px; color:var(--text-dim); text-decoration:none; font-size:0.85rem; }
 
-.dashboard { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
-.dashboard.active { display: block; }
-.dash-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: var(--glass); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 25px; backdrop-filter: blur(20px); flex-wrap: wrap; gap: 15px; }
-.dash-header h1 { font-size: 1.3rem; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
-.logout-btn { padding: 10px 20px; background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; cursor: pointer; font-family: inherit; font-weight: 600; transition: 0.3s; font-size: 0.85rem; }
-.logout-btn:hover { background: var(--danger); color: white; }
+.dashboard { display:none; padding:20px; max-width:1100px; margin:0 auto; }
+.dashboard.active { display:block; }
+.dash-header { display:flex; justify-content:space-between; align-items:center; padding:20px; background:var(--glass); border:1px solid var(--border); border-radius:18px; margin-bottom:25px; backdrop-filter:blur(20px); flex-wrap:wrap; gap:15px; }
+.dash-header h1 { font-size:1.3rem; background:linear-gradient(90deg,var(--cyan),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; }
+.logout-btn { padding:10px 20px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:600; transition:0.3s; font-size:0.85rem; }
+.logout-btn:hover { background:var(--danger); color:white; }
 
-.tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.tab { padding: 12px 22px; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; transition: 0.3s; font-family: inherit; color: var(--text-dim); font-weight: 600; font-size: 0.9rem; position: relative; display: flex; align-items: center; gap: 8px; }
-.tab:hover { color: var(--cyan); border-color: var(--cyan); }
-.tab.active { background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15)); color: var(--cyan); border-color: var(--cyan); }
-.tab-badge { background: var(--danger); color: white; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 50px; min-width: 20px; text-align: center; animation: pulse 1.5s infinite; }
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+.tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.tab { padding:12px 22px; background:var(--glass); border:1px solid var(--border); border-radius:12px; cursor:pointer; transition:0.3s; font-family:inherit; color:var(--text-dim); font-weight:600; font-size:0.9rem; position:relative; display:flex; align-items:center; gap:8px; }
+.tab:hover { color:var(--cyan); border-color:var(--cyan); }
+.tab.active { background:linear-gradient(135deg,rgba(0,255,231,0.15),rgba(168,85,247,0.15)); color:var(--cyan); border-color:var(--cyan); }
+.tab-badge { background:var(--danger); color:white; font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:50px; min-width:20px; text-align:center; }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
 
-.card { background: var(--glass); border: 1px solid var(--border); border-radius: 20px; padding: 25px; backdrop-filter: blur(20px); margin-bottom: 20px; }
-.card-title { font-size: 1.1rem; font-weight: 700; color: var(--cyan); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.form-group { margin-bottom: 15px; }
-.form-group label { display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
-.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 13px 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 0.95rem; outline: none; transition: 0.3s; font-family: inherit; }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,255,231,0.2); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.form-row.three { grid-template-columns: 1fr 1fr 1fr; }
+.card { background:var(--glass); border:1px solid var(--border); border-radius:20px; padding:25px; backdrop-filter:blur(20px); margin-bottom:20px; }
+.card-title { font-size:1.1rem; font-weight:700; color:var(--cyan); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.form-group { margin-bottom:15px; }
+.form-group label { display:block; font-size:0.85rem; color:var(--text-dim); margin-bottom:6px; font-weight:600; }
+.form-group input, .form-group textarea, .form-group select { width:100%; padding:13px 16px; background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; color:var(--text); font-size:0.95rem; outline:none; transition:0.3s; font-family:inherit; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--cyan); box-shadow:0 0 15px rgba(0,255,231,0.2); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.form-row.three { grid-template-columns:1fr 1fr 1fr; }
 
-.save-btn { width: 100%; padding: 14px; background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: inherit; box-shadow: 0 0 25px rgba(0,255,231,0.4); }
-.save-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,255,231,0.7); }
-.save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.save-btn { width:100%; padding:14px; background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; transition:0.3s; font-family:inherit; box-shadow:0 0 25px rgba(0,255,231,0.4); }
+.save-btn:hover { transform:translateY(-2px); box-shadow:0 0 40px rgba(0,255,231,0.7); }
+.save-btn:disabled { opacity:0.6; cursor:not-allowed; }
 
-.upload-area { border: 2px dashed var(--border); border-radius: 12px; padding: 30px 20px; text-align: center; cursor: pointer; transition: 0.3s; background: rgba(0,0,0,0.2); }
-.upload-area:hover { border-color: var(--cyan); background: rgba(0,255,231,0.05); }
-.upload-area .icon { font-size: 3rem; margin-bottom: 10px; }
-.upload-area p { color: var(--text-dim); font-size: 0.9rem; }
-.upload-area input { display: none; }
-.images-preview { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-.img-preview-item { position: relative; width: 80px; height: 80px; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); }
-.img-preview-item img { width: 100%; height: 100%; object-fit: cover; }
-.img-preview-item .remove { position: absolute; top: 3px; right: 3px; background: rgba(255,56,96,0.9); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+.upload-area { border:2px dashed var(--border); border-radius:12px; padding:30px 20px; text-align:center; cursor:pointer; transition:0.3s; background:rgba(0,0,0,0.2); }
+.upload-area:hover { border-color:var(--cyan); background:rgba(0,255,231,0.05); }
+.upload-area .icon { font-size:3rem; margin-bottom:10px; }
+.upload-area p { color:var(--text-dim); font-size:0.9rem; }
+.upload-area input { display:none; }
+.images-preview { display:flex; gap:10px; flex-wrap:wrap; margin-top:15px; }
+.img-preview-item { position:relative; width:80px; height:80px; border-radius:10px; overflow:hidden; border:2px solid var(--border); }
+.img-preview-item img { width:100%; height:100%; object-fit:cover; }
+.img-preview-item .remove { position:absolute; top:3px; right:3px; background:rgba(255,56,96,0.9); color:white; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
 
-.status { padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; font-weight: 600; display: none; align-items: center; gap: 10px; }
-.status.show { display: flex; }
-.status.success { background: rgba(16,185,129,0.15); border: 1px solid var(--success); color: var(--success); }
-.status.error { background: rgba(255,56,96,0.15); border: 1px solid var(--danger); color: var(--danger); }
-.status.loading { background: rgba(0,255,231,0.1); border: 1px solid var(--cyan); color: var(--cyan); }
+.status { padding:15px 20px; border-radius:12px; margin-bottom:20px; font-weight:600; display:none; align-items:center; gap:10px; }
+.status.show { display:flex; }
+.status.success { background:rgba(16,185,129,0.15); border:1px solid var(--success); color:var(--success); }
+.status.error { background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); }
+.status.loading { background:rgba(0,255,231,0.1); border:1px solid var(--cyan); color:var(--cyan); }
 
-.products-list { display: grid; gap: 12px; }
-.product-item { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; transition: 0.3s; }
-.product-item:hover { border-color: var(--cyan); }
-.product-thumb { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; border: 1px solid var(--border); }
-.product-details h4 { font-size: 1rem; margin-bottom: 3px; }
-.product-details p { font-size: 0.8rem; color: var(--text-dim); }
-.product-price { color: var(--cyan); font-weight: 700; font-size: 0.9rem; }
-.product-actions { display: flex; gap: 8px; }
-.btn-icon { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; transition: 0.3s; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
-.btn-icon:hover { background: rgba(0,255,231,0.1); border-color: var(--cyan); }
-.btn-icon.danger:hover { background: rgba(255,56,96,0.15); border-color: var(--danger); color: var(--danger); }
+.products-list { display:grid; gap:12px; }
+.product-item { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:12px; padding:15px; display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap; transition:0.3s; }
+.product-item:hover { border-color:var(--cyan); }
+.product-thumb { width:60px; height:60px; border-radius:10px; object-fit:cover; border:1px solid var(--border); }
+.product-details h4 { font-size:1rem; margin-bottom:3px; }
+.product-details p { font-size:0.8rem; color:var(--text-dim); }
+.product-price { color:var(--cyan); font-weight:700; font-size:0.9rem; }
+.product-actions { display:flex; gap:8px; }
+.btn-icon { width:38px; height:38px; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer; transition:0.3s; font-size:1rem; display:flex; align-items:center; justify-content:center; }
+.btn-icon:hover { background:rgba(0,255,231,0.1); border-color:var(--cyan); }
+.btn-icon.danger:hover { background:rgba(255,56,96,0.15); border-color:var(--danger); color:var(--danger); }
 
-.status-badge { padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: 0.3s; border: 1px solid; display: inline-flex; align-items: center; gap: 5px; }
-.status-badge.available { background: rgba(16,185,129,0.15); color: var(--success); border-color: var(--success); }
-.status-badge.sold { background: rgba(255,56,96,0.15); color: var(--danger); border-color: var(--danger); }
-.status-badge.unavailable { background: rgba(100,100,100,0.15); color: #999; border-color: #666; }
-.status-badge:hover { transform: scale(1.05); }
+.status-badge { padding:5px 12px; border-radius:50px; font-size:0.75rem; font-weight:700; cursor:pointer; transition:0.3s; border:1px solid; display:inline-flex; align-items:center; gap:5px; }
+.status-badge.available { background:rgba(16,185,129,0.15); color:var(--success); border-color:var(--success); }
+.status-badge.sold { background:rgba(255,56,96,0.15); color:var(--danger); border-color:var(--danger); }
+.status-badge.unavailable { background:rgba(100,100,100,0.15); color:#999; border-color:#666; }
 
-.empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
-.empty-state .icon { font-size: 3rem; margin-bottom: 10px; opacity: 0.5; }
+.empty-state { text-align:center; padding:40px 20px; color:var(--text-dim); }
+.empty-state .icon { font-size:3rem; margin-bottom:10px; opacity:0.5; }
 
-.chat-wrap { display: grid; grid-template-columns: 320px 1fr; gap: 15px; height: 620px; }
-.chat-list-sidebar { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px; overflow-y: auto; padding: 10px; }
-.chat-list-item { padding: 12px 14px; border-radius: 12px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; margin-bottom: 8px; position: relative; }
-.chat-list-item:hover { background: rgba(0,255,231,0.05); border-color: var(--border); }
-.chat-list-item.active { background: linear-gradient(135deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1)); border-color: var(--cyan); }
-.chat-list-item .name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
-.chat-list-item .name-text { display: flex; align-items: center; gap: 6px; }
-.chat-list-item .preview { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.chat-list-item .time { font-size: 0.7rem; color: #666; margin-top: 4px; }
-.delete-chat-btn { background: rgba(255,56,96,0.1); border: 1px solid rgba(255,56,96,0.3); color: var(--danger); border-radius: 8px; width: 26px; height: 26px; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; padding: 0; }
-.delete-chat-btn:hover { background: var(--danger); color: white; transform: scale(1.15); box-shadow: 0 0 10px rgba(255,56,96,0.6); }
+.chat-wrap { display:grid; grid-template-columns:320px 1fr; gap:15px; height:620px; }
+.chat-list-sidebar { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:15px; overflow-y:auto; padding:10px; }
+.chat-list-item { padding:12px 14px; border-radius:12px; cursor:pointer; transition:0.3s; border:1px solid transparent; margin-bottom:8px; position:relative; }
+.chat-list-item:hover { background:rgba(0,255,231,0.05); border-color:var(--border); }
+.chat-list-item.active { background:linear-gradient(135deg,rgba(0,255,231,0.1),rgba(168,85,247,0.1)); border-color:var(--cyan); }
+.chat-list-item .name { font-weight:700; font-size:0.9rem; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between; gap:6px; }
+.chat-list-item .name-text { display:flex; align-items:center; gap:6px; }
+.chat-list-item .preview { font-size:0.75rem; color:var(--text-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.chat-list-item .time { font-size:0.7rem; color:#666; margin-top:4px; }
+.delete-chat-btn { background:rgba(255,56,96,0.1); border:1px solid rgba(255,56,96,0.3); color:var(--danger); border-radius:8px; width:26px; height:26px; font-size:0.75rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.3s; padding:0; }
+.delete-chat-btn:hover { background:var(--danger); color:white; transform:scale(1.15); }
 
-.unread-badge { background: linear-gradient(135deg, #ff3860, #ff0055); color: white; font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 50px; min-width: 22px; text-align: center; box-shadow: 0 0 10px rgba(255,56,96,0.8); animation: unreadPulse 1.5s ease-in-out infinite; }
-@keyframes unreadPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,56,96,0.8); } 50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,56,96,1); } }
-.chat-list-item.has-unread { background: rgba(255,56,96,0.08); border-color: rgba(255,56,96,0.4) !important; }
-.chat-list-item.has-unread .name-text { color: #ff3860; font-weight: 800; }
+.unread-badge { background:linear-gradient(135deg,#ff3860,#ff0055); color:white; font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:50px; min-width:22px; text-align:center; box-shadow:0 0 10px rgba(255,56,96,0.8); animation:unreadPulse 1.5s ease-in-out infinite; }
+@keyframes unreadPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
+.chat-list-item.has-unread { background:rgba(255,56,96,0.08); border-color:rgba(255,56,96,0.4) !important; }
+.chat-list-item.has-unread .name-text { color:#ff3860; font-weight:800; }
 
-.chat-main { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px; display: flex; flex-direction: column; overflow: hidden; }
-.chat-main-header { padding: 15px 20px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08)); }
-.chat-main-header h3 { font-size: 1rem; color: var(--cyan); }
-.chat-main-messages { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-.chat-main-input { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; background: rgba(0,0,0,0.3); }
-.chat-main-input input { flex: 1; padding: 12px 16px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 50px; color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none; }
-.chat-main-input input:focus { border-color: var(--cyan); }
-.chat-main-input button { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; color: #0a0a0f; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
-.chat-main-input button:hover { transform: scale(1.1); }
+.chat-main { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:15px; display:flex; flex-direction:column; overflow:hidden; }
+.chat-main-header { padding:15px 20px; border-bottom:1px solid var(--border); background:linear-gradient(135deg,rgba(0,255,231,0.08),rgba(168,85,247,0.08)); }
+.chat-main-header h3 { font-size:1rem; color:var(--cyan); }
+.chat-main-messages { flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px; }
+.chat-main-input { padding:12px; border-top:1px solid var(--border); display:flex; gap:8px; background:rgba(0,0,0,0.3); }
+.chat-main-input input { flex:1; padding:12px 16px; background:rgba(0,0,0,0.4); border:1px solid var(--border); border-radius:50px; color:var(--text); font-family:inherit; font-size:0.9rem; outline:none; }
+.chat-main-input input:focus { border-color:var(--cyan); }
+.chat-main-input button { width:45px; height:45px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--purple)); border:none; color:#0a0a0f; font-size:1.2rem; cursor:pointer; transition:0.3s; }
 
-.admin-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-dim); text-align: center; padding: 40px; }
-.admin-empty .icon { font-size: 4rem; margin-bottom: 15px; opacity: 0.4; }
+.admin-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:var(--text-dim); text-align:center; padding:40px; }
+.admin-empty .icon { font-size:4rem; margin-bottom:15px; opacity:0.4; }
 
-.bubble { max-width: 80%; padding: 10px 14px; border-radius: 16px; animation: bubbleIn 0.3s ease-out; word-wrap: break-word; }
-@keyframes bubbleIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.bubble.theirs { align-self: flex-start; background: linear-gradient(135deg, rgba(0,255,231,0.15), rgba(168,85,247,0.15)); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
-.bubble.mine { align-self: flex-end; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; border-bottom-left-radius: 4px; font-weight: 600; }
-.bubble .text { font-size: 0.9rem; line-height: 1.5; }
-.bubble .time { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; text-align: left; }
+.bubble { max-width:80%; padding:10px 14px; border-radius:16px; animation:bubbleIn 0.3s ease-out; word-wrap:break-word; }
+@keyframes bubbleIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+.bubble.theirs { align-self:flex-start; background:linear-gradient(135deg,rgba(0,255,231,0.15),rgba(168,85,247,0.15)); border:1px solid var(--border); border-bottom-right-radius:4px; }
+.bubble.mine { align-self:flex-end; background:linear-gradient(135deg,var(--cyan),var(--purple)); color:#0a0a0f; border-bottom-left-radius:4px; font-weight:600; }
+.bubble .text { font-size:0.9rem; line-height:1.5; }
+.bubble .time { font-size:0.7rem; opacity:0.6; margin-top:4px; text-align:left; }
 
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 99999; display: none; justify-content: center; align-items: center; padding: 20px; }
-.modal-overlay.show { display: flex; }
-.modal { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 25px; padding: 30px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 60px rgba(0,255,231,0.2); }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
-.modal-header h2 { font-size: 1.3rem; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
-.modal-close { background: transparent; border: none; color: var(--text-dim); font-size: 1.5rem; cursor: pointer; width: 35px; height: 35px; border-radius: 10px; transition: 0.3s; }
-.modal-close:hover { background: rgba(255,56,96,0.15); color: var(--danger); }
-.modal-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-.modal-btn { flex: 1; padding: 13px; border-radius: 12px; border: none; font-family: inherit; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.3s; min-width: 120px; }
-.modal-btn.primary { background: linear-gradient(90deg, var(--cyan), var(--purple)); color: #0a0a0f; box-shadow: 0 0 20px rgba(0,255,231,0.4); }
-.modal-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,255,231,0.7); }
-.modal-btn.secondary { background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); }
-.modal-btn.secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(10px); z-index:99999; display:none; justify-content:center; align-items:center; padding:20px; }
+.modal-overlay.show { display:flex; }
+.modal { background:var(--bg-dark); border:1px solid var(--border); border-radius:25px; padding:30px; width:100%; max-width:600px; max-height:90vh; overflow-y:auto; box-shadow:0 25px 60px rgba(0,255,231,0.2); }
+.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; padding-bottom:15px; border-bottom:1px solid var(--border); }
+.modal-header h2 { font-size:1.3rem; background:linear-gradient(90deg,var(--cyan),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; }
+.modal-close { background:transparent; border:none; color:var(--text-dim); font-size:1.5rem; cursor:pointer; width:35px; height:35px; border-radius:10px; transition:0.3s; }
+.modal-close:hover { background:rgba(255,56,96,0.15); color:var(--danger); }
+.modal-actions { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+.modal-btn { flex:1; padding:13px; border-radius:12px; border:none; font-family:inherit; font-weight:700; font-size:0.95rem; cursor:pointer; transition:0.3s; min-width:120px; }
+.modal-btn.primary { background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; }
+.modal-btn.secondary { background:rgba(255,255,255,0.05); color:var(--text); border:1px solid var(--border); }
 
-.existing-images { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-.existing-img-item { position: relative; width: 80px; height: 80px; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); }
-.existing-img-item img { width: 100%; height: 100%; object-fit: cover; }
-.existing-img-item .delete-img { position: absolute; top: 3px; right: 3px; background: rgba(255,56,96,0.9); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+.existing-images { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+.existing-img-item { position:relative; width:80px; height:80px; border-radius:10px; overflow:hidden; border:2px solid var(--border); }
+.existing-img-item img { width:100%; height:100%; object-fit:cover; }
+.existing-img-item .delete-img { position:absolute; top:3px; right:3px; background:rgba(255,56,96,0.9); color:white; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
 
-.password-box { background: rgba(255,56,96,0.05); border: 1px solid rgba(255,56,96,0.3); border-radius: 15px; padding: 20px; margin-top: 15px; }
-.password-box h4 { color: var(--danger); font-size: 1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+.password-box { background:rgba(255,56,96,0.05); border:1px solid rgba(255,56,96,0.3); border-radius:15px; padding:20px; margin-top:15px; }
+.password-box h4 { color:var(--danger); font-size:1rem; margin-bottom:15px; display:flex; align-items:center; gap:8px; }
 
-.notif-permission { background: rgba(255,200,0,0.1); border: 1px solid #ffcc00; color: #ffcc00; padding: 12px 18px; border-radius: 12px; margin-bottom: 15px; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-.notif-permission button { padding: 8px 16px; background: #ffcc00; color: #0a0a0f; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.85rem; }
-.notif-permission.success-banner { background: rgba(16,185,129,0.1); border-color: #10b981; color: #10b981; }
-.notif-permission.error-banner { background: rgba(255,56,96,0.1); border-color: #ff3860; color: #ff3860; }
+.notif-permission { background:rgba(255,200,0,0.1); border:1px solid #ffcc00; color:#ffcc00; padding:12px 18px; border-radius:12px; margin-bottom:15px; font-size:0.85rem; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.notif-permission button { padding:8px 16px; background:#ffcc00; color:#0a0a0f; border:none; border-radius:8px; font-weight:700; cursor:pointer; font-family:inherit; font-size:0.85rem; }
+.notif-permission.success-banner { background:rgba(16,185,129,0.1); border-color:#10b981; color:#10b981; }
+.notif-permission.error-banner { background:rgba(255,56,96,0.1); border-color:#ff3860; color:#ff3860; }
 
-.voice-recorder { display: flex; align-items: center; gap: 10px; flex: 1; padding: 8px 15px; background: rgba(255,56,96,0.1); border: 1px solid var(--danger); border-radius: 50px; animation: recordingPulse 1.5s ease-in-out infinite; }
-@keyframes recordingPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,56,96,0.4); } 50% { box-shadow: 0 0 0 8px rgba(255,56,96,0); } }
-.voice-recorder .dot-rec { width: 12px; height: 12px; border-radius: 50%; background: #ff3860; animation: dotBlink 1s infinite; }
-@keyframes dotBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-.voice-recorder .timer { color: #ff3860; font-weight: 700; font-size: 0.95rem; min-width: 50px; }
-.voice-recorder .cancel-rec, .voice-recorder .send-rec { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-.voice-recorder .cancel-rec { background: rgba(255,56,96,0.2); color: #ff3860; }
-.voice-recorder .cancel-rec:hover { background: #ff3860; color: white; }
-.voice-recorder .send-rec { background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #0a0a0f; }
-.voice-recorder .send-rec:hover { transform: scale(1.1); }
-.mic-btn { width: 45px; height: 45px; border-radius: 50%; background: rgba(168,85,247,0.15); border: 1px solid var(--purple); color: var(--purple); font-size: 1.2rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.mic-btn:hover { background: var(--purple); color: white; transform: scale(1.05); }
-.voice-player { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(0,0,0,0.2); border-radius: 25px; min-width: 200px; }
-.voice-player .play-btn { width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s; }
-.bubble.mine .voice-player .play-btn { background: #0a0a0f; color: var(--cyan); }
-.bubble.theirs .voice-player .play-btn { background: var(--cyan); color: #0a0a0f; }
-.voice-player .waveform { flex: 1; height: 24px; display: flex; align-items: center; gap: 2px; }
-.voice-player .waveform .bar { width: 3px; border-radius: 2px; opacity: 0.5; }
-.bubble.mine .voice-player .waveform .bar { background: #0a0a0f; }
-.bubble.theirs .voice-player .waveform .bar { background: var(--cyan); }
-.voice-player .duration { font-size: 0.75rem; font-weight: 700; min-width: 35px; text-align: center; }
-.bubble.mine .voice-player .duration { color: #0a0a0f; }
-.bubble.theirs .voice-player .duration { color: var(--cyan); }
+/* Voice */
+.voice-recorder { display:flex; align-items:center; gap:10px; flex:1; padding:8px 15px; background:rgba(255,56,96,0.1); border:1px solid var(--danger); border-radius:50px; }
+.voice-recorder .dot-rec { width:12px; height:12px; border-radius:50%; background:#ff3860; animation:dotBlink 1s infinite; }
+@keyframes dotBlink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.voice-recorder .timer { color:#ff3860; font-weight:700; font-size:0.95rem; min-width:50px; }
+.voice-recorder .cancel-rec, .voice-recorder .send-rec { width:38px; height:38px; border-radius:50%; border:none; cursor:pointer; font-size:1.1rem; display:flex; align-items:center; justify-content:center; transition:0.3s; }
+.voice-recorder .cancel-rec { background:rgba(255,56,96,0.2); color:#ff3860; }
+.voice-recorder .send-rec { background:linear-gradient(135deg,var(--cyan),var(--purple)); color:#0a0a0f; }
+.mic-btn { width:45px; height:45px; border-radius:50%; background:rgba(168,85,247,0.15); border:1px solid var(--purple); color:var(--purple); font-size:1.2rem; cursor:pointer; transition:0.3s; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.mic-btn:hover { background:var(--purple); color:white; }
+.voice-player { display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(0,0,0,0.2); border-radius:25px; min-width:200px; }
+.voice-player .play-btn { width:38px; height:38px; border-radius:50%; border:none; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.bubble.mine .voice-player .play-btn { background:#0a0a0f; color:var(--cyan); }
+.bubble.theirs .voice-player .play-btn { background:var(--cyan); color:#0a0a0f; }
+.voice-player .waveform { flex:1; height:24px; display:flex; align-items:center; gap:2px; }
+.voice-player .waveform .bar { width:3px; border-radius:2px; opacity:0.5; }
+.bubble.mine .voice-player .waveform .bar { background:#0a0a0f; }
+.bubble.theirs .voice-player .waveform .bar { background:var(--cyan); }
+.voice-player .duration { font-size:0.75rem; font-weight:700; min-width:35px; text-align:center; }
 
-/* ===== رنگ‌های اطلاعیه ===== */
-.color-picker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 8px; }
-.color-option { padding: 12px 8px; border-radius: 10px; cursor: pointer; text-align: center; font-size: 0.75rem; font-weight: 700; color: white; border: 3px solid transparent; transition: 0.3s; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
-.color-option:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-.color-option.active { border-color: white; box-shadow: 0 0 20px rgba(255,255,255,0.6); transform: scale(1.05); }
+/* Announce */
+.color-picker-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:8px; }
+.color-option { padding:12px 8px; border-radius:10px; cursor:pointer; text-align:center; font-size:0.75rem; font-weight:700; color:white; border:3px solid transparent; transition:0.3s; text-shadow:0 1px 3px rgba(0,0,0,0.5); }
+.color-option:hover { transform:translateY(-3px) scale(1.02); }
+.color-option.active { border-color:white; box-shadow:0 0 20px rgba(255,255,255,0.6); transform:scale(1.05); }
+.announcement-bar { display:flex; align-items:center; justify-content:center; gap:12px; padding:14px 20px; border-radius:12px; background:linear-gradient(90deg,#00ffe7,#a855f7); color:white; font-weight:700; font-size:0.95rem; text-align:center; box-shadow:0 8px 25px rgba(0,255,231,0.3); line-height:1.5; word-wrap:break-word; overflow-wrap:break-word; word-break:break-word; }
+.announcement-bar .ann-icon { font-size:1.4rem; flex-shrink:0; animation:annIconPulse 2s ease-in-out infinite; }
+.announcement-bar .ann-message { flex:1; min-width:0; word-wrap:break-word; overflow-wrap:break-word; word-break:break-word; }
+@keyframes annIconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
 
-.announcement-bar { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 20px; border-radius: 12px; background: linear-gradient(90deg, #00ffe7, #a855f7); color: white; font-weight: 700; font-size: 0.95rem; text-align: center; box-shadow: 0 8px 25px rgba(0,255,231,0.3); line-height: 1.5; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
-.announcement-bar .ann-icon { font-size: 1.4rem; flex-shrink: 0; animation: annIconPulse 2s ease-in-out infinite; }
-.announcement-bar .ann-message { flex: 1; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; }
-@keyframes annIconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
-
-@media (max-width: 700px) {
-  .chat-wrap { grid-template-columns: 1fr; height: auto; }
-  .chat-list-sidebar { max-height: 220px; }
-  .chat-main { height: 500px; }
-}
-@media (max-width: 600px) {
-  .login-box { padding: 35px 25px; }
-  .card { padding: 18px; }
-  .form-row, .form-row.three { grid-template-columns: 1fr; }
-  .modal { padding: 20px; }
-  .color-picker-grid { grid-template-columns: repeat(2, 1fr); }
-}
+@media (max-width:700px) { .chat-wrap { grid-template-columns:1fr; height:auto; } .chat-list-sidebar { max-height:220px; } .chat-main { height:500px; } }
+@media (max-width:600px) { .login-box{padding:35px 25px;} .card{padding:18px;} .form-row,.form-row.three{grid-template-columns:1fr;} .modal{padding:20px;} .color-picker-grid{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
 <body>
 
 <div class="bg-glow"></div>
 
-<!-- Login -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-icon">🔐</div>
@@ -243,7 +211,6 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
   </div>
 </div>
 
-<!-- Dashboard -->
 <div class="dashboard" id="dashboard">
   <div class="dash-header">
     <h1>⚓ پنل مدیریت کاپیتان وکثور</h1>
@@ -263,7 +230,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <button class="tab" onclick="switchTab('settings', this)">⚙️ تنظیمات</button>
   </div>
 
-  <!-- Tab: Add -->
+  <!-- Add -->
   <div class="tab-content active" id="tab-add">
     <div class="card">
       <div class="card-title">➕ افزودن محصول جدید</div>
@@ -367,11 +334,10 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
       </div>
 
-      <div class="form-group" style="margin-top: 15px; padding: 15px; background: rgba(168,85,247,0.05); border: 1px dashed var(--purple); border-radius: 12px;">
-        <label style="color: var(--purple);">⭐ فیلدهای دلخواه (اختیاری)</label>
-        <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 10px;">میتونی هر تعداد فیلد دلخواه اضافه کنی</p>
+      <div class="form-group" style="margin-top:15px; padding:15px; background:rgba(168,85,247,0.05); border:1px dashed var(--purple); border-radius:12px;">
+        <label style="color:var(--purple);">⭐ فیلدهای دلخواه</label>
         <div id="customFieldsContainer"></div>
-        <button type="button" onclick="addCustomField()" style="margin-top: 8px; padding: 8px 16px; background: rgba(168,85,247,0.2); border: 1px solid var(--purple); color: var(--purple); border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.85rem;">➕ افزودن فیلد دلخواه</button>
+        <button type="button" onclick="addCustomField()" style="margin-top:8px; padding:8px 16px; background:rgba(168,85,247,0.2); border:1px solid var(--purple); color:var(--purple); border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; font-size:0.85rem;">➕ افزودن فیلد دلخواه</button>
       </div>
 
       <div class="form-row">
@@ -407,11 +373,11 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     </div>
   </div>
 
-  <!-- Tab: List -->
+  <!-- List -->
   <div class="tab-content" id="tab-list">
     <div class="card">
       <div class="card-title">📦 لیست محصولات</div>
-      <div style="margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
+      <div style="margin-bottom:15px; display:flex; gap:8px; flex-wrap:wrap;">
         <button class="status-badge available" onclick="filterList('all')">همه</button>
         <button class="status-badge available" onclick="filterList('موجود')">✅ موجود</button>
         <button class="status-badge unavailable" onclick="filterList('ناموجود')">❌ ناموجود</button>
@@ -421,7 +387,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     </div>
   </div>
 
-  <!-- Tab: Chat -->
+  <!-- Chat -->
   <div class="tab-content" id="tab-chat">
     <div class="chat-wrap">
       <div class="chat-list-sidebar" id="chatList">
@@ -431,26 +397,24 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
         <div class="admin-empty">
           <div class="icon">💬</div>
           <h3>یه گفتگو انتخاب کن</h3>
-          <p>از لیست سمت راست، یه مشتری رو انتخاب کن</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Tab: Stats -->
+  <!-- Stats -->
   <div class="tab-content" id="tab-stats">
     <div class="card">
       <div class="card-title">📊 آمار سایت</div>
-      <div style="text-align: center; padding: 20px 0;">
-        <div style="font-size: 5rem; margin-bottom: 15px; filter: drop-shadow(0 0 30px #ff9500);">📈</div>
-        <h2 style="font-size: 1.4rem; margin-bottom: 10px; background: linear-gradient(90deg, #00ffe7, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;">آمار زنده سایت</h2>
-        <p style="color: #a0a0b0; font-size: 0.9rem; max-width: 500px; margin: 0 auto 25px;">برای دیدن آمار کامل سایت روی دکمه زیر کلیک کن</p>
-        <a href="https://statsfa.com/dashboard" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: linear-gradient(90deg, #ff9500, #ff5e00); color: white; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 0 30px rgba(255,149,0,0.5);">📊 رفتن به پنل آمار</a>
+      <div style="text-align:center; padding:20px 0;">
+        <div style="font-size:5rem; margin-bottom:15px; filter:drop-shadow(0 0 30px #ff9500);">📈</div>
+        <p style="color:#a0a0b0; font-size:0.9rem; margin:0 auto 25px; max-width:500px;">برای دیدن آمار کامل سایت روی دکمه زیر کلیک کن</p>
+        <a href="https://statsfa.com/dashboard" target="_blank" style="display:inline-flex; align-items:center; gap:10px; padding:18px 40px; background:linear-gradient(90deg,#ff9500,#ff5e00); color:white; border-radius:15px; text-decoration:none; font-weight:700; font-size:1.1rem;">📊 رفتن به پنل آمار</a>
       </div>
     </div>
   </div>
 
-  <!-- Tab: Contact -->
+  <!-- Contact -->
   <div class="tab-content" id="tab-contact">
     <div class="card">
       <div class="card-title">📞 اطلاعات تماس</div>
@@ -461,78 +425,69 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     </div>
   </div>
 
-  <!-- Tab: Announce -->
+  <!-- Announce -->
   <div class="tab-content" id="tab-announce">
     <div class="card">
       <div class="card-title">📢 مدیریت اطلاعیه</div>
-
       <div class="form-group">
         <label>📢 آیکون</label>
-        <input type="text" id="annIcon" placeholder="📢" value="📢" maxlength="4" style="font-size: 1.5rem; text-align: center;">
+        <input type="text" id="annIcon" placeholder="📢" value="📢" maxlength="4" style="font-size:1.5rem; text-align:center;">
       </div>
-
       <div class="form-group">
         <label>🎨 رنگ اطلاعیه</label>
         <div class="color-picker-grid" id="colorPickerGrid">
-          <div class="color-option active" data-preset="cyan-purple" style="background: linear-gradient(90deg, #00ffe7, #a855f7);" onclick="selectColor('cyan-purple', this)">فیروزه‌ای-بنفش</div>
-          <div class="color-option" data-preset="red-orange" style="background: linear-gradient(90deg, #ff3860, #ff9500);" onclick="selectColor('red-orange', this)">قرمز-نارنجی</div>
-          <div class="color-option" data-preset="purple-pink" style="background: linear-gradient(90deg, #a855f7, #ff2ec4);" onclick="selectColor('purple-pink', this)">بنفش-صورتی</div>
-          <div class="color-option" data-preset="green-cyan" style="background: linear-gradient(90deg, #10b981, #22d3ee);" onclick="selectColor('green-cyan', this)">سبز-فیروزه‌ای</div>
-          <div class="color-option" data-preset="gold-orange" style="background: linear-gradient(90deg, #ffcc00, #ff9900); color: #111;" onclick="selectColor('gold-orange', this)">طلایی-نارنجی</div>
-          <div class="color-option" data-preset="blue-cyan" style="background: linear-gradient(90deg, #0088cc, #00ffe7);" onclick="selectColor('blue-cyan', this)">آبی-فیروزه‌ای</div>
-          <div class="color-option" data-preset="black-gold" style="background: linear-gradient(90deg, #1a1a2e, #4a3a1e); color: #ffcc00;" onclick="selectColor('black-gold', this)">مشکی-طلایی</div>
-          <div class="color-option" data-preset="custom" style="background: linear-gradient(90deg, #666, #999);" onclick="selectColor('custom', this)">🎨 دلخواه</div>
+          <div class="color-option active" data-preset="cyan-purple" style="background:linear-gradient(90deg,#00ffe7,#a855f7);" onclick="selectColor('cyan-purple',this)">فیروزه‌ای-بنفش</div>
+          <div class="color-option" data-preset="red-orange" style="background:linear-gradient(90deg,#ff3860,#ff9500);" onclick="selectColor('red-orange',this)">قرمز-نارنجی</div>
+          <div class="color-option" data-preset="purple-pink" style="background:linear-gradient(90deg,#a855f7,#ff2ec4);" onclick="selectColor('purple-pink',this)">بنفش-صورتی</div>
+          <div class="color-option" data-preset="green-cyan" style="background:linear-gradient(90deg,#10b981,#22d3ee);" onclick="selectColor('green-cyan',this)">سبز-فیروزه‌ای</div>
+          <div class="color-option" data-preset="gold-orange" style="background:linear-gradient(90deg,#ffcc00,#ff9900); color:#111;" onclick="selectColor('gold-orange',this)">طلایی-نارنجی</div>
+          <div class="color-option" data-preset="blue-cyan" style="background:linear-gradient(90deg,#0088cc,#00ffe7);" onclick="selectColor('blue-cyan',this)">آبی-فیروزه‌ای</div>
+          <div class="color-option" data-preset="black-gold" style="background:linear-gradient(90deg,#1a1a2e,#4a3a1e); color:#ffcc00;" onclick="selectColor('black-gold',this)">مشکی-طلایی</div>
+          <div class="color-option" data-preset="custom" style="background:linear-gradient(90deg,#666,#999);" onclick="selectColor('custom',this)">🎨 دلخواه</div>
         </div>
       </div>
-
-      <div class="form-row" id="customColorRow" style="display: none;">
-        <div class="form-group"><label>🎨 رنگ 1</label><input type="color" id="annColor1" value="#00ffe7" style="height: 50px; padding: 5px; cursor: pointer;"></div>
-        <div class="form-group"><label>🎨 رنگ 2</label><input type="color" id="annColor2" value="#a855f7" style="height: 50px; padding: 5px; cursor: pointer;"></div>
+      <div class="form-row" id="customColorRow" style="display:none;">
+        <div class="form-group"><label>🎨 رنگ 1</label><input type="color" id="annColor1" value="#00ffe7" style="height:50px; padding:5px; cursor:pointer;"></div>
+        <div class="form-group"><label>🎨 رنگ 2</label><input type="color" id="annColor2" value="#a855f7" style="height:50px; padding:5px; cursor:pointer;"></div>
       </div>
-
       <div class="form-group">
         <label>📝 متن اطلاعیه *</label>
-        <textarea id="annMessage" rows="3" placeholder="مثلاً: 🎉 جشنواره تخفیف ویژه! تا 50% تخفیف روی همه محصولات" maxlength="200"></textarea>
-        <div style="text-align: left; font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;"><span id="annCharCount">0</span>/200</div>
+        <textarea id="annMessage" rows="3" placeholder="مثلاً: 🎉 جشنواره تخفیف ویژه! تا 50% تخفیف" maxlength="200"></textarea>
+        <div style="text-align:left; font-size:0.75rem; color:var(--text-dim); margin-top:4px;"><span id="annCharCount">0</span>/200</div>
       </div>
-
-      <div class="form-group" style="display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 10px;">
-        <input type="checkbox" id="annActive" checked style="width: auto; cursor: pointer;">
-        <label for="annActive" style="margin: 0; cursor: pointer; color: var(--cyan); font-weight: 700;">✅ اطلاعیه فعال باشه</label>
+      <div class="form-group" style="display:flex; align-items:center; gap:10px; padding:12px; background:rgba(0,255,231,0.05); border:1px solid var(--border); border-radius:10px;">
+        <input type="checkbox" id="annActive" checked style="width:auto; cursor:pointer;">
+        <label for="annActive" style="margin:0; cursor:pointer; color:var(--cyan); font-weight:700;">✅ اطلاعیه فعال باشه</label>
       </div>
-
       <div class="form-group">
         <label>👁️ پیش‌نمایش</label>
-        <div id="annPreview" class="announcement-bar" style="position: relative; margin-top: 8px;">
+        <div id="annPreview" class="announcement-bar" style="margin-top:8px;">
           <span class="ann-icon">📢</span>
           <span class="ann-message">متن اطلاعیه اینجا نشون داده میشه</span>
         </div>
       </div>
-
       <div class="form-row">
         <button class="save-btn" id="saveAnnBtn" onclick="saveAnnouncement()">🚀 ذخیره اطلاعیه</button>
-        <button class="save-btn" onclick="deleteAnnouncement()" style="background: linear-gradient(90deg, #ff3860, #cc0033);">🗑️ پاک کردن</button>
+        <button class="save-btn" onclick="deleteAnnouncement()" style="background:linear-gradient(90deg,#ff3860,#cc0033);">🗑️ پاک کردن</button>
       </div>
     </div>
   </div>
 
-  <!-- Tab: Settings -->
+  <!-- Settings -->
   <div class="tab-content" id="tab-settings">
     <div class="card">
       <div class="card-title">⚙️ تنظیمات امنیتی</div>
       <div class="password-box">
         <h4>🔐 تغییر نام کاربری و رمز عبور</h4>
-        <div class="form-group"><label>👤 نام کاربری فعلی</label><input type="text" id="currentUsername" placeholder="نام کاربری فعلی" dir="ltr"></div>
-        <div class="form-group"><label>🔑 رمز عبور فعلی</label><input type="password" id="currentPassword" placeholder="رمز فعلی" dir="ltr"></div>
-        <div class="form-group"><label>👤 نام کاربری جدید</label><input type="text" id="newUsername" placeholder="نام کاربری جدید" dir="ltr"></div>
-        <div class="form-group"><label>🔑 رمز عبور جدید</label><input type="password" id="newPassword" placeholder="رمز جدید" dir="ltr"></div>
-        <div class="form-group"><label>🔑 تکرار رمز عبور جدید</label><input type="password" id="confirmPassword" placeholder="رمز جدید رو تکرار کن" dir="ltr"></div>
+        <div class="form-group"><label>👤 نام کاربری فعلی</label><input type="text" id="currentUsername" dir="ltr"></div>
+        <div class="form-group"><label>🔑 رمز عبور فعلی</label><input type="password" id="currentPassword" dir="ltr"></div>
+        <div class="form-group"><label>👤 نام کاربری جدید</label><input type="text" id="newUsername" dir="ltr"></div>
+        <div class="form-group"><label>🔑 رمز عبور جدید</label><input type="password" id="newPassword" dir="ltr"></div>
+        <div class="form-group"><label>🔑 تکرار رمز جدید</label><input type="password" id="confirmPassword" dir="ltr"></div>
         <button class="save-btn" onclick="changeCredentials()">💾 ذخیره تغییرات</button>
       </div>
-      <div style="margin-top: 20px; padding: 15px; background: rgba(0,255,231,0.05); border: 1px solid var(--border); border-radius: 12px; font-size: 0.85rem; color: var(--text-dim); line-height: 1.8;">
-        💡 <strong style="color: var(--cyan);">نام کاربری و رمز پیش‌فرض:</strong>
-        <br>👤 <span dir="ltr">admin</span>
-        <br>🔑 <span dir="ltr">vexor2024</span>
+      <div style="margin-top:20px; padding:15px; background:rgba(0,255,231,0.05); border:1px solid var(--border); border-radius:12px; font-size:0.85rem; color:var(--text-dim); line-height:1.8;">
+        💡 <strong style="color:var(--cyan);">پیش‌فرض:</strong> 👤 admin / 🔑 vexor2024
       </div>
     </div>
   </div>
@@ -552,8 +507,8 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     <div class="form-group">
       <label>📂 دسته‌بندی</label>
       <select id="editCategory">
-        <option value="کالاف">🎯 کالاف دیوتی</option>
-        <option value="کلش">🏰 کلش آف کلنز</option>
+        <option value="کالاف">🎯 کالاف</option>
+        <option value="کلش">🏰 کلش</option>
         <option value="کلش رویال">👑 کلش رویال</option>
         <option value="فری فایر">🔥 فری فایر</option>
         <option value="آزاد">✨ آزاد</option>
@@ -622,6 +577,7 @@ body { background: var(--bg-dark); color: var(--text); min-height: 100vh; overfl
     </div>
   </div>
 </div>
+
 <script>
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
@@ -652,14 +608,14 @@ let currentAnnouncement = null;
 let selectedColorPreset = 'cyan-purple';
 
 const COLOR_PRESETS = {
-  'cyan-purple': { c1: '#00ffe7', c2: '#a855f7' },
-  'red-orange':  { c1: '#ff3860', c2: '#ff9500' },
-  'purple-pink': { c1: '#a855f7', c2: '#ff2ec4' },
-  'green-cyan':  { c1: '#10b981', c2: '#22d3ee' },
-  'gold-orange': { c1: '#ffcc00', c2: '#ff9900' },
-  'blue-cyan':   { c1: '#0088cc', c2: '#00ffe7' },
-  'black-gold':  { c1: '#1a1a2e', c2: '#4a3a1e' },
-  'custom':      { c1: '#00ffe7', c2: '#a855f7' }
+  'cyan-purple': { c1:'#00ffe7', c2:'#a855f7' },
+  'red-orange':  { c1:'#ff3860', c2:'#ff9500' },
+  'purple-pink': { c1:'#a855f7', c2:'#ff2ec4' },
+  'green-cyan':  { c1:'#10b981', c2:'#22d3ee' },
+  'gold-orange': { c1:'#ffcc00', c2:'#ff9900' },
+  'blue-cyan':   { c1:'#0088cc', c2:'#00ffe7' },
+  'black-gold':  { c1:'#1a1a2e', c2:'#4a3a1e' },
+  'custom':      { c1:'#00ffe7', c2:'#a855f7' }
 };
 
 function login() {
@@ -693,32 +649,24 @@ function checkNotificationBanner() {
   const banner = document.getElementById('notifBanner');
   if (!('Notification' in window)) return;
   if (Notification.permission === 'default') {
-    banner.innerHTML = `<div class="notif-permission"><span>🔔 برای دریافت نوتیفیکیشن پیام‌های جدید، اجازه بده</span><button onclick="requestNotifPermission()">فعال‌سازی نوتیف</button></div>`;
+    banner.innerHTML = `<div class="notif-permission"><span>🔔 برای دریافت نوتیف اجازه بده</span><button onclick="requestNotifPermission()">فعال‌سازی</button></div>`;
   } else if (Notification.permission === 'granted') {
-    banner.innerHTML = `<div class="notif-permission success-banner"><span>✅ نوتیفیکیشن فعاله!</span><button onclick="testNotification()" style="background: #10b981; color: white;">تست نوتیف</button></div>`;
+    banner.innerHTML = `<div class="notif-permission success-banner"><span>✅ نوتیفیکیشن فعاله!</span><button onclick="testNotification()" style="background:#10b981; color:white;">تست</button></div>`;
   } else if (Notification.permission === 'denied') {
-    banner.innerHTML = `<div class="notif-permission error-banner"><span>🔕 نوتیفیکیشن مسدود شده</span><button onclick="showNotifHelp()" style="background: #ff3860; color: white;">راهنما</button></div>`;
+    banner.innerHTML = `<div class="notif-permission error-banner"><span>🔕 نوتیف مسدود شده</span></div>`;
   }
 }
 
-function requestNotifPermission() {
-  if ('Notification' in window) Notification.requestPermission().then(p => { checkNotificationBanner(); if (p === 'granted') testNotification(); });
-}
+function requestNotifPermission() { if ('Notification' in window) Notification.requestPermission().then(() => checkNotificationBanner()); }
 
 function testNotification() {
   if (Notification.permission !== 'granted') return;
   try {
     if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-      navigator.serviceWorker.ready.then(reg => {
-        reg.showNotification('🔔 تست موفق!', { body: 'نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl', lang: 'fa', vibrate: [200, 100, 200] });
-      });
-    } else {
-      new Notification('🔔 تست موفق!', { body: 'نوتیف کار می‌کنه', icon: 'icon-512.png', dir: 'rtl' });
-    }
-  } catch (e) { alert('خطا: ' + e.message); }
+      navigator.serviceWorker.ready.then(reg => { reg.showNotification('🔔 تست موفق!', { body:'نوتیف کار می‌کنه', icon:'icon-512.png', dir:'rtl', lang:'fa' }); });
+    } else { new Notification('🔔 تست موفق!', { body:'نوتیف کار می‌کنه', icon:'icon-512.png', dir:'rtl' }); }
+  } catch (e) {}
 }
-
-function showNotifHelp() { alert('برای فعال کردن نوتیف:\n1. Chrome → Settings\n2. Site Settings → Notifications\n3. آدرس سایت رو از Blocked حذف کن\n4. صفحه رو رفرش کن'); }
 
 function logout() {
   sessionStorage.removeItem('cv_logged_in');
@@ -753,7 +701,6 @@ function updateCategoryFields() {
   const isItemClashOrCod = cat === 'آیتم کلش' || cat === 'آیتم کالاف';
   const isItemFF = cat === 'آیتم فری فایر';
   const isItemRoyal = cat === 'آیتم کلش رویال';
-  
   document.getElementById('fields-clash').style.display = isClash ? 'grid' : 'none';
   document.getElementById('fields-clash-2').style.display = isClash ? 'grid' : 'none';
   document.getElementById('fields-cod').style.display = isCod ? 'grid' : 'none';
@@ -775,7 +722,7 @@ function addCustomField() {
   div.className = 'form-row';
   div.id = 'custom-field-' + id;
   div.style.marginBottom = '8px';
-  div.innerHTML = `<div class="form-group" style="margin:0;"><input type="text" id="cf-label-${id}" placeholder="عنوان"></div><div class="form-group" style="margin:0; display: flex; gap: 8px;"><input type="text" id="cf-value-${id}" placeholder="مقدار"><button type="button" onclick="removeCustomField(${id})" style="padding: 0 15px; background: rgba(255,56,96,0.2); border: 1px solid var(--danger); color: var(--danger); border-radius: 10px; cursor: pointer; font-size: 1.2rem;">×</button></div>`;
+  div.innerHTML = `<div class="form-group" style="margin:0;"><input type="text" id="cf-label-${id}" placeholder="عنوان"></div><div class="form-group" style="margin:0; display:flex; gap:8px;"><input type="text" id="cf-value-${id}" placeholder="مقدار"><button type="button" onclick="removeCustomField(${id})" style="padding:0 15px; background:rgba(255,56,96,0.2); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-size:1.2rem;">×</button></div>`;
   container.appendChild(div);
 }
 function removeCustomField(id) { const el = document.getElementById('custom-field-' + id); if (el) el.remove(); }
@@ -794,11 +741,9 @@ function playNotificationSound() {
   try {
     if (!notificationAudioCtx) notificationAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (notificationAudioCtx.state === 'suspended') notificationAudioCtx.resume();
-    const ctx = notificationAudioCtx;
-    const now = ctx.currentTime;
+    const ctx = notificationAudioCtx, now = ctx.currentTime;
     [880, 1174].forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+      const osc = ctx.createOscillator(), gain = ctx.createGain();
       osc.connect(gain); gain.connect(ctx.destination);
       osc.type = 'sine'; osc.frequency.setValueAtTime(freq, now + i * 0.15);
       gain.gain.setValueAtTime(0, now + i * 0.15);
@@ -810,20 +755,14 @@ function playNotificationSound() {
 }
 
 function showNotification(title, body) {
-  if (!('Notification' in window)) return;
-  if (Notification.permission === 'granted') {
-    try {
-      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-        navigator.serviceWorker.ready.then(registration => {
-          registration.showNotification(title, { body, icon: '/icon-512.png', badge: '/icon-512.png', dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now(), vibrate: [200, 100, 200] });
-        });
-      } else { fallbackNotification(title, body); }
-    } catch (e) {}
-  }
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  try {
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.ready.then(reg => { reg.showNotification(title, { body, icon:'/icon-512.png', dir:'rtl', lang:'fa' }); });
+    } else { new Notification(title, { body, icon:'icon-512.png', dir:'rtl' }); }
+  } catch (e) {}
 }
-function fallbackNotification(title, body) {
-  try { const notif = new Notification(title, { body, icon: 'icon-512.png', dir: 'rtl', lang: 'fa', tag: 'cv-chat-' + Date.now() }); notif.onclick = () => { window.focus(); notif.close(); }; } catch (e) {}
-}
+
 function flashPageTitle(newTitle) {
   if (titleFlashInterval) clearInterval(titleFlashInterval);
   let toggle = false;
@@ -834,10 +773,10 @@ function flashPageTitle(newTitle) {
 }
 
 async function compressAndUpload(file) {
-  const options = { maxSizeMB: 0.3, maxWidthOrHeight: 1200, useWebWorker: true, fileType: 'image/jpeg', initialQuality: 0.8 };
+  const options = { maxSizeMB:0.3, maxWidthOrHeight:1200, useWebWorker:true, fileType:'image/jpeg', initialQuality:0.8 };
   const compressedFile = await imageCompression(file, options);
   const fileName = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}.jpg`;
-  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'image/jpeg' }, body: compressedFile });
+  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/product-images/${fileName}`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'image/jpeg' }, body:compressedFile });
   if (!res.ok) throw new Error('خطا در آپلود');
   return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 }
@@ -915,7 +854,7 @@ async function addProduct() {
       product.item_type = document.getElementById('pFree1').value.trim();
       product.item_amount = document.getElementById('pFree2').value.trim();
     }
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, body: JSON.stringify(product) });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' }, body:JSON.stringify(product) });
     if (res.ok) {
       const result = await res.json();
       showStatus('🎉 محصول ثبت شد!', 'success');
@@ -923,7 +862,7 @@ async function addProduct() {
       if (customFields.length > 0 && result && result[0]) {
         const productId = result[0].id;
         for (const field of customFields) {
-          await fetch(`${SUPABASE_URL}/rest/v1/product_custom_fields`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ product_id: productId, field_label: field.label, field_value: field.value }) });
+          await fetch(`${SUPABASE_URL}/rest/v1/product_custom_fields`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ product_id:productId, field_label:field.label, field_value:field.value }) });
         }
       }
       ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pGems','pStarBonus','pBuilderCount','pRank','pPlayerLevel','pSkins','pCp','pBattlePass','pMythic','pLegendary','pItemType','pItemAmount','pFFItemAmount','pFFItemDuration','pRoyalItemAmount','pRoyalItemDuration','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
@@ -936,7 +875,7 @@ async function addProduct() {
 }
 
 async function loadProducts() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   allProductsData = await res.json();
   filterList(currentListFilter);
 }
@@ -964,7 +903,7 @@ async function toggleStatus(id, currentStatus) {
   if (currentStatus === 'موجود') newStatus = 'فروش رفته';
   else if (currentStatus === 'فروش رفته') newStatus = 'ناموجود';
   else newStatus = 'موجود';
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ status: newStatus }) });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ status:newStatus }) });
   if (res.ok) { showStatus(`✅ وضعیت به "${newStatus}" تغییر کرد`, 'success'); loadProducts(); }
 }
 
@@ -1067,7 +1006,7 @@ async function saveEdit() {
       description: document.getElementById('editDesc').value.trim(),
       images: existingImages
     };
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify(updateData) });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify(updateData) });
     if (res.ok) { showStatus('🎉 ذخیره شد!', 'success'); closeEditModal(); loadProducts(); }
     else { alert('خطا'); }
   } catch (err) { alert('خطا: ' + err.message); }
@@ -1076,13 +1015,13 @@ async function saveEdit() {
 
 async function deleteProduct(id) {
   if (!confirm('مطمئنی؟')) return;
-  await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+  await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   showStatus('🗑️ حذف شد', 'success');
   loadProducts();
 }
 
 async function loadSettings() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   const data = await res.json();
   if (data && data.length > 0) {
     document.getElementById('phone').value = data[0].phone || '';
@@ -1098,31 +1037,31 @@ async function saveSettings() {
   const telegram = document.getElementById('telegram')?.value.trim() || '';
   if (!phone || !rubika) { showStatus('❌ شماره و روبیکا اجباری!', 'error'); return; }
   showStatus('⏳ ذخیره...', 'loading');
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, rubika_id: rubika, telegram_id: telegram, updated_at: new Date().toISOString() }) });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ phone, rubika_id:rubika, telegram_id:telegram, updated_at:new Date().toISOString() }) });
   if (res.ok) showStatus('🎉 ذخیره شد!', 'success');
   else showStatus('❌ خطا', 'error');
 }
 
 function changeCredentials() {
-  const currentUser = document.getElementById('currentUsername').value.trim();
-  const currentPass = document.getElementById('currentPassword').value.trim();
-  const newUser = document.getElementById('newUsername').value.trim();
-  const newPass = document.getElementById('newPassword').value.trim();
-  const confirmPass = document.getElementById('confirmPassword').value.trim();
-  const savedUser = localStorage.getItem('cv_username') || DEFAULT_USERNAME;
-  const savedPass = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
-  if (currentUser !== savedUser || currentPass !== savedPass) { showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error'); return; }
-  if (!newUser && !newPass) { showStatus('❌ چیزی وارد نکردی!', 'error'); return; }
-  if (newPass && newPass !== confirmPass) { showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error'); return; }
-  if (newPass && newPass.length < 4) { showStatus('❌ رمز باید حداقل ۴ کاراکتر باشه!', 'error'); return; }
-  if (newUser) localStorage.setItem('cv_username', newUser);
-  if (newPass) localStorage.setItem('cv_password', newPass);
+  const cu = document.getElementById('currentUsername').value.trim();
+  const cp = document.getElementById('currentPassword').value.trim();
+  const nu = document.getElementById('newUsername').value.trim();
+  const np = document.getElementById('newPassword').value.trim();
+  const cf = document.getElementById('confirmPassword').value.trim();
+  const su = localStorage.getItem('cv_username') || DEFAULT_USERNAME;
+  const sp = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
+  if (cu !== su || cp !== sp) { showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error'); return; }
+  if (!nu && !np) { showStatus('❌ چیزی وارد نکردی!', 'error'); return; }
+  if (np && np !== cf) { showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error'); return; }
+  if (np && np.length < 4) { showStatus('❌ رمز باید حداقل ۴ کاراکتر باشه!', 'error'); return; }
+  if (nu) localStorage.setItem('cv_username', nu);
+  if (np) localStorage.setItem('cv_password', np);
   showStatus('🎉 تغییر کرد!', 'success');
   ['currentUsername','currentPassword','newUsername','newPassword','confirmPassword'].forEach(id => { document.getElementById(id).value = ''; });
 }
 
 async function loadChats() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   allChatsData = await res.json();
   renderChatList(allChatsData);
   updateUnreadBadge(allChatsData);
@@ -1151,8 +1090,8 @@ function updateUnreadBadge(chats) {
 async function deleteChat(id, name) {
   if (!confirm(`مطمئنی چت "${name}" رو حذف کنی؟`)) return;
   try {
-    await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+    await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${id}`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
     if (res.ok) {
       showStatus('🗑️ چت حذف شد', 'success');
       if (currentChatId === id) { currentChatId = null; document.getElementById('chatMain').innerHTML = `<div class="admin-empty"><div class="icon">💬</div><h3>یه گفتگو انتخاب کن</h3></div>`; }
@@ -1163,16 +1102,16 @@ async function deleteChat(id, name) {
 
 async function openChat(id, name) {
   currentChatId = id; currentChatName = name;
-  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ unread_count: 0 }) });
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ unread_count:0 }) });
   loadChats();
   const main = document.getElementById('chatMain');
-  main.innerHTML = `<div class="chat-main-header"><h3>👤 ${escapeHtml(name)}</h3></div><div class="chat-main-messages" id="chatMainMessages"><div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div></div><div class="chat-main-input" id="chatInputArea"><button type="button" class="mic-btn" id="micBtn" onclick="startRecording()" title="ضبط وییس">🎤</button><input type="text" id="adminChatInput" placeholder="پاسخ بنویس..." onkeypress="if(event.key==='Enter') sendAdminMessage()"><button onclick="sendAdminMessage()">📤</button></div><div class="voice-recorder" id="voiceRecorder" style="display:none;"><span class="dot-rec"></span><span class="timer" id="recTimer">0:00</span><div style="flex:1;"></div><button class="cancel-rec" onclick="cancelRecording()" title="لغو">✕</button><button class="send-rec" onclick="stopAndSendVoice()" title="ارسال">📤</button></div>`;
+  main.innerHTML = `<div class="chat-main-header"><h3>👤 ${escapeHtml(name)}</h3></div><div class="chat-main-messages" id="chatMainMessages"><div style="text-align:center;color:#666;padding:20px;">در حال بارگذاری...</div></div><div class="chat-main-input" id="chatInputArea"><button type="button" class="mic-btn" id="micBtn" onclick="startRecording()" title="ضبط وییس">🎤</button><input type="text" id="adminChatInput" placeholder="پاسخ بنویس..." onkeypress="if(event.key==='Enter') sendAdminMessage()"><button onclick="sendAdminMessage()">📤</button></div><div class="voice-recorder" id="voiceRecorder" style="display:none;"><span class="dot-rec"></span><span class="timer" id="recTimer">0:00</span><div style="flex:1;"></div><button class="cancel-rec" onclick="cancelRecording()">✕</button><button class="send-rec" onclick="stopAndSendVoice()">📤</button></div>`;
   loadChatMessages(id);
   subscribeToChatMessages(id);
 }
 
 async function loadChatMessages(chatId) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?chat_id=eq.${chatId}&select=*&order=created_at.asc`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   const messages = await res.json();
   renderChatMessages(messages);
 }
@@ -1197,15 +1136,15 @@ async function sendAdminMessage() {
   const text = input.value.trim();
   if (!text || !currentChatId) return;
   input.value = '';
-  await fetch(`${SUPABASE_URL}/rest/v1/messages`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: text, message_type: 'text' }) });
-  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ last_message_at: new Date().toISOString() }) });
+  await fetch(`${SUPABASE_URL}/rest/v1/messages`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ chat_id:currentChatId, sender:'admin', message:text, message_type:'text' }) });
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ last_message_at:new Date().toISOString() }) });
   loadChatMessages(currentChatId);
   loadChats();
 }
 
 async function startRecording() {
   try {
-    recordingStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 44100 } });
+    recordingStream = await navigator.mediaDevices.getUserMedia({ audio:{ echoCancellation:true, noiseSuppression:true, sampleRate:44100 } });
     audioChunks = [];
     mediaRecorder = new MediaRecorder(recordingStream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4' });
     mediaRecorder.ondataavailable = (event) => { if (event.data.size > 0) audioChunks.push(event.data); };
@@ -1250,11 +1189,11 @@ async function stopAndSendVoice() {
         document.getElementById('recTimer').textContent = '0:00';
         showStatus('⏳ آپلود وییس...', 'loading');
         const fileName = `voice-${Date.now()}-${Math.random().toString(36).substr(2, 9)}.webm`;
-        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/voice-messages/${fileName}`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': audioBlob.type }, body: audioBlob });
+        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/voice-messages/${fileName}`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':audioBlob.type }, body:audioBlob });
         if (!uploadRes.ok) throw new Error('خطا در آپلود');
         const voiceUrl = `${SUPABASE_URL}/storage/v1/object/public/voice-messages/${fileName}`;
-        await fetch(`${SUPABASE_URL}/rest/v1/messages`, { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: currentChatId, sender: 'admin', message: `🎤 وییس (${duration} ثانیه)`, message_type: 'voice', voice_url: voiceUrl, voice_duration: duration }) });
-        await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ last_message_at: new Date().toISOString() }) });
+        await fetch(`${SUPABASE_URL}/rest/v1/messages`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ chat_id:currentChatId, sender:'admin', message:`🎤 وییس (${duration} ثانیه)`, message_type:'voice', voice_url:voiceUrl, voice_duration:duration }) });
+        await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${currentChatId}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ last_message_at:new Date().toISOString() }) });
         showStatus('✅ وییس ارسال شد!', 'success');
         loadChatMessages(currentChatId);
         loadChats();
@@ -1266,22 +1205,21 @@ async function stopAndSendVoice() {
 }
 
 function renderVoicePlayer(url, duration, isAdmin) {
-  const bars = Array.from({length: 25}, () => Math.floor(Math.random() * 20) + 4);
-  const barsHtml = bars.map(h => `<div class="bar" style="height: ${h}px;"></div>`).join('');
-  const mins = Math.floor(duration / 60);
-  const secs = duration % 60;
+  const bars = Array.from({length:25}, () => Math.floor(Math.random() * 20) + 4);
+  const barsHtml = bars.map(h => `<div class="bar" style="height:${h}px;"></div>`).join('');
+  const mins = Math.floor(duration / 60), secs = duration % 60;
   const durationText = `${mins}:${String(secs).padStart(2,'0')}`;
   const playerId = 'voice-' + Math.random().toString(36).substr(2, 9);
-  return `<div class="voice-player" id="${playerId}"><button class="play-btn" onclick="playVoice('${playerId}', '${url}', ${duration})">▶️</button><div class="waveform">${barsHtml}</div><span class="duration">${durationText}</span></div><audio id="audio-${playerId}" src="${url}" preload="none"></audio>`;
+  return `<div class="voice-player" id="${playerId}"><button class="play-btn" onclick="playVoice('${playerId}', '${url}')">▶️</button><div class="waveform">${barsHtml}</div><span class="duration">${durationText}</span></div><audio id="audio-${playerId}" src="${url}" preload="none"></audio>`;
 }
 
-function playVoice(playerId, url, duration) {
+function playVoice(playerId, url) {
   const audio = document.getElementById('audio-' + playerId);
   const btn = document.querySelector(`#${playerId} .play-btn`);
   if (!audio || !btn) return;
   if (!audio.paused) { audio.pause(); audio.currentTime = 0; btn.textContent = '▶️'; return; }
   document.querySelectorAll('.voice-player audio').forEach(a => {
-    if (a.id !== 'audio-' + playerId) { a.pause(); a.currentTime = 0; const otherBtn = a.parentElement?.querySelector('.play-btn'); if (otherBtn) otherBtn.textContent = '▶️'; }
+    if (a.id !== 'audio-' + playerId) { a.pause(); a.currentTime = 0; const ob = a.parentElement?.querySelector('.play-btn'); if (ob) ob.textContent = '▶️'; }
   });
   btn.textContent = '⏸️';
   audio.play();
@@ -1293,8 +1231,8 @@ function subscribeToChats() {
   if (chatsChannel) return;
   chatsChannel = supabaseClient
     .channel('admin-chats')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, () => loadChats())
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
+    .on('postgres_changes', { event:'*', schema:'public', table:'chats' }, () => loadChats())
+    .on('postgres_changes', { event:'INSERT', schema:'public', table:'messages' }, (payload) => {
       const newMsg = payload.new;
       if (newMsg && newMsg.sender === 'visitor') {
         const chat = allChatsData?.find(c => c.id === newMsg.chat_id);
@@ -1311,33 +1249,30 @@ function subscribeToChats() {
 }
 
 async function incrementUnread(chatId) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=unread_count`, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}&select=unread_count`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   const data = await res.json();
   const current = (data[0] && data[0].unread_count) || 0;
-  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, { method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ unread_count: current + 1 }) });
+  await fetch(`${SUPABASE_URL}/rest/v1/chats?id=eq.${chatId}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ unread_count:current + 1 }) });
 }
 
 function subscribeToChatMessages(chatId) {
   if (messagesChannel) supabaseClient.removeChannel(messagesChannel);
   messagesChannel = supabaseClient
     .channel('admin-chat-' + chatId)
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `chat_id=eq.${chatId}` }, () => loadChatMessages(chatId))
+    .on('postgres_changes', { event:'INSERT', schema:'public', table:'messages', filter:`chat_id=eq.${chatId}` }, () => loadChatMessages(chatId))
     .subscribe();
 }
 
 function escapeHtml(text) { if (!text) return ''; const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 function formatTime(iso) { const d = new Date(iso); return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); }
 
-// ==========================================
-// اطلاعیه
-// ==========================================
+// ===== Announce =====
 function selectColor(preset, el) {
   document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
   el.classList.add('active');
   selectedColorPreset = preset;
   const customRow = document.getElementById('customColorRow');
-  if (preset === 'custom') { customRow.style.display = 'grid'; }
-  else { customRow.style.display = 'none'; }
+  customRow.style.display = preset === 'custom' ? 'grid' : 'none';
   updatePreview();
 }
 
@@ -1361,20 +1296,17 @@ function updatePreview() {
   preview.querySelector('.ann-message').textContent = message;
 }
 
-document.getElementById('annIcon')?.addEventListener('input', updatePreview);
-document.getElementById('annMessage')?.addEventListener('input', () => {
-  const len = document.getElementById('annMessage').value.length;
-  document.getElementById('annCharCount').textContent = len;
+document.getElementById('annIcon').addEventListener('input', updatePreview);
+document.getElementById('annMessage').addEventListener('input', () => {
+  document.getElementById('annCharCount').textContent = document.getElementById('annMessage').value.length;
   updatePreview();
 });
-document.getElementById('annColor1')?.addEventListener('input', updatePreview);
-document.getElementById('annColor2')?.addEventListener('input', updatePreview);
+document.getElementById('annColor1').addEventListener('input', updatePreview);
+document.getElementById('annColor2').addEventListener('input', updatePreview);
 
 async function loadAnnouncement() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?select=*&order=id.desc&limit=1`, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?select=*&order=id.desc&limit=1`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
     const data = await res.json();
     if (data && data.length > 0) {
       currentAnnouncement = data[0];
@@ -1382,9 +1314,7 @@ async function loadAnnouncement() {
       document.getElementById('annIcon').value = data[0].icon || '📢';
       document.getElementById('annActive').checked = data[0].is_active !== false;
       selectedColorPreset = data[0].color_preset || 'cyan-purple';
-      document.querySelectorAll('.color-option').forEach(o => {
-        o.classList.toggle('active', o.dataset.preset === selectedColorPreset);
-      });
+      document.querySelectorAll('.color-option').forEach(o => o.classList.toggle('active', o.dataset.preset === selectedColorPreset));
       if (selectedColorPreset === 'custom') {
         document.getElementById('customColorRow').style.display = 'grid';
         const parts = (data[0].color_custom || '#00ffe7,#a855f7').split(',');
@@ -1403,9 +1333,7 @@ async function saveAnnouncement() {
   const btn = document.getElementById('saveAnnBtn');
   btn.disabled = true; btn.textContent = '⏳ ذخیره...';
   try {
-    const customColor = selectedColorPreset === 'custom' 
-      ? `${document.getElementById('annColor1').value},${document.getElementById('annColor2').value}`
-      : null;
+    const customColor = selectedColorPreset === 'custom' ? `${document.getElementById('annColor1').value},${document.getElementById('annColor2').value}` : null;
     const payload = {
       message: message,
       icon: document.getElementById('annIcon').value || '📢',
@@ -1416,55 +1344,35 @@ async function saveAnnouncement() {
     };
     let res;
     if (currentAnnouncement) {
-      res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?id=eq.${currentAnnouncement.id}`, {
-        method: 'PATCH',
-        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
-        body: JSON.stringify(payload)
-      });
+      res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?id=eq.${currentAnnouncement.id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' }, body:JSON.stringify(payload) });
     } else {
-      res = await fetch(`${SUPABASE_URL}/rest/v1/announcements`, {
-        method: 'POST',
-        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
-        body: JSON.stringify(payload)
-      });
+      res = await fetch(`${SUPABASE_URL}/rest/v1/announcements`, { method:'POST', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' }, body:JSON.stringify(payload) });
     }
     if (res.ok) {
       const data = await res.json();
       if (data && data[0]) currentAnnouncement = data[0];
       showStatus('🎉 اطلاعیه ذخیره شد!', 'success');
       loadAnnouncement();
-    } else {
-      showStatus('❌ خطا در ذخیره', 'error');
-    }
-  } catch (err) {
-    showStatus('❌ خطا: ' + err.message, 'error');
-  } finally {
-    btn.disabled = false; btn.textContent = '🚀 ذخیره اطلاعیه';
-  }
+    } else { showStatus('❌ خطا در ذخیره', 'error'); }
+  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
+  finally { btn.disabled = false; btn.textContent = '🚀 ذخیره اطلاعیه'; }
 }
 
 async function deleteAnnouncement() {
   if (!confirm('مطمئنی می‌خوای اطلاعیه رو پاک کنی؟')) return;
   try {
-    await fetch(`${SUPABASE_URL}/rest/v1/announcements?id=gt.0`, {
-      method: 'DELETE',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
+    await fetch(`${SUPABASE_URL}/rest/v1/announcements?id=gt.0`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
     currentAnnouncement = null;
     document.getElementById('annMessage').value = '';
     document.getElementById('annIcon').value = '📢';
     document.getElementById('annActive').checked = true;
     selectedColorPreset = 'cyan-purple';
-    document.querySelectorAll('.color-option').forEach(o => {
-      o.classList.toggle('active', o.dataset.preset === 'cyan-purple');
-    });
+    document.querySelectorAll('.color-option').forEach(o => o.classList.toggle('active', o.dataset.preset === 'cyan-purple'));
     document.getElementById('customColorRow').style.display = 'none';
     document.getElementById('annCharCount').textContent = '0';
     updatePreview();
     showStatus('🗑️ اطلاعیه پاک شد', 'success');
-  } catch (err) {
-    showStatus('❌ خطا: ' + err.message, 'error');
-  }
+  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
 
 updateCategoryFields();
