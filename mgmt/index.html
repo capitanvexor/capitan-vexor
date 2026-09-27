@@ -18,7 +18,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .bg-glow::before { width:500px; height:500px; background:var(--cyan); top:-100px; right:-100px; }
 .bg-glow::after { width:600px; height:600px; background:var(--purple); bottom:-150px; left:-150px; animation-delay:-6s; }
 @keyframes float { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(50px,50px) scale(1.1);} }
-
 .login-screen { min-height:100vh; display:flex; justify-content:center; align-items:center; padding:20px; }
 .login-box { background:var(--glass); border:1px solid var(--border); border-radius:25px; padding:45px 35px; backdrop-filter:blur(20px); width:100%; max-width:420px; text-align:center; box-shadow:0 25px 60px rgba(0,255,231,0.1); }
 .login-icon { font-size:4rem; margin-bottom:15px; filter:drop-shadow(0 0 25px var(--cyan)); animation:pulse 2s ease-in-out infinite; }
@@ -34,14 +33,12 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .error-msg { background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); padding:12px; border-radius:10px; margin-top:15px; font-size:0.9rem; display:none; }
 .error-msg.show { display:block; }
 .back-link { display:inline-block; margin-top:20px; color:var(--text-dim); text-decoration:none; font-size:0.85rem; }
-
 .dashboard { display:none; padding:20px; max-width:1100px; margin:0 auto; }
 .dashboard.active { display:block; }
 .dash-header { display:flex; justify-content:space-between; align-items:center; padding:20px; background:var(--glass); border:1px solid var(--border); border-radius:18px; margin-bottom:25px; backdrop-filter:blur(20px); flex-wrap:wrap; gap:15px; }
 .dash-header h1 { font-size:1.3rem; background:linear-gradient(90deg,var(--cyan),var(--purple)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; }
 .logout-btn { padding:10px 20px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:600; transition:0.3s; font-size:0.85rem; }
 .logout-btn:hover { background:var(--danger); color:white; }
-
 .tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
 .tab { padding:12px 22px; background:var(--glass); border:1px solid var(--border); border-radius:12px; cursor:pointer; transition:0.3s; font-family:inherit; color:var(--text-dim); font-weight:600; font-size:0.9rem; position:relative; display:flex; align-items:center; gap:8px; }
 .tab:hover { color:var(--cyan); border-color:var(--cyan); }
@@ -49,7 +46,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .tab-badge { background:var(--danger); color:white; font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:50px; min-width:20px; text-align:center; }
 .tab-content { display:none; }
 .tab-content.active { display:block; }
-
 .card { background:var(--glass); border:1px solid var(--border); border-radius:20px; padding:25px; backdrop-filter:blur(20px); margin-bottom:20px; }
 .card-title { font-size:1.1rem; font-weight:700; color:var(--cyan); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
 .form-group { margin-bottom:15px; }
@@ -58,11 +54,9 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--cyan); box-shadow:0 0 15px rgba(0,255,231,0.2); }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
 .form-row.three { grid-template-columns:1fr 1fr 1fr; }
-
 .save-btn { width:100%; padding:14px; background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; border:none; border-radius:12px; font-size:1rem; font-weight:700; cursor:pointer; transition:0.3s; font-family:inherit; box-shadow:0 0 25px rgba(0,255,231,0.4); }
 .save-btn:hover { transform:translateY(-2px); }
 .save-btn:disabled { opacity:0.6; cursor:not-allowed; }
-
 .upload-area { border:2px dashed var(--border); border-radius:12px; padding:30px 20px; text-align:center; cursor:pointer; transition:0.3s; background:rgba(0,0,0,0.2); }
 .upload-area:hover { border-color:var(--cyan); background:rgba(0,255,231,0.05); }
 .upload-area .icon { font-size:3rem; margin-bottom:10px; }
@@ -72,13 +66,11 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .img-preview-item { position:relative; width:80px; height:80px; border-radius:10px; overflow:hidden; border:2px solid var(--border); }
 .img-preview-item img { width:100%; height:100%; object-fit:cover; }
 .img-preview-item .remove { position:absolute; top:3px; right:3px; background:rgba(255,56,96,0.9); color:white; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
-
 .status { padding:15px 20px; border-radius:12px; margin-bottom:20px; font-weight:600; display:none; align-items:center; gap:10px; }
 .status.show { display:flex; }
 .status.success { background:rgba(16,185,129,0.15); border:1px solid var(--success); color:var(--success); }
 .status.error { background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); }
 .status.loading { background:rgba(0,255,231,0.1); border:1px solid var(--cyan); color:var(--cyan); }
-
 .products-list { display:grid; gap:12px; }
 .product-item { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:12px; padding:15px; display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap; transition:0.3s; }
 .product-item:hover { border-color:var(--cyan); }
@@ -90,15 +82,12 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .btn-icon { width:38px; height:38px; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer; transition:0.3s; font-size:1rem; display:flex; align-items:center; justify-content:center; }
 .btn-icon:hover { background:rgba(0,255,231,0.1); border-color:var(--cyan); }
 .btn-icon.danger:hover { background:rgba(255,56,96,0.15); border-color:var(--danger); color:var(--danger); }
-
 .status-badge { padding:5px 12px; border-radius:50px; font-size:0.75rem; font-weight:700; cursor:pointer; transition:0.3s; border:1px solid; display:inline-flex; align-items:center; gap:5px; }
 .status-badge.available { background:rgba(16,185,129,0.15); color:var(--success); border-color:var(--success); }
 .status-badge.sold { background:rgba(255,56,96,0.15); color:var(--danger); border-color:var(--danger); }
 .status-badge.unavailable { background:rgba(100,100,100,0.15); color:#999; border-color:#666; }
-
 .empty-state { text-align:center; padding:40px 20px; color:var(--text-dim); }
 .empty-state .icon { font-size:3rem; margin-bottom:10px; opacity:0.5; }
-
 .chat-wrap { display:grid; grid-template-columns:320px 1fr; gap:15px; height:620px; }
 .chat-list-sidebar { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:15px; overflow-y:auto; padding:10px; }
 .chat-list-item { padding:12px 14px; border-radius:12px; cursor:pointer; transition:0.3s; border:1px solid transparent; margin-bottom:8px; position:relative; }
@@ -110,12 +99,10 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .chat-list-item .time { font-size:0.7rem; color:#666; margin-top:4px; }
 .delete-chat-btn { background:rgba(255,56,96,0.1); border:1px solid rgba(255,56,96,0.3); color:var(--danger); border-radius:8px; width:26px; height:26px; font-size:0.75rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.3s; padding:0; }
 .delete-chat-btn:hover { background:var(--danger); color:white; }
-
 .unread-badge { background:linear-gradient(135deg,#ff3860,#ff0055); color:white; font-size:0.7rem; font-weight:800; padding:2px 8px; border-radius:50px; min-width:22px; text-align:center; box-shadow:0 0 10px rgba(255,56,96,0.8); animation:unreadPulse 1.5s ease-in-out infinite; }
 @keyframes unreadPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
 .chat-list-item.has-unread { background:rgba(255,56,96,0.08); border-color:rgba(255,56,96,0.4) !important; }
 .chat-list-item.has-unread .name-text { color:#ff3860; font-weight:800; }
-
 .chat-main { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:15px; display:flex; flex-direction:column; overflow:hidden; }
 .chat-main-header { padding:15px 20px; border-bottom:1px solid var(--border); background:linear-gradient(135deg,rgba(0,255,231,0.08),rgba(168,85,247,0.08)); }
 .chat-main-header h3 { font-size:1rem; color:var(--cyan); }
@@ -124,17 +111,14 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .chat-main-input input { flex:1; padding:12px 16px; background:rgba(0,0,0,0.4); border:1px solid var(--border); border-radius:50px; color:var(--text); font-family:inherit; font-size:0.9rem; outline:none; }
 .chat-main-input input:focus { border-color:var(--cyan); }
 .chat-main-input button { width:45px; height:45px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--purple)); border:none; color:#0a0a0f; font-size:1.2rem; cursor:pointer; }
-
 .admin-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:var(--text-dim); text-align:center; padding:40px; }
 .admin-empty .icon { font-size:4rem; margin-bottom:15px; opacity:0.4; }
-
 .bubble { max-width:80%; padding:10px 14px; border-radius:16px; animation:bubbleIn 0.3s ease-out; word-wrap:break-word; }
 @keyframes bubbleIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
 .bubble.theirs { align-self:flex-start; background:linear-gradient(135deg,rgba(0,255,231,0.15),rgba(168,85,247,0.15)); border:1px solid var(--border); border-bottom-right-radius:4px; }
 .bubble.mine { align-self:flex-end; background:linear-gradient(135deg,var(--cyan),var(--purple)); color:#0a0a0f; border-bottom-left-radius:4px; font-weight:600; }
 .bubble .text { font-size:0.9rem; line-height:1.5; }
 .bubble .time { font-size:0.7rem; opacity:0.6; margin-top:4px; text-align:left; }
-
 .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(10px); z-index:99999; display:none; justify-content:center; align-items:center; padding:20px; }
 .modal-overlay.show { display:flex; }
 .modal { background:var(--bg-dark); border:1px solid var(--border); border-radius:25px; padding:30px; width:100%; max-width:600px; max-height:90vh; overflow-y:auto; box-shadow:0 25px 60px rgba(0,255,231,0.2); }
@@ -146,20 +130,16 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .modal-btn { flex:1; padding:13px; border-radius:12px; border:none; font-family:inherit; font-weight:700; font-size:0.95rem; cursor:pointer; transition:0.3s; min-width:120px; }
 .modal-btn.primary { background:linear-gradient(90deg,var(--cyan),var(--purple)); color:#0a0a0f; }
 .modal-btn.secondary { background:rgba(255,255,255,0.05); color:var(--text); border:1px solid var(--border); }
-
 .existing-images { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
 .existing-img-item { position:relative; width:80px; height:80px; border-radius:10px; overflow:hidden; border:2px solid var(--border); }
 .existing-img-item img { width:100%; height:100%; object-fit:cover; }
 .existing-img-item .delete-img { position:absolute; top:3px; right:3px; background:rgba(255,56,96,0.9); color:white; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center; }
-
 .password-box { background:rgba(255,56,96,0.05); border:1px solid rgba(255,56,96,0.3); border-radius:15px; padding:20px; margin-top:15px; }
 .password-box h4 { color:var(--danger); font-size:1rem; margin-bottom:15px; display:flex; align-items:center; gap:8px; }
-
 .notif-permission { background:rgba(255,200,0,0.1); border:1px solid #ffcc00; color:#ffcc00; padding:12px 18px; border-radius:12px; margin-bottom:15px; font-size:0.85rem; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
 .notif-permission button { padding:8px 16px; background:#ffcc00; color:#0a0a0f; border:none; border-radius:8px; font-weight:700; cursor:pointer; font-family:inherit; font-size:0.85rem; }
 .notif-permission.success-banner { background:rgba(16,185,129,0.1); border-color:#10b981; color:#10b981; }
 .notif-permission.error-banner { background:rgba(255,56,96,0.1); border-color:#ff3860; color:#ff3860; }
-
 .voice-recorder { display:flex; align-items:center; gap:10px; flex:1; padding:8px 15px; background:rgba(255,56,96,0.1); border:1px solid var(--danger); border-radius:50px; }
 .voice-recorder .dot-rec { width:12px; height:12px; border-radius:50%; background:#ff3860; animation:dotBlink 1s infinite; }
 @keyframes dotBlink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
@@ -178,7 +158,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .bubble.mine .voice-player .waveform .bar { background:#0a0a0f; }
 .bubble.theirs .voice-player .waveform .bar { background:var(--cyan); }
 .voice-player .duration { font-size:0.75rem; font-weight:700; min-width:35px; text-align:center; }
-
 .color-picker-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:8px; }
 .color-option { padding:12px 8px; border-radius:10px; cursor:pointer; text-align:center; font-size:0.75rem; font-weight:700; color:white; border:3px solid transparent; transition:0.3s; text-shadow:0 1px 3px rgba(0,0,0,0.5); }
 .color-option:hover { transform:translateY(-3px) scale(1.02); }
@@ -187,7 +166,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 .announcement-bar .ann-icon { font-size:1.4rem; flex-shrink:0; animation:annIconPulse 2s ease-in-out infinite; }
 .announcement-bar .ann-message { flex:1; min-width:0; word-wrap:break-word; overflow-wrap:break-word; word-break:break-word; }
 @keyframes annIconPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
-
 @media (max-width:700px) { .chat-wrap { grid-template-columns:1fr; height:auto; } .chat-list-sidebar { max-height:220px; } .chat-main { height:500px; } }
 @media (max-width:600px) { .login-box{padding:35px 25px;} .card{padding:18px;} .form-row,.form-row.three{grid-template-columns:1fr;} .modal{padding:20px;} .color-picker-grid{grid-template-columns:repeat(2,1fr);} }
 </style>
@@ -229,7 +207,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     <button class="tab" onclick="switchTab('settings', this)">⚙️ تنظیمات</button>
   </div>
 
-  <!-- Add -->
   <div class="tab-content active" id="tab-add">
     <div class="card">
       <div class="card-title">➕ افزودن محصول جدید</div>
@@ -255,7 +232,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
           </optgroup>
         </select>
       </div>
-
       <div id="fields-clash" class="form-row three" style="display:none;">
         <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="pTownHall" placeholder="14"></div>
         <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
@@ -266,7 +242,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <div class="form-group"><label>⭐ ستاره بونوس</label><input type="number" id="pStarBonus" placeholder="5"></div>
         <div class="form-group"><label>🏗️ بیلدرها</label><input type="text" id="pBuilderCount" placeholder="5/5"></div>
       </div>
-
       <div id="fields-cod" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pRank" placeholder="Legendary"></div>
         <div class="form-group"><label>📊 لول پلیر</label><input type="number" id="pPlayerLevel" placeholder="150"></div>
@@ -280,12 +255,10 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
       <div id="fields-cod-3" class="form-row" style="display:none;">
         <div class="form-group"><label>🟡 Legendary</label><input type="number" id="pLegendary" placeholder="10"></div>
       </div>
-
       <div id="fields-item" class="form-row" style="display:none;">
         <div class="form-group"><label>🏷️ نوع آیتم</label><input type="text" id="pItemType" placeholder="بلیط طلایی"></div>
         <div class="form-group"><label>📦 مقدار</label><input type="text" id="pItemAmount" placeholder="۱ عدد"></div>
       </div>
-
       <div id="fields-item-ff" class="form-row three" style="display:none;">
         <div class="form-group">
           <label>🏷️ نوع آیتم</label>
@@ -300,7 +273,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <div class="form-group"><label>📦 مقدار</label><input type="text" id="pFFItemAmount" placeholder="1000"></div>
         <div class="form-group"><label>⏱️ مدت</label><input type="text" id="pFFItemDuration" placeholder="30 روز"></div>
       </div>
-
       <div id="fields-item-royal" class="form-row three" style="display:none;">
         <div class="form-group">
           <label>🏷️ نوع آیتم</label>
@@ -315,35 +287,29 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <div class="form-group"><label>📦 مقدار</label><input type="text" id="pRoyalItemAmount" placeholder="500"></div>
         <div class="form-group"><label>⏱️ مدت</label><input type="text" id="pRoyalItemDuration" placeholder="30 روز"></div>
       </div>
-
       <div id="fields-royal" class="form-row three" style="display:none;">
         <div class="form-group"><label>👑 سطح آرنا</label><input type="number" id="pArena" placeholder="15"></div>
         <div class="form-group"><label>🏆 تعداد جام</label><input type="number" id="pTrophies" placeholder="5000"></div>
         <div class="form-group"><label>📊 لول کینگ</label><input type="number" id="pKingLevel" placeholder="10"></div>
       </div>
-
       <div id="fields-freefire" class="form-row three" style="display:none;">
         <div class="form-group"><label>🎖️ رنک</label><input type="text" id="pFFRank" placeholder="Heroic"></div>
         <div class="form-group"><label>📊 لول</label><input type="number" id="pFFLevel" placeholder="60"></div>
         <div class="form-group"><label>💎 تعداد جم</label><input type="number" id="pFFGems" placeholder="1000"></div>
       </div>
-
       <div id="fields-free" class="form-row" style="display:none;">
         <div class="form-group"><label>📝 مشخصات ۱</label><input type="text" id="pFree1" placeholder="مثلاً: لول"></div>
         <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
       </div>
-
       <div class="form-group" style="margin-top:15px; padding:15px; background:rgba(168,85,247,0.05); border:1px dashed var(--purple); border-radius:12px;">
         <label style="color:var(--purple);">⭐ فیلدهای دلخواه</label>
         <div id="customFieldsContainer"></div>
         <button type="button" onclick="addCustomField()" style="margin-top:8px; padding:8px 16px; background:rgba(168,85,247,0.2); border:1px solid var(--purple); color:var(--purple); border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; font-size:0.85rem;">➕ افزودن فیلد دلخواه</button>
       </div>
-
       <div class="form-row">
         <div class="form-group"><label>🆔 کد محصول</label><input type="text" id="pCode" placeholder="232" dir="ltr"></div>
         <div class="form-group"><label>💰 قیمت (تومان) *</label><input type="number" id="pPrice" placeholder="5800000"></div>
       </div>
-
       <div class="form-row">
         <div class="form-group"><label>💵 قیمت دلاری</label><input type="text" id="pPriceUsd" placeholder="95$" dir="ltr"></div>
         <div class="form-group">
@@ -355,9 +321,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
           </select>
         </div>
       </div>
-
       <div class="form-group"><label>📝 توضیحات</label><textarea id="pDesc" rows="3" placeholder="توضیحات کامل..."></textarea></div>
-
       <div class="form-group">
         <label>📸 عکس‌ها (خودکار فشرده میشن ⚡)</label>
         <div class="upload-area" onclick="document.getElementById('pImages').click()">
@@ -367,12 +331,10 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         </div>
         <div class="images-preview" id="imagesPreview"></div>
       </div>
-
       <button class="save-btn" id="addBtn" onclick="addProduct()">🚀 ثبت محصول</button>
     </div>
   </div>
 
-  <!-- List -->
   <div class="tab-content" id="tab-list">
     <div class="card">
       <div class="card-title">📦 لیست محصولات</div>
@@ -386,7 +348,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Chat -->
   <div class="tab-content" id="tab-chat">
     <div class="chat-wrap">
       <div class="chat-list-sidebar" id="chatList">
@@ -401,7 +362,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Stats -->
   <div class="tab-content" id="tab-stats">
     <div class="card">
       <div class="card-title">📊 آمار سایت</div>
@@ -413,7 +373,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Contact -->
   <div class="tab-content" id="tab-contact">
     <div class="card">
       <div class="card-title">📞 اطلاعات تماس</div>
@@ -424,7 +383,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Announce -->
   <div class="tab-content" id="tab-announce">
     <div class="card">
       <div class="card-title">📢 مدیریت اطلاعیه</div>
@@ -469,10 +427,10 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
     </div>
   </div>
 
-  <!-- Ratings -->
+  <!-- Tab: Ratings -->
   <div class="tab-content" id="tab-ratings">
     <div class="card">
-      <div class="card-title">⭐ آمار امتیازها</div>
+      <div class="card-title">⭐ آمار امتیازهای تاییدشده</div>
       <div id="ratingsStats" style="text-align:center; padding:20px 0;">
         <div style="display:inline-block; padding:25px 40px; background:linear-gradient(135deg,rgba(255,204,0,0.15),rgba(255,149,0,0.15)); border:2px solid #ffcc00; border-radius:20px; margin:10px;">
           <div style="font-size:3rem; margin-bottom:8px;">⭐</div>
@@ -482,21 +440,44 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <div style="display:inline-block; padding:25px 40px; background:rgba(0,255,231,0.08); border:2px solid var(--cyan); border-radius:20px; margin:10px;">
           <div style="font-size:3rem; margin-bottom:8px;">👥</div>
           <div style="font-size:2.5rem; font-weight:900; color:var(--cyan);" id="totalRatings">0</div>
-          <div style="color:var(--text-dim); font-size:0.85rem;">تعداد کل امتیازها</div>
+          <div style="color:var(--text-dim); font-size:0.85rem;">امتیازهای تاییدشده</div>
+        </div>
+        <div style="display:inline-block; padding:25px 40px; background:rgba(255,200,0,0.08); border:2px solid #ffcc00; border-radius:20px; margin:10px;">
+          <div style="font-size:3rem; margin-bottom:8px;">⏳</div>
+          <div style="font-size:2.5rem; font-weight:900; color:#ffcc00;" id="pendingCount">0</div>
+          <div style="color:var(--text-dim); font-size:0.85rem;">در انتظار تایید</div>
         </div>
       </div>
       <div style="margin-top:30px;">
-        <h4 style="color:var(--cyan); margin-bottom:15px; font-size:1rem;">📊 توزیع ستاره‌ها</h4>
+        <h4 style="color:var(--cyan); margin-bottom:15px; font-size:1rem;">📊 توزیع ستاره‌های تاییدشده</h4>
         <div id="ratingsChart"></div>
       </div>
       <div style="margin-top:25px; display:flex; gap:10px; flex-wrap:wrap;">
         <button class="save-btn" onclick="loadRatings()" style="flex:1;">🔄 بروزرسانی</button>
-        <button onclick="clearAllRatings()" style="padding:14px 24px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:12px; cursor:pointer; font-family:inherit; font-weight:700;">🗑️ پاک کردن همه</button>
+      </div>
+    </div>
+
+    <div class="card" style="border: 2px solid #ffcc00;">
+      <div class="card-title" style="color: #ffcc00;">⏳ در انتظار تایید</div>
+      <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 15px;">
+        💡 این امتیازها هنوز توی سایت نشون داده نمیشن. تایید کن تا نمایش داده بشن
+      </p>
+      <div id="pendingRatingsList">
+        <p style="text-align:center; color: #666; padding: 20px;">در حال بارگذاری...</p>
+      </div>
+    </div>
+
+    <div class="card" style="border: 2px solid #10b981;">
+      <div class="card-title" style="color: #10b981;">✅ تاییدشده‌ها</div>
+      <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 15px;">
+        💡 این امتیازها توی سایت نمایش داده میشن
+      </p>
+      <div id="approvedRatingsList">
+        <p style="text-align:center; color: #666; padding: 20px;">در حال بارگذاری...</p>
       </div>
     </div>
   </div>
 
-  <!-- Settings -->
   <div class="tab-content" id="tab-settings">
     <div class="card">
       <div class="card-title">⚙️ تنظیمات امنیتی</div>
@@ -658,7 +639,6 @@ function showDashboard() {
   checkNotificationBanner();
   loadProducts(); loadSettings(); loadChats(); loadAnnouncement(); subscribeToChats();
 }
-
 function checkNotificationBanner() {
   const banner = document.getElementById('notifBanner');
   if (!('Notification' in window)) return;
@@ -668,7 +648,6 @@ function checkNotificationBanner() {
 }
 function requestNotifPermission() { if ('Notification' in window) Notification.requestPermission().then(() => checkNotificationBanner()); }
 function testNotification() { if (Notification.permission !== 'granted') return; try { new Notification('🔔 تست موفق!', { body:'نوتیف کار می‌کنه', icon:'icon-512.png', dir:'rtl' }); } catch(e){} }
-
 function logout() { sessionStorage.removeItem('cv_logged_in'); document.getElementById('loginScreen').style.display = 'flex'; document.getElementById('dashboard').classList.remove('active'); }
 window.addEventListener('load', () => { if (sessionStorage.getItem('cv_logged_in') === 'true') showDashboard(); });
 
@@ -681,14 +660,12 @@ function switchTab(name, btn) {
   if (name === 'announce') loadAnnouncement();
   if (name === 'ratings') loadRatings();
 }
-
 function showStatus(msg, type = 'loading') {
   const box = document.getElementById('statusBox');
   box.className = 'status show ' + type;
   box.textContent = msg;
   if (type !== 'loading') setTimeout(() => box.classList.remove('show'), 4000);
 }
-
 function updateCategoryFields() {
   const cat = document.getElementById('pCategory').value;
   const isClash = cat === 'کلش';
@@ -711,7 +688,6 @@ function updateCategoryFields() {
   document.getElementById('fields-freefire').style.display = isFreeFire ? 'grid' : 'none';
   document.getElementById('fields-free').style.display = isFree ? 'grid' : 'none';
 }
-
 function addCustomField() {
   customFieldsCount++;
   const id = customFieldsCount;
@@ -734,7 +710,6 @@ function getCustomFields() {
   });
   return fields;
 }
-
 function playNotificationSound() {
   try {
     if (!notificationAudioCtx) notificationAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -767,7 +742,6 @@ function flashPageTitle(newTitle) {
   window.addEventListener('focus', stopFlash);
   setTimeout(stopFlash, 60000);
 }
-
 async function compressAndUpload(file) {
   const options = { maxSizeMB:0.3, maxWidthOrHeight:1200, useWebWorker:true, fileType:'image/jpeg', initialQuality:0.8 };
   const compressedFile = await imageCompression(file, options);
@@ -776,7 +750,6 @@ async function compressAndUpload(file) {
   if (!res.ok) throw new Error('خطا در آپلود');
   return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 }
-
 function handleImages(event) { selectedImages = [...selectedImages, ...Array.from(event.target.files)]; renderImagePreviews(); }
 function renderImagePreviews() {
   const preview = document.getElementById('imagesPreview');
@@ -790,7 +763,6 @@ function renderImagePreviews() {
   });
 }
 function removeImage(i) { selectedImages.splice(i, 1); renderImagePreviews(); }
-
 async function addProduct() {
   const title = document.getElementById('pTitle').value.trim();
   const price = document.getElementById('pPrice').value.trim();
@@ -869,20 +841,17 @@ async function addProduct() {
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
   finally { btn.disabled = false; btn.textContent = '🚀 ثبت محصول'; }
 }
-
 async function loadProducts() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=id.desc`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   allProductsData = await res.json();
   filterList(currentListFilter);
 }
-
 function filterList(status) {
   currentListFilter = status;
   let filtered = allProductsData;
   if (status !== 'all') filtered = allProductsData.filter(p => p.status === status);
   renderProducts(filtered);
 }
-
 function renderProducts(products) {
   const list = document.getElementById('productsList');
   if (!products || products.length === 0) { list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>محصولی نیست</p></div>`; return; }
@@ -893,7 +862,6 @@ function renderProducts(products) {
     return `<div class="product-item">${img}<div class="product-details"><h4>${p.title}</h4><p>${p.category} | کد: ${p.account_code || '-'}</p></div><div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}</div><span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">${statusIcon} ${p.status}</span><div class="product-actions"><button class="btn-icon" onclick="openEditModal(${p.id})">✏️</button><button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button></div></div>`;
   }).join('');
 }
-
 async function toggleStatus(id, currentStatus) {
   let newStatus;
   if (currentStatus === 'موجود') newStatus = 'فروش رفته';
@@ -902,7 +870,6 @@ async function toggleStatus(id, currentStatus) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ status:newStatus }) });
   if (res.ok) { showStatus(`✅ وضعیت به "${newStatus}" تغییر کرد`, 'success'); loadProducts(); }
 }
-
 function openEditModal(id) {
   const p = allProductsData.find(x => x.id === id);
   if (!p) return;
@@ -961,7 +928,6 @@ function renderEditImagesPreview() {
   });
 }
 function removeEditImage(i) { editNewImages.splice(i, 1); renderEditImagesPreview(); }
-
 async function saveEdit() {
   const id = document.getElementById('editId').value;
   const title = document.getElementById('editTitle').value.trim();
@@ -1007,14 +973,12 @@ async function saveEdit() {
   } catch (err) { alert('خطا: ' + err.message); }
   finally { btn.disabled = false; btn.textContent = '💾 ذخیره'; }
 }
-
 async function deleteProduct(id) {
   if (!confirm('مطمئنی؟')) return;
   await fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${id}`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   showStatus('🗑️ حذف شد', 'success');
   loadProducts();
 }
-
 async function loadSettings() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   const data = await res.json();
@@ -1033,7 +997,6 @@ async function saveSettings() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ phone, rubika_id:rubika, telegram_id:telegram, updated_at:new Date().toISOString() }) });
   if (res.ok) showStatus('🎉 ذخیره شد!', 'success'); else showStatus('❌ خطا', 'error');
 }
-
 function changeCredentials() {
   const cu = document.getElementById('currentUsername').value.trim();
   const cp = document.getElementById('currentPassword').value.trim();
@@ -1051,7 +1014,6 @@ function changeCredentials() {
   showStatus('🎉 تغییر کرد!', 'success');
   ['currentUsername','currentPassword','newUsername','newPassword','confirmPassword'].forEach(id => { document.getElementById(id).value = ''; });
 }
-
 async function loadChats() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   allChatsData = await res.json();
@@ -1125,7 +1087,6 @@ async function sendAdminMessage() {
   loadChatMessages(currentChatId);
   loadChats();
 }
-
 async function startRecording() {
   try {
     recordingStream = await navigator.mediaDevices.getUserMedia({ audio:{ echoCancellation:true, noiseSuppression:true, sampleRate:44100 } });
@@ -1263,7 +1224,6 @@ document.getElementById('annIcon').addEventListener('input', updatePreview);
 document.getElementById('annMessage').addEventListener('input', () => { document.getElementById('annCharCount').textContent = document.getElementById('annMessage').value.length; updatePreview(); });
 document.getElementById('annColor1').addEventListener('input', updatePreview);
 document.getElementById('annColor2').addEventListener('input', updatePreview);
-
 async function loadAnnouncement() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/announcements?select=*&order=id.desc&limit=1`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
@@ -1333,41 +1293,135 @@ async function deleteAnnouncement() {
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
 
-// ===== Ratings =====
+// ===== Ratings with Approval =====
 async function loadRatings() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=stars`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=*&order=id.desc&limit=500`, { 
+      headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } 
+    });
     const data = await res.json();
+    
     if (!data || data.length === 0) {
       document.getElementById('avgRating').textContent = '0.0';
       document.getElementById('totalRatings').textContent = '0';
+      document.getElementById('pendingCount').textContent = '0';
       document.getElementById('ratingsChart').innerHTML = '<p style="text-align:center;color:#666;padding:20px;">هنوز امتیازی ثبت نشده</p>';
+      document.getElementById('pendingRatingsList').innerHTML = '<p style="text-align:center;color:#666;padding:20px;">لیست خالیه</p>';
+      document.getElementById('approvedRatingsList').innerHTML = '<p style="text-align:center;color:#666;padding:20px;">لیست خالیه</p>';
       return;
     }
-    const total = data.length;
-    const sum = data.reduce((s, r) => s + r.stars, 0);
-    const avg = (sum / total).toFixed(1);
+    
+    const approved = data.filter(r => r.is_approved === true);
+    const pending = data.filter(r => r.is_approved !== true);
+    
+    const total = approved.length;
+    const sum = approved.reduce((s, r) => s + r.stars, 0);
+    const avg = total > 0 ? (sum / total).toFixed(1) : '0.0';
+    
     document.getElementById('avgRating').textContent = avg;
     document.getElementById('totalRatings').textContent = total;
-    const distribution = { 1:0, 2:0, 3:0, 4:0, 5:0 };
-    data.forEach(r => { if (r.stars >= 1 && r.stars <= 5) distribution[r.stars]++; });
-    const maxCount = Math.max(...Object.values(distribution), 1);
-    let chartHtml = '';
-    for (let i = 5; i >= 1; i--) {
-      const count = distribution[i];
-      const percent = total > 0 ? (count / total * 100) : 0;
-      const barWidth = (count / maxCount * 100);
-      const stars = '⭐'.repeat(i);
-      chartHtml += `<div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="min-width:80px; font-size:0.9rem;">${stars}</div><div style="flex:1; height:25px; background:rgba(0,0,0,0.3); border-radius:50px; overflow:hidden;"><div style="height:100%; width:${barWidth}%; background:linear-gradient(90deg,#ffcc00,#ff9500); transition:width 0.5s;"></div></div><div style="min-width:100px; text-align:left; color:var(--text-dim); font-size:0.85rem;"><strong style="color:var(--cyan);">${count}</strong> (${percent.toFixed(1)}%)</div></div>`;
+    document.getElementById('pendingCount').textContent = pending.length;
+    
+    if (total > 0) {
+      const distribution = { 1:0, 2:0, 3:0, 4:0, 5:0 };
+      approved.forEach(r => { if (r.stars >= 1 && r.stars <= 5) distribution[r.stars]++; });
+      const maxCount = Math.max(...Object.values(distribution), 1);
+      let chartHtml = '';
+      for (let i = 5; i >= 1; i--) {
+        const count = distribution[i];
+        const percent = total > 0 ? (count / total * 100) : 0;
+        const barWidth = (count / maxCount * 100);
+        const stars = '⭐'.repeat(i);
+        chartHtml += `<div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="min-width:80px; font-size:0.9rem;">${stars}</div><div style="flex:1; height:25px; background:rgba(0,0,0,0.3); border-radius:50px; overflow:hidden;"><div style="height:100%; width:${barWidth}%; background:linear-gradient(90deg,#ffcc00,#ff9500);"></div></div><div style="min-width:100px; text-align:left; color:var(--text-dim); font-size:0.85rem;"><strong style="color:var(--cyan);">${count}</strong> (${percent.toFixed(1)}%)</div></div>`;
+      }
+      document.getElementById('ratingsChart').innerHTML = chartHtml;
+    } else {
+      document.getElementById('ratingsChart').innerHTML = '<p style="text-align:center;color:#666;padding:20px;">هنوز امتیاز تاییدشده‌ای نیست</p>';
     }
-    document.getElementById('ratingsChart').innerHTML = chartHtml;
-  } catch (err) { console.error('Load ratings error:', err); showStatus('❌ خطا در بارگذاری', 'error'); }
+    
+    if (pending.length === 0) {
+      document.getElementById('pendingRatingsList').innerHTML = '<p style="text-align:center; color: #10b981; padding: 20px;">✨ همه امتیازها تایید شدن!</p>';
+    } else {
+      document.getElementById('pendingRatingsList').innerHTML = pending.slice(0, 50).map(r => {
+        const date = new Date(r.created_at).toLocaleString('fa-IR', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+        const stars = '⭐'.repeat(r.stars);
+        const starColor = r.stars <= 2 ? '#ff3860' : (r.stars === 3 ? '#ffcc00' : '#10b981');
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:rgba(255,200,0,0.08); border:1px solid #ffcc00; border-radius:12px; margin-bottom:8px; gap:10px; flex-wrap:wrap;">
+            <div style="font-size:1rem; min-width:100px; color:${starColor};">${stars}</div>
+            <div style="color:var(--text-dim); font-size:0.8rem; flex:1;">🕐 ${date}</div>
+            <div style="display:flex; gap:8px;">
+              <button onclick="approveRating(${r.id})" style="padding:8px 16px; background:rgba(16,185,129,0.2); border:1px solid #10b981; color:#10b981; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">✅ تایید</button>
+              <button onclick="deleteRating(${r.id})" style="padding:8px 14px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">🗑️ حذف</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    if (approved.length === 0) {
+      document.getElementById('approvedRatingsList').innerHTML = '<p style="text-align:center; color: #666; padding: 20px;">هنوز امتیاز تاییدشده‌ای نیست</p>';
+    } else {
+      document.getElementById('approvedRatingsList').innerHTML = approved.slice(0, 50).map(r => {
+        const date = new Date(r.created_at).toLocaleString('fa-IR', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+        const stars = '⭐'.repeat(r.stars);
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:rgba(16,185,129,0.08); border:1px solid #10b981; border-radius:12px; margin-bottom:8px; gap:10px; flex-wrap:wrap;">
+            <div style="font-size:1rem; min-width:100px; color:#10b981;">${stars}</div>
+            <div style="color:var(--text-dim); font-size:0.8rem; flex:1;">🕐 ${date}</div>
+            <button onclick="unapproveRating(${r.id})" style="padding:8px 14px; background:rgba(255,200,0,0.15); border:1px solid #ffcc00; color:#ffcc00; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">⏳ لغو تایید</button>
+            <button onclick="deleteRating(${r.id})" style="padding:8px 14px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">🗑️ حذف</button>
+          </div>
+        `;
+      }).join('');
+    }
+    
+  } catch (err) { 
+    console.error('Load ratings error:', err); 
+    showStatus('❌ خطا در بارگذاری', 'error'); 
+  }
 }
-async function clearAllRatings() {
-  if (!confirm('مطمئنی می‌خوای همه امتیازها رو پاک کنی؟')) return;
+
+async function approveRating(id) {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=gt.0`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
-    if (res.ok) { showStatus('🗑️ همه امتیازها پاک شدن', 'success'); loadRatings(); }
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ is_approved: true })
+    });
+    if (res.ok) {
+      showStatus('✅ امتیاز تایید شد!', 'success');
+      loadRatings();
+    } else { showStatus('❌ خطا در تایید', 'error'); }
+  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
+}
+
+async function unapproveRating(id) {
+  if (!confirm('لغو تایید کنم؟ امتیاز از سایت حذف میشه ولی توی پنل میمونه')) return;
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ is_approved: false })
+    });
+    if (res.ok) {
+      showStatus('⏳ تایید لغو شد', 'success');
+      loadRatings();
+    } else { showStatus('❌ خطا', 'error'); }
+  } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
+}
+
+async function deleteRating(id) {
+  if (!confirm('مطمئنی این امتیاز رو کلا حذف کنی؟')) return;
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    if (res.ok) {
+      showStatus('🗑️ امتیاز حذف شد', 'success');
+      loadRatings();
+    } else { showStatus('❌ خطا در حذف', 'error'); }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
 
