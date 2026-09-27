@@ -131,18 +131,16 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .step-title { font-size: 16px; color: var(--cyan); margin-bottom: 8px; font-weight: 800; }
 .step-desc { color: var(--text-dim); font-size: 13px; line-height: 1.6; }
 
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-.feature { background: var(--glass); border: 1px solid var(--border); border-radius: 16px; padding: 25px; text-align: center; transition: 0.3s; }
-.feature:hover { border-color: var(--purple); transform: translateY(-6px); box-shadow: 0 15px 40px rgba(168,85,247,0.25); }
-.feature-icon { font-size: 2.3rem; margin-bottom: 12px; display: inline-block; transition: 0.3s; }
-.feature:hover .feature-icon { transform: scale(1.15) rotate(8deg); }
-.feature h4 { color: var(--cyan); margin-bottom: 8px; font-size: 1rem; }
-.feature p { color: var(--text-dim); font-size: 0.85rem; }
-
-.guarantee { max-width: 900px; margin: 40px auto; background: linear-gradient(135deg, rgba(0,255,231,0.08), rgba(168,85,247,0.08)); border: 1px solid var(--border); border-radius: 22px; padding: 35px 25px; text-align: center; }
-.guarantee-icon { font-size: 3.5rem; margin-bottom: 15px; display: inline-block; animation: pulse 2s ease-in-out infinite; }
-.guarantee h3 { font-size: 1.4rem; margin-bottom: 15px; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.guarantee p { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 0.9rem; }
+/* ===== دکمه‌های تماس توی مرحله ۲ ===== */
+.step-contact-btns { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.step-btn { padding: 8px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; font-family: inherit; transition: 0.3s; display: inline-flex; align-items: center; gap: 4px; color: white; white-space: nowrap; }
+.step-btn.chat-btn { background: linear-gradient(135deg, #00ffe7, #a855f7); box-shadow: 0 0 15px rgba(0,255,231,0.4); }
+.step-btn.chat-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 25px rgba(0,255,231,0.8); }
+.step-btn.rubika-btn { background: linear-gradient(135deg, #ff2ec4, #a855f7); box-shadow: 0 0 15px rgba(255,46,196,0.4); }
+.step-btn.rubika-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 25px rgba(255,46,196,0.8); }
+.step-btn.telegram-btn { background: linear-gradient(135deg, #0088cc, #00b4ff); box-shadow: 0 0 15px rgba(0,136,204,0.4); }
+.step-btn.telegram-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 25px rgba(0,136,204,0.8); }
+.step-contact { padding: 35px 20px 30px; }
 
 /* ===== بخش امتیازدهی ===== */
 .rating-section { max-width: 750px; margin: 60px auto; padding: 50px 35px 45px; text-align: center; background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,149,0,0.05), rgba(168,85,247,0.08)); border: 2px solid rgba(255,204,0,0.4); border-radius: 30px; box-shadow: 0 20px 60px rgba(255,204,0,0.2); direction: rtl; position: relative; overflow: hidden; }
@@ -161,7 +159,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .star:active { transform: scale(1.05) rotate(0deg); }
 .rating-stars-text { font-size: 1.1rem; font-weight: 700; color: #ffcc00; margin-top: 8px; min-height: 28px; text-shadow: 0 0 15px rgba(255,204,0,0.6); letter-spacing: 3px; position: relative; z-index: 1; }
 
-/* فرم نظر */
 .rating-comment-box { max-width: 550px; margin: 25px auto 0; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
 .rating-name-input { width: 100%; padding: 12px 18px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,204,0,0.3); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; }
 .rating-name-input:focus { border-color: #ffcc00; box-shadow: 0 0 20px rgba(255,204,0,0.3); }
@@ -172,14 +169,11 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .comment-counter { text-align: left; font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: -6px; padding-left: 5px; }
 .rating-submit-btn { padding: 14px 30px; background: linear-gradient(90deg, #ffcc00, #ff9500); color: #0a0a0f; border: none; border-radius: 50px; font-family: inherit; font-size: 1rem; font-weight: 900; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,204,0,0.4); letter-spacing: 0.5px; }
 .rating-submit-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 40px rgba(255,204,0,0.6); }
-.rating-submit-btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
 .rating-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 .rating-feedback { min-height: 50px; font-size: 1rem; font-weight: 800; margin-top: 20px; padding: 15px 25px; border-radius: 50px; background: linear-gradient(90deg, rgba(16,185,129,0.15), rgba(0,255,231,0.15)); border: 1px solid rgba(16,185,129,0.4); color: #10b981; opacity: 0; transform: scale(0.8); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); display: inline-block; max-width: 90%; box-shadow: 0 10px 30px rgba(16,185,129,0.2); position: relative; z-index: 1; }
 .rating-feedback.show { opacity: 1; transform: scale(1); }
-@keyframes feedbackPop { 0% { transform: scale(0.5) translateY(20px); opacity: 0; } 60% { transform: scale(1.1) translateY(-5px); opacity: 1; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
 
-/* آمار و نظرات عمومی */
 .public-rating-stats { display: none; margin-top: 35px; padding-top: 30px; border-top: 1px dashed rgba(255,204,0,0.3); position: relative; z-index: 1; }
 .public-rating-stats.show { display: block; animation: statsFadeIn 0.8s ease; }
 @keyframes statsFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -189,8 +183,6 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .public-stat .val { font-size: 2.3rem; font-weight: 900; background: linear-gradient(135deg, #ffcc00, #ff9500); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,204,0,0.5)); }
 .public-stat .lbl { font-size: 0.8rem; color: var(--text-dim); margin-top: 5px; }
 .public-stats-divider { width: 1px; height: 50px; background: linear-gradient(180deg, transparent, rgba(255,204,0,0.5), transparent); }
-
-/* لیست نظرات */
 .public-comments-list { margin-top: 30px; display: grid; gap: 12px; max-width: 600px; margin-left: auto; margin-right: auto; }
 .public-comment-item { padding: 15px 18px; background: linear-gradient(135deg, rgba(255,204,0,0.06), rgba(255,149,0,0.04)); border: 1px solid rgba(255,204,0,0.2); border-radius: 16px; text-align: right; position: relative; transition: 0.3s; animation: commentFadeIn 0.5s ease; }
 .public-comment-item:hover { border-color: rgba(255,204,0,0.4); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,204,0,0.15); }
@@ -201,16 +193,8 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .public-comment-item .comment-text { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.7; word-wrap: break-word; }
 .public-comment-item .comment-date { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 6px; }
 .public-comment-item::before { content: '"'; position: absolute; top: 5px; right: 12px; font-size: 2.5rem; color: rgba(255,204,0,0.15); font-family: serif; line-height: 1; }
+@media (max-width: 600px) { .rating-section { padding: 35px 20px 30px; margin: 40px 15px; } .stars-container { gap: 6px; padding: 10px 0; } .public-stats-wrap { gap: 15px; } .public-stat { padding: 12px 18px; min-width: 100px; } .trophy-icon { font-size: 3rem; } }
 
-@media (max-width: 600px) {
-  .rating-section { padding: 35px 20px 30px; margin: 40px 15px; }
-  .stars-container { gap: 6px; padding: 10px 0; }
-  .public-stats-wrap { gap: 15px; }
-  .public-stat { padding: 12px 18px; min-width: 100px; }
-  .trophy-icon { font-size: 3rem; }
-}
-
-/* کانفتی */
 .confetti-piece { position: fixed; width: 10px; height: 10px; pointer-events: none; z-index: 99998; animation: confettiFall 3s linear forwards; }
 @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
@@ -287,6 +271,7 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   .theme-btn { top: 12px; left: 12px; width: 40px; height: 40px; font-size: 1.1rem; }
   .chat-window { left: 8px; right: 8px; bottom: 8px; top: 8px; width: auto; max-width: none; height: auto; max-height: none; }
 }
+@media (max-width: 600px) { .step-btn { font-size: 0.72rem; padding: 7px 12px; } }
 
 .vexor-ad-box { background: linear-gradient(135deg, #0f0f1a 0%, #1b1b3a 50%, #2a1b4d 100%); padding: 40px 20px; display: flex; justify-content: center; font-family: 'Vazirmatn', Tahoma, sans-serif; direction: rtl; }
 .vexor-ad-inner { max-width: 800px; width: 100%; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 200, 0, 0.4); border-radius: 18px; padding: 30px 25px; box-shadow: 0 0 25px rgba(255, 200, 0, 0.15); color: #eee; text-align: right; line-height: 1.9; }
@@ -382,10 +367,38 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   <h2 class="section-title">🛒 چطور خرید کنیم؟</h2>
   <p class="section-sub">فقط ۴ قدم ساده تا خرید</p>
   <div class="steps-grid">
-    <div class="step-card reveal"><div class="step-num">۱</div><span class="step-icon">👀</span><h3 class="step-title">انتخاب محصول</h3><p class="step-desc">از لیست محصولات، مورد نظرت رو انتخاب کن</p></div>
-    <div class="step-card reveal"><div class="step-num">۲</div><span class="step-icon">💬</span><h3 class="step-title">تماس با مدیریت</h3><p class="step-desc">از طریق روبیکا یا تماس، با مدیریت صحبت کن</p></div>
-    <div class="step-card reveal"><div class="step-num">۳</div><span class="step-icon">💳</span><h3 class="step-title">پرداخت</h3><p class="step-desc">پرداخت نقدی یا اقساطی (طبق توافق)</p></div>
-    <div class="step-card reveal"><div class="step-num">۴</div><span class="step-icon">🎮</span><h3 class="step-title">تحویل فوری</h3><p class="step-desc">محصول بلافاصله تحویل داده میشه</p></div>
+    <div class="step-card reveal">
+      <div class="step-num">۱</div>
+      <span class="step-icon">👀</span>
+      <h3 class="step-title">انتخاب محصول</h3>
+      <p class="step-desc">از لیست محصولات، مورد نظرت رو انتخاب کن</p>
+    </div>
+
+    <div class="step-card reveal step-contact">
+      <div class="step-num">۲</div>
+      <span class="step-icon">💬</span>
+      <h3 class="step-title">تماس با مدیریت</h3>
+      <p class="step-desc">از راه‌های زیر با ما در تماس باش</p>
+      <div class="step-contact-btns">
+        <button onclick="toggleChatWindow()" class="step-btn chat-btn">💬 چت زنده</button>
+        <a href="https://rubika.ir/oooo1219" id="rubikaBtnStep" target="_blank" class="step-btn rubika-btn">💬 روبیکا</a>
+        <a href="#" id="telegramBtnStep" target="_blank" class="step-btn telegram-btn" style="display:none;">✈️ تلگرام</a>
+      </div>
+    </div>
+
+    <div class="step-card reveal">
+      <div class="step-num">۳</div>
+      <span class="step-icon">💳</span>
+      <h3 class="step-title">پرداخت</h3>
+      <p class="step-desc">پرداخت نقدی یا اقساطی (طبق توافق)</p>
+    </div>
+
+    <div class="step-card reveal">
+      <div class="step-num">۴</div>
+      <span class="step-icon">🎮</span>
+      <h3 class="step-title">تحویل فوری</h3>
+      <p class="step-desc">محصول بلافاصله تحویل داده میشه</p>
+    </div>
   </div>
 </section>
 
@@ -412,7 +425,6 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   </div>
 </section>
 
-<!-- ===== بخش امتیازدهی جذاب ===== -->
 <section class="rating-section reveal">
   <div class="trophy-icon">🏆</div>
   <h2 class="rating-title">⭐ به کاپیتان وکثور امتیاز بدید</h2>
@@ -536,7 +548,7 @@ function playClick() {
   } catch (e) {}
 }
 document.addEventListener('click', (e) => {
-  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .stat-box, .chat-close, .star');
+  const target = e.target.closest('button, a, .category-card, .float-btn, .theme-btn, .stat-box, .chat-close, .star, .step-btn');
   if (target) playClick();
 }, true);
 
@@ -645,6 +657,16 @@ async function loadContact() {
       if (telegramLink) { if (data[0].telegram_id) telegramLink.href = `https://t.me/${data[0].telegram_id}`; else telegramLink.style.display = 'none'; }
       const floatPhone = document.getElementById('floatPhone');
       if (floatPhone) floatPhone.href = `tel:${data[0].phone}`;
+      // دکمه‌های مرحله 2
+      const rubikaBtn = document.getElementById('rubikaBtnStep');
+      if (rubikaBtn && data[0].rubika_id) rubikaBtn.href = `https://rubika.ir/${data[0].rubika_id}`;
+      const telegramBtn = document.getElementById('telegramBtnStep');
+      if (telegramBtn) {
+        if (data[0].telegram_id) {
+          telegramBtn.href = `https://t.me/${data[0].telegram_id}`;
+          telegramBtn.style.display = 'inline-flex';
+        } else telegramBtn.style.display = 'none';
+      }
     }
   } catch (err) { console.error(err); }
 }
@@ -751,18 +773,14 @@ async function submitRating() {
     setTimeout(() => { feedback.classList.remove('show'); feedback.style.color = ''; }, 2500);
     return;
   }
-  
   ratingSubmitted = true;
   const name = document.getElementById('visitorNameInput2').value.trim();
   const comment = document.getElementById('ratingCommentInput').value.trim();
-  
   if (selectedStars >= 4) createConfetti();
-  
   const btn = document.getElementById('ratingSubmitBtn');
   const btnText = document.getElementById('submitBtnText');
   btn.disabled = true;
   btnText.textContent = '⏳ در حال ارسال...';
-  
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings`, { 
       method: 'POST', 
@@ -774,9 +792,7 @@ async function submitRating() {
         visitor_name: name || null
       })
     });
-    
     const feedback = document.getElementById('ratingFeedback');
-    
     if (res.ok) {
       const messages = {
         1: '😢 متأسفیم که راضی نبودی. نظرت ثبت شد و تایید میشه ❤️',
@@ -787,7 +803,6 @@ async function submitRating() {
       };
       feedback.textContent = '✅ ' + (messages[selectedStars] || 'ممنون از نظرت!');
       feedback.classList.add('show');
-      
       setTimeout(() => {
         ratingSubmitted = false;
         selectedStars = 0;
@@ -823,16 +838,12 @@ async function loadPublicRatingStats() {
     });
     const data = await res.json();
     if (!data || data.length === 0) return;
-    
     const total = data.length;
     const sum = data.reduce((s, r) => s + r.stars, 0);
     const avg = (sum / total).toFixed(1);
-    
     document.getElementById('publicAvg').textContent = avg;
     document.getElementById('publicCount').textContent = total;
-    
     const withComments = data.filter(r => r.comment && r.comment.trim().length > 0).slice(0, 10);
-    
     const commentsList = document.getElementById('publicCommentsList');
     if (withComments.length === 0) {
       commentsList.innerHTML = '';
@@ -853,7 +864,6 @@ async function loadPublicRatingStats() {
         `;
       }).join('');
     }
-    
     document.getElementById('publicRatingStats').classList.add('show');
   } catch (err) { console.error('Stats error:', err); }
 }
