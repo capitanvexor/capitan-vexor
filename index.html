@@ -18,16 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
-:root {
-  --bg-dark: #0a0a0f;
-  --cyan: #00ffe7;
-  --purple: #a855f7;
-  --pink: #ff2ec4;
-  --text: #ffffff;
-  --text-dim: #a0a0b0;
-  --glass: rgba(255,255,255,0.04);
-  --border: rgba(0,255,231,0.2);
-}
+:root { --bg-dark:#0a0a0f; --cyan:#00ffe7; --purple:#a855f7; --pink:#ff2ec4; --text:#fff; --text-dim:#a0a0b0; --glass:rgba(255,255,255,0.04); --border:rgba(0,255,231,0.2); }
 html { scroll-behavior: smooth; }
 body { background: var(--bg-dark); color: var(--text); min-height: 100vh; line-height: 1.7; overflow-x: hidden; transition: background 0.4s, color 0.4s; }
 
@@ -74,7 +65,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 12px 2
 @keyframes cursorBlink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 .hero-tagline { display: inline-block; padding: 10px 25px; background: linear-gradient(90deg, rgba(0,255,231,0.1), rgba(168,85,247,0.1)); border: 1px solid var(--border); border-radius: 50px; font-weight: 700; color: var(--cyan); margin-bottom: 30px; font-size: 1rem; }
 .hero p { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-dim); max-width: 700px; margin-bottom: 30px; }
-
 .stats { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 40px 0 60px; }
 .stat-box { background: var(--glass); border: 1px solid var(--border); border-radius: 18px; padding: 22px 30px; transition: 0.3s; min-width: 130px; }
 .stat-box:hover { transform: translateY(-8px) scale(1.05); border-color: var(--cyan); box-shadow: 0 15px 40px rgba(0,255,231,0.25); }
@@ -154,272 +144,75 @@ section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
 .guarantee h3 { font-size: 1.4rem; margin-bottom: 15px; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .guarantee p { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 0.9rem; }
 
-/* ===== بخش امتیازدهی جذاب ===== */
-.rating-section {
-  max-width: 750px;
-  margin: 60px auto;
-  padding: 50px 35px 45px;
-  text-align: center;
-  background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,149,0,0.05), rgba(168,85,247,0.08));
-  border: 2px solid rgba(255,204,0,0.4);
-  border-radius: 30px;
-  box-shadow: 0 20px 60px rgba(255,204,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
-  direction: rtl;
-  position: relative;
-  overflow: hidden;
-}
-
-.rating-section::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(255,204,0,0.15) 0%, transparent 60%);
-  animation: ratingBgRotate 20s linear infinite;
-  pointer-events: none;
-}
+/* ===== بخش امتیازدهی ===== */
+.rating-section { max-width: 750px; margin: 60px auto; padding: 50px 35px 45px; text-align: center; background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,149,0,0.05), rgba(168,85,247,0.08)); border: 2px solid rgba(255,204,0,0.4); border-radius: 30px; box-shadow: 0 20px 60px rgba(255,204,0,0.2); direction: rtl; position: relative; overflow: hidden; }
+.rating-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,204,0,0.15) 0%, transparent 60%); animation: ratingBgRotate 20s linear infinite; pointer-events: none; }
 @keyframes ratingBgRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-.rating-section::after {
-  content: '✨ ⭐ ✨';
-  position: absolute;
-  top: 15px; right: 20px;
-  font-size: 1rem;
-  opacity: 0.6;
-  animation: starFloat 3s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes starFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-  50% { transform: translateY(-5px) rotate(10deg); opacity: 1; }
-}
-
-.trophy-icon {
-  font-size: 4rem;
-  display: inline-block;
-  margin-bottom: 15px;
-  animation: trophyBounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 10px 25px rgba(255,204,0,0.5));
-  position: relative;
-  z-index: 1;
-}
-@keyframes trophyBounce {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.1); }
-}
-
-.rating-title {
-  font-size: clamp(1.4rem, 4.5vw, 2rem);
-  font-weight: 900;
-  margin-bottom: 12px;
-  background: linear-gradient(90deg, #ffcc00, #ff9500, #ff2ec4, #ffcc00);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: titleShine 3s ease infinite;
-  position: relative;
-  z-index: 1;
-}
-@keyframes titleShine {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.rating-subtitle {
-  color: var(--text-dim);
-  font-size: 0.95rem;
-  margin-bottom: 35px;
-  position: relative;
-  z-index: 1;
-}
-
-.stars-container {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 25px;
-  direction: ltr;
-  position: relative;
-  z-index: 1;
-  padding: 20px 0;
-}
-
-.stars-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 10% 30%, rgba(255,204,0,0.6) 1.5px, transparent 2px),
-    radial-gradient(circle at 90% 70%, rgba(255,149,0,0.6) 1.5px, transparent 2px),
-    radial-gradient(circle at 30% 80%, rgba(255,204,0,0.5) 1px, transparent 2px),
-    radial-gradient(circle at 70% 20%, rgba(255,149,0,0.5) 1px, transparent 2px);
-  animation: sparkleMove 4s ease-in-out infinite;
-  pointer-events: none;
-  opacity: 0.7;
-}
-@keyframes sparkleMove {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
-  50% { transform: translateY(-3px) scale(1.2); opacity: 1; }
-}
-
-.star {
-  font-size: clamp(2.5rem, 9vw, 4rem);
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  filter: grayscale(1) brightness(0.4);
-  user-select: none;
-  line-height: 1;
-  position: relative;
-  display: inline-block;
-  text-shadow: 0 0 0 rgba(255,204,0,0);
-}
-
-.star:hover,
-.star.hover,
-.star.active {
-  filter: grayscale(0) brightness(1.3);
-  transform: scale(1.25) rotate(-8deg) translateY(-5px);
-  text-shadow: 0 0 30px rgba(255, 204, 0, 1), 0 0 60px rgba(255, 149, 0, 0.7), 0 0 90px rgba(255, 46, 196, 0.4);
-}
-
-.star.hover { animation: starWiggle 0.4s ease; }
-@keyframes starWiggle {
-  0% { transform: scale(1.25) rotate(-8deg) translateY(-5px); }
-  50% { transform: scale(1.3) rotate(8deg) translateY(-8px); }
-  100% { transform: scale(1.25) rotate(-8deg) translateY(-5px); }
-}
-
+.rating-section::after { content: '✨ ⭐ ✨'; position: absolute; top: 15px; right: 20px; font-size: 1rem; opacity: 0.6; animation: starFloat 3s ease-in-out infinite; pointer-events: none; }
+@keyframes starFloat { 0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; } 50% { transform: translateY(-5px) rotate(10deg); opacity: 1; } }
+.trophy-icon { font-size: 4rem; display: inline-block; margin-bottom: 15px; animation: trophyBounce 2s ease-in-out infinite; filter: drop-shadow(0 10px 25px rgba(255,204,0,0.5)); position: relative; z-index: 1; }
+@keyframes trophyBounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-10px) scale(1.1); } }
+.rating-title { font-size: clamp(1.4rem, 4.5vw, 2rem); font-weight: 900; margin-bottom: 12px; background: linear-gradient(90deg, #ffcc00, #ff9500, #ff2ec4, #ffcc00); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: titleShine 3s ease infinite; position: relative; z-index: 1; }
+@keyframes titleShine { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.rating-subtitle { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 30px; position: relative; z-index: 1; }
+.stars-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; direction: ltr; position: relative; z-index: 1; padding: 15px 0; }
+.star { font-size: clamp(2.5rem, 9vw, 4rem); cursor: pointer; transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55); filter: grayscale(1) brightness(0.4); user-select: none; line-height: 1; position: relative; display: inline-block; text-shadow: 0 0 0 rgba(255,204,0,0); }
+.star:hover, .star.hover, .star.active { filter: grayscale(0) brightness(1.3); transform: scale(1.25) rotate(-8deg) translateY(-5px); text-shadow: 0 0 30px rgba(255, 204, 0, 1), 0 0 60px rgba(255, 149, 0, 0.7), 0 0 90px rgba(255, 46, 196, 0.4); }
 .star:active { transform: scale(1.05) rotate(0deg); }
+.rating-stars-text { font-size: 1.1rem; font-weight: 700; color: #ffcc00; margin-top: 8px; min-height: 28px; text-shadow: 0 0 15px rgba(255,204,0,0.6); letter-spacing: 3px; position: relative; z-index: 1; }
 
-.star.active::before {
-  content: '';
-  position: absolute;
-  inset: -10px;
-  background: radial-gradient(circle, rgba(255,204,0,0.4) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: starGlow 1.5s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes starGlow {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
+/* فرم نظر */
+.rating-comment-box { max-width: 550px; margin: 25px auto 0; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+.rating-name-input { width: 100%; padding: 12px 18px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,204,0,0.3); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; }
+.rating-name-input:focus { border-color: #ffcc00; box-shadow: 0 0 20px rgba(255,204,0,0.3); }
+.rating-name-input::placeholder { color: rgba(255,255,255,0.4); }
+.rating-comment-input { width: 100%; padding: 14px 18px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,204,0,0.3); border-radius: 14px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; resize: vertical; min-height: 80px; line-height: 1.7; }
+.rating-comment-input:focus { border-color: #ffcc00; box-shadow: 0 0 20px rgba(255,204,0,0.3); }
+.rating-comment-input::placeholder { color: rgba(255,255,255,0.4); }
+.comment-counter { text-align: left; font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: -6px; padding-left: 5px; }
+.rating-submit-btn { padding: 14px 30px; background: linear-gradient(90deg, #ffcc00, #ff9500); color: #0a0a0f; border: none; border-radius: 50px; font-family: inherit; font-size: 1rem; font-weight: 900; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,204,0,0.4); letter-spacing: 0.5px; }
+.rating-submit-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 40px rgba(255,204,0,0.6); }
+.rating-submit-btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+.rating-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-.rating-stars-text {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #ffcc00;
-  margin-top: 8px;
-  min-height: 28px;
-  text-shadow: 0 0 15px rgba(255,204,0,0.6);
-  letter-spacing: 3px;
-}
+.rating-feedback { min-height: 50px; font-size: 1rem; font-weight: 800; margin-top: 20px; padding: 15px 25px; border-radius: 50px; background: linear-gradient(90deg, rgba(16,185,129,0.15), rgba(0,255,231,0.15)); border: 1px solid rgba(16,185,129,0.4); color: #10b981; opacity: 0; transform: scale(0.8); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); display: inline-block; max-width: 90%; box-shadow: 0 10px 30px rgba(16,185,129,0.2); position: relative; z-index: 1; }
+.rating-feedback.show { opacity: 1; transform: scale(1); }
+@keyframes feedbackPop { 0% { transform: scale(0.5) translateY(20px); opacity: 0; } 60% { transform: scale(1.1) translateY(-5px); opacity: 1; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
 
-.rating-feedback {
-  min-height: 50px;
-  font-size: 1.05rem;
-  font-weight: 800;
-  margin-top: 15px;
-  padding: 15px 25px;
-  border-radius: 50px;
-  background: linear-gradient(90deg, rgba(16,185,129,0.15), rgba(0,255,231,0.15));
-  border: 1px solid rgba(16,185,129,0.4);
-  color: #10b981;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  display: inline-block;
-  max-width: 90%;
-  box-shadow: 0 10px 30px rgba(16,185,129,0.2);
-}
-
-.rating-feedback.show { opacity: 1; transform: scale(1); animation: feedbackPop 0.6s ease; }
-@keyframes feedbackPop {
-  0% { transform: scale(0.5) translateY(20px); opacity: 0; }
-  60% { transform: scale(1.1) translateY(-5px); opacity: 1; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-.public-rating-stats {
-  display: none;
-  margin-top: 35px;
-  padding-top: 30px;
-  border-top: 1px dashed rgba(255,204,0,0.3);
-  position: relative;
-  z-index: 1;
-}
+/* آمار و نظرات عمومی */
+.public-rating-stats { display: none; margin-top: 35px; padding-top: 30px; border-top: 1px dashed rgba(255,204,0,0.3); position: relative; z-index: 1; }
 .public-rating-stats.show { display: block; animation: statsFadeIn 0.8s ease; }
-@keyframes statsFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes statsFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.public-stats-wrap { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; }
+.public-stat { text-align: center; padding: 15px 25px; background: rgba(255,204,0,0.08); border-radius: 18px; border: 1px solid rgba(255,204,0,0.2); transition: 0.3s; min-width: 120px; }
+.public-stat:hover { transform: translateY(-5px); border-color: #ffcc00; box-shadow: 0 10px 30px rgba(255,204,0,0.3); }
+.public-stat .val { font-size: 2.3rem; font-weight: 900; background: linear-gradient(135deg, #ffcc00, #ff9500); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255,204,0,0.5)); }
+.public-stat .lbl { font-size: 0.8rem; color: var(--text-dim); margin-top: 5px; }
+.public-stats-divider { width: 1px; height: 50px; background: linear-gradient(180deg, transparent, rgba(255,204,0,0.5), transparent); }
 
-.public-stats-wrap {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.public-stat {
-  text-align: center;
-  padding: 15px 25px;
-  background: rgba(255,204,0,0.08);
-  border-radius: 18px;
-  border: 1px solid rgba(255,204,0,0.2);
-  transition: 0.3s;
-  min-width: 120px;
-}
-.public-stat:hover {
-  transform: translateY(-5px);
-  border-color: #ffcc00;
-  box-shadow: 0 10px 30px rgba(255,204,0,0.3);
-}
-
-.public-stat .val {
-  font-size: 2.3rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, #ffcc00, #ff9500);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(255,204,0,0.5));
-}
-.public-stat .lbl {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  margin-top: 5px;
-}
-
-.public-stats-divider {
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(180deg, transparent, rgba(255,204,0,0.5), transparent);
-}
+/* لیست نظرات */
+.public-comments-list { margin-top: 30px; display: grid; gap: 12px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.public-comment-item { padding: 15px 18px; background: linear-gradient(135deg, rgba(255,204,0,0.06), rgba(255,149,0,0.04)); border: 1px solid rgba(255,204,0,0.2); border-radius: 16px; text-align: right; position: relative; transition: 0.3s; animation: commentFadeIn 0.5s ease; }
+.public-comment-item:hover { border-color: rgba(255,204,0,0.4); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,204,0,0.15); }
+@keyframes commentFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.public-comment-item .comment-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.public-comment-item .comment-user { font-weight: 800; color: #ffcc00; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; }
+.public-comment-item .comment-stars { font-size: 0.85rem; letter-spacing: 1px; }
+.public-comment-item .comment-text { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.7; word-wrap: break-word; }
+.public-comment-item .comment-date { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 6px; }
+.public-comment-item::before { content: '"'; position: absolute; top: 5px; right: 12px; font-size: 2.5rem; color: rgba(255,204,0,0.15); font-family: serif; line-height: 1; }
 
 @media (max-width: 600px) {
   .rating-section { padding: 35px 20px 30px; margin: 40px 15px; }
-  .stars-container { gap: 6px; padding: 15px 0; }
+  .stars-container { gap: 6px; padding: 10px 0; }
   .public-stats-wrap { gap: 15px; }
   .public-stat { padding: 12px 18px; min-width: 100px; }
   .trophy-icon { font-size: 3rem; }
 }
 
 /* کانفتی */
-.confetti-piece {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  pointer-events: none;
-  z-index: 99998;
-  animation: confettiFall 3s linear forwards;
-}
-@keyframes confettiFall {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-}
+.confetti-piece { position: fixed; width: 10px; height: 10px; pointer-events: none; z-index: 99998; animation: confettiFall 3s linear forwards; }
+@keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
 footer { background: rgba(10,10,15,0.9); border-top: 1px solid var(--border); padding: 40px 20px 25px; text-align: center; margin-top: 50px; transition: background 0.4s; }
 .footer-logo { font-size: 1.3rem; font-weight: 900; background: linear-gradient(90deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px; }
@@ -476,7 +269,6 @@ body.theme-light nav { background: rgba(245,240,232,0.95); }
 body.theme-light footer { background: rgba(245,240,232,0.95); }
 body.theme-light .chat-window { background: rgba(255,255,255,0.98); }
 body.theme-light .chat-messages { background: rgba(0,0,0,0.03); }
-
 body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; --glass: rgba(255,255,255,0.07); --border: rgba(255,100,200,0.35); --cyan: #00d4ff; --purple: #ff2ec4; --pink: #ffdd00; }
 
 @media (max-width: 768px) {
@@ -627,13 +419,23 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
   <p class="rating-subtitle">نظر شما برای ما ارزشمنده ❤️</p>
 
   <div class="stars-container" id="starsContainer">
-    <span class="star" data-value="1" onclick="submitRating(1)">⭐</span>
-    <span class="star" data-value="2" onclick="submitRating(2)">⭐</span>
-    <span class="star" data-value="3" onclick="submitRating(3)">⭐</span>
-    <span class="star" data-value="4" onclick="submitRating(4)">⭐</span>
-    <span class="star" data-value="5" onclick="submitRating(5)">⭐</span>
+    <span class="star" data-value="1" onclick="selectStar(1)">⭐</span>
+    <span class="star" data-value="2" onclick="selectStar(2)">⭐</span>
+    <span class="star" data-value="3" onclick="selectStar(3)">⭐</span>
+    <span class="star" data-value="4" onclick="selectStar(4)">⭐</span>
+    <span class="star" data-value="5" onclick="selectStar(5)">⭐</span>
   </div>
   <div class="rating-stars-text" id="ratingStarsText"></div>
+
+  <div class="rating-comment-box" id="commentBox">
+    <input type="text" id="visitorNameInput2" class="rating-name-input" placeholder="اسمت (اختیاری)" maxlength="30">
+    <textarea id="ratingCommentInput" class="rating-comment-input" placeholder="نظرت رو هم بنویس... (اختیاری)" maxlength="300" rows="3"></textarea>
+    <div class="comment-counter"><span id="commentCounter">0</span>/300</div>
+    <button class="rating-submit-btn" id="ratingSubmitBtn" onclick="submitRating()">
+      <span id="submitBtnText">ارسال امتیاز و نظر</span> ✨
+    </button>
+  </div>
+
   <div class="rating-feedback" id="ratingFeedback"></div>
 
   <div class="public-rating-stats" id="publicRatingStats">
@@ -648,6 +450,7 @@ body.theme-colorful { --bg-dark: #1a0533; --text: #ffffff; --text-dim: #d4c0ff; 
         <div class="lbl">کاربر راضی</div>
       </div>
     </div>
+    <div id="publicCommentsList" class="public-comments-list"></div>
   </div>
 </section>
 
@@ -725,8 +528,7 @@ function playClick() {
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
     oscillator.connect(gainNode); gainNode.connect(audioContext.destination);
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(900, now);
+    oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(900, now);
     oscillator.frequency.exponentialRampToValueAtTime(400, now + 0.08);
     gainNode.gain.setValueAtTime(0.15, now);
     gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
@@ -890,18 +692,10 @@ async function loadAnnouncement() {
 }
 window.addEventListener('load', () => { setTimeout(loadAnnouncement, 500); });
 
-// ===== امتیازدهی =====
-const ratingMessages = {
-  1: '😢 متأسفیم که راضی نبودی',
-  2: '😐 امیدواریم بهتر بشیم',
-  3: '🙂 ممنون از نظرت',
-  4: '😊 خوشحالیم که راضی بودی',
-  5: '🤩 وای! فوق‌العاده! ممنون ❤️'
-};
-
+// ===== امتیازدهی با نظر =====
+let selectedStars = 0;
 let ratingSubmitted = false;
 
-// کانفتی
 function createConfetti() {
   const colors = ['#ffcc00', '#ff9500', '#ff2ec4', '#00ffe7', '#a855f7', '#10b981'];
   for (let i = 0; i < 50; i++) {
@@ -922,46 +716,88 @@ function createConfetti() {
   }
 }
 
+function selectStar(val) {
+  if (ratingSubmitted) return;
+  selectedStars = val;
+  document.querySelectorAll('.star').forEach((s, i) => {
+    s.classList.toggle('active', i < val);
+  });
+  document.getElementById('ratingStarsText').textContent = '⭐'.repeat(val);
+}
+
 document.querySelectorAll('.star').forEach(star => {
   star.addEventListener('mouseenter', () => {
     if (ratingSubmitted) return;
     const val = parseInt(star.dataset.value);
     document.querySelectorAll('.star').forEach((s, i) => { s.classList.toggle('hover', i < val); });
-    document.getElementById('ratingStarsText').textContent = '⭐'.repeat(val);
   });
 });
 document.getElementById('starsContainer')?.addEventListener('mouseleave', () => {
   if (ratingSubmitted) return;
   document.querySelectorAll('.star').forEach(s => s.classList.remove('hover'));
-  document.getElementById('ratingStarsText').textContent = '';
 });
 
-async function submitRating(stars) {
+document.getElementById('ratingCommentInput')?.addEventListener('input', (e) => {
+  document.getElementById('commentCounter').textContent = e.target.value.length;
+});
+
+async function submitRating() {
   if (ratingSubmitted) return;
-  if (stars < 1 || stars > 5) return;
-  ratingSubmitted = true;
-  document.querySelectorAll('.star').forEach((s, i) => { s.classList.toggle('active', i < stars); });
-  document.getElementById('ratingStarsText').textContent = '⭐'.repeat(stars);
+  if (selectedStars < 1) {
+    const feedback = document.getElementById('ratingFeedback');
+    feedback.textContent = '⚠️ لطفاً اول ستاره انتخاب کن';
+    feedback.style.color = '#ffcc00';
+    feedback.classList.add('show');
+    setTimeout(() => { feedback.classList.remove('show'); feedback.style.color = ''; }, 2500);
+    return;
+  }
   
-  // کانفتی فقط برای 4 و 5 ستاره
-  if (stars >= 4) createConfetti();
+  ratingSubmitted = true;
+  const name = document.getElementById('visitorNameInput2').value.trim();
+  const comment = document.getElementById('ratingCommentInput').value.trim();
+  
+  if (selectedStars >= 4) createConfetti();
+  
+  const btn = document.getElementById('ratingSubmitBtn');
+  const btnText = document.getElementById('submitBtnText');
+  btn.disabled = true;
+  btnText.textContent = '⏳ در حال ارسال...';
   
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings`, { 
       method: 'POST', 
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({ stars: stars, is_approved: false })
+      body: JSON.stringify({ 
+        stars: selectedStars, 
+        is_approved: false,
+        comment: comment || null,
+        visitor_name: name || null
+      })
     });
+    
     const feedback = document.getElementById('ratingFeedback');
+    
     if (res.ok) {
-      feedback.textContent = '✅ ' + (ratingMessages[stars] || 'ممنون از نظرت! ❤️');
+      const messages = {
+        1: '😢 متأسفیم که راضی نبودی. نظرت ثبت شد و تایید میشه ❤️',
+        2: '😐 امیدواریم بهتر بشیم. ممنون از نظرت',
+        3: '🙂 ممنون از نظرت! ثبت شد و تایید میشه',
+        4: '😊 خوشحالیم که راضی بودی! ممنون ❤️',
+        5: '🤩 وای! فوق‌العاده! ممنون از حمایتت ❤️'
+      };
+      feedback.textContent = '✅ ' + (messages[selectedStars] || 'ممنون از نظرت!');
       feedback.classList.add('show');
+      
       setTimeout(() => {
         ratingSubmitted = false;
+        selectedStars = 0;
         document.querySelectorAll('.star').forEach(s => s.classList.remove('active', 'hover'));
         document.getElementById('ratingStarsText').textContent = '';
+        document.getElementById('ratingCommentInput').value = '';
+        document.getElementById('visitorNameInput2').value = '';
+        document.getElementById('commentCounter').textContent = '0';
         feedback.classList.remove('show');
-      }, 4000);
+      }, 5000);
     } else {
       feedback.textContent = '❌ خطا، دوباره تلاش کن';
       feedback.style.color = '#ff3860';
@@ -973,24 +809,60 @@ async function submitRating(stars) {
     document.getElementById('ratingFeedback').textContent = '❌ خطا در ارسال';
     document.getElementById('ratingFeedback').classList.add('show');
     setTimeout(() => { ratingSubmitted = false; document.getElementById('ratingFeedback').classList.remove('show'); }, 3000);
+  } finally {
+    btn.disabled = false;
+    btnText.textContent = 'ارسال امتیاز و نظر';
   }
 }
 
-// ===== نمایش آمار امتیازهای تاییدشده =====
+// ===== نمایش آمار و نظرات تاییدشده =====
 async function loadPublicRatingStats() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=stars&is_approved=eq.true`, { 
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=*&is_approved=eq.true&order=id.desc&limit=50`, { 
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } 
     });
     const data = await res.json();
     if (!data || data.length === 0) return;
+    
     const total = data.length;
     const sum = data.reduce((s, r) => s + r.stars, 0);
     const avg = (sum / total).toFixed(1);
+    
     document.getElementById('publicAvg').textContent = avg;
     document.getElementById('publicCount').textContent = total;
+    
+    const withComments = data.filter(r => r.comment && r.comment.trim().length > 0).slice(0, 10);
+    
+    const commentsList = document.getElementById('publicCommentsList');
+    if (withComments.length === 0) {
+      commentsList.innerHTML = '';
+    } else {
+      commentsList.innerHTML = withComments.map(r => {
+        const date = new Date(r.created_at).toLocaleString('fa-IR', { month:'long', day:'numeric' });
+        const stars = '⭐'.repeat(r.stars);
+        const name = r.visitor_name || 'کاربر ناشناس';
+        return `
+          <div class="public-comment-item">
+            <div class="comment-header">
+              <div class="comment-user"><span>👤 ${escapeHtml(name)}</span></div>
+              <div class="comment-stars">${stars}</div>
+            </div>
+            <div class="comment-text">${escapeHtml(r.comment)}</div>
+            <div class="comment-date">🕐 ${date}</div>
+          </div>
+        `;
+      }).join('');
+    }
+    
     document.getElementById('publicRatingStats').classList.add('show');
   } catch (err) { console.error('Stats error:', err); }
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 window.addEventListener('load', () => { setTimeout(loadPublicRatingStats, 600); });
