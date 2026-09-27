@@ -232,6 +232,26 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
           </optgroup>
         </select>
       </div>
+
+      <!-- ویژگی‌های اکانت (چنج/سیو/خام) -->
+      <div id="features-box" style="margin-top:15px; padding:15px; background:linear-gradient(135deg,rgba(0,255,231,0.05),rgba(168,85,247,0.05)); border:2px dashed var(--cyan); border-radius:14px;">
+        <label style="color:var(--cyan); font-weight:800; margin-bottom:12px; display:block; font-size:0.95rem;">🎯 ویژگی‌های اکانت</label>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <label style="display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(0,255,231,0.08); border:1px solid var(--border); border-radius:10px; cursor:pointer; flex:1; min-width:130px;">
+            <input type="checkbox" id="pHasChange" style="width:auto; cursor:pointer; accent-color:var(--cyan);">
+            <span style="font-weight:700; color:var(--text);">🔄 چنج</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(168,85,247,0.08); border:1px solid var(--border); border-radius:10px; cursor:pointer; flex:1; min-width:130px;">
+            <input type="checkbox" id="pHasSave" style="width:auto; cursor:pointer; accent-color:var(--purple);">
+            <span style="font-weight:700; color:var(--text);">💾 سیو</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(255,204,0,0.08); border:1px solid var(--border); border-radius:10px; cursor:pointer; flex:1; min-width:130px;">
+            <input type="checkbox" id="pIsRaw" style="width:auto; cursor:pointer; accent-color:#ffcc00;">
+            <span style="font-weight:700; color:var(--text);">✨ خام</span>
+          </label>
+        </div>
+      </div>
+
       <div id="fields-clash" class="form-row three" style="display:none;">
         <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="pTownHall" placeholder="14"></div>
         <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="pBuilder" placeholder="10"></div>
@@ -301,11 +321,13 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <div class="form-group"><label>📝 مشخصات ۱</label><input type="text" id="pFree1" placeholder="مثلاً: لول"></div>
         <div class="form-group"><label>📝 مشخصات ۲</label><input type="text" id="pFree2" placeholder="مثلاً: رنک"></div>
       </div>
+
       <div class="form-group" style="margin-top:15px; padding:15px; background:rgba(168,85,247,0.05); border:1px dashed var(--purple); border-radius:12px;">
         <label style="color:var(--purple);">⭐ فیلدهای دلخواه</label>
         <div id="customFieldsContainer"></div>
         <button type="button" onclick="addCustomField()" style="margin-top:8px; padding:8px 16px; background:rgba(168,85,247,0.2); border:1px solid var(--purple); color:var(--purple); border-radius:8px; cursor:pointer; font-family:inherit; font-weight:600; font-size:0.85rem;">➕ افزودن فیلد دلخواه</button>
       </div>
+
       <div class="form-row">
         <div class="form-group"><label>🆔 کد محصول</label><input type="text" id="pCode" placeholder="232" dir="ltr"></div>
         <div class="form-group"><label>💰 قیمت (تومان) *</label><input type="number" id="pPrice" placeholder="5800000"></div>
@@ -455,25 +477,15 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <button class="save-btn" onclick="loadRatings()" style="flex:1;">🔄 بروزرسانی</button>
       </div>
     </div>
-
     <div class="card" style="border: 2px solid #ffcc00;">
       <div class="card-title" style="color: #ffcc00;">⏳ در انتظار تایید</div>
-      <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 15px;">
-        💡 این امتیازها هنوز توی سایت نشون داده نمیشن. تایید کن تا نمایش داده بشن
-      </p>
-      <div id="pendingRatingsList">
-        <p style="text-align:center; color: #666; padding: 20px;">در حال بارگذاری...</p>
-      </div>
+      <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 15px;">💡 این امتیازها هنوز توی سایت نشون داده نمیشن. تایید کن تا نمایش داده بشن</p>
+      <div id="pendingRatingsList"><p style="text-align:center; color: #666; padding: 20px;">در حال بارگذاری...</p></div>
     </div>
-
     <div class="card" style="border: 2px solid #10b981;">
       <div class="card-title" style="color: #10b981;">✅ تاییدشده‌ها</div>
-      <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 15px;">
-        💡 این امتیازها توی سایت نمایش داده میشن
-      </p>
-      <div id="approvedRatingsList">
-        <p style="text-align:center; color: #666; padding: 20px;">در حال بارگذاری...</p>
-      </div>
+      <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 15px;">💡 این امتیازها توی سایت نمایش داده میشن</p>
+      <div id="approvedRatingsList"><p style="text-align:center; color: #666; padding: 20px;">در حال بارگذاری...</p></div>
     </div>
   </div>
 
@@ -521,6 +533,26 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <option value="آیتم کلش رویال">🎁 آیتم کلش رویال</option>
       </select>
     </div>
+
+    <!-- ویژگی‌های اکانت در مودال ویرایش -->
+    <div class="form-group" style="padding:15px; background:linear-gradient(135deg,rgba(0,255,231,0.05),rgba(168,85,247,0.05)); border:2px dashed var(--cyan); border-radius:14px;">
+      <label style="color:var(--cyan); font-weight:800; margin-bottom:12px; display:block;">🎯 ویژگی‌های اکانت</label>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <label style="display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(0,255,231,0.08); border:1px solid var(--border); border-radius:10px; cursor:pointer; flex:1; min-width:120px;">
+          <input type="checkbox" id="editHasChange" style="width:auto; cursor:pointer; accent-color:var(--cyan);">
+          <span style="font-weight:700;">🔄 چنج</span>
+        </label>
+        <label style="display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(168,85,247,0.08); border:1px solid var(--border); border-radius:10px; cursor:pointer; flex:1; min-width:120px;">
+          <input type="checkbox" id="editHasSave" style="width:auto; cursor:pointer; accent-color:var(--purple);">
+          <span style="font-weight:700;">💾 سیو</span>
+        </label>
+        <label style="display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(255,204,0,0.08); border:1px solid var(--border); border-radius:10px; cursor:pointer; flex:1; min-width:120px;">
+          <input type="checkbox" id="editIsRaw" style="width:auto; cursor:pointer; accent-color:#ffcc00;">
+          <span style="font-weight:700;">✨ خام</span>
+        </label>
+      </div>
+    </div>
+
     <div class="form-row three">
       <div class="form-group"><label>🏰 تاون هال</label><input type="number" id="editTownHall"></div>
       <div class="form-group"><label>🏗️ لول بیلدر</label><input type="number" id="editBuilder"></div>
@@ -783,7 +815,10 @@ async function addProduct() {
       price: parseInt(price),
       price_usd: document.getElementById('pPriceUsd').value.trim(),
       description: document.getElementById('pDesc').value.trim(),
-      status: document.getElementById('pStatus').value, images: imageUrls
+      status: document.getElementById('pStatus').value, images: imageUrls,
+      has_change: document.getElementById('pHasChange').checked,
+      has_save: document.getElementById('pHasSave').checked,
+      is_raw: document.getElementById('pIsRaw').checked
     };
     if (cat === 'کلش') {
       product.town_hall = parseInt(document.getElementById('pTownHall').value) || null;
@@ -835,6 +870,9 @@ async function addProduct() {
         }
       }
       ['pTitle','pSlogan','pTownHall','pBuilder','pNameChanges','pGems','pStarBonus','pBuilderCount','pRank','pPlayerLevel','pSkins','pCp','pBattlePass','pMythic','pLegendary','pItemType','pItemAmount','pFFItemAmount','pFFItemDuration','pRoyalItemAmount','pRoyalItemDuration','pArena','pTrophies','pKingLevel','pFFRank','pFFLevel','pFFGems','pFree1','pFree2','pCode','pPrice','pPriceUsd','pDesc'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      document.getElementById('pHasChange').checked = false;
+      document.getElementById('pHasSave').checked = false;
+      document.getElementById('pIsRaw').checked = false;
       document.getElementById('customFieldsContainer').innerHTML = '';
       customFieldsCount = 0;
       selectedImages = []; renderImagePreviews(); loadProducts();
@@ -860,7 +898,15 @@ function renderProducts(products) {
     const img = p.images && p.images[0] ? `<img src="${p.images[0]}" class="product-thumb">` : '<div style="font-size:2rem;">🎯</div>';
     const statusClass = p.status === 'موجود' ? 'available' : (p.status === 'فروش رفته' ? 'sold' : 'unavailable');
     const statusIcon = p.status === 'موجود' ? '✅' : (p.status === 'فروش رفته' ? '🔴' : '❌');
-    return `<div class="product-item">${img}<div class="product-details"><h4>${p.title}</h4><p>${p.category} | کد: ${p.account_code || '-'}</p></div><div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}</div><span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">${statusIcon} ${p.status}</span><div class="product-actions"><button class="btn-icon" onclick="openEditModal(${p.id})">✏️</button><button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button></div></div>`;
+    let featHtml = '';
+    if (p.has_change || p.has_save || p.is_raw) {
+      featHtml = '<div style="display:flex; gap:5px; flex-wrap:wrap; margin-top:6px;">';
+      if (p.has_change) featHtml += '<span style="padding:3px 10px; background:rgba(0,255,231,0.12); border:1px solid var(--cyan); color:var(--cyan); border-radius:50px; font-size:0.7rem; font-weight:700;">🔄 چنج</span>';
+      if (p.has_save) featHtml += '<span style="padding:3px 10px; background:rgba(168,85,247,0.12); border:1px solid var(--purple); color:var(--purple); border-radius:50px; font-size:0.7rem; font-weight:700;">💾 سیو</span>';
+      if (p.is_raw) featHtml += '<span style="padding:3px 10px; background:rgba(255,204,0,0.12); border:1px solid #ffcc00; color:#ffcc00; border-radius:50px; font-size:0.7rem; font-weight:700;">✨ خام</span>';
+      featHtml += '</div>';
+    }
+    return `<div class="product-item">${img}<div class="product-details"><h4>${p.title}</h4><p>${p.category} | کد: ${p.account_code || '-'}</p>${featHtml}</div><div class="product-price">${Number(p.price).toLocaleString('fa-IR')} ت ${p.price_usd ? '<br><span style="font-size:0.75rem;color:#a855f7;">' + p.price_usd + '</span>' : ''}</div><span class="status-badge ${statusClass}" onclick="toggleStatus(${p.id}, '${p.status}')">${statusIcon} ${p.status}</span><div class="product-actions"><button class="btn-icon" onclick="openEditModal(${p.id})">✏️</button><button class="btn-icon danger" onclick="deleteProduct(${p.id})">🗑️</button></div></div>`;
   }).join('');
 }
 async function toggleStatus(id, currentStatus) {
@@ -898,6 +944,9 @@ function openEditModal(id) {
   document.getElementById('editPriceUsd').value = p.price_usd || '';
   document.getElementById('editStatus').value = p.status || 'موجود';
   document.getElementById('editDesc').value = p.description || '';
+  document.getElementById('editHasChange').checked = p.has_change || false;
+  document.getElementById('editHasSave').checked = p.has_save || false;
+  document.getElementById('editIsRaw').checked = p.is_raw || false;
   const images = p.images || [];
   document.getElementById('editImages').value = JSON.stringify(images);
   renderExistingImages(images);
@@ -946,6 +995,9 @@ async function saveEdit() {
     const updateData = {
       title, slogan: document.getElementById('editSlogan').value.trim(),
       category: document.getElementById('editCategory').value,
+      has_change: document.getElementById('editHasChange').checked,
+      has_save: document.getElementById('editHasSave').checked,
+      is_raw: document.getElementById('editIsRaw').checked,
       town_hall: parseInt(document.getElementById('editTownHall').value) || null,
       builder_level: parseInt(document.getElementById('editBuilder').value) || null,
       name_changes: parseInt(document.getElementById('editNameChanges').value) || null,
@@ -1296,11 +1348,8 @@ async function deleteAnnouncement() {
 // ===== Ratings =====
 async function loadRatings() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=*&order=id.desc&limit=500`, { 
-      headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } 
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?select=*&order=id.desc&limit=500`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
     const data = await res.json();
-    
     if (!data || data.length === 0) {
       document.getElementById('avgRating').textContent = '0.0';
       document.getElementById('totalRatings').textContent = '0';
@@ -1310,18 +1359,14 @@ async function loadRatings() {
       document.getElementById('approvedRatingsList').innerHTML = '<p style="text-align:center;color:#666;padding:20px;">لیست خالیه</p>';
       return;
     }
-    
     const approved = data.filter(r => r.is_approved === true);
     const pending = data.filter(r => r.is_approved !== true);
-    
     const total = approved.length;
     const sum = approved.reduce((s, r) => s + r.stars, 0);
     const avg = total > 0 ? (sum / total).toFixed(1) : '0.0';
-    
     document.getElementById('avgRating').textContent = avg;
     document.getElementById('totalRatings').textContent = total;
     document.getElementById('pendingCount').textContent = pending.length;
-    
     if (total > 0) {
       const distribution = { 1:0, 2:0, 3:0, 4:0, 5:0 };
       approved.forEach(r => { if (r.stars >= 1 && r.stars <= 5) distribution[r.stars]++; });
@@ -1338,7 +1383,6 @@ async function loadRatings() {
     } else {
       document.getElementById('ratingsChart').innerHTML = '<p style="text-align:center;color:#666;padding:20px;">هنوز امتیاز تاییدشده‌ای نیست</p>';
     }
-    
     if (pending.length === 0) {
       document.getElementById('pendingRatingsList').innerHTML = '<p style="text-align:center; color: #10b981; padding: 20px;">✨ همه امتیازها تایید شدن!</p>';
     } else {
@@ -1348,23 +1392,9 @@ async function loadRatings() {
         const starColor = r.stars <= 2 ? '#ff3860' : (r.stars === 3 ? '#ffcc00' : '#10b981');
         const nameHtml = r.visitor_name ? `<div style="font-size:0.85rem; color:#ffcc00; font-weight:700; margin-top:8px;">👤 ${escapeHtml(r.visitor_name)}</div>` : '';
         const commentHtml = r.comment ? `<div style="margin-top: 10px; padding: 10px 14px; background: rgba(0,0,0,0.3); border-right: 3px solid var(--cyan); border-radius: 8px; font-size: 0.9rem; line-height: 1.7; color: var(--text);">💬 "${escapeHtml(r.comment)}"</div>` : '<div style="margin-top: 8px; color: #666; font-size: 0.8rem;">— بدون نظر —</div>';
-        return `
-          <div style="padding:14px; background:rgba(255,200,0,0.08); border:1px solid #ffcc00; border-radius:12px; margin-bottom:10px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-              <div style="font-size:1.1rem; color:${starColor};">${stars}</div>
-              <div style="color:var(--text-dim); font-size:0.8rem;">🕐 ${date}</div>
-            </div>
-            ${nameHtml}
-            ${commentHtml}
-            <div style="display:flex; gap:8px; margin-top: 12px;">
-              <button onclick="approveRating(${r.id})" style="flex:1; padding:9px 16px; background:rgba(16,185,129,0.2); border:1px solid #10b981; color:#10b981; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">✅ تایید</button>
-              <button onclick="deleteRating(${r.id})" style="flex:1; padding:9px 14px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">🗑️ حذف</button>
-            </div>
-          </div>
-        `;
+        return `<div style="padding:14px; background:rgba(255,200,0,0.08); border:1px solid #ffcc00; border-radius:12px; margin-bottom:10px;"><div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;"><div style="font-size:1.1rem; color:${starColor};">${stars}</div><div style="color:var(--text-dim); font-size:0.8rem;">🕐 ${date}</div></div>${nameHtml}${commentHtml}<div style="display:flex; gap:8px; margin-top: 12px;"><button onclick="approveRating(${r.id})" style="flex:1; padding:9px 16px; background:rgba(16,185,129,0.2); border:1px solid #10b981; color:#10b981; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">✅ تایید</button><button onclick="deleteRating(${r.id})" style="flex:1; padding:9px 14px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">🗑️ حذف</button></div></div>`;
       }).join('');
     }
-    
     if (approved.length === 0) {
       document.getElementById('approvedRatingsList').innerHTML = '<p style="text-align:center; color: #666; padding: 20px;">هنوز امتیاز تاییدشده‌ای نیست</p>';
     } else {
@@ -1373,61 +1403,30 @@ async function loadRatings() {
         const stars = '⭐'.repeat(r.stars);
         const nameHtml = r.visitor_name ? `<div style="font-size:0.85rem; color:#10b981; font-weight:700; margin-top:8px;">👤 ${escapeHtml(r.visitor_name)}</div>` : '';
         const commentHtml = r.comment ? `<div style="margin-top: 10px; padding: 10px 14px; background: rgba(0,0,0,0.3); border-right: 3px solid #10b981; border-radius: 8px; font-size: 0.9rem; line-height: 1.7; color: var(--text);">💬 "${escapeHtml(r.comment)}"</div>` : '<div style="margin-top: 8px; color: #666; font-size: 0.8rem;">— بدون نظر —</div>';
-        return `
-          <div style="padding:14px; background:rgba(16,185,129,0.08); border:1px solid #10b981; border-radius:12px; margin-bottom:10px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-              <div style="font-size:1.1rem; color:#10b981;">${stars}</div>
-              <div style="color:var(--text-dim); font-size:0.8rem;">🕐 ${date}</div>
-            </div>
-            ${nameHtml}
-            ${commentHtml}
-            <div style="display:flex; gap:8px; margin-top: 12px;">
-              <button onclick="unapproveRating(${r.id})" style="flex:1; padding:9px 14px; background:rgba(255,200,0,0.15); border:1px solid #ffcc00; color:#ffcc00; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">⏳ لغو تایید</button>
-              <button onclick="deleteRating(${r.id})" style="flex:1; padding:9px 14px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">🗑️ حذف</button>
-            </div>
-          </div>
-        `;
+        return `<div style="padding:14px; background:rgba(16,185,129,0.08); border:1px solid #10b981; border-radius:12px; margin-bottom:10px;"><div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;"><div style="font-size:1.1rem; color:#10b981;">${stars}</div><div style="color:var(--text-dim); font-size:0.8rem;">🕐 ${date}</div></div>${nameHtml}${commentHtml}<div style="display:flex; gap:8px; margin-top: 12px;"><button onclick="unapproveRating(${r.id})" style="flex:1; padding:9px 14px; background:rgba(255,200,0,0.15); border:1px solid #ffcc00; color:#ffcc00; border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">⏳ لغو تایید</button><button onclick="deleteRating(${r.id})" style="flex:1; padding:9px 14px; background:rgba(255,56,96,0.15); border:1px solid var(--danger); color:var(--danger); border-radius:10px; cursor:pointer; font-family:inherit; font-weight:700; font-size:0.85rem;">🗑️ حذف</button></div></div>`;
       }).join('');
     }
-    
-  } catch (err) { 
-    console.error('Load ratings error:', err); 
-    showStatus('❌ خطا در بارگذاری', 'error'); 
-  }
+  } catch (err) { console.error('Load ratings error:', err); showStatus('❌ خطا در بارگذاری', 'error'); }
 }
-
 async function approveRating(id) {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, {
-      method: 'PATCH',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ is_approved: true })
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' }, body:JSON.stringify({ is_approved: true }) });
     if (res.ok) { showStatus('✅ امتیاز تایید شد!', 'success'); loadRatings(); }
-    else { showStatus('❌ خطا در تایید', 'error'); }
+    else { const errText = await res.text(); console.error('Approval error:', errText); showStatus('❌ خطا در تایید', 'error'); }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
-
 async function unapproveRating(id) {
   if (!confirm('لغو تایید کنم؟')) return;
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, {
-      method: 'PATCH',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ is_approved: false })
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, { method:'PATCH', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}`, 'Content-Type':'application/json' }, body:JSON.stringify({ is_approved: false }) });
     if (res.ok) { showStatus('⏳ تایید لغو شد', 'success'); loadRatings(); }
     else { showStatus('❌ خطا', 'error'); }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
 }
-
 async function deleteRating(id) {
   if (!confirm('مطمئنی این امتیاز رو کلا حذف کنی؟')) return;
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, {
-      method: 'DELETE',
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-    });
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/ratings?id=eq.${id}`, { method:'DELETE', headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
     if (res.ok) { showStatus('🗑️ امتیاز حذف شد', 'success'); loadRatings(); }
     else { showStatus('❌ خطا در حذف', 'error'); }
   } catch (err) { showStatus('❌ خطا: ' + err.message, 'error'); }
