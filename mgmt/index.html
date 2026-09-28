@@ -396,11 +396,8 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
       <div class="form-group"><label>📱 شماره تماس</label><input type="text" id="phone" placeholder="09388499513" dir="ltr"></div>
       <div class="form-group"><label>💬 آیدی روبیکا</label><input type="text" id="rubika" placeholder="oooo1219" dir="ltr"></div>
       <div class="form-group"><label>✈️ آیدی تلگرام (اختیاری)</label><input type="text" id="telegram" placeholder="username" dir="ltr"></div>
-      
-      <!-- فیلدهای اضافه شده: واتساپ و اینستاگرام -->
       <div class="form-group"><label>🟢 شماره واتساپ (اختیاری)</label><input type="text" id="whatsapp" placeholder="09123456789" dir="ltr"></div>
       <div class="form-group"><label>📸 آیدی اینستاگرام (اختیاری)</label><input type="text" id="instagram" placeholder="username" dir="ltr"></div>
-      
       <button class="save-btn" onclick="saveSettings()">💾 ذخیره</button>
     </div>
   </div>
@@ -502,7 +499,7 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
         <button class="save-btn" onclick="changeCredentials()">💾 ذخیره تغییرات</button>
       </div>
       <div style="margin-top:20px; padding:15px; background:rgba(0,255,231,0.05); border:1px solid var(--border); border-radius:12px; font-size:0.85rem; color:var(--text-dim); line-height:1.8;">
-        💡 <strong style="color:var(--cyan);">پیش‌فرض:</strong> 👤 admin / 🔑 vexor2024
+        💡 <strong style="color:var(--cyan);">توجه:</strong> تغییرات رمز روی همه دستگاه‌ها اعمال میشه (از دیتابیس Supabase خونده میشه).
       </div>
     </div>
   </div>
@@ -613,8 +610,6 @@ body { background:var(--bg-dark); color:var(--text); min-height:100vh; overflow-
 const SUPABASE_URL = 'https://pvghoflyhkppgpralypc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2hvZmx5aGtwcGdwcmFseXBjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjcwODIsImV4cCI6MjEwNTkwMzA4Mn0.yaYfCSXUegLwB3AQDuj733xyCZK49J95W2Gey6EAiWw';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const DEFAULT_USERNAME = 'admin';
-const DEFAULT_PASSWORD = 'vexor2024';
 
 let selectedImages = [];
 let editNewImages = [];
@@ -649,15 +644,28 @@ const COLOR_PRESETS = {
   'custom':      { c1:'#00ffe7', c2:'#a855f7' }
 };
 
-function login() {
+// 🔐 تابع ورود (خواندن از Supabase)
+async function login() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
-  const savedUser = localStorage.getItem('cv_username') || DEFAULT_USERNAME;
-  const savedPass = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
-  if (user === savedUser && pass === savedPass) {
-    sessionStorage.setItem('cv_logged_in', 'true');
-    showDashboard();
-  } else {
+  
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/admin_credentials?id=eq.1&select=*`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+    const savedUser = (data && data[0] && data[0].username) || 'admin';
+    const savedPass = (data && data[0] && data[0].password) || 'vexor2024';
+    
+    if (user === savedUser && pass === savedPass) {
+      sessionStorage.setItem('cv_logged_in', 'true');
+      showDashboard();
+    } else {
+      document.getElementById('errorMsg').classList.add('show');
+      setTimeout(() => document.getElementById('errorMsg').classList.remove('show'), 3000);
+    }
+  } catch (err) {
+    console.error('Login error:', err);
     document.getElementById('errorMsg').classList.add('show');
     setTimeout(() => document.getElementById('errorMsg').classList.remove('show'), 3000);
   }
@@ -1034,7 +1042,6 @@ async function deleteProduct(id) {
   loadProducts();
 }
 
-// 👇 تابع loadSettings با اضافه شدن واتساپ و اینستاگرام 👇
 async function loadSettings() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/shop_settings?id=eq.1&select=*`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   const data = await res.json();
@@ -1042,18 +1049,15 @@ async function loadSettings() {
     document.getElementById('phone').value = data[0].phone || '';
     document.getElementById('rubika').value = data[0].rubika_id || '';
     const tg = document.getElementById('telegram'); if (tg) tg.value = data[0].telegram_id || '';
-    // خطوط اضافه شده برای واتساپ و اینستاگرام
     const wa = document.getElementById('whatsapp'); if (wa) wa.value = data[0].whatsapp || '';
     const ig = document.getElementById('instagram'); if (ig) ig.value = data[0].instagram || '';
   }
 }
 
-// 👇 تابع saveSettings با اضافه شدن واتساپ و اینستاگرام 👇
 async function saveSettings() {
   const phone = document.getElementById('phone').value.trim();
   const rubika = document.getElementById('rubika').value.trim();
   const telegram = document.getElementById('telegram')?.value.trim() || '';
-  // خطوط اضافه شده برای واتساپ و اینستاگرام
   const whatsapp = document.getElementById('whatsapp')?.value.trim() || '';
   const instagram = document.getElementById('instagram')?.value.trim() || '';
   
@@ -1063,23 +1067,67 @@ async function saveSettings() {
   if (res.ok) showStatus('🎉 ذخیره شد!', 'success'); else showStatus('❌ خطا', 'error');
 }
 
-function changeCredentials() {
+// 🔐 تابع تغییر رمز (ذخیره در Supabase)
+async function changeCredentials() {
   const cu = document.getElementById('currentUsername').value.trim();
   const cp = document.getElementById('currentPassword').value.trim();
   const nu = document.getElementById('newUsername').value.trim();
   const np = document.getElementById('newPassword').value.trim();
   const cf = document.getElementById('confirmPassword').value.trim();
-  const su = localStorage.getItem('cv_username') || DEFAULT_USERNAME;
-  const sp = localStorage.getItem('cv_password') || DEFAULT_PASSWORD;
-  if (cu !== su || cp !== sp) { showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error'); return; }
-  if (!nu && !np) { showStatus('❌ چیزی وارد نکردی!', 'error'); return; }
-  if (np && np !== cf) { showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error'); return; }
-  if (np && np.length < 4) { showStatus('❌ رمز باید حداقل ۴ کاراکتر باشه!', 'error'); return; }
-  if (nu) localStorage.setItem('cv_username', nu);
-  if (np) localStorage.setItem('cv_password', np);
-  showStatus('🎉 تغییر کرد!', 'success');
-  ['currentUsername','currentPassword','newUsername','newPassword','confirmPassword'].forEach(id => { document.getElementById(id).value = ''; });
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/admin_credentials?id=eq.1&select=*`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+    const savedUser = (data && data[0] && data[0].username) || 'admin';
+    const savedPass = (data && data[0] && data[0].password) || 'vexor2024';
+
+    if (cu !== savedUser || cp !== savedPass) {
+      showStatus('❌ نام کاربری یا رمز فعلی اشتباهه!', 'error');
+      return;
+    }
+    if (!nu && !np) {
+      showStatus('❌ چیزی وارد نکردی!', 'error');
+      return;
+    }
+    if (np && np !== cf) {
+      showStatus('❌ رمز جدید و تکرارش یکی نیستن!', 'error');
+      return;
+    }
+    if (np && np.length < 4) {
+      showStatus('❌ رمز باید حداقل ۴ کاراکتر باشه!', 'error');
+      return;
+    }
+
+    const updateData = {};
+    if (nu) updateData.username = nu;
+    if (np) updateData.password = np;
+    updateData.updated_at = new Date().toISOString();
+
+    const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/admin_credentials?id=eq.1`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updateData)
+    });
+
+    if (updateRes.ok) {
+      showStatus('🎉 تغییر کرد! از این به بعد روی همه دستگاه‌ها با رمز جدید وارد شو.', 'success');
+      ['currentUsername', 'currentPassword', 'newUsername', 'newPassword', 'confirmPassword'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    } else {
+      showStatus('❌ خطا در ذخیره', 'error');
+    }
+  } catch (err) {
+    showStatus('❌ خطا: ' + err.message, 'error');
+  }
 }
+
 async function loadChats() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/chats?select=*&order=last_message_at.desc`, { headers:{ 'apikey':SUPABASE_KEY, 'Authorization':`Bearer ${SUPABASE_KEY}` } });
   allChatsData = await res.json();
