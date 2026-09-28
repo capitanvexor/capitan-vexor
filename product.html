@@ -580,7 +580,7 @@ function renderProduct(p) {
         ${images.length > 1 ? `
           <div class="thumbnails">
             ${images.map((img, i) => `
-              <div class="thumb ${i === 0 ? 'active' : ''}" onclick="changeImage('${img}', this); openLightbox(${i})">
+              <div class="thumb ${i === 0 ? 'active' : ''}" onclick="changeImage('${img}', this)">
                 <img src="${img}" loading="lazy">
               </div>
             `).join('')}
